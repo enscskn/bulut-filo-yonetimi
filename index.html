@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulut Filo Yönetimi - BPM Analiz Sunumu</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Particle Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Progress Bar -->
+    <div id="progress-bar"></div>
+
+
+    <!-- Navigation Dots -->
+    <nav id="nav-menu">
+        <div class="nav-dot" data-section="cover" data-tooltip="Kapak"></div>
+        <div class="nav-dot" data-section="team" data-tooltip="Ekip"></div>
+        <div class="nav-dot" data-section="company-overview" data-tooltip="Şirket"></div>
+        <div class="nav-dot" data-section="problem" data-tooltip="Problem"></div>
+        <div class="nav-dot" data-section="swot" data-tooltip="SWOT"></div>
+        <div class="nav-dot" data-section="sipoc" data-tooltip="SIPOC"></div>
+        <div class="nav-dot" data-section="as-is" data-tooltip="Mevcut Durum"></div>
+        <div class="nav-dot" data-section="ishikawa" data-tooltip="Kök Neden"></div>
+        <div class="nav-dot" data-section="improvements" data-tooltip="İyileştirmeler"></div>
+        <div class="nav-dot" data-section="footer" data-tooltip="İletişim"></div>
+    </nav>
+
+    <!-- Section 1: Cover -->
+    <section id="cover">
+        <div class="cover-bg-overlay"></div>
+        <div class="cover-content parallax" data-speed="0.5">
+            <div class="cover-logo" data-animate="scale-up">
+                <img src="images/bulut_filo_ynetimi_logo.jpg" alt="Bulut Filo Yönetimi Logo" class="logo-img">
+            </div>
+            <h1 class="cover-title" data-animate="fade-up" data-delay="300">Bulut Filo Yönetimi</h1>
+            <p class="cover-subtitle" data-animate="fade-up" data-delay="500">Mevcut Durum Analizi ve İyileştirme Fırsatları</p>
+            <p class="cover-company" data-animate="fade-up" data-delay="700">Kiralama Modülü - İş Süreci Yönetimi Projesi</p>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- Section 2: Team -->
+    <section id="team">
+        <div class="container">
+            <h2 data-aos="fade-up">Proje Ekibi</h2>
+            <div class="team-grid">
+                <div class="glass-card card-3d team-member" data-aos="fade-right" data-aos-delay="100">
+                    <div class="team-avatar">EB</div>
+                    <h3 class="team-name">Enes Balcı</h3>
+                    <p class="team-role">Kıdemli İş Analisti</p>
+                </div>
+                <div class="glass-card card-3d team-member" data-aos="fade-up" data-aos-delay="200">
+                    <div class="team-avatar">EC</div>
+                    <h3 class="team-name">Enes Coşkun</h3>
+                    <p class="team-role">Kıdemli İş Geliştirme Uzmanı</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3A: Company Overview -->
+    <section id="company-overview">
+        <div class="geometric-pattern"></div>
+        <div class="container">
+            <h2 data-aos="fade-up" style="color: white; text-align: center;">Şirket Hakkında</h2>
+            <div data-aos="fade-up" data-aos-delay="200">
+                <p style="font-size: 1.3rem; text-align: center; color: rgba(255,255,255,0.9); max-width: 800px; margin: 0 auto;">
+                    Bulut Filo Yönetimi, araç kiralama sektöründe yenilikçi ve teknoloji odaklı çözümler sunan öncü bir platformdur.
+                </p>
+            </div>
+            <div class="stats-grid">
+                <div class="glass-card stat-card hover-lift" data-animate="scale-up" data-delay="100">
+                    <div class="stat-number" data-count="5000" data-duration="2000">0</div>
+                    <div class="stat-label">Aktif Araç</div>
+                </div>
+                <div class="glass-card stat-card hover-lift" data-animate="scale-up" data-delay="200">
+                    <div class="stat-number" data-count="250" data-duration="1500">0</div>
+                    <div class="stat-label">Çalışan</div>
+                </div>
+                <div class="glass-card stat-card hover-lift" data-animate="scale-up" data-delay="300">
+                    <div class="stat-number" data-count="15000" data-duration="2500">0</div>
+                    <div class="stat-label">Aylık İşlem</div>
+                </div>
+                <div class="glass-card stat-card hover-lift" data-animate="scale-up" data-delay="400">
+                    <div class="stat-number" data-count="98" data-duration="2000">0</div>
+                    <div class="stat-label">Müşteri Memnuniyeti %</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3B: Mission & Vision -->
+    <section id="mission-vision">
+        <div class="container">
+            <h2 data-aos="fade-up">Misyon ve Vizyon</h2>
+            <div class="split-container">
+                <div class="glass-card split-section hover-lift" data-animate="fade-left" data-delay="100" data-reveal-container>
+                    <div class="icon-large" data-reveal>🎯</div>
+                    <h3 data-reveal>Misyonumuz</h3>
+                    <p data-reveal>Müşterilerimize en güvenilir, esnek ve teknoloji destekli filo yönetimi çözümlerini sunarak operasyonel verimliliği maksimize etmek.</p>
+                    <ul style="margin-top: 20px; line-height: 2;" data-reveal>
+                        <li>✓ Müşteri odaklı hizmet</li>
+                        <li>✓ Yenilikçi teknoloji</li>
+                        <li>✓ Sürdürülebilir çözümler</li>
+                    </ul>
+                </div>
+                <div class="glass-card split-section hover-lift" data-animate="fade-right" data-delay="100" data-reveal-container>
+                    <div class="icon-large" data-reveal>🚀</div>
+                    <h3 data-reveal>Vizyonumuz</h3>
+                    <p data-reveal>Türkiye'nin lider bulut tabanlı filo yönetim platformu olarak, sektörde dijital dönüşümün öncüsü olmak ve global pazarda tanınan bir marka haline gelmek.</p>
+                    <ul style="margin-top: 20px; line-height: 2;" data-reveal>
+                        <li>✓ Sektör lideri olmak</li>
+                        <li>✓ Global genişleme</li>
+                        <li>✓ Sürekli inovasyon</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Problem Definition -->
+    <section id="problem">
+        <div class="geometric-pattern"></div>
+        <div class="container">
+            <h2 data-aos="fade-up" style="color: white; text-align: center;">Neden Buradayız?</h2>
+            <div class="problem-statement" data-aos="fade-up" data-aos-delay="200">
+                <p data-type="Kiralama modülümüz, manuel süreçler, sistem entegrasyon eksiklikleri ve veri tutarsızlıkları nedeniyle operasyonel verimliliğin önünde engel oluşturmaktadır." data-type-speed="30" style="font-size: clamp(1.3rem, 2.5vw, 1.8rem);">
+                </p>
+            </div>
+            <div class="pain-points" data-stagger-container data-stagger-delay="150">
+                <div class="pain-point hover-lift" data-stagger>
+                    <h3>⏱️ Uzun İşlem Süreleri</h3>
+                    <p>Ortalama kiralama işlemi 45 dakika sürüyor (hedef: 15 dakika)</p>
+                </div>
+                <div class="pain-point hover-lift" data-stagger>
+                    <h3>❌ Yüksek Hata Oranı</h3>
+                    <p>%12 oranında veri girişi hatası tespit edilmiştir</p>
+                </div>
+                <div class="pain-point hover-lift" data-stagger>
+                    <h3>📉 Müşteri Kaybı</h3>
+                    <p>Uzun işlem süreleri nedeniyle %8 müşteri kaybı yaşanmaktadır</p>
+                </div>
+                <div class="pain-point hover-lift" data-stagger>
+                    <h3>💰 Maliyet Artışı</h3>
+                    <p>Manuel işlemler yıllık 500.000 TL ek maliyet oluşturmaktadır</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5A: SWOT Analysis -->
+    <section id="swot">
+        <div class="container">
+            <h2 data-aos="fade-up">SWOT Analizi</h2>
+            <div class="swot-grid">
+                <div class="swot-quadrant swot-strengths glass-card" data-aos="fade-right">
+                    <h3>💪 Güçlü Yönler (Strengths)</h3>
+                    <ul>
+                        <li>Geniş araç filosu ve çeşitliliği</li>
+                        <li>Deneyimli ve uzman ekip</li>
+                        <li>Güçlü marka bilinirliği</li>
+                    </ul>
+                    <div class="swot-details">
+                        <ul>
+                            Detaylı Güçlü Yönleri buraya yazılacak.
+                        </ul>
+                    </div>
+                </div>
+                <div class="swot-quadrant swot-weaknesses glass-card" data-aos="fade-left">
+                    <h3>⚠️ Zayıf Yönler (Weaknesses)</h3>
+                    <ul>
+                        <li>Eski teknoloji altyapısı</li>
+                        <li>Manuel süreç adımları</li>
+                        <li>Sistem entegrasyon eksikliği</li>
+                    </ul>
+                    <div class="swot-details">
+                        <ul>
+                            Detaylı Zayıf Yönleri buraya yazılacak.
+                        </ul>
+                    </div>
+                </div>
+                <div class="swot-quadrant swot-opportunities glass-card" data-aos="fade-right">
+                    <h3>🌟 Fırsatlar (Opportunities)</h3>
+                    <ul>
+                        <li>Dijital dönüşüm talebi artışı</li>
+                        <li>Bulut teknolojileri yatırımları</li>
+                        <li>Yeni pazar segmentleri</li>
+                    </ul>
+                    <div class="swot-details">
+                        <ul>
+                            Detaylı Fırsatları buraya yazılacak.
+                        </ul>
+                    </div>
+                </div>
+                <div class="swot-quadrant swot-threats glass-card" data-aos="fade-left">
+                    <h3>⚡ Tehditler (Threats)</h3>
+                    <ul>
+                        <li>Artan rekabet ve yeni oyuncular</li>
+                        <li>Değişen müşteri beklentileri</li>
+                        <li>Ekonomik dalgalanmalar</li>
+                    </ul>
+                    <div class="swot-details">
+                        <ul>
+                            Detaylı Tehditleri buraya yazılacak.
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5B: TOWS Matrix -->
+    <section id="tows">
+        <div class="geometric-pattern"></div>
+        <div class="container">
+            <h2 data-aos="fade-up" style="color: white;">TOWS Stratejik Öneriler</h2>
+            <div class="tows-grid">
+                <div class="tows-strategy glass-card" data-aos="zoom-in" data-aos-delay="100">
+                    <h3>🎯 SO Stratejileri</h3>
+                    <p>(Güçlü Yönler × Fırsatlar)</p>
+                    <ul style="margin-top: 15px; line-height: 2;">
+                        <li>• Geniş filoyu dijital platformlarla entegre et</li>
+                        <li>• Deneyimli ekibi bulut teknolojilerinde eğit</li>
+                        <li>• Marka gücünü yeni pazarlara taşı</li>
+                    </ul>
+                </div>
+                <div class="tows-strategy glass-card" data-aos="zoom-in" data-aos-delay="200">
+                    <h3>🔧 WO Stratejileri</h3>
+                    <p>(Zayıf Yönler × Fırsatlar)</p>
+                    <ul style="margin-top: 15px; line-height: 2;">
+                        <li>• Teknoloji altyapısını modernize et</li>
+                        <li>• Manuel süreçleri otomasyona dönüştür</li>
+                        <li>• Sistem entegrasyonlarını tamamla</li>
+                    </ul>
+                </div>
+                <div class="tows-strategy glass-card" data-aos="zoom-in" data-aos-delay="300">
+                    <h3>🛡️ ST Stratejileri</h3>
+                    <p>(Güçlü Yönler × Tehditler)</p>
+                    <ul style="margin-top: 15px; line-height: 2;">
+                        <li>• Müşteri sadakatini rekabet avantajına çevir</li>
+                        <li>• Coğrafi kapsama alanını güçlendir</li>
+                        <li>• Marka değerini koruma stratejileri geliştir</li>
+                    </ul>
+                </div>
+                <div class="tows-strategy glass-card" data-aos="zoom-in" data-aos-delay="400">
+                    <h3>⚠️ WT Stratejileri</h3>
+                    <p>(Zayıf Yönler × Tehditler)</p>
+                    <ul style="margin-top: 15px; line-height: 2;">
+                        <li>• Siber güvenlik önlemlerini güçlendir</li>
+                        <li>• Hızlı adaptasyon yetenekleri geliştir</li>
+                        <li>• Risk yönetim sistemleri kur</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5C: RICE Scoring -->
+    <section id="rice">
+        <div class="container">
+            <h2 data-aos="fade-up">RICE Skorlama Analizi</h2>
+            <div class="glass-card rice-chart" data-aos="fade-up">
+                <p style="margin-bottom: 30px; font-size: 1.1rem;">
+                    RICE = (Reach × Impact × Confidence) / Effort
+                </p>
+                <div id="rice-chart-custom">
+                    <!-- Custom RICE visualization will be rendered here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5D: MoSCoW -->
+    <section id="moscow">
+        <div class="geometric-pattern"></div>
+        <div class="container">
+            <h2 data-aos="fade-up" style="color: white;">MoSCoW Önceliklendirme</h2>
+            <div class="moscow-grid">
+                <div class="moscow-column moscow-must" data-aos="fade-up" data-aos-delay="100">
+                    <h3>
+                        <span>Must Have</span>
+                        <span class="moscow-count">5</span>
+                    </h3>
+                    <div class="moscow-item">Otomatik rezervasyon sistemi</div>
+                    <div class="moscow-item">Gerçek zamanlı araç takibi</div>
+                    <div class="moscow-item">Ödeme entegrasyonu</div>
+                    <div class="moscow-item">Müşteri kimlik doğrulama</div>
+                    <div class="moscow-item">Sözleşme yönetimi</div>
+                </div>
+                <div class="moscow-column moscow-should" data-aos="fade-up" data-aos-delay="200">
+                    <h3>
+                        <span>Should Have</span>
+                        <span class="moscow-count">5</span>
+                    </h3>
+                    <div class="moscow-item">Mobil uygulama geliştirme</div>
+                    <div class="moscow-item">SMS/Email bildirimleri</div>
+                    <div class="moscow-item">Rapor ve analitik dashboard</div>
+                    <div class="moscow-item">Müşteri puanlama sistemi</div>
+                    <div class="moscow-item">Kampanya yönetimi</div>
+                </div>
+                <div class="moscow-column moscow-could" data-aos="fade-up" data-aos-delay="300">
+                    <h3>
+                        <span>Could Have</span>
+                        <span class="moscow-count">5</span>
+                    </h3>
+                    <div class="moscow-item">AI destekli fiyatlandırma</div>
+                    <div class="moscow-item">Sesli asistan entegrasyonu</div>
+                    <div class="moscow-item">Sosyal medya entegrasyonu</div>
+                    <div class="moscow-item">Sadakat programı</div>
+                    <div class="moscow-item">Chatbot desteği</div>
+                </div>
+                <div class="moscow-column moscow-wont" data-aos="fade-up" data-aos-delay="400">
+                    <h3>
+                        <span>Won't Have</span>
+                        <span class="moscow-count">5</span>
+                    </h3>
+                    <div class="moscow-item">Kendi filosu üretimi</div>
+                    <div class="moscow-item">Uluslararası genişleme (ilk fazda)</div>
+                    <div class="moscow-item">Kripto para ödemeleri</div>
+                    <div class="moscow-item">Blockchain entegrasyonu</div>
+                    <div class="moscow-item">VR showroom</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: SIPOC -->
+    <section id="sipoc">
+        <div class="container">
+            <h2 data-aos="fade-up">SIPOC Diyagramı</h2>
+            <p data-aos="fade-up" style="text-align: center; font-size: 1.1rem; margin-bottom: 20px;">
+                Kiralama Sürecinin Kapsamı ve Paydaşları
+            </p>
+            <div class="sipoc-diagram">
+                <div class="sipoc-box sipoc-suppliers" data-aos="fade-right" data-aos-delay="100">
+                    <h3>Tedarikçiler</h3>
+                    <ul>
+                        <li>Müşteriler</li>
+                        <li>Araç Sahipleri</li>
+                        <li>Sigorta Şirketleri</li>
+                        <li>Bakım Servisleri</li>
+                    </ul>
+                </div>
+                <div class="sipoc-box sipoc-inputs" data-aos="fade-right" data-aos-delay="200">
+                    <h3>Girdiler</h3>
+                    <ul>
+                        <li>Kiralama Talebi</li>
+                        <li>Müşteri Bilgileri</li>
+                        <li>Araç Envanter</li>
+                        <li>Fiyat Listeleri</li>
+                    </ul>
+                </div>
+                <div class="sipoc-box sipoc-process" data-aos="zoom-in" data-aos-delay="300">
+                    <h3>Süreç</h3>
+                    <ul>
+                        <li>Rezervasyon Al</li>
+                        <li>Doğrulama Yap</li>
+                        <li>Sözleşme Oluştur</li>
+                        <li>Araç Teslim Et</li>
+                        <li>Ödeme İşle</li>
+                    </ul>
+                </div>
+                <div class="sipoc-box sipoc-outputs" data-aos="fade-left" data-aos-delay="400">
+                    <h3>Çıktılar</h3>
+                    <ul>
+                        <li>Onaylı Rezervasyon</li>
+                        <li>Kiralama Sözleşmesi</li>
+                        <li>Teslim Belgesi</li>
+                        <li>Fatura</li>
+                    </ul>
+                </div>
+                <div class="sipoc-box sipoc-customers" data-aos="fade-left" data-aos-delay="500">
+                    <h3>Müşteriler</h3>
+                    <ul>
+                        <li>Bireysel Müşteriler</li>
+                        <li>Kurumsal Firmalar</li>
+                        <li>Turizm Acenteleri</li>
+                        <li>Araç Sahipleri</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7A: AS-IS Process -->
+    <section id="as-is">
+        <div class="container">
+            <h2 data-aos="fade-up" style="color: white;">Mevcut Durum (AS-IS) Süreci</h2>
+            <div class="process-flow">
+                <h3 style="color: white; margin-bottom: 30px;">Kiralama Süreci Akışı</h3>
+                <div class="flow-steps">
+                    <div class="flow-step" data-aos="fade-right" data-aos-delay="100">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">1️⃣</div>
+                        <strong>Talep Girişi</strong>
+                        <p style="font-size: 0.9rem; margin-top: 10px;">Manuel form doldurma</p>
+                    </div>
+                    <div class="flow-step" data-aos="fade-up" data-aos-delay="200">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">2️⃣</div>
+                        <strong>Müsaitlik Kontrolü</strong>
+                        <p style="font-size: 0.9rem; margin-top: 10px;">Excel tabloları</p>
+                    </div>
+                    <div class="flow-step" data-aos="fade-up" data-aos-delay="300">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">3️⃣</div>
+                        <strong>Fiyat Hesaplama</strong>
+                        <p style="font-size: 0.9rem; margin-top: 10px;">Manuel hesaplama</p>
+                    </div>
+                    <div class="flow-step" data-aos="fade-up" data-aos-delay="400">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">4️⃣</div>
+                        <strong>Onay Süreci</strong>
+                        <p style="font-size: 0.9rem; margin-top: 10px;">Çoklu seviyeler</p>
+                    </div>
+                    <div class="flow-step" data-aos="fade-left" data-aos-delay="500">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">5️⃣</div>
+                        <strong>Teslim</strong>
+                        <p style="font-size: 0.9rem; margin-top: 10px;">Kağıt belgeler</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7B: Metrics Dashboard -->
+    <section id="metrics">
+        <div class="container">
+            <h2 data-aos="fade-up">Süreç Metrikleri Dashboard</h2>
+            <div class="metrics-grid">
+                <div class="glass-card metric-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3>⏱️ İşlem Süreleri - Timeline</h3>
+                    <div id="timeline-chart" style="padding: 20px;">
+                        <!-- Custom timeline will be rendered here -->
+                    </div>
+                </div>
+                <div class="glass-card metric-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3>💰 Maliyet Dağılımı</h3>
+                    <div class="chart-container">
+                        <canvas id="costChart"></canvas>
+                    </div>
+                    <div id="cost-center-total" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; pointer-events: none;">
+                        <div style="font-size: 2rem; font-weight: 800; color: var(--accent-color);">500K₺</div>
+                        <div style="font-size: 0.9rem; color: var(--text-light); opacity: 0.8;">Toplam Maliyet</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7C: Bottlenecks -->
+    <section id="bottlenecks">
+        <div class="container">
+            <h2 data-aos="fade-up" style="color: white;">Darboğaz Noktaları</h2>
+            <div class="bottleneck-grid" data-stagger-container data-stagger-delay="120">
+                <div class="bottleneck-card hover-lift" data-stagger data-scroll-scale>
+                    <div class="warning-icon">⚠️</div>
+                    <div class="bottleneck-stat">45 dk</div>
+                    <div class="bottleneck-label">Ortalama İşlem Süresi</div>
+                </div>
+                <div class="bottleneck-card hover-lift" data-stagger data-scroll-scale>
+                    <div class="warning-icon">❌</div>
+                    <div class="bottleneck-stat">%12</div>
+                    <div class="bottleneck-label">Hata Oranı</div>
+                </div>
+                <div class="bottleneck-card hover-lift" data-stagger data-scroll-scale>
+                    <div class="warning-icon">🔄</div>
+                    <div class="bottleneck-stat">4x</div>
+                    <div class="bottleneck-label">Tekrar İşlemler</div>
+                </div>
+                <div class="bottleneck-card hover-lift" data-stagger data-scroll-scale>
+                    <div class="warning-icon">💸</div>
+                    <div class="bottleneck-stat">500K₺</div>
+                    <div class="bottleneck-label">Yıllık Ek Maliyet</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 8A: Ishikawa (Fishbone) Diagram -->
+    <section id="ishikawa">
+        <div class="container">
+            <h2 data-aos="fade-up">Ishikawa (Balık Kılçığı) Analizi</h2>
+            <p data-aos="fade-up" style="text-align: center; font-size: 1.1rem; margin-bottom: 30px;">
+                Kök Neden: <strong style="color: var(--accent-color);">Uzun İşlem Süreleri ve Operasyonel Verimsizlik</strong>
+            </p>
+            <div class="fishbone-container">
+                <div id="fishbone-svg-container" style="width: 100%; min-height: 600px; padding: 40px;">
+                    <!-- Interactive SVG Fishbone will be rendered here -->
+                </div>
+                <div id="fishbone-details" class="glass-card" style="margin-top: 30px; display: none; padding: 30px;">
+                    <h3 id="detail-title" style="color: var(--accent-color); margin-bottom: 15px;"></h3>
+                    <ul id="detail-list" style="line-height: 2;">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 8B: 5 Whys Analysis -->
+    <section id="five-whys">
+        <div class="geometric-pattern"></div>
+        <div class="container">
+            <h2 data-aos="fade-up" style="color: white;">5 Neden Analizi</h2>
+            <div class="whys-timeline">
+                <div class="why-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="why-number">1</div>
+                    <strong>Neden müşterilerimiz uzun süre bekliyor?</strong>
+                    <p style="margin-top: 10px;">Çünkü kiralama işlemleri manuel olarak yapılıyor ve ortalama 45 dakika sürüyor.</p>
+                </div>
+                <div class="why-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="why-number">2</div>
+                    <strong>Neden işlemler manuel yapılıyor?</strong>
+                    <p style="margin-top: 10px;">Çünkü mevcut sistemimiz otomatik rezervasyon ve doğrulama yeteneklerine sahip değil.</p>
+                </div>
+                <div class="why-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="why-number">3</div>
+                    <strong>Neden sistem otomasyon yetenekleri yok?</strong>
+                    <p style="margin-top: 10px;">Çünkü eski teknoloji altyapısı kullanılıyor ve sistemler birbirine entegre değil.</p>
+                </div>
+                <div class="why-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="why-number">4</div>
+                    <strong>Neden teknoloji altyapısı güncellenmiyor?</strong>
+                    <p style="margin-top: 10px;">Çünkü dijital dönüşüm stratejisi ve yol haritası net değil.</p>
+                </div>
+                <div class="why-item root-cause" data-aos="fade-up" data-aos-delay="500">
+                    <div class="why-number">5</div>
+                    <strong>Neden dijital dönüşüm stratejisi yok?</strong>
+                    <p style="margin-top: 10px;"><strong>KÖK NEDEN:</strong> Şirket, operasyonel ihtiyaçları karşılamaya odaklanmış ve dijital dönüşüme yeterli yatırım ve öncelik verilmemiştir.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 9: Improvements -->
+    <section id="improvements">
+        <div class="container">
+            <h2 data-aos="fade-up">İyileştirme Fırsatları</h2>
+            <div class="improvements-grid">
+                <div class="glass-card card-3d improvement-card" data-aos="zoom-in" data-aos-delay="100">
+                    <span class="priority-badge priority-high">Yüksek</span>
+                    <div class="improvement-icon">🤖</div>
+                    <h3>Süreç Otomasyonu</h3>
+                    <p>Rezervasyon ve onay süreçlerini otomatize ederek işlem süresini %70 azalt</p>
+                </div>
+                <div class="glass-card card-3d improvement-card" data-aos="zoom-in" data-aos-delay="200">
+                    <span class="priority-badge priority-high">Yüksek</span>
+                    <div class="improvement-icon">🔗</div>
+                    <h3>Sistem Entegrasyonu</h3>
+                    <p>Tüm sistemleri tek platformda birleştirerek veri tutarlılığını sağla</p>
+                </div>
+                <div class="glass-card card-3d improvement-card" data-aos="zoom-in" data-aos-delay="300">
+                    <span class="priority-badge priority-high">Yüksek</span>
+                    <div class="improvement-icon">📱</div>
+                    <h3>Mobil Uygulama</h3>
+                    <p>7/24 erişilebilir, kullanıcı dostu mobil platform geliştir</p>
+                </div>
+                <div class="glass-card card-3d improvement-card" data-aos="zoom-in" data-aos-delay="400">
+                    <span class="priority-badge priority-medium">Orta</span>
+                    <div class="improvement-icon">📊</div>
+                    <h3>Analitik Dashboard</h3>
+                    <p>Gerçek zamanlı veri analitiği ve raporlama sistemi kur</p>
+                </div>
+                <div class="glass-card card-3d improvement-card" data-aos="zoom-in" data-aos-delay="500">
+                    <span class="priority-badge priority-medium">Orta</span>
+                    <div class="improvement-icon">🎓</div>
+                    <h3>Personel Eğitimi</h3>
+                    <p>Yeni sistemler için kapsamlı eğitim programları oluştur</p>
+                </div>
+                <div class="glass-card card-3d improvement-card" data-aos="zoom-in" data-aos-delay="600">
+                    <span class="priority-badge priority-low">Düşük</span>
+                    <div class="improvement-icon">🤝</div>
+                    <h3>CRM Entegrasyonu</h3>
+                    <p>Müşteri ilişkileri yönetimini geliştir ve sadakati artır</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section id="footer">
+        <div class="container footer-content">
+            <h2 data-aos="fade-up">Teşekkürler!</h2>
+            <div class="footer-grid">
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <h3>Proje Ekibi</h3>
+                    <p>Enes Balcı - Kıdemli İş Analisti</p>
+                    <p>Enes Coşkun - Kıdemli İş Geliştirme Uzmanı</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="300">
+                    <h3>Proje Zaman Çizelgesi</h3>
+                    <p>✓ Faz 1: Analiz (Tamamlandı)</p>
+                    <p>→ Faz 2: Tasarım (Sonraki)</p>
+                    <p>→ Faz 3: Implementasyon</p>
+                    <p>→ Faz 4: İyileştirme</p>
+                </div>
+            </div>
+            <div class="timeline-summary glass-card" data-aos="fade-up" data-aos-delay="400">
+                <p style="font-size: 1.2rem; color: var(--accent-color); font-weight: 600;">
+                    "Dijital dönüşümle birlikte, müşteri deneyimini üst seviyeye taşıyoruz."
+                </p>
+                <p style="margin-top: 20px;">
+                    © 2025 Bulut Filo Yönetimi - Tüm Hakları Saklıdır
+                </p>
+            </div>
+        </div>
+    </section>
+</body>
+<script src="index.js"></script>
+</html>
