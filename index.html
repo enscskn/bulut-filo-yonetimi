@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bulut Filo Yönetimi - BPM Analiz Sunumu</title>
+    <link rel="icon" type="image/jpg" href="images/bulut_filo_ynetimi_logo.jpg">
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.44.0/dist/apexcharts.min.js"></script>
@@ -28,13 +29,19 @@
         <div class="nav-dot" data-section="cover" data-tooltip="Kapak"></div>
         <div class="nav-dot" data-section="team" data-tooltip="Ekip"></div>
         <div class="nav-dot" data-section="company-overview" data-tooltip="Şirket"></div>
+        <div class="nav-dot" data-section="mission-vision" data-tooltip="Misyon ve Vizyon"></div>
         <div class="nav-dot" data-section="problem" data-tooltip="Problem"></div>
         <div class="nav-dot" data-section="swot" data-tooltip="SWOT"></div>
+        <div class="nav-dot" data-section="tows" data-tooltip="TOWS"></div>
+        <div class="nav-dot" data-section="rice" data-tooltip="RICE"></div>
+        <div class="nav-dot" data-section="moscow" data-tooltip="MoSCoW"></div>
         <div class="nav-dot" data-section="sipoc" data-tooltip="SIPOC"></div>
-        <div class="nav-dot" data-section="as-is" data-tooltip="Mevcut Durum"></div>
-        <div class="nav-dot" data-section="ishikawa" data-tooltip="Kök Neden"></div>
+        <div class="nav-dot" data-section="as-is" data-tooltip="AS-IS"></div>
+        <div class="nav-dot" data-section="metrics" data-tooltip="Dashboard"></div>
+        <div class="nav-dot" data-section="bottlenecks" data-tooltip="Darboğaz Noktaları"></div>
+        <div class="nav-dot" data-section="ishikawa" data-tooltip="Ishikawa"></div>
+        <div class="nav-dot" data-section="five-whys" data-tooltip="5 Neden"></div>
         <div class="nav-dot" data-section="improvements" data-tooltip="İyileştirmeler"></div>
-        <div class="nav-dot" data-section="footer" data-tooltip="İletişim"></div>
     </nav>
 
     <!-- Section 1: Cover -->
@@ -346,52 +353,107 @@
     <section id="sipoc">
         <div class="container">
             <h2 data-aos="fade-up">SIPOC Diyagramı</h2>
+            <p data-aos="fade-up" style="text-align: center; font-size: 1.1rem; margin-bottom: 20px; opacity: 0.9;">
+                Kiralama Sürecinin Kapsamı ve Paydaşları
+            </p>
+            
+            <!-- SIPOC Visual Flow -->
+            <div class="sipoc-visual-container" data-aos="fade-up">
+                <div id="sipoc-svg-flow"></div>
+            </div>
+            
+            <!-- Interactive SIPOC Boxes -->
             <div class="sipoc-diagram">
-                <div class="sipoc-box sipoc-suppliers" data-aos="fade-right" data-aos-delay="100">
+                <div class="sipoc-box sipoc-suppliers hover-lift" data-aos="fade-right" data-aos-delay="100" data-sipoc-id="suppliers">
+                    <div class="sipoc-number">S</div>
                     <h3>Tedarikçiler</h3>
-                    <ul>
+                    <div class="sipoc-count">4 Kategori</div>
+                    <ul class="sipoc-preview">
                         <li>Müşteriler</li>
                         <li>Araç Sahipleri</li>
                         <li>Sigorta Şirketleri</li>
                         <li>Bakım Servisleri</li>
                     </ul>
+                    <div class="sipoc-expand-btn">👁️ Detaylar</div>
                 </div>
-                <div class="sipoc-box sipoc-inputs" data-aos="fade-right" data-aos-delay="200">
+                
+                <div class="sipoc-box sipoc-inputs hover-lift" data-aos="fade-right" data-aos-delay="200" data-sipoc-id="inputs">
+                    <div class="sipoc-number">I</div>
                     <h3>Girdiler</h3>
-                    <ul>
+                    <div class="sipoc-count">4 Girdi</div>
+                    <ul class="sipoc-preview">
                         <li>Kiralama Talebi</li>
                         <li>Müşteri Bilgileri</li>
                         <li>Araç Envanter</li>
                         <li>Fiyat Listeleri</li>
                     </ul>
+                    <div class="sipoc-expand-btn">👁️ Detaylar</div>
                 </div>
-                <div class="sipoc-box sipoc-process" data-aos="zoom-in" data-aos-delay="300">
+                
+                <div class="sipoc-box sipoc-process hover-lift" data-aos="zoom-in" data-aos-delay="300" data-sipoc-id="process">
+                    <div class="sipoc-number">P</div>
                     <h3>Süreç</h3>
-                    <ul>
+                    <div class="sipoc-count">5 Adım</div>
+                    <ul class="sipoc-preview">
                         <li>Rezervasyon Al</li>
                         <li>Doğrulama Yap</li>
                         <li>Sözleşme Oluştur</li>
                         <li>Araç Teslim Et</li>
                         <li>Ödeme İşle</li>
                     </ul>
+                    <div class="sipoc-expand-btn">👁️ Detaylar</div>
                 </div>
-                <div class="sipoc-box sipoc-outputs" data-aos="fade-left" data-aos-delay="400">
+                
+                <div class="sipoc-box sipoc-outputs hover-lift" data-aos="fade-left" data-aos-delay="400" data-sipoc-id="outputs">
+                    <div class="sipoc-number">O</div>
                     <h3>Çıktılar</h3>
-                    <ul>
+                    <div class="sipoc-count">4 Çıktı</div>
+                    <ul class="sipoc-preview">
                         <li>Onaylı Rezervasyon</li>
                         <li>Kiralama Sözleşmesi</li>
                         <li>Teslim Belgesi</li>
                         <li>Fatura</li>
                     </ul>
+                    <div class="sipoc-expand-btn">👁️ Detaylar</div>
                 </div>
-                <div class="sipoc-box sipoc-customers" data-aos="fade-left" data-aos-delay="500">
+                
+                <div class="sipoc-box sipoc-customers hover-lift" data-aos="fade-left" data-aos-delay="500" data-sipoc-id="customers">
+                    <div class="sipoc-number">C</div>
                     <h3>Müşteriler</h3>
-                    <ul>
+                    <div class="sipoc-count">4 Segment</div>
+                    <ul class="sipoc-preview">
                         <li>Bireysel Müşteriler</li>
                         <li>Kurumsal Firmalar</li>
                         <li>Turizm Acenteleri</li>
                         <li>Araç Sahipleri</li>
                     </ul>
+                    <div class="sipoc-expand-btn">👁️ Detaylar</div>
+                </div>
+            </div>
+            
+            <!-- SIPOC Details Panel -->
+            <div id="sipoc-details-panel" class="glass-card sipoc-details-panel">
+                <div class="sipoc-details-header">
+                    <h3 id="sipoc-detail-title"></h3>
+                    <button class="sipoc-close-detail">&times;</button>
+                </div>
+                <div class="sipoc-details-content">
+                    <div class="sipoc-detail-section">
+                        <h4>📋 Detaylı Açıklama</h4>
+                        <p id="sipoc-detail-description"></p>
+                    </div>
+                    <div class="sipoc-detail-section">
+                        <h4>📊 Alt Kategoriler</h4>
+                        <div id="sipoc-detail-items" class="sipoc-items-grid"></div>
+                    </div>
+                    <div class="sipoc-detail-section">
+                        <h4>🎯 Önemli Noktalar</h4>
+                        <ul id="sipoc-detail-keypoints"></ul>
+                    </div>
+                    <div class="sipoc-detail-section">
+                        <h4>📈 Metrikler</h4>
+                        <div id="sipoc-detail-metrics" class="sipoc-metrics-grid"></div>
+                    </div>
                 </div>
             </div>
         </div>

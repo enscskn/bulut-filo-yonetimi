@@ -2094,6 +2094,421 @@
         }
 
         // ============================================
+        // SIPOC INTERACTIVE SYSTEM
+        // ============================================
+        
+        // SIPOC Detaylı Veriler
+        const sipocDetails = {
+            'suppliers': {
+                title: 'Tedarikçiler (Suppliers)',
+                letter: 'S',
+                color: '#8b5cf6',
+                description: 'Kiralama sürecine girdi sağlayan tüm dış ve iç paydaşlar. Bu tedarikçiler, sürecin başlaması ve devam etmesi için gerekli kaynakları, bilgileri ve talepleri sağlarlar.',
+                items: [
+                    {
+                        name: 'Müşteriler',
+                        detail: 'Araç kiralama talebinde bulunan bireysel ve kurumsal müşteriler. Yaklaşık 12.000+ aktif müşteri profili.'
+                    },
+                    {
+                        name: 'Araç Sahipleri',
+                        detail: 'Filoya araç sağlayan bireysel ve kurumsal mal sahipleri. 350+ araç sahibi ile çalışılmaktadır.'
+                    },
+                    {
+                        name: 'Sigorta Şirketleri',
+                        detail: 'Kasko ve trafik sigortası sağlayan anlaşmalı kurumlar. 5 farklı sigorta şirketi ile ortaklık.'
+                    },
+                    {
+                        name: 'Bakım Servisleri',
+                        detail: 'Araç bakım ve onarım hizmetleri sunan yetkili servisler. 25+ servis noktası.'
+                    }
+                ],
+                keypoints: [
+                    'Müşteri taleplerinin %85\'i online kanallardan geliyor',
+                    'Araç sahipleri ile stratejik ortaklıklar mevcut',
+                    'Sigorta şirketleri ile otomatik entegrasyon hedefleniyor',
+                    'Bakım servisleri için dijital takip sistemi kurulacak'
+                ],
+                metrics: [
+                    { label: 'Aktif Tedarikçi', value: '380+' },
+                    { label: 'Aylık Talep', value: '15K' },
+                    { label: 'Ortaklık Skoru', value: '4.7★' },
+                    { label: 'SLA Uyumu', value: '%94' }
+                ]
+            },
+            'inputs': {
+                title: 'Girdiler (Inputs)',
+                letter: 'I',
+                color: '#3b82f6',
+                description: 'Kiralama sürecinin başlaması ve yürütülmesi için gerekli olan tüm bilgiler, belgeler ve kaynaklar. Bu girdiler sürecin doğru ve verimli işlemesi için kritik öneme sahiptir.',
+                items: [
+                    {
+                        name: 'Kiralama Talebi',
+                        detail: 'Müşterinin araç, tarih ve konum tercihlerini içeren talep formu. Günde ortalama 500 talep alınır.'
+                    },
+                    {
+                        name: 'Müşteri Bilgileri',
+                        detail: 'TC kimlik, ehliyet, iletişim ve ödeme bilgileri. KVKK uyumlu veri yönetimi.'
+                    },
+                    {
+                        name: 'Araç Envanter',
+                        detail: '5.000+ araçlık envanter verisi. Gerçek zamanlı müsaitlik durumu ve lokasyon bilgisi.'
+                    },
+                    {
+                        name: 'Fiyat Listeleri',
+                        detail: 'Dinamik fiyatlandırma algoritması. Sezon, talep ve araç tipine göre değişken fiyatlar.'
+                    }
+                ],
+                keypoints: [
+                    'Taleplerin %65\'i mobil cihazlardan geliyor',
+                    'Müşteri bilgileri ISO 27001 standardında korunuyor',
+                    'Envanter güncellemeleri manuel yapılıyor (otomasyon hedefi)',
+                    'Fiyat algoritması AI ile optimize edilecek'
+                ],
+                metrics: [
+                    { label: 'Günlük Talep', value: '500' },
+                    { label: 'Veri Doğruluğu', value: '%88' },
+                    { label: 'Envanter Sync', value: '15dk' },
+                    { label: 'Fiyat Varyasyonu', value: '±%18' }
+                ]
+            },
+            'process': {
+                title: 'Süreç (Process)',
+                letter: 'P',
+                color: '#10b981',
+                description: 'Girdilerin çıktılara dönüştürüldüğü temel iş süreçleri. Her adım, değer katarak müşteri talebini karşılamaya yönelik faaliyetlerden oluşur. Ortalama tamamlanma süresi 45 dakika.',
+                items: [
+                    {
+                        name: 'Rezervasyon Al',
+                        detail: 'Müşteri talebini kaydetme ve ön onay süreci. Ortalama 10 dakika. Hedef: 3 dakika.'
+                    },
+                    {
+                        name: 'Doğrulama Yap',
+                        detail: 'Kimlik, ehliyet ve ödeme bilgilerinin doğrulanması. Ortalama 12 dakika. Hedef: 2 dakika.'
+                    },
+                    {
+                        name: 'Sözleşme Oluştur',
+                        detail: 'Dijital veya fiziksel sözleşme hazırlama. Ortalama 8 dakika. Hedef: 2 dakika.'
+                    },
+                    {
+                        name: 'Araç Teslim Et',
+                        detail: 'Aracın müşteriye teslimi ve hasarsızlık kontrolü. Ortalama 10 dakika. Hedef: 3 dakika.'
+                    },
+                    {
+                        name: 'Ödeme İşle',
+                        detail: 'Ödeme tahsilatı ve faturalama işlemi. Ortalama 5 dakika. Hedef: 2 dakika.'
+                    }
+                ],
+                keypoints: [
+                    'Toplam süreç süresi: 45 dakika (Hedef: 15 dakika)',
+                    'Manuel işlem oranı: %75 (Hedef: %25)',
+                    'Otomasyonla %70 süre tasarrufu sağlanacak',
+                    'Dijital sözleşme ile kağıt kullanımı %90 azalacak',
+                    'Gerçek zamanlı doğrulama ile hata oranı %80 düşecek'
+                ],
+                metrics: [
+                    { label: 'Toplam Süre', value: '45dk' },
+                    { label: 'Adım Sayısı', value: '5' },
+                    { label: 'Otomasyon', value: '%25' },
+                    { label: 'Verimlilik', value: '%58' }
+                ]
+            },
+            'outputs': {
+                title: 'Çıktılar (Outputs)',
+                letter: 'O',
+                color: '#f59e0b',
+                description: 'Süreç sonunda üretilen somut belgeler, onaylar ve deliverable\'lar. Bu çıktılar hem müşteri hem de iç süreçler için kullanılır ve sürecin başarıyla tamamlandığını gösterir.',
+                items: [
+                    {
+                        name: 'Onaylı Rezervasyon',
+                        detail: 'Rezervasyon onay belgesi ve referans numarası. Günde 450+ rezervasyon onayı.'
+                    },
+                    {
+                        name: 'Kiralama Sözleşmesi',
+                        detail: 'İmzalanmış kiralama sözleşmesi (dijital veya fiziksel). Yasal geçerliliği olan belge.'
+                    },
+                    {
+                        name: 'Teslim Belgesi',
+                        detail: 'Araç teslim tutanağı ve hasar kayıt formu. Fotoğraflı belgeleme.'
+                    },
+                    {
+                        name: 'Fatura',
+                        detail: 'E-fatura veya fiziksel fatura belgesi. Muhasebe sistemi entegrasyonu.'
+                    }
+                ],
+                keypoints: [
+                    'Tüm belgeler dijitalleştirilecek (%100 hedef)',
+                    'E-imza entegrasyonu ile anında onay',
+                    'Blockchain ile belge güvenliği artırılacak',
+                    'Otomatik arşivleme ve kolay erişim',
+                    'Müşteri portali üzerinden belge indirme'
+                ],
+                metrics: [
+                    { label: 'Günlük Çıktı', value: '450' },
+                    { label: 'Dijital Oran', value: '%42' },
+                    { label: 'Hata Oranı', value: '%8' },
+                    { label: 'E-Fatura', value: '%78' }
+                ]
+            },
+            'customers': {
+                title: 'Müşteriler (Customers)',
+                letter: 'C',
+                color: '#ef4444',
+                description: 'Süreç çıktılarından yararlanan ve hizmeti tüketen tüm müşteri segmentleri. Her segment farklı ihtiyaçlar ve beklentilerle sürece dahil olur.',
+                items: [
+                    {
+                        name: 'Bireysel Müşteriler',
+                        detail: 'Kişisel kullanım için araç kiralayan bireyler. Toplam müşterilerin %55\'i. Yıllık 8.000+ işlem.'
+                    },
+                    {
+                        name: 'Kurumsal Firmalar',
+                        detail: 'Kurumsal filo ihtiyaçları olan şirketler. Toplam müşterilerin %30\'u. Uzun dönem anlaşmalar.'
+                    },
+                    {
+                        name: 'Turizm Acenteleri',
+                        detail: 'Transfer ve tur hizmetleri için toplu kiralama yapan acenteler. %10 pazar payı.'
+                    },
+                    {
+                        name: 'Araç Sahipleri',
+                        detail: 'Araçlarını filoya dahil eden ve gelir elde eden sahipler. %5 müşteri segmenti.'
+                    }
+                ],
+                keypoints: [
+                    'Bireysel müşteri memnuniyeti: %98',
+                    'Kurumsal müşteri sadakati: %85',
+                    'Turizm acenteleri için özel fiyatlandırma',
+                    'Araç sahipleri için komisyon sistemi: %15-25',
+                    'NPS Skoru: +62 (Mükemmel seviye)'
+                ],
+                metrics: [
+                    { label: 'Toplam Müşteri', value: '12K+' },
+                    { label: 'Aktif Müşteri', value: '4.5K' },
+                    { label: 'Retention', value: '%82' },
+                    { label: 'NPS', value: '+62' }
+                ]
+            }
+        };
+
+        // SVG Flow Diyagramı Oluştur
+        function createSIPOCFlow() {
+            const container = document.getElementById('sipoc-svg-flow');
+            if (!container) return;
+
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('width', '100%');
+            svg.setAttribute('height', '120');
+            svg.setAttribute('viewBox', '0 0 1200 120');
+            svg.style.overflow = 'visible';
+
+            const lineY = 60;
+            const colors = ['#8b5cf6', '#3b82f6', '#10b981', '#f59e0b', '#ef4444'];
+            const labels = ['S', 'I', 'P', 'O', 'C'];
+            const names = ['Suppliers', 'Inputs', 'Process', 'Outputs', 'Customers'];
+
+            // Main flow line
+            const mainLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            mainLine.setAttribute('x1', '100');
+            mainLine.setAttribute('y1', lineY);
+            mainLine.setAttribute('x2', '1100');
+            mainLine.setAttribute('y2', lineY);
+            mainLine.setAttribute('stroke', 'url(#flowGradient)');
+            mainLine.setAttribute('stroke-width', '4');
+            mainLine.style.strokeDasharray = '1000';
+            mainLine.style.strokeDashoffset = '1000';
+            mainLine.style.animation = 'drawLine 3s ease forwards';
+            svg.appendChild(mainLine);
+
+            // Gradient definition
+            const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+            const gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+            gradient.setAttribute('id', 'flowGradient');
+            gradient.setAttribute('x1', '0%');
+            gradient.setAttribute('y1', '0%');
+            gradient.setAttribute('x2', '100%');
+            gradient.setAttribute('y2', '0%');
+            
+            colors.forEach((color, i) => {
+                const stop = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+                stop.setAttribute('offset', `${(i / (colors.length - 1)) * 100}%`);
+                stop.setAttribute('stop-color', color);
+                gradient.appendChild(stop);
+            });
+            defs.appendChild(gradient);
+            svg.appendChild(defs);
+
+            // SIPOC Points
+            for (let i = 0; i < 5; i++) {
+                const x = 200 + (i * 200);
+                
+                // Circle
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('cx', x);
+                circle.setAttribute('cy', lineY);
+                circle.setAttribute('r', '25');
+                circle.setAttribute('fill', colors[i]);
+                circle.setAttribute('stroke', 'white');
+                circle.setAttribute('stroke-width', '3');
+                circle.style.opacity = '0';
+                circle.style.cursor = 'pointer';
+                circle.style.animation = `fadeIn 0.5s ease forwards ${1 + i * 0.2}s`;
+                circle.style.filter = 'drop-shadow(0 5px 15px rgba(0,0,0,0.3))';
+                
+                circle.addEventListener('mouseenter', function() {
+                    this.setAttribute('r', '30');
+                });
+                circle.addEventListener('mouseleave', function() {
+                    this.setAttribute('r', '25');
+                });
+                
+                svg.appendChild(circle);
+                
+                // Letter
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', x);
+                text.setAttribute('y', lineY + 7);
+                text.setAttribute('text-anchor', 'middle');
+                text.setAttribute('fill', 'white');
+                text.setAttribute('font-size', '20');
+                text.setAttribute('font-weight', 'bold');
+                text.textContent = labels[i];
+                text.style.opacity = '0';
+                text.style.animation = `fadeIn 0.5s ease forwards ${1.2 + i * 0.2}s`;
+                text.style.pointerEvents = 'none';
+                svg.appendChild(text);
+                
+                // Name label
+                const nameText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                nameText.setAttribute('x', x);
+                nameText.setAttribute('y', lineY - 40);
+                nameText.setAttribute('text-anchor', 'middle');
+                nameText.setAttribute('fill', document.body.classList.contains('light-theme') ? '#000' : '#fff');
+                nameText.setAttribute('font-size', '12');
+                nameText.setAttribute('font-weight', '600');
+                nameText.textContent = names[i];
+                nameText.style.opacity = '0';
+                nameText.style.animation = `fadeIn 0.5s ease forwards ${1.4 + i * 0.2}s`;
+                svg.appendChild(nameText);
+
+                // Arrow (except last)
+                if (i < 4) {
+                    const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+                    const arrowX = x + 110;
+                    arrow.setAttribute('points', `${arrowX},${lineY} ${arrowX-10},${lineY-6} ${arrowX-10},${lineY+6}`);
+                    arrow.setAttribute('fill', colors[i+1]);
+                    arrow.style.opacity = '0';
+                    arrow.style.animation = `fadeIn 0.5s ease forwards ${1.6 + i * 0.2}s`;
+                    svg.appendChild(arrow);
+                }
+            }
+
+            container.appendChild(svg);
+        }
+
+        // SIPOC Detay Panelini Göster
+        function showSIPOCDetails(sipocId) {
+            const panel = document.getElementById('sipoc-details-panel');
+            const data = sipocDetails[sipocId];
+            
+            if (!data) return;
+
+            // Tüm kutulardan active sınıfını kaldır
+            document.querySelectorAll('.sipoc-box').forEach(box => {
+                box.classList.remove('active');
+            });
+
+            // Tıklanan kutuya active ekle
+            document.querySelector(`[data-sipoc-id="${sipocId}"]`).classList.add('active');
+
+            // Panel içeriğini doldur
+            document.getElementById('sipoc-detail-title').textContent = data.title;
+            document.getElementById('sipoc-detail-description').textContent = data.description;
+
+            // Alt kategorileri doldur
+            const itemsGrid = document.getElementById('sipoc-detail-items');
+            itemsGrid.innerHTML = '';
+            data.items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'sipoc-item-card';
+                card.innerHTML = `
+                    <h5>${item.name}</h5>
+                    <p>${item.detail}</p>
+                `;
+                itemsGrid.appendChild(card);
+            });
+
+            // Önemli noktaları doldur
+            const keypointsList = document.getElementById('sipoc-detail-keypoints');
+            keypointsList.innerHTML = '';
+            data.keypoints.forEach(point => {
+                const li = document.createElement('li');
+                li.textContent = point;
+                keypointsList.appendChild(li);
+            });
+
+            // Metrikleri doldur
+            const metricsGrid = document.getElementById('sipoc-detail-metrics');
+            metricsGrid.innerHTML = '';
+            data.metrics.forEach(metric => {
+                const card = document.createElement('div');
+                card.className = 'sipoc-metric-card';
+                card.innerHTML = `
+                    <div class="sipoc-metric-value">${metric.value}</div>
+                    <div class="sipoc-metric-label">${metric.label}</div>
+                `;
+                metricsGrid.appendChild(card);
+            });
+
+            // Paneli göster
+            panel.classList.add('active');
+            
+            // Panele scroll
+            setTimeout(() => {
+                panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 300);
+        }
+
+        // SIPOC Detay Panelini Kapat
+        function closeSIPOCDetails() {
+            const panel = document.getElementById('sipoc-details-panel');
+            panel.classList.remove('active');
+            
+            // Active sınıfını kaldır
+            document.querySelectorAll('.sipoc-box').forEach(box => {
+                box.classList.remove('active');
+            });
+        }
+
+        // SIPOC Kutularına Click Event
+        document.querySelectorAll('.sipoc-box').forEach(box => {
+            box.addEventListener('click', () => {
+                const sipocId = box.getAttribute('data-sipoc-id');
+                if (sipocId) {
+                    showSIPOCDetails(sipocId);
+                }
+            });
+        });
+
+        // SIPOC Close Button
+        const sipocCloseBtn = document.querySelector('.sipoc-close-detail');
+        if (sipocCloseBtn) {
+            sipocCloseBtn.addEventListener('click', closeSIPOCDetails);
+        }
+
+        // SIPOC SVG Flow'u oluştur
+        const sipocObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    createSIPOCFlow();
+                    sipocObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        const sipocSection = document.getElementById('sipoc');
+        if (sipocSection) {
+            sipocObserver.observe(sipocSection);
+        }
+
+        // ============================================
         // IMPROVEMENT DETAILS MODAL SYSTEM
         // ============================================
         
