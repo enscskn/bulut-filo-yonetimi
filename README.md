@@ -66,8 +66,15 @@ Araç kiralama sektöründe faaliyet gösteren Bulut Filo Yönetimi şirketinin 
    - Kök neden tespiti için 5 aşamalı sorgulama
 
 8. **Süreç Metrikleri Dashboard**
-   - Timeline grafiği
-   - Maliyet dağılımı (Chart.js)
+   - Custom Timeline grafiği (SVG)
+   - AS-IS vs TO-BE karşılaştırma grafiği (ApexCharts Bar)
+   - Radial Progress Chart - İyileştirme hedefleri (ApexCharts RadialBar)
+   - 6 Aylık performans trendi (ApexCharts Area)
+   - Haftalık süreç yoğunluk haritası (ApexCharts Heatmap)
+   - Kombine metrik analizi (ApexCharts Mixed: Bar + Line)
+   - Detaylı maliyet dağılımı (ApexCharts Treemap)
+   - Performans kategorileri (ApexCharts PolarArea)
+   - Maliyet dağılımı (Chart.js Doughnut)
    - Darboğaz noktaları
 
 ## 🛠️ Kullanılan Teknolojiler
@@ -79,6 +86,7 @@ Araç kiralama sektöründe faaliyet gösteren Bulut Filo Yönetimi şirketinin 
 
 ### Kütüphaneler
 - **[Chart.js](https://www.chartjs.org/)** (v4.4.0): Veri görselleştirme grafikleri
+- **[ApexCharts](https://apexcharts.com/)** (v3.44.0): İleri seviye interaktif grafikler
 - **[AOS](https://michalsnik.github.io/aos/)** (v2.3.4): Scroll animasyonları
 
 ### Tasarım Yaklaşımı
@@ -135,6 +143,61 @@ bulut-filo-yonetimi/
 
 3. **Tarayıcıda Görüntüleyin**
    - Sunucu kullanıyorsanız: `http://localhost:8000`
+
+## 📊 Grafik ve Veri Görselleştirme Özellikleri
+
+### İnteraktif Grafikler (ApexCharts)
+
+Proje, ApexCharts kütüphanesi kullanılarak gelişmiş ve interaktif veri görselleştirmeleri sunar:
+
+#### 1. **AS-IS vs TO-BE Karşılaştırma Grafiği**
+- Bar chart ile mevcut ve hedef durum karşılaştırması
+- Export özellikleri (PNG, SVG, CSV)
+- Zoom ve pan desteği
+- Gradient renkler ve animasyonlar
+
+#### 2. **Radial Progress Chart**
+- İyileştirme hedeflerinin yüzdelik gösterimi
+- 4 farklı kategori (Otomasyon, Entegrasyon, Eğitim, Analitik)
+- Ortalama hesaplama
+- İnteraktif legend
+
+#### 3. **Performans Trend Analizi**
+- 6 aylık area chart
+- 3 farklı metrik (İşlem süresi, Müşteri memnuniyeti, Hata oranı)
+- Smooth curve geçişleri
+- Gradient fill efektleri
+
+#### 4. **Süreç Yoğunluk Haritası (Heatmap)**
+- Haftalık ve saatlik işlem yoğunluğu
+- Renk skalası ile yoğunluk gösterimi
+- İnteraktif tooltip'ler
+
+#### 5. **Kombine Metrik Analizi**
+- Bar + Line kombinasyonu
+- Çoklu Y ekseni
+- İşlem hacmi, verimlilik ve tasarruf metrikleri
+- Shared tooltip
+
+#### 6. **Detaylı Maliyet Dağılımı (Treemap)**
+- Hiyerarşik maliyet gösterimi
+- Tıklanabilir alanlar
+- 8 farklı maliyet kategorisi
+- Boyut bazlı görselleştirme
+
+#### 7. **Performans Kategorileri (Polar Area)**
+- 5 kategori karşılaştırması (Hız, Doğruluk, Verimlilik, Maliyet, Memnuniyet)
+- Dairesel görselleştirme
+- Puan bazlı değerlendirme
+
+### Grafik Özellikleri
+- ✅ **Responsive**: Tüm ekran boyutlarına uyumlu
+- ✅ **Export**: PNG, SVG, CSV formatlarında indirme
+- ✅ **Zoom/Pan**: Grafikleri yakınlaştırma ve kaydırma
+- ✅ **Tooltip**: Detaylı veri gösterimi
+- ✅ **Animation**: Smooth giriş animasyonları
+- ✅ **Dark/Light Mode**: Tema desteği
+- ✅ **Accessibility**: Ekran okuyucu desteği
 
 ## 🎯 Navigasyon
 
