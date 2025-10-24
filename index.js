@@ -554,11 +554,16 @@
         // CUSTOM RICE CHART - Stacked Horizontal Bars
         // ============================================
         const riceData = [
-            { name: 'Otomasyon', reach: 200, impact: 8, confidence: 90, effort: 3, total: 480, winner: true },
-            { name: 'Entegrasyon', reach: 180, impact: 7, confidence: 85, effort: 3, total: 357 },
-            { name: 'Mobil App', reach: 150, impact: 9, confidence: 75, effort: 5, total: 203 },
-            { name: 'Dashboard', reach: 100, impact: 6, confidence: 80, effort: 2, total: 240 },
-            { name: 'Eğitim', reach: 80, impact: 5, confidence: 95, effort: 1, total: 380 }
+            { name: 'Temel Operasyonel Raporlama', reach: 100, impact: 1.5, confidence: 100, effort: 1, total: 1500, winner: true },
+            { name: 'Otomatik Sözleşme Üretimi', reach: 100, impact: 2, confidence: 100, effort: 2, total: 1000 },
+            { name: 'Müşteri Tipine Göre Farklılaşan Kayıt', reach: 100, impact: 2, confidence: 100, effort: 2.5, total: 800 },
+            { name: 'Temel Araç ve Sürücü Atama (Kurumsal)', reach: 60, impact: 2, confidence: 100, effort: 1.5, total: 800 },
+            { name: 'Detaylı Ceza ve Hasar Yönetimi', reach: 100, impact: 3, confidence: 90, effort: 4, total: 675 },
+            { name: 'Temel Risk Skorlaması (Bireysel)', reach: 80, impact: 3, confidence: 80, effort: 3, total: 640 },
+            { name: 'Kredi Kartı Provizyon Kontrolü', reach: 80, impact: 2, confidence: 80, effort: 2, total: 640 },
+            { name: 'Tek Panelde Bireysel ve Kurumsal Kiralama Yönetimi', reach: 100, impact: 3, confidence: 100, effort: 5, total: 600 },
+            { name: 'Otomatik Fatura Planlama ve Takibi', reach: 70, impact: 2.5, confidence: 90, effort: 3, total: 525 },
+            { name: 'Gelişmiş Raporlama Paneli', reach: 50, impact: 2, confidence: 80, effort: 4, total: 200 },
         ];
 
         function createRiceChart() {
