@@ -560,16 +560,12 @@
                 
                 <!-- BPMN Diagram -->
                 <div id="bpmn-diagram" class="bpmn-diagram">
-                    <!-- Buraya Draw.io embed veya SVG diagram gelecek -->
-                    <div class="bpmn-placeholder">
-                        <div class="placeholder-content">
-                            <div class="placeholder-icon">📊</div>
-                            <h4>BPMN 2.0 Süreç Haritası</h4>
-                            <p>Detaylı süreç haritası burada görüntülenecek</p>
-                            <div class="placeholder-actions">
-                                <button class="btn btn-primary">Haritayı Görüntüle</button>
-                                <button class="btn btn-secondary">PDF İndir</button>
-                            </div>
+                    <div class="bpmn-image-container">
+                        <img src="images/bpm2.png" alt="BPMN 2.0 Süreç Haritası" class="bpmn-image" id="bpmn-image">
+                        <div class="zoom-controls">
+                            <button class="zoom-btn zoom-in" onclick="zoomIn()">🔍+</button>
+                            <button class="zoom-btn zoom-out" onclick="zoomOut()">🔍-</button>
+                            <button class="zoom-btn zoom-reset" onclick="resetZoom()">⌂</button>
                         </div>
                     </div>
                 </div>

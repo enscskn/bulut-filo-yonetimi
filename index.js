@@ -2800,3 +2800,189 @@
         });
 
         console.log('🚀 Bulut Filo Yönetimi - BPM Analiz Sunumu Yüklendi');
+
+        // BPMN Image Zoom Functionality
+        let currentZoom = 1;
+        const minZoom = 0.5;
+        const maxZoom = 3;
+        const zoomStep = 0.2;
+        
+        // Drag/Pan functionality
+        let isDragging = false;
+        let startX = 0;
+        let startY = 0;
+        let currentTranslateX = 0;
+        let currentTranslateY = 0;
+        let lastTranslateX = 0;
+        let lastTranslateY = 0;
+
+        function zoomIn() {
+            if (currentZoom < maxZoom) {
+                currentZoom += zoomStep;
+                applyZoom();
+            }
+        }
+
+        function zoomOut() {
+            if (currentZoom > minZoom) {
+                currentZoom -= zoomStep;
+                applyZoom();
+            }
+        }
+
+        function resetZoom() {
+            currentZoom = 1;
+            currentTranslateX = 0;
+            currentTranslateY = 0;
+            lastTranslateX = 0;
+            lastTranslateY = 0;
+            applyZoom();
+        }
+
+        function applyZoom() {
+            const image = document.getElementById('bpmn-image');
+            if (image) {
+                image.style.transform = `scale(${currentZoom}) translate(${currentTranslateX}px, ${currentTranslateY}px)`;
+                
+                // Zoom seviyesini göster
+                updateZoomIndicator();
+            }
+        }
+
+        function updateZoomIndicator() {
+            // Zoom seviyesini konsola yazdır (isteğe bağlı)
+            console.log(`Zoom Level: ${Math.round(currentZoom * 100)}%`);
+        }
+
+        // Mouse wheel zoom ve drag desteği
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageContainer = document.querySelector('.bpmn-image-container');
+            const image = document.getElementById('bpmn-image');
+            
+            if (imageContainer && image) {
+                // Mouse wheel zoom
+                imageContainer.addEventListener('wheel', function(e) {
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomIn();
+                    } else {
+                        zoomOut();
+                    }
+                });
+                
+                // Mouse drag events
+                image.addEventListener('mousedown', function(e) {
+                    if (e.button === 0) { // Sol mouse tuşu
+                        isDragging = true;
+                        startX = e.clientX - currentTranslateX;
+                        startY = e.clientY - currentTranslateY;
+                        image.classList.add('dragging');
+                        e.preventDefault();
+                    }
+                });
+                
+                document.addEventListener('mousemove', function(e) {
+                    if (isDragging) {
+                        currentTranslateX = e.clientX - startX;
+                        currentTranslateY = e.clientY - startY;
+                        
+                        // Sınırları kontrol et
+                        const containerRect = imageContainer.getBoundingClientRect();
+                        const imageRect = image.getBoundingClientRect();
+                        const scaledWidth = imageRect.width * currentZoom;
+                        const scaledHeight = imageRect.height * currentZoom;
+                        
+                        const maxTranslateX = Math.max(0, (scaledWidth - containerRect.width) / 2);
+                        const maxTranslateY = Math.max(0, (scaledHeight - containerRect.height) / 2);
+                        
+                        currentTranslateX = Math.max(-maxTranslateX, Math.min(maxTranslateX, currentTranslateX));
+                        currentTranslateY = Math.max(-maxTranslateY, Math.min(maxTranslateY, currentTranslateY));
+                        
+                        applyZoom();
+                    }
+                });
+                
+                document.addEventListener('mouseup', function() {
+                    if (isDragging) {
+                        isDragging = false;
+                        lastTranslateX = currentTranslateX;
+                        lastTranslateY = currentTranslateY;
+                        image.classList.remove('dragging');
+                    }
+                });
+                
+                // Drag'i engellemek için context menu'yu kapat
+                image.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                });
+            }
+        });
+
+        // Touch zoom ve drag desteği (mobil cihazlar için)
+        let initialDistance = 0;
+        let initialZoom = 1;
+        let initialTranslateX = 0;
+        let initialTranslateY = 0;
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const image = document.getElementById('bpmn-image');
+            if (image) {
+                image.addEventListener('touchstart', function(e) {
+                    if (e.touches.length === 1) {
+                        // Tek parmak - drag
+                        touchStartX = e.touches[0].clientX - currentTranslateX;
+                        touchStartY = e.touches[0].clientY - currentTranslateY;
+                    } else if (e.touches.length === 2) {
+                        // İki parmak - zoom
+                        e.preventDefault();
+                        initialDistance = getDistance(e.touches[0], e.touches[1]);
+                        initialZoom = currentZoom;
+                        initialTranslateX = currentTranslateX;
+                        initialTranslateY = currentTranslateY;
+                    }
+                });
+
+                image.addEventListener('touchmove', function(e) {
+                    if (e.touches.length === 1) {
+                        // Tek parmak - drag
+                        e.preventDefault();
+                        currentTranslateX = e.touches[0].clientX - touchStartX;
+                        currentTranslateY = e.touches[0].clientY - touchStartY;
+                        
+                        // Sınırları kontrol et
+                        const imageContainer = document.querySelector('.bpmn-image-container');
+                        const containerRect = imageContainer.getBoundingClientRect();
+                        const imageRect = image.getBoundingClientRect();
+                        const scaledWidth = imageRect.width * currentZoom;
+                        const scaledHeight = imageRect.height * currentZoom;
+                        
+                        const maxTranslateX = Math.max(0, (scaledWidth - containerRect.width) / 2);
+                        const maxTranslateY = Math.max(0, (scaledHeight - containerRect.height) / 2);
+                        
+                        currentTranslateX = Math.max(-maxTranslateX, Math.min(maxTranslateX, currentTranslateX));
+                        currentTranslateY = Math.max(-maxTranslateY, Math.min(maxTranslateY, currentTranslateY));
+                        
+                        applyZoom();
+                    } else if (e.touches.length === 2) {
+                        // İki parmak - zoom
+                        e.preventDefault();
+                        const currentDistance = getDistance(e.touches[0], e.touches[1]);
+                        const scale = currentDistance / initialDistance;
+                        const newZoom = initialZoom * scale;
+                        
+                        if (newZoom >= minZoom && newZoom <= maxZoom) {
+                            currentZoom = newZoom;
+                            applyZoom();
+                        }
+                    }
+                });
+            }
+        });
+
+        function getDistance(touch1, touch2) {
+            const dx = touch1.clientX - touch2.clientX;
+            const dy = touch1.clientY - touch2.clientY;
+            return Math.sqrt(dx * dx + dy * dy);
+        }
