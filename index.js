@@ -1864,12 +1864,6 @@
             btn.addEventListener('click', closeImprovementModal);
         });
 
-        // Overlay'e tıklayınca kapat
-        document.getElementById('improvement-modal').addEventListener('click', (e) => {
-            if (e.target.id === 'improvement-modal') {
-                closeImprovementModal();
-            }
-        });
 
         // ESC tuşu ile kapat
         document.addEventListener('keydown', (e) => {
@@ -1879,100 +1873,6 @@
         });
 
         console.log('🚀 Bulut Filo Yönetimi - BPM Analiz Sunumu Yüklendi');
-
-        // ============================================
-        // FOOTER FUNCTIONALITY
-        // ============================================
-        
-        // Contact button functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const contactBtn = document.querySelector('.contact-btn');
-            if (contactBtn) {
-                contactBtn.addEventListener('click', function() {
-                    // Create a simple contact modal or redirect
-                    const email = 'info@bulutfilo.com';
-                    const subject = 'Kiralama Modülü Projesi Hakkında Bilgi';
-                    const body = 'Merhaba,\n\nKiralama Modülü projesi hakkında daha fazla bilgi almak istiyorum.\n\nTeşekkürler.';
-                    
-                    const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                    window.open(mailtoLink);
-                });
-            }
-        });
-
-        // Smooth scroll for footer links
-        document.addEventListener('DOMContentLoaded', function() {
-            const footerLinks = document.querySelectorAll('.footer-links a, .link-group a');
-            footerLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-                    if (href && href.startsWith('#')) {
-                        e.preventDefault();
-                        const targetSection = document.querySelector(href);
-                        if (targetSection) {
-                            targetSection.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
-                            });
-                        }
-                    }
-                });
-            });
-        });
-
-        // Social media link handlers
-        document.addEventListener('DOMContentLoaded', function() {
-            const socialLinks = document.querySelectorAll('.social-link');
-            socialLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const platform = this.classList.contains('linkedin') ? 'LinkedIn' :
-                                   this.classList.contains('twitter') ? 'Twitter' :
-                                   this.classList.contains('instagram') ? 'Instagram' :
-                                   this.classList.contains('youtube') ? 'YouTube' : 'Sosyal Medya';
-                    
-                    // Show a message or redirect to actual social media pages
-                    alert(`${platform} sayfamız yakında aktif olacak!`);
-                });
-            });
-        });
-
-        // Footer stats animation
-        document.addEventListener('DOMContentLoaded', function() {
-            const statNumbers = document.querySelectorAll('.stat-number');
-            
-            const animateStats = () => {
-                statNumbers.forEach(stat => {
-                    const finalNumber = parseInt(stat.textContent);
-                    let currentNumber = 0;
-                    const increment = finalNumber / 50;
-                    const timer = setInterval(() => {
-                        currentNumber += increment;
-                        if (currentNumber >= finalNumber) {
-                            stat.textContent = finalNumber;
-                            clearInterval(timer);
-                        } else {
-                            stat.textContent = Math.floor(currentNumber);
-                        }
-                    }, 30);
-                });
-            };
-
-            // Trigger animation when footer comes into view
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        animateStats();
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-
-            const footer = document.querySelector('#footer');
-            if (footer) {
-                observer.observe(footer);
-            }
-        });
 
         // BPMN Image Zoom Functionality
         let currentZoom = 1;

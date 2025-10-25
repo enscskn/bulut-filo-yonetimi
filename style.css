@@ -3302,12 +3302,14 @@ body.light-theme .team-member-footer:hover {
     font-size: 1rem;
     margin-bottom: 5px;
     font-weight: 600;
+    text-align: left;
 }
 
 .member-role {
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.85rem;
     margin-bottom: 3px;
+    text-align: left;
 }
 
 body.light-theme .member-role {
