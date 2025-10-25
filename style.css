@@ -1317,6 +1317,13 @@ body.light-theme .sipoc-item-card p {
     text-align: center;
     color: white;
     position: relative;
+    transition: all 0.3s ease;
+}
+
+.flow-step.bottleneck {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    border: 2px solid #fbbf24;
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
 }
 
 .flow-step::after {
@@ -1331,6 +1338,255 @@ body.light-theme .sipoc-item-card p {
 
 .flow-step:last-child::after {
     content: '';
+}
+
+.step-metrics {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.step-metrics .metric {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.step-metrics.critical .metric {
+    background: rgba(251, 191, 36, 0.3);
+    color: #fbbf24;
+}
+
+/* BPMN Process Map Styles */
+#bpmn-process {
+    background: var(--bg-dark);
+    min-height: auto;
+    padding: 100px 20px;
+}
+
+body.light-theme #bpmn-process {
+    background: var(--bg-light);
+}
+
+.bpmn-container {
+    margin-top: 50px;
+    padding: 40px;
+    position: relative;
+    overflow: visible;
+}
+
+.bpmn-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.light-theme .bpmn-header {
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+.bpmn-header h3 {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    margin: 0;
+}
+
+.process-metrics {
+    display: flex;
+    gap: 20px;
+}
+
+.metric-item {
+    text-align: center;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border-left: 3px solid var(--accent-color);
+}
+
+body.light-theme .metric-item {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.metric-label {
+    display: block;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 5px;
+}
+
+body.light-theme .metric-label {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.metric-value {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+.bpmn-diagram {
+    min-height: 400px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+body.light-theme .bpmn-diagram {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.bpmn-placeholder {
+    text-align: center;
+    padding: 60px 40px;
+}
+
+.placeholder-content {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.placeholder-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.placeholder-content h4 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--accent-color);
+}
+
+.placeholder-content p {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 30px;
+}
+
+body.light-theme .placeholder-content p {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.placeholder-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.process-details {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.light-theme .process-details {
+    border-top-color: rgba(0, 0, 0, 0.1);
+}
+
+.process-details h4 {
+    font-size: 1.2rem;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.detail-item {
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border-left: 3px solid var(--accent-color);
+}
+
+body.light-theme .detail-item {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.detail-item strong {
+    color: var(--accent-color);
+}
+
+/* Bottleneck Analysis */
+.bottleneck-analysis {
+    margin-top: 40px;
+    padding: 30px;
+}
+
+.bottleneck-analysis h3 {
+    font-size: 1.3rem;
+    color: var(--accent-color);
+    margin-bottom: 25px;
+}
+
+.bottleneck-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.bottleneck-item {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid;
+    transition: all 0.3s ease;
+}
+
+.bottleneck-item.critical {
+    background: rgba(239, 68, 68, 0.1);
+    border-left-color: #ef4444;
+}
+
+.bottleneck-item.high {
+    background: rgba(245, 158, 11, 0.1);
+    border-left-color: #f59e0b;
+}
+
+.bottleneck-item.medium {
+    background: rgba(251, 146, 60, 0.1);
+    border-left-color: #fb923c;
+}
+
+.bottleneck-icon {
+    font-size: 2rem;
+    margin-right: 20px;
+}
+
+.bottleneck-info h4 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: var(--text-light);
+}
+
+body.light-theme .bottleneck-info h4 {
+    color: var(--text-dark);
+}
+
+.bottleneck-info p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+body.light-theme .bottleneck-info p {
+    color: rgba(0, 0, 0, 0.6);
 }
 
 /* Metrics Dashboard */
@@ -1463,7 +1719,6 @@ body.light-theme #ishikawa {
 
 .fishbone-container {
     margin-top: 50px;
-    overflow-x: auto;
 }
 
 .fishbone {
@@ -1520,6 +1775,48 @@ body.light-theme .fishbone-category {
     left: 0;
     color: var(--accent-color);
     font-size: 1.5rem;
+}
+
+/* Fishbone Details Panel */
+#fishbone-details {
+    margin-top: 30px;
+    padding: 30px;
+    background: var(--card-dark);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: none;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+body.light-theme #fishbone-details {
+    background: var(--card-light);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#fishbone-details h3 {
+    color: var(--accent-color);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+#fishbone-details ul {
+    list-style: none;
+    padding: 0;
+}
+
+#fishbone-details li {
+    padding: 8px 0;
+    padding-left: 20px;
+    position: relative;
+    color: var(--text-primary);
+}
+
+#fishbone-details li::before {
+    content: '▶';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+    font-size: 0.8rem;
 }
 
 /* 5 Whys */

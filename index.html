@@ -37,6 +37,7 @@
         <div class="nav-dot" data-section="moscow" data-tooltip="MoSCoW"></div>
         <div class="nav-dot" data-section="sipoc" data-tooltip="SIPOC"></div>
         <div class="nav-dot" data-section="as-is" data-tooltip="AS-IS"></div>
+        <div class="nav-dot" data-section="bpmn-process" data-tooltip="BPMN Haritası"></div>
         <div class="nav-dot" data-section="metrics" data-tooltip="Dashboard"></div>
         <div class="nav-dot" data-section="bottlenecks" data-tooltip="Darboğaz Noktaları"></div>
         <div class="nav-dot" data-section="ishikawa" data-tooltip="Ishikawa"></div>
@@ -483,26 +484,140 @@
                         <div style="font-size: 2rem; margin-bottom: 10px;">1️⃣</div>
                         <strong>Talep Girişi</strong>
                         <p style="font-size: 0.9rem; margin-top: 10px;">Manuel form doldurma</p>
+                        <div class="step-metrics">
+                            <span class="metric">⏱️ 10 dk</span>
+                            <span class="metric">❌ %5 hata</span>
+                        </div>
                     </div>
                     <div class="flow-step" data-aos="fade-up" data-aos-delay="200">
                         <div style="font-size: 2rem; margin-bottom: 10px;">2️⃣</div>
                         <strong>Müsaitlik Kontrolü</strong>
                         <p style="font-size: 0.9rem; margin-top: 10px;">Excel tabloları</p>
+                        <div class="step-metrics">
+                            <span class="metric">⏱️ 15 dk</span>
+                            <span class="metric">❌ %3 hata</span>
+                        </div>
                     </div>
                     <div class="flow-step" data-aos="fade-up" data-aos-delay="300">
                         <div style="font-size: 2rem; margin-bottom: 10px;">3️⃣</div>
                         <strong>Fiyat Hesaplama</strong>
                         <p style="font-size: 0.9rem; margin-top: 10px;">Manuel hesaplama</p>
+                        <div class="step-metrics">
+                            <span class="metric">⏱️ 10 dk</span>
+                            <span class="metric">❌ %1 hata</span>
+                        </div>
                     </div>
-                    <div class="flow-step" data-aos="fade-up" data-aos-delay="400">
+                    <div class="flow-step bottleneck" data-aos="fade-up" data-aos-delay="400">
                         <div style="font-size: 2rem; margin-bottom: 10px;">4️⃣</div>
                         <strong>Onay Süreci</strong>
                         <p style="font-size: 0.9rem; margin-top: 10px;">Çoklu seviyeler</p>
+                        <div class="step-metrics critical">
+                            <span class="metric">⏱️ 20 dk</span>
+                            <span class="metric">❌ %8 hata</span>
+                        </div>
                     </div>
                     <div class="flow-step" data-aos="fade-left" data-aos-delay="500">
                         <div style="font-size: 2rem; margin-bottom: 10px;">5️⃣</div>
                         <strong>Teslim</strong>
                         <p style="font-size: 0.9rem; margin-top: 10px;">Kağıt belgeler</p>
+                        <div class="step-metrics">
+                            <span class="metric">⏱️ 5 dk</span>
+                            <span class="metric">❌ %2 hata</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7B: BPMN Process Map -->
+    <section id="bpmn-process">
+        <div class="container">
+            <h2 data-aos="fade-up">BPMN 2.0 Süreç Haritası</h2>
+            <p data-aos="fade-up" style="text-align: center; font-size: 1.1rem; margin-bottom: 30px; opacity: 0.9;">
+                Mevcut Durum Analizi - Kiralama Süreci Detay Haritası
+            </p>
+            
+            <!-- BPMN Diagram Container -->
+            <div class="bpmn-container glass-card" data-aos="fade-up">
+                <div class="bpmn-header">
+                    <h3>📋 Kiralama Süreci - Mevcut Durum (AS-IS)</h3>
+                    <div class="process-metrics">
+                        <div class="metric-item">
+                            <span class="metric-label">Toplam Süre</span>
+                            <span class="metric-value">45 dk</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Hata Oranı</span>
+                            <span class="metric-value">%12</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Maliyet</span>
+                            <span class="metric-value">500K₺/yıl</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- BPMN Diagram -->
+                <div id="bpmn-diagram" class="bpmn-diagram">
+                    <!-- Buraya Draw.io embed veya SVG diagram gelecek -->
+                    <div class="bpmn-placeholder">
+                        <div class="placeholder-content">
+                            <div class="placeholder-icon">📊</div>
+                            <h4>BPMN 2.0 Süreç Haritası</h4>
+                            <p>Detaylı süreç haritası burada görüntülenecek</p>
+                            <div class="placeholder-actions">
+                                <button class="btn btn-primary">Haritayı Görüntüle</button>
+                                <button class="btn btn-secondary">PDF İndir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Process Details -->
+                <div class="process-details">
+                    <h4>🔍 Süreç Detayları</h4>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <strong>Başlangıç:</strong> Müşteri Talep Girişi
+                        </div>
+                        <div class="detail-item">
+                            <strong>Bitiş:</strong> Araç Teslimi
+                        </div>
+                        <div class="detail-item">
+                            <strong>Aktörler:</strong> Müşteri, Operasyon, Yönetim
+                        </div>
+                        <div class="detail-item">
+                            <strong>Sistemler:</strong> Excel, Telefon, Kağıt
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bottleneck Analysis -->
+            <div class="bottleneck-analysis glass-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>⚠️ Darboğaz Analizi</h3>
+                <div class="bottleneck-list">
+                    <div class="bottleneck-item critical">
+                        <div class="bottleneck-icon">🔴</div>
+                        <div class="bottleneck-info">
+                            <h4>Onay Süreci</h4>
+                            <p>Süre: 20 dk | Hata: %8 | Maliyet: 200K₺</p>
+                        </div>
+                    </div>
+                    <div class="bottleneck-item high">
+                        <div class="bottleneck-icon">🟡</div>
+                        <div class="bottleneck-info">
+                            <h4>Müsaitlik Kontrolü</h4>
+                            <p>Süre: 15 dk | Hata: %3 | Maliyet: 150K₺</p>
+                        </div>
+                    </div>
+                    <div class="bottleneck-item medium">
+                        <div class="bottleneck-icon">🟠</div>
+                        <div class="bottleneck-info">
+                            <h4>Fiyat Hesaplama</h4>
+                            <p>Süre: 10 dk | Hata: %1 | Maliyet: 100K₺</p>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -479,6 +479,10 @@
                 const sectionId = dot.getAttribute('data-section');
                 const targetSection = document.getElementById(sectionId);
                 
+                // Update active class immediately on click
+                navDots.forEach(d => d.classList.remove('active'));
+                dot.classList.add('active');
+                
                 // Smooth scroll with custom easing
                 targetSection.scrollIntoView({ 
                     behavior: 'smooth',
@@ -1167,7 +1171,6 @@
             });
 
             detailsContainer.style.display = 'block';
-            detailsContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
         const fishboneObserver = new IntersectionObserver((entries) => {
