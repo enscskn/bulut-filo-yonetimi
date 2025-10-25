@@ -36,12 +36,10 @@
         <div class="nav-dot" data-section="rice" data-tooltip="RICE"></div>
         <div class="nav-dot" data-section="moscow" data-tooltip="MoSCoW"></div>
         <div class="nav-dot" data-section="sipoc" data-tooltip="SIPOC"></div>
-        <div class="nav-dot" data-section="product-overview" data-tooltip="Modül Görselleri"></div>
         <div class="nav-dot" data-section="bpmn-process" data-tooltip="BPMN Haritası"></div>
         <div class="nav-dot" data-section="ishikawa" data-tooltip="Ishikawa"></div>
         <div class="nav-dot" data-section="five-whys" data-tooltip="5 Neden"></div>
         <div class="nav-dot" data-section="product-overview" data-tooltip="Modül Görselleri"></div>
-        <div class="nav-dot" data-section="improvements" data-tooltip="İyileştirmeler"></div>
     </nav>
 
     <!-- Section 1: Cover -->
@@ -670,109 +668,102 @@
             </div>
         </section>
 
-    <!-- Section 9: Improvements -->
-    <section id="improvements">
-        <div class="container">
-            <h2 data-aos="fade-up">İyileştirme Fırsatları</h2>
-            <p data-aos="fade-up" style="text-align: center; font-size: 1.1rem; margin-bottom: 30px; opacity: 0.9;">
-                Detayları görmek için kartlara tıklayın
-            </p>
-            <div class="improvements-grid">
-                <div class="glass-card card-3d improvement-card" data-aos="zoom-in" data-aos-delay="100" data-improvement-id="automation">
-                    <span class="priority-badge priority-high">Yüksek</span>
-                    <div class="improvement-icon">🤖</div>
-                    <h3>Süreç Otomasyonu</h3>
-                    <p>Rezervasyon ve onay süreçlerini otomatize ederek işlem süresini %70 azalt</p>
-                    <div class="card-click-hint">📋 Detaylar</div>
-                </div>
-                <div class="glass-card card-3d improvement-card" data-aos="zoom-in" data-aos-delay="200" data-improvement-id="integration">
-                    <span class="priority-badge priority-high">Yüksek</span>
-                    <div class="improvement-icon">🔗</div>
-                    <h3>Sistem Entegrasyonu</h3>
-                    <p>Tüm sistemleri tek platformda birleştirerek veri tutarlılığını sağla</p>
-                    <div class="card-click-hint">📋 Detaylar</div>
-                </div>
-                <div class="glass-card card-3d improvement-card" data-aos="zoom-in" data-aos-delay="300" data-improvement-id="mobile">
-                    <span class="priority-badge priority-high">Yüksek</span>
-                    <div class="improvement-icon">📱</div>
-                    <h3>Mobil Uygulama</h3>
-                    <p>7/24 erişilebilir, kullanıcı dostu mobil platform geliştir</p>
-                    <div class="card-click-hint">📋 Detaylar</div>
-                </div>
-                <div class="glass-card card-3d improvement-card" data-aos="zoom-in" data-aos-delay="400" data-improvement-id="analytics">
-                    <span class="priority-badge priority-medium">Orta</span>
-                    <div class="improvement-icon">📊</div>
-                    <h3>Analitik Dashboard</h3>
-                    <p>Gerçek zamanlı veri analitiği ve raporlama sistemi kur</p>
-                    <div class="card-click-hint">📋 Detaylar</div>
-                </div>
-                <div class="glass-card card-3d improvement-card" data-aos="zoom-in" data-aos-delay="500" data-improvement-id="training">
-                    <span class="priority-badge priority-medium">Orta</span>
-                    <div class="improvement-icon">🎓</div>
-                    <h3>Personel Eğitimi</h3>
-                    <p>Yeni sistemler için kapsamlı eğitim programları oluştur</p>
-                    <div class="card-click-hint">📋 Detaylar</div>
-                </div>
-                <div class="glass-card card-3d improvement-card" data-aos="zoom-in" data-aos-delay="600" data-improvement-id="crm">
-                    <span class="priority-badge priority-low">Düşük</span>
-                    <div class="improvement-icon">🤝</div>
-                    <h3>CRM Entegrasyonu</h3>
-                    <p>Müşteri ilişkileri yönetimini geliştir ve sadakati artır</p>
-                    <div class="card-click-hint">📋 Detaylar</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Improvement Detail Modal -->
-    <div id="improvement-modal" class="modal-overlay">
-        <div class="modal-container">
-            <button class="modal-close" aria-label="Kapat">&times;</button>
-            <div class="modal-header">
-                <div id="modal-icon" class="modal-icon"></div>
-                <h2 id="modal-title"></h2>
-                <span id="modal-priority" class="priority-badge"></span>
-            </div>
-            <div class="modal-body">
-                <div class="modal-section">
-                    <h3>📝 Genel Bakış</h3>
-                    <p id="modal-overview"></p>
-                </div>
-                <div class="modal-section">
-                    <h3>🎯 Hedefler</h3>
-                    <ul id="modal-goals"></ul>
-                </div>
-                <div class="modal-section">
-                    <h3>✅ Beklenen Faydalar</h3>
-                    <ul id="modal-benefits"></ul>
-                </div>
-                <div class="modal-section">
-                    <h3>📊 Metrikler</h3>
-                    <div id="modal-metrics" class="metrics-list"></div>
-                </div>
-                <div class="modal-section">
-                    <h3>⏱️ Uygulama Süresi</h3>
-                    <p id="modal-timeline"></p>
-                </div>
-                <div class="modal-section">
-                    <h3>💰 Tahmini Yatırım</h3>
-                    <p id="modal-investment"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Footer -->
     <section id="footer">
-        <div class="container footer-content">
-            <h2 data-aos="fade-up">Teşekkürler!</h2>
-            <div class="footer-grid">
+        <div class="container">
+            <!-- Footer Header -->
+            <div class="footer-header" data-aos="fade-up">
+                <h2>Bulut Filo Yönetimi</h2>
+                <p>Kiralama Modülü - İş Süreci Yönetimi Projesi</p>
+                <div class="footer-divider"></div>
             </div>
-            <div class="timeline-summary glass-card" data-aos="fade-up" data-aos-delay="400">
-                <div data-aos="fade-up" data-aos-delay="200">
-                    <p>Enes Balcı - Kıdemli İş Analisti</p>
-                    <p>Enes Coşkun - Kıdemli İş Geliştirme Uzmanı</p>
+
+            <!-- Footer Content -->
+            <div class="footer-content">
+
+                <!-- Project Team -->
+                <div class="footer-section" data-aos="fade-up" data-aos-delay="200">
+                    <h3>👥 Proje Ekibi</h3>
+                    <div class="team-info">
+                        <div class="team-member-footer">
+                            <div class="member-avatar">
+                                <img src="images/balci.JPG" alt="Enes Balcı" class="avatar-img">
+                            </div>
+                            <div class="member-details">
+                                <h4>Enes Balcı</h4>
+                                <p class="member-role">Kıdemli İş Analisti</p>
+                                <p class="member-email">enes.balci@bulutfilo.com</p>
+                            </div>
+                        </div>
+                        <div class="team-member-footer">
+                            <div class="member-avatar">
+                                <img src="images/boi.JPG" alt="Enes Coşkun" class="avatar-img">
+                            </div>
+                            <div class="member-details">
+                                <h4>Enes Coşkun</h4>
+                                <p class="member-role">Kıdemli İş Geliştirme Uzmanı</p>
+                                <p class="member-email">enes.coskun@bulutfilo.com</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Social Media & Contact -->
+                <div class="footer-section" data-aos="fade-up" data-aos-delay="400">
+                    <h3>📱 İletişim & Sosyal Medya</h3>
+                    <div class="social-contact">
+                        <div class="social-links">
+                            <h4>Sosyal Medya</h4>
+                            <div class="social-icons">
+                                <a href="https://www.linkedin.com/company/bulut-filo-yönetimi/" class="social-link linkedin" title="LinkedIn">
+                                    <span>💼</span>
+                                </a>
+                                <a href="https://x.com/bulutfilo" class="social-link twitter" title="Twitter">
+                                    <span>🐦</span>
+                                </a>
+                                <a href="https://www.instagram.com/bulutfilo/" class="social-link instagram" title="Instagram">
+                                    <span>📷</span>
+                                </a>
+                                <a href="https://www.youtube.com/@bulutfilo" class="social-link youtube" title="YouTube">
+                                    <span>📺</span> 
+                                </a>
+                            </div>
+                        </div>
+                        <div class="contact-cta">
+                            <h4>Proje Hakkında</h4>
+                            <p>Bu proje hakkında daha fazla bilgi almak için bizimle iletişime geçin.</p>
+                            <button class="contact-btn" onclick="window.location.href='mailto:info@bulutfilo.com'">İletişime Geç</button>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+                            <div class="project-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">15</span>
+                        <span class="stat-label">Analiz Bölümü</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">5</span>
+                        <span class="stat-label">Modül Görseli</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">2</span>
+                        <span class="stat-label">Uzman Ekip</span>
+                    </div>
+                </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom" data-aos="fade-up" data-aos-delay="500">
+                <div class="footer-divider"></div>
+                <div class="bottom-content">
+                    <div class="copyright">
+                        <p>&copy; 2024 Bulut Filo Yönetimi. Tüm hakları saklıdır.</p>
+                        <p>Bu sunum, Kiralama Modülü geliştirme projesi kapsamında hazırlanmıştır.</p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
