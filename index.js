@@ -1009,29 +1009,32 @@
         // INTERACTIVE FISHBONE DIAGRAM
         // ============================================
         const fishboneData = {
-            '👥 İnsan': {
+            '📈 Pazar ve Rekabet': {
                 color: '#3b82f6',
-                items: ['Yetersiz eğitim', 'Yüksek personel devri', 'Manuel veri girişi hataları', 'İletişim problemleri']
+                items: ['Alt Neden: Genel filo yönetimi pazarının doygunluğa ulaşması ve büyüme hızının yavaşlaması.',
+                'Alt Neden: Arvento gibi pazar liderlerinin yarattığı yoğun fiyat rekabeti ve baskı.']
             },
-            '⚙️ Süreç': {
+            '📦 Ürün ve Teknoloji': {
                 color: '#10b981',
-                items: ['Karmaşık onay mekanizması', 'Standardize edilmemiş adımlar', 'Gereksiz bekleme süreleri', 'Çoklu kontrol noktaları']
+                items: ['Alt Neden: Mevcut ürünün "genelleyici" olması ve niş sektörlerin derinlemesine operasyonel ihtiyaçlarını karşılayamaması.',
+                'Alt Neden: Platformun, temel bir "takip aracı" olmanın ötesine geçip stratejik bir "işletme aracına" dönüşememesi.']
             },
-            '💻 Teknoloji': {
+            '📱 Pazarlama ve Satış': {
                 color: '#8b5cf6',
-                items: ['Eski yazılım sistemleri', 'Entegrasyon eksikliği', 'Yetersiz otomasyon', 'Mobil erişim sınırlılığı']
+                items: ['Alt Neden: Pazarlama ve satış eforunun sürekli olarak aynı ve artık doymuş olan müşteri segmentine odaklanması.',
+                'Alt Neden: Marka konumlandırmasının "araç takip firması" ile sınırlı kalması ve "sektörel çözüm ortağı" olarak algılanmaması.']
             },
-            '📋 Materyal': {
+            '👥 Müşteriler': {
                 color: '#f59e0b',
-                items: ['Kağıt bazlı belgeler', 'Güncel olmayan formlar', 'Dağınık veri kaynakları', 'Tutarsız şablonlar']
+                items: ['Alt Neden: Araç kiralama gibi sektörlerin, genel filo yönetiminden çok daha farklı ve karmaşık operasyonel ihtiyaçlara sahip olması.',
+                'Alt Neden: Potansiyel müşteri havuzunda, mevcut ürünle hizmet verilemeyen ancak yüksek potansiyel taşıyan segmentlerin (kiralama firmaları) gözden kaçırılması.',
+                'Alt Neden: Müşterilerin, kendi iş akışlarına özel çözümlere daha fazla değer vermesi ve daha fazla ödeme yapmaya istekli olması.']
             },
-            '🌍 Çevre': {
+            '🎯 Strateji ve Yönetim': {
                 color: '#06b6d4',
-                items: ['Fiziksel ofis bağımlılığı', 'Sınırlı çalışma saatleri', 'Bölgesel kısıtlamalar', 'Değişken talep yoğunluğu']
-            },
-            '📏 Ölçüm': {
-                color: '#ef4444',
-                items: ['Yetersiz KPI takibi', 'Manuel raporlama', 'Gerçek zamanlı veri eksikliği', 'Analitik araçlar yetersiz']
+                items: ['Alt Neden: Büyüme stratejisinin, pazardaki dikey ve daha kârlı nişlere derinleşmek yerine, yatayda "daha fazla benzer müşteri bulmaya" odaklanması.',  
+                'Alt Neden: Mevcut teknolojik gücü ve marka bilinirliğini kullanarak yeni bir pazara girmenin, sıfırdan bir iş kurmaktan daha yönetilebilir bir risk olması.',
+                'Alt Neden: Şirketin kendi kaynaklarıyla, dış yatırım gerektirmeden yeni bir gelir kapısı yaratma (organik büyüme) fırsatının yeterince değerlendirilmemesi.']
             }
         };
 
@@ -1185,920 +1188,6 @@
         const fishboneSection = document.getElementById('ishikawa');
         if (fishboneSection) {
             fishboneObserver.observe(fishboneSection);
-        }
-
-                // ============================================
-        // APEXCHARTS - COMPARISON CHARTS
-        // ============================================
-
-        // AS-IS vs TO-BE Comparison Chart
-        function createComparisonChart() {
-            const container = document.createElement('div');
-            container.id = 'comparison-chart';
-            container.style.cssText = 'margin-top: 50px;';
-            
-            const metricsSection = document.getElementById('metrics');
-            if (metricsSection && typeof ApexCharts !== 'undefined') {
-                const chartContainer = metricsSection.querySelector('.container');
-                if (chartContainer) {
-                    const chartCard = document.createElement('div');
-                    chartCard.className = 'glass-card metric-card';
-                    chartCard.setAttribute('data-aos', 'fade-up');
-                    chartCard.setAttribute('data-aos-delay', '300');
-                    chartCard.innerHTML = '<h3>📊 AS-IS vs TO-BE Karşılaştırması</h3>';
-                    chartCard.appendChild(container);
-                    chartContainer.appendChild(chartCard);
-
-                    const comparisonOptions = {
-                        series: [{
-                            name: 'Mevcut Durum (AS-IS)',
-                            data: [45, 12, 4, 500]
-                        }, {
-                            name: 'Hedef Durum (TO-BE)',
-                            data: [15, 2, 1, 100]
-                        }],
-                        chart: {
-                            type: 'bar',
-                            height: 350,
-                            fontFamily: 'Inter, sans-serif',
-                            toolbar: {
-                                show: true,
-                                tools: {
-                                    download: '<svg>...</svg>',
-                                    selection: false,
-                                    zoom: true,
-                                    zoomin: true,
-                                    zoomout: true,
-                                    pan: false,
-                                    reset: true
-                                },
-                                export: {
-                                    csv: {
-                                        filename: 'bulut-filo-karsilastirma',
-                                        headerCategory: 'Metrik',
-                                        headerValue: 'Değer'
-                                    },
-                                    svg: {
-                                        filename: 'bulut-filo-karsilastirma'
-                                    },
-                                    png: {
-                                        filename: 'bulut-filo-karsilastirma'
-                                    }
-                                }
-                            },
-                            animations: {
-                                enabled: true,
-                                easing: 'easeinout',
-                                speed: 800
-                            }
-                        },
-                        plotOptions: {
-                            bar: {
-                                horizontal: false,
-                                columnWidth: '55%',
-                                endingShape: 'rounded',
-                                dataLabels: {
-                                    position: 'top'
-                                }
-                            }
-                        },
-                        dataLabels: {
-                            enabled: true,
-                            offsetY: -20,
-                            style: {
-                                fontSize: '12px',
-                                fontWeight: 'bold'
-                            }
-                        },
-                        stroke: {
-                            show: true,
-                            width: 2,
-                            colors: ['transparent']
-                        },
-                        xaxis: {
-                            categories: ['İşlem Süresi (dk)', 'Hata Oranı (%)', 'Tekrar İşlem', 'Maliyet (K₺)'],
-                            labels: {
-                                style: {
-                                    colors: document.body.classList.contains('light-theme') ? '#000' : '#fff'
-                                }
-                            }
-                        },
-                        yaxis: {
-                            title: {
-                                text: 'Değer',
-                                style: {
-                                    color: document.body.classList.contains('light-theme') ? '#000' : '#fff'
-                                }
-                            },
-                            labels: {
-                                style: {
-                                    colors: document.body.classList.contains('light-theme') ? '#000' : '#fff'
-                                }
-                            }
-                        },
-                        colors: ['#ef4444', '#10b981'],
-                        fill: {
-                            opacity: 1,
-                            type: 'gradient',
-                            gradient: {
-                                shade: 'dark',
-                                type: 'vertical',
-                                shadeIntensity: 0.3,
-                                gradientToColors: ['#dc2626', '#059669'],
-                                inverseColors: false,
-                                opacityFrom: 1,
-                                opacityTo: 0.9,
-                                stops: [0, 100]
-                            }
-                        },
-                        tooltip: {
-                            y: {
-                                formatter: function(val, opts) {
-                                    const category = opts.w.globals.labels[opts.dataPointIndex];
-                                    if (category.includes('Maliyet')) {
-                                        return val + '.000 ₺';
-                                    } else if (category.includes('Süre')) {
-                                        return val + ' dakika';
-                                    } else if (category.includes('Hata')) {
-                                        return '%' + val;
-                                    } else {
-                                        return val + 'x';
-                                    }
-                                }
-                            },
-                            theme: document.body.classList.contains('light-theme') ? 'light' : 'dark'
-                        },
-                        legend: {
-                            position: 'top',
-                            horizontalAlign: 'center',
-                            fontSize: '14px',
-                            labels: {
-                                colors: document.body.classList.contains('light-theme') ? '#000' : '#fff'
-                            }
-                        },
-                        theme: {
-                            mode: document.body.classList.contains('light-theme') ? 'light' : 'dark'
-                        }
-                    };
-
-                    const comparisonChart = new ApexCharts(container, comparisonOptions);
-                    comparisonChart.render();
-                    
-                    if (!window.chartInstances) window.chartInstances = [];
-                    window.chartInstances.push(comparisonChart);
-                }
-            }
-        }
-
-        // Create comparison chart when section is visible
-        const metricsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !document.getElementById('comparison-chart')) {
-                    createComparisonChart();
-                    createRadialProgressChart();
-                    createPerformanceTrendChart();
-                    createProcessHeatmap();
-                    createMixedMetricsChart();
-                    createCostTreemap();
-                    createPolarComparisonChart();
-                    metricsObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.3 });
-
-        const metricsSection = document.getElementById('metrics');
-        if (metricsSection) {
-            metricsObserver.observe(metricsSection);
-        }
-
-        // ============================================
-        // RADIAL PROGRESS CHART - İyileştirme Hedefleri
-        // ============================================
-        function createRadialProgressChart() {
-            const container = document.createElement('div');
-            container.id = 'radial-progress-chart';
-            container.style.cssText = 'margin-top: 50px;';
-            
-            const metricsSection = document.getElementById('metrics');
-            if (metricsSection && typeof ApexCharts !== 'undefined') {
-                const chartContainer = metricsSection.querySelector('.container');
-                if (chartContainer) {
-                    const chartCard = document.createElement('div');
-                    chartCard.className = 'glass-card metric-card';
-                    chartCard.setAttribute('data-aos', 'fade-up');
-                    chartCard.setAttribute('data-aos-delay', '400');
-                    chartCard.innerHTML = '<h3>🎯 İyileştirme Hedefleri</h3>';
-                    chartCard.appendChild(container);
-                    chartContainer.appendChild(chartCard);
-
-                    const radialOptions = {
-                        series: [67, 84, 91, 75],
-                        chart: {
-                            height: 380,
-                            type: 'radialBar',
-                            fontFamily: 'Inter, sans-serif',
-                            animations: {
-                                enabled: true,
-                                easing: 'easeinout',
-                                speed: 1200,
-                                animateGradually: {
-                                    enabled: true,
-                                    delay: 150
-                                }
-                            }
-                        },
-                        plotOptions: {
-                            radialBar: {
-                                offsetY: 0,
-                                startAngle: 0,
-                                endAngle: 270,
-                                hollow: {
-                                    margin: 5,
-                                    size: '30%',
-                                    background: 'transparent',
-                                },
-                                dataLabels: {
-                                    name: {
-                                        show: true,
-                                        fontSize: '14px',
-                                        fontWeight: 600,
-                                        color: document.body.classList.contains('light-theme') ? '#000' : '#fff'
-                                    },
-                                    value: {
-                                        show: true,
-                                        fontSize: '24px',
-                                        fontWeight: 700,
-                                        color: document.body.classList.contains('light-theme') ? '#000' : '#fff',
-                                        formatter: function (val) {
-                                            return parseInt(val) + '%';
-                                        }
-                                    },
-                                    total: {
-                                        show: true,
-                                        label: 'Ortalama',
-                                        fontSize: '16px',
-                                        fontWeight: 600,
-                                        color: document.body.classList.contains('light-theme') ? '#666' : '#999',
-                                        formatter: function (w) {
-                                            const total = w.globals.seriesTotals.reduce((a, b) => a + b, 0);
-                                            return parseInt(total / w.globals.series.length) + '%';
-                                        }
-                                    }
-                                },
-                                track: {
-                                    background: 'rgba(255,255,255,0.1)',
-                                    strokeWidth: '97%'
-                                }
-                            }
-                        },
-                        colors: ['#10b981', '#3b82f6', '#f59e0b', '#8b5cf6'],
-                        labels: ['Otomasyon', 'Entegrasyon', 'Eğitim', 'Analitik'],
-                        legend: {
-                            show: true,
-                            floating: true,
-                            fontSize: '14px',
-                            position: 'left',
-                            offsetX: 0,
-                            offsetY: 15,
-                            labels: {
-                                colors: document.body.classList.contains('light-theme') ? '#000' : '#fff',
-                                useSeriesColors: false
-                            },
-                            markers: {
-                                size: 6
-                            },
-                            formatter: function(seriesName, opts) {
-                                return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex] + '%';
-                            },
-                            itemMargin: {
-                                vertical: 3
-                            }
-                        },
-                        responsive: [{
-                            breakpoint: 480,
-                            options: {
-                                legend: {
-                                    show: false
-                                }
-                            }
-                        }],
-                        theme: {
-                            mode: document.body.classList.contains('light-theme') ? 'light' : 'dark'
-                        }
-                    };
-
-                    const radialChart = new ApexCharts(container, radialOptions);
-                    radialChart.render();
-                    
-                    if (!window.chartInstances) window.chartInstances = [];
-                    window.chartInstances.push(radialChart);
-                }
-            }
-        }
-
-        // ============================================
-        // PERFORMANCE TREND CHART - Performans Trendi
-        // ============================================
-        function createPerformanceTrendChart() {
-            const container = document.createElement('div');
-            container.id = 'performance-trend-chart';
-            container.style.cssText = 'margin-top: 50px;';
-            
-            const metricsSection = document.getElementById('metrics');
-            if (metricsSection && typeof ApexCharts !== 'undefined') {
-                const chartContainer = metricsSection.querySelector('.container');
-                if (chartContainer) {
-                    const chartCard = document.createElement('div');
-                    chartCard.className = 'glass-card metric-card';
-                    chartCard.setAttribute('data-aos', 'fade-up');
-                    chartCard.setAttribute('data-aos-delay', '500');
-                    chartCard.innerHTML = '<h3>📈 6 Aylık Performans Trendi</h3>';
-                    chartCard.appendChild(container);
-                    chartContainer.appendChild(chartCard);
-
-                    const trendOptions = {
-                        series: [{
-                            name: 'İşlem Süresi (dk)',
-                            data: [48, 47, 46, 44, 45, 42]
-                        }, {
-                            name: 'Müşteri Memnuniyeti (%)',
-                            data: [85, 87, 89, 91, 95, 98]
-                        }, {
-                            name: 'Hata Oranı (%)',
-                            data: [15, 14, 13, 13, 12, 12]
-                        }],
-                        chart: {
-                            type: 'area',
-                            height: 350,
-                            fontFamily: 'Inter, sans-serif',
-                            toolbar: {
-                                show: true,
-                                tools: {
-                                    download: true,
-                                    zoom: true,
-                                    zoomin: true,
-                                    zoomout: true,
-                                    pan: false,
-                                    reset: true
-                                }
-                            },
-                            animations: {
-                                enabled: true,
-                                easing: 'easeinout',
-                                speed: 800,
-                                animateGradually: {
-                                    enabled: true,
-                                    delay: 150
-                                }
-                            }
-                        },
-                        dataLabels: {
-                            enabled: false
-                        },
-                        stroke: {
-                            curve: 'smooth',
-                            width: 3
-                        },
-                        xaxis: {
-                            categories: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran'],
-                            labels: {
-                                style: {
-                                    colors: document.body.classList.contains('light-theme') ? '#000' : '#fff'
-                                }
-                            }
-                        },
-                        yaxis: {
-                            title: {
-                                text: 'Değer',
-                                style: {
-                                    color: document.body.classList.contains('light-theme') ? '#000' : '#fff'
-                                }
-                            },
-                            labels: {
-                                style: {
-                                    colors: document.body.classList.contains('light-theme') ? '#000' : '#fff'
-                                }
-                            }
-                        },
-                        colors: ['#ef4444', '#10b981', '#f59e0b'],
-                        fill: {
-                            type: 'gradient',
-                            gradient: {
-                                shadeIntensity: 1,
-                                opacityFrom: 0.7,
-                                opacityTo: 0.3,
-                                stops: [0, 90, 100]
-                            }
-                        },
-                        tooltip: {
-                            theme: document.body.classList.contains('light-theme') ? 'light' : 'dark',
-                            x: {
-                                format: 'dd/MM/yy'
-                            }
-                        },
-                        legend: {
-                            position: 'top',
-                            horizontalAlign: 'left',
-                            fontSize: '14px',
-                            labels: {
-                                colors: document.body.classList.contains('light-theme') ? '#000' : '#fff'
-                            }
-                        },
-                        theme: {
-                            mode: document.body.classList.contains('light-theme') ? 'light' : 'dark'
-                        }
-                    };
-
-                    const trendChart = new ApexCharts(container, trendOptions);
-                    trendChart.render();
-                    
-                    if (!window.chartInstances) window.chartInstances = [];
-                    window.chartInstances.push(trendChart);
-                }
-            }
-        }
-
-        // ============================================
-        // PROCESS HEATMAP - Süreç Yoğunluk Analizi
-        // ============================================
-        function createProcessHeatmap() {
-            const container = document.createElement('div');
-            container.id = 'process-heatmap';
-            container.style.cssText = 'margin-top: 50px;';
-            
-            const metricsSection = document.getElementById('metrics');
-            if (metricsSection && typeof ApexCharts !== 'undefined') {
-                const chartContainer = metricsSection.querySelector('.container');
-                if (chartContainer) {
-                    const chartCard = document.createElement('div');
-                    chartCard.className = 'glass-card metric-card';
-                    chartCard.setAttribute('data-aos', 'fade-up');
-                    chartCard.setAttribute('data-aos-delay', '600');
-                    chartCard.innerHTML = '<h3>🔥 Haftalık Süreç Yoğunluk Haritası</h3>';
-                    chartCard.appendChild(container);
-                    chartContainer.appendChild(chartCard);
-
-                    const heatmapData = [
-                        {
-                            name: 'Pazartesi',
-                            data: [
-                                { x: '09:00', y: 45 },
-                                { x: '12:00', y: 67 },
-                                { x: '15:00', y: 52 },
-                                { x: '18:00', y: 38 }
-                            ]
-                        },
-                        {
-                            name: 'Salı',
-                            data: [
-                                { x: '09:00', y: 42 },
-                                { x: '12:00', y: 71 },
-                                { x: '15:00', y: 48 },
-                                { x: '18:00', y: 35 }
-                            ]
-                        },
-                        {
-                            name: 'Çarşamba',
-                            data: [
-                                { x: '09:00', y: 51 },
-                                { x: '12:00', y: 85 },
-                                { x: '15:00', y: 63 },
-                                { x: '18:00', y: 44 }
-                            ]
-                        },
-                        {
-                            name: 'Perşembe',
-                            data: [
-                                { x: '09:00', y: 48 },
-                                { x: '12:00', y: 78 },
-                                { x: '15:00', y: 58 },
-                                { x: '18:00', y: 41 }
-                            ]
-                        },
-                        {
-                            name: 'Cuma',
-                            data: [
-                                { x: '09:00', y: 55 },
-                                { x: '12:00', y: 92 },
-                                { x: '15:00', y: 74 },
-                                { x: '18:00', y: 52 }
-                            ]
-                        }
-                    ];
-
-                    const heatmapOptions = {
-                        series: heatmapData,
-                        chart: {
-                            height: 350,
-                            type: 'heatmap',
-                            fontFamily: 'Inter, sans-serif',
-                            toolbar: {
-                                show: true
-                            },
-                            animations: {
-                                enabled: true,
-                                easing: 'easeinout',
-                                speed: 800
-                            }
-                        },
-                        dataLabels: {
-                            enabled: true,
-                            style: {
-                                colors: ['#fff']
-                            }
-                        },
-                        colors: ['#10b981'],
-                        title: {
-                            text: 'İşlem Sayısı',
-                            align: 'left',
-                            style: {
-                                color: document.body.classList.contains('light-theme') ? '#000' : '#fff'
-                            }
-                        },
-                        xaxis: {
-                            labels: {
-                                style: {
-                                    colors: document.body.classList.contains('light-theme') ? '#000' : '#fff'
-                                }
-                            }
-                        },
-                        yaxis: {
-                            labels: {
-                                style: {
-                                    colors: document.body.classList.contains('light-theme') ? '#000' : '#fff'
-                                }
-                            }
-                        },
-                        tooltip: {
-                            theme: document.body.classList.contains('light-theme') ? 'light' : 'dark',
-                            y: {
-                                formatter: function(val) {
-                                    return val + ' işlem';
-                                }
-                            }
-                        },
-                        theme: {
-                            mode: document.body.classList.contains('light-theme') ? 'light' : 'dark'
-                        }
-                    };
-
-                    const heatmapChart = new ApexCharts(container, heatmapOptions);
-                    heatmapChart.render();
-                    
-                    if (!window.chartInstances) window.chartInstances = [];
-                    window.chartInstances.push(heatmapChart);
-                }
-            }
-        }
-
-        // ============================================
-        // MIXED METRICS CHART - Kombinasyon Grafik
-        // ============================================
-        function createMixedMetricsChart() {
-            const container = document.createElement('div');
-            container.id = 'mixed-metrics-chart';
-            container.style.cssText = 'margin-top: 50px;';
-            
-            const metricsSection = document.getElementById('metrics');
-            if (metricsSection && typeof ApexCharts !== 'undefined') {
-                const chartContainer = metricsSection.querySelector('.container');
-                if (chartContainer) {
-                    const chartCard = document.createElement('div');
-                    chartCard.className = 'glass-card metric-card';
-                    chartCard.setAttribute('data-aos', 'fade-up');
-                    chartCard.setAttribute('data-aos-delay', '700');
-                    chartCard.innerHTML = '<h3>📊 Kombine Metrik Analizi</h3>';
-                    chartCard.appendChild(container);
-                    chartContainer.appendChild(chartCard);
-
-                    const mixedOptions = {
-                        series: [{
-                            name: 'İşlem Hacmi',
-                            type: 'column',
-                            data: [440, 505, 414, 671, 227, 413]
-                        }, {
-                            name: 'Verimlilik (%)',
-                            type: 'line',
-                            data: [23, 42, 35, 27, 43, 22]
-                        }, {
-                            name: 'Tasarruf (K₺)',
-                            type: 'line',
-                            data: [35, 41, 36, 26, 45, 48]
-                        }],
-                        chart: {
-                            height: 350,
-                            type: 'line',
-                            fontFamily: 'Inter, sans-serif',
-                            stacked: false,
-                            toolbar: {
-                                show: true
-                            },
-                            animations: {
-                                enabled: true,
-                                easing: 'easeinout',
-                                speed: 800
-                            }
-                        },
-                        stroke: {
-                            width: [0, 4, 4],
-                            curve: 'smooth'
-                        },
-                        plotOptions: {
-                            bar: {
-                                columnWidth: '50%'
-                            }
-                        },
-                        fill: {
-                            opacity: [0.85, 1, 1],
-                            gradient: {
-                                inverseColors: false,
-                                shade: 'light',
-                                type: 'vertical',
-                                opacityFrom: 0.85,
-                                opacityTo: 0.55,
-                                stops: [0, 100, 100, 100]
-                            }
-                        },
-                        labels: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran'],
-                        markers: {
-                            size: 0
-                        },
-                        xaxis: {
-                            labels: {
-                                style: {
-                                    colors: document.body.classList.contains('light-theme') ? '#000' : '#fff'
-                                }
-                            }
-                        },
-                        yaxis: [
-                            {
-                                seriesName: 'İşlem Hacmi',
-                                title: {
-                                    text: 'İşlem Sayısı',
-                                    style: {
-                                        color: document.body.classList.contains('light-theme') ? '#000' : '#fff'
-                                    }
-                                },
-                                labels: {
-                                    style: {
-                                        colors: document.body.classList.contains('light-theme') ? '#000' : '#fff'
-                                    }
-                                }
-                            },
-                            {
-                                seriesName: 'Verimlilik (%)',
-                                opposite: true,
-                                title: {
-                                    text: 'Verimlilik & Tasarruf',
-                                    style: {
-                                        color: document.body.classList.contains('light-theme') ? '#000' : '#fff'
-                                    }
-                                },
-                                labels: {
-                                    style: {
-                                        colors: document.body.classList.contains('light-theme') ? '#000' : '#fff'
-                                    }
-                                }
-                            }
-                        ],
-                        colors: ['#3b82f6', '#10b981', '#f59e0b'],
-                        tooltip: {
-                            theme: document.body.classList.contains('light-theme') ? 'light' : 'dark',
-                            shared: true,
-                            intersect: false,
-                            y: {
-                                formatter: function (y, opts) {
-                                    if (typeof y !== 'undefined') {
-                                        if (opts.seriesIndex === 1) {
-                                            return y.toFixed(0) + '%';
-                                        } else if (opts.seriesIndex === 2) {
-                                            return y.toFixed(0) + 'K ₺';
-                                        }
-                                        return y.toFixed(0);
-                                    }
-                                    return y;
-                                }
-                            }
-                        },
-                        legend: {
-                            position: 'top',
-                            horizontalAlign: 'center',
-                            fontSize: '14px',
-                            labels: {
-                                colors: document.body.classList.contains('light-theme') ? '#000' : '#fff'
-                            }
-                        },
-                        theme: {
-                            mode: document.body.classList.contains('light-theme') ? 'light' : 'dark'
-                        }
-                    };
-
-                    const mixedChart = new ApexCharts(container, mixedOptions);
-                    mixedChart.render();
-                    
-                    if (!window.chartInstances) window.chartInstances = [];
-                    window.chartInstances.push(mixedChart);
-                }
-            }
-        }
-
-        // ============================================
-        // COST TREEMAP - Maliyet Dağılımı
-        // ============================================
-        function createCostTreemap() {
-            const container = document.createElement('div');
-            container.id = 'cost-treemap';
-            container.style.cssText = 'margin-top: 50px;';
-            
-            const metricsSection = document.getElementById('metrics');
-            if (metricsSection && typeof ApexCharts !== 'undefined') {
-                const chartContainer = metricsSection.querySelector('.container');
-                if (chartContainer) {
-                    const chartCard = document.createElement('div');
-                    chartCard.className = 'glass-card metric-card';
-                    chartCard.setAttribute('data-aos', 'fade-up');
-                    chartCard.setAttribute('data-aos-delay', '800');
-                    chartCard.innerHTML = '<h3>🗺️ Detaylı Maliyet Dağılımı</h3>';
-                    chartCard.appendChild(container);
-                    chartContainer.appendChild(chartCard);
-
-                    const treemapOptions = {
-                        series: [
-                            {
-                                name: 'Manuel İşlem',
-                                data: [
-                                    { x: 'Veri Girişi', y: 125 },
-                                    { x: 'Form Kontrolü', y: 87 },
-                                    { x: 'Belge Hazırlama', y: 63 }
-                                ]
-                            },
-                            {
-                                name: 'Hatalar',
-                                data: [
-                                    { x: 'Yeniden İşleme', y: 78 },
-                                    { x: 'Düzeltme', y: 52 },
-                                    { x: 'Kontrol', y: 36 }
-                                ]
-                            },
-                            {
-                                name: 'Bekleme',
-                                data: [
-                                    { x: 'Onay Süreci', y: 45 },
-                                    { x: 'Sıra Bekleme', y: 28 }
-                                ]
-                            }
-                        ],
-                        chart: {
-                            height: 380,
-                            type: 'treemap',
-                            fontFamily: 'Inter, sans-serif',
-                            toolbar: {
-                                show: true
-                            },
-                            animations: {
-                                enabled: true,
-                                easing: 'easeinout',
-                                speed: 800
-                            }
-                        },
-                        plotOptions: {
-                            treemap: {
-                                distributed: true,
-                                enableShades: false
-                            }
-                        },
-                        colors: [
-                            '#ef4444',
-                            '#f59e0b',
-                            '#3b82f6',
-                            '#10b981',
-                            '#8b5cf6',
-                            '#ec4899',
-                            '#06b6d4',
-                            '#84cc16'
-                        ],
-                        legend: {
-                            show: true,
-                            position: 'bottom',
-                            fontSize: '14px',
-                            labels: {
-                                colors: document.body.classList.contains('light-theme') ? '#000' : '#fff'
-                            }
-                        },
-                        tooltip: {
-                            theme: document.body.classList.contains('light-theme') ? 'light' : 'dark',
-                            y: {
-                                formatter: function(val) {
-                                    return val + '.000 ₺';
-                                }
-                            }
-                        },
-                        theme: {
-                            mode: document.body.classList.contains('light-theme') ? 'light' : 'dark'
-                        }
-                    };
-
-                    const treemapChart = new ApexCharts(container, treemapOptions);
-                    treemapChart.render();
-                    
-                    if (!window.chartInstances) window.chartInstances = [];
-                    window.chartInstances.push(treemapChart);
-                }
-            }
-        }
-
-        // ============================================
-        // POLAR COMPARISON CHART - Kategori Karşılaştırması
-        // ============================================
-        function createPolarComparisonChart() {
-            const container = document.createElement('div');
-            container.id = 'polar-comparison-chart';
-            container.style.cssText = 'margin-top: 50px;';
-            
-            const metricsSection = document.getElementById('metrics');
-            if (metricsSection && typeof ApexCharts !== 'undefined') {
-                const chartContainer = metricsSection.querySelector('.container');
-                if (chartContainer) {
-                    const chartCard = document.createElement('div');
-                    chartCard.className = 'glass-card metric-card';
-                    chartCard.setAttribute('data-aos', 'fade-up');
-                    chartCard.setAttribute('data-aos-delay', '900');
-                    chartCard.innerHTML = '<h3>🎯 Performans Kategorileri</h3>';
-                    chartCard.appendChild(container);
-                    chartContainer.appendChild(chartCard);
-
-                    const polarOptions = {
-                        series: [42, 47, 52, 58, 65],
-                        chart: {
-                            height: 380,
-                            type: 'polarArea',
-                            fontFamily: 'Inter, sans-serif',
-                            animations: {
-                                enabled: true,
-                                easing: 'easeinout',
-                                speed: 800,
-                                animateGradually: {
-                                    enabled: true,
-                                    delay: 150
-                                }
-                            }
-                        },
-                        labels: ['Hız', 'Doğruluk', 'Verimlilik', 'Maliyet', 'Memnuniyet'],
-                        fill: {
-                            opacity: 0.8
-                        },
-                        colors: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'],
-                        stroke: {
-                            width: 2,
-                            colors: document.body.classList.contains('light-theme') ? ['#fff'] : ['#1e293b']
-                        },
-                        yaxis: {
-                            show: true,
-                            labels: {
-                                style: {
-                                    colors: document.body.classList.contains('light-theme') ? '#000' : '#fff'
-                                }
-                            }
-                        },
-                        legend: {
-                            position: 'bottom',
-                            fontSize: '14px',
-                            labels: {
-                                colors: document.body.classList.contains('light-theme') ? '#000' : '#fff'
-                            }
-                        },
-                        plotOptions: {
-                            polarArea: {
-                                rings: {
-                                    strokeWidth: 1,
-                                    strokeColor: document.body.classList.contains('light-theme') ? '#e2e8f0' : '#334155'
-                                },
-                                spokes: {
-                                    strokeWidth: 1,
-                                    connectorColors: document.body.classList.contains('light-theme') ? '#e2e8f0' : '#334155'
-                                }
-                            }
-                        },
-                        tooltip: {
-                            theme: document.body.classList.contains('light-theme') ? 'light' : 'dark',
-                            y: {
-                                formatter: function(val) {
-                                    return val + ' puan';
-                                }
-                            }
-                        },
-                        theme: {
-                            mode: document.body.classList.contains('light-theme') ? 'light' : 'dark'
-                        }
-                    };
-
-                    const polarChart = new ApexCharts(container, polarOptions);
-                    polarChart.render();
-                    
-                    if (!window.chartInstances) window.chartInstances = [];
-                    window.chartInstances.push(polarChart);
-                }
-            }
         }
 
         // ============================================
@@ -2484,16 +1573,6 @@
                 box.classList.remove('active');
             });
         }
-
-        // SIPOC Kutularına Click Event
-        document.querySelectorAll('.sipoc-box').forEach(box => {
-            box.addEventListener('click', () => {
-                const sipocId = box.getAttribute('data-sipoc-id');
-                if (sipocId) {
-                    showSIPOCDetails(sipocId);
-                }
-            });
-        });
 
         // SIPOC Close Button
         const sipocCloseBtn = document.querySelector('.sipoc-close-detail');
@@ -2985,4 +2064,201 @@
             const dx = touch1.clientX - touch2.clientX;
             const dy = touch1.clientY - touch2.clientY;
             return Math.sqrt(dx * dx + dy * dy);
+        }
+
+        // ============================================
+        // PRODUCT GALLERY ZOOM & DRAG FUNCTIONALITY
+        // ============================================
+        
+        // Product gallery zoom states
+        const productZoomStates = {};
+        const productDragStates = {};
+        
+        // Initialize product gallery functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const productImages = document.querySelectorAll('.product-image');
+            productImages.forEach(image => {
+                const imageId = image.id;
+                productZoomStates[imageId] = {
+                    zoom: 1,
+                    translateX: 0,
+                    translateY: 0,
+                    lastTranslateX: 0,
+                    lastTranslateY: 0
+                };
+                
+                productDragStates[imageId] = {
+                    isDragging: false,
+                    startX: 0,
+                    startY: 0
+                };
+                
+                // Mouse events
+                image.addEventListener('mousedown', function(e) {
+                    if (e.button === 0) {
+                        productDragStates[imageId].isDragging = true;
+                        productDragStates[imageId].startX = e.clientX - productZoomStates[imageId].translateX;
+                        productDragStates[imageId].startY = e.clientY - productZoomStates[imageId].translateY;
+                        image.classList.add('dragging');
+                        e.preventDefault();
+                    }
+                });
+                
+                // Mouse wheel zoom
+                image.addEventListener('wheel', function(e) {
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomInProduct(imageId);
+                    } else {
+                        zoomOutProduct(imageId);
+                    }
+                });
+                
+                // Context menu prevention
+                image.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                });
+            });
+            
+            // Global mouse events for product gallery
+            document.addEventListener('mousemove', function(e) {
+                Object.keys(productDragStates).forEach(imageId => {
+                    const dragState = productDragStates[imageId];
+                    const zoomState = productZoomStates[imageId];
+                    
+                    if (dragState.isDragging) {
+                        zoomState.translateX = e.clientX - dragState.startX;
+                        zoomState.translateY = e.clientY - dragState.startY;
+                        
+                        // Apply boundaries
+                        const image = document.getElementById(imageId);
+                        const container = image.closest('.product-image-container');
+                        if (container) {
+                            const containerRect = container.getBoundingClientRect();
+                            const imageRect = image.getBoundingClientRect();
+                            const scaledWidth = imageRect.width * zoomState.zoom;
+                            const scaledHeight = imageRect.height * zoomState.zoom;
+                            
+                            const maxTranslateX = Math.max(0, (scaledWidth - containerRect.width) / 2);
+                            const maxTranslateY = Math.max(0, (scaledHeight - containerRect.height) / 2);
+                            
+                            zoomState.translateX = Math.max(-maxTranslateX, Math.min(maxTranslateX, zoomState.translateX));
+                            zoomState.translateY = Math.max(-maxTranslateY, Math.min(maxTranslateY, zoomState.translateY));
+                        }
+                        
+                        applyProductZoom(imageId);
+                    }
+                });
+            });
+            
+            document.addEventListener('mouseup', function() {
+                Object.keys(productDragStates).forEach(imageId => {
+                    const dragState = productDragStates[imageId];
+                    const zoomState = productZoomStates[imageId];
+                    
+                    if (dragState.isDragging) {
+                        dragState.isDragging = false;
+                        zoomState.lastTranslateX = zoomState.translateX;
+                        zoomState.lastTranslateY = zoomState.translateY;
+                        document.getElementById(imageId).classList.remove('dragging');
+                    }
+                });
+            });
+            
+            // Touch events for product gallery
+            Object.keys(productZoomStates).forEach(imageId => {
+                const image = document.getElementById(imageId);
+                if (image) {
+                    let initialDistance = 0;
+                    let initialZoom = 1;
+                    let initialTranslateX = 0;
+                    let initialTranslateY = 0;
+                    let touchStartX = 0;
+                    let touchStartY = 0;
+                    
+                    image.addEventListener('touchstart', function(e) {
+                        if (e.touches.length === 1) {
+                            // Single touch - drag
+                            touchStartX = e.touches[0].clientX - productZoomStates[imageId].translateX;
+                            touchStartY = e.touches[0].clientY - productZoomStates[imageId].translateY;
+                        } else if (e.touches.length === 2) {
+                            // Two touches - zoom
+                            e.preventDefault();
+                            initialDistance = getDistance(e.touches[0], e.touches[1]);
+                            initialZoom = productZoomStates[imageId].zoom;
+                            initialTranslateX = productZoomStates[imageId].translateX;
+                            initialTranslateY = productZoomStates[imageId].translateY;
+                        }
+                    });
+                    
+                    image.addEventListener('touchmove', function(e) {
+                        if (e.touches.length === 1) {
+                            // Single touch - drag
+                            e.preventDefault();
+                            productZoomStates[imageId].translateX = e.touches[0].clientX - touchStartX;
+                            productZoomStates[imageId].translateY = e.touches[0].clientY - touchStartY;
+                            
+                            // Apply boundaries
+                            const container = image.closest('.product-image-container');
+                            if (container) {
+                                const containerRect = container.getBoundingClientRect();
+                                const imageRect = image.getBoundingClientRect();
+                                const scaledWidth = imageRect.width * productZoomStates[imageId].zoom;
+                                const scaledHeight = imageRect.height * productZoomStates[imageId].zoom;
+                                
+                                const maxTranslateX = Math.max(0, (scaledWidth - containerRect.width) / 2);
+                                const maxTranslateY = Math.max(0, (scaledHeight - containerRect.height) / 2);
+                                
+                                productZoomStates[imageId].translateX = Math.max(-maxTranslateX, Math.min(maxTranslateX, productZoomStates[imageId].translateX));
+                                productZoomStates[imageId].translateY = Math.max(-maxTranslateY, Math.min(maxTranslateY, productZoomStates[imageId].translateY));
+                            }
+                            
+                            applyProductZoom(imageId);
+                        } else if (e.touches.length === 2) {
+                            // Two touches - zoom
+                            e.preventDefault();
+                            const currentDistance = getDistance(e.touches[0], e.touches[1]);
+                            const scale = currentDistance / initialDistance;
+                            const newZoom = initialZoom * scale;
+                            
+                            if (newZoom >= 0.5 && newZoom <= 3) {
+                                productZoomStates[imageId].zoom = newZoom;
+                                applyProductZoom(imageId);
+                            }
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Product gallery zoom functions
+        function zoomInProduct(imageId) {
+            if (productZoomStates[imageId].zoom < 3) {
+                productZoomStates[imageId].zoom += 0.2;
+                applyProductZoom(imageId);
+            }
+        }
+        
+        function zoomOutProduct(imageId) {
+            if (productZoomStates[imageId].zoom > 0.5) {
+                productZoomStates[imageId].zoom -= 0.2;
+                applyProductZoom(imageId);
+            }
+        }
+        
+        function resetZoomProduct(imageId) {
+            productZoomStates[imageId].zoom = 1;
+            productZoomStates[imageId].translateX = 0;
+            productZoomStates[imageId].translateY = 0;
+            productZoomStates[imageId].lastTranslateX = 0;
+            productZoomStates[imageId].lastTranslateY = 0;
+            applyProductZoom(imageId);
+        }
+        
+        function applyProductZoom(imageId) {
+            const image = document.getElementById(imageId);
+            if (image && productZoomStates[imageId]) {
+                const state = productZoomStates[imageId];
+                image.style.transform = `scale(${state.zoom}) translate(${state.translateX}px, ${state.translateY}px)`;
+            }
         }
