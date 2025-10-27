@@ -4,6 +4,8 @@
 
 Bu proje, **Bulut Filo Yönetimi** şirketinin kiralama modülü için hazırlanan kapsamlı bir İş Süreci Yönetimi (BPM) analiz sunumudur. Modern web teknolojileri kullanılarak geliştirilmiş, interaktif ve görsel olarak etkileyici bir sunum platformudur.
 
+**BANÜ İş Süreçleri Analizi Dersi Kapsamında Hazırlanmıştır.**
+
 ### 🎯 Proje Amacı
 
 Araç kiralama sektöründe faaliyet gösteren Bulut Filo Yönetimi şirketinin mevcut durumunu analiz etmek, operasyonel verimsizlikleri tespit etmek ve iyileştirme önerileri sunmaktır.
@@ -65,18 +67,6 @@ Araç kiralama sektöründe faaliyet gösteren Bulut Filo Yönetimi şirketinin 
 7. **5 Neden Analizi**
    - Kök neden tespiti için 5 aşamalı sorgulama
 
-8. **Süreç Metrikleri Dashboard**
-   - Custom Timeline grafiği (SVG)
-   - AS-IS vs TO-BE karşılaştırma grafiği (ApexCharts Bar)
-   - Radial Progress Chart - İyileştirme hedefleri (ApexCharts RadialBar)
-   - 6 Aylık performans trendi (ApexCharts Area)
-   - Haftalık süreç yoğunluk haritası (ApexCharts Heatmap)
-   - Kombine metrik analizi (ApexCharts Mixed: Bar + Line)
-   - Detaylı maliyet dağılımı (ApexCharts Treemap)
-   - Performans kategorileri (ApexCharts PolarArea)
-   - Maliyet dağılımı (Chart.js Doughnut)
-   - Darboğaz noktaları
-
 ## 🛠️ Kullanılan Teknolojiler
 
 ### Frontend
@@ -112,15 +102,11 @@ bulut-filo-yonetimi/
 
 ## 🚀 Kurulum ve Kullanım
 
-### Gereksinimler
-- Modern bir web tarayıcı (Chrome, Firefox, Safari, Edge)
-- İnternet bağlantısı (CDN kütüphaneleri için)
-
 ### Yerel Olarak Çalıştırma
 
 1. **Projeyi Klonlayın**
    ```bash
-   git clone https://github.com/kullaniciadi/bulut-filo-yonetimi.git
+   git clone https://github.com/enscskn/bulut-filo-yonetimi.git
    cd bulut-filo-yonetimi
    ```
 
@@ -141,104 +127,18 @@ bulut-filo-yonetimi/
    php -S localhost:8000
    ```
 
+   **VEYA**
+   
+   - IDE Eklentilerinden Live Server kullanabilirsiniz.
+
 3. **Tarayıcıda Görüntüleyin**
    - Sunucu kullanıyorsanız: `http://localhost:8000`
-
-## 📊 Grafik ve Veri Görselleştirme Özellikleri
-
-### İnteraktif Grafikler (ApexCharts)
-
-Proje, ApexCharts kütüphanesi kullanılarak gelişmiş ve interaktif veri görselleştirmeleri sunar:
-
-#### 1. **AS-IS vs TO-BE Karşılaştırma Grafiği**
-- Bar chart ile mevcut ve hedef durum karşılaştırması
-- Export özellikleri (PNG, SVG, CSV)
-- Zoom ve pan desteği
-- Gradient renkler ve animasyonlar
-
-#### 2. **Radial Progress Chart**
-- İyileştirme hedeflerinin yüzdelik gösterimi
-- 4 farklı kategori (Otomasyon, Entegrasyon, Eğitim, Analitik)
-- Ortalama hesaplama
-- İnteraktif legend
-
-#### 3. **Performans Trend Analizi**
-- 6 aylık area chart
-- 3 farklı metrik (İşlem süresi, Müşteri memnuniyeti, Hata oranı)
-- Smooth curve geçişleri
-- Gradient fill efektleri
-
-#### 4. **Süreç Yoğunluk Haritası (Heatmap)**
-- Haftalık ve saatlik işlem yoğunluğu
-- Renk skalası ile yoğunluk gösterimi
-- İnteraktif tooltip'ler
-
-#### 5. **Kombine Metrik Analizi**
-- Bar + Line kombinasyonu
-- Çoklu Y ekseni
-- İşlem hacmi, verimlilik ve tasarruf metrikleri
-- Shared tooltip
-
-#### 6. **Detaylı Maliyet Dağılımı (Treemap)**
-- Hiyerarşik maliyet gösterimi
-- Tıklanabilir alanlar
-- 8 farklı maliyet kategorisi
-- Boyut bazlı görselleştirme
-
-#### 7. **Performans Kategorileri (Polar Area)**
-- 5 kategori karşılaştırması (Hız, Doğruluk, Verimlilik, Maliyet, Memnuniyet)
-- Dairesel görselleştirme
-- Puan bazlı değerlendirme
-
-### Grafik Özellikleri
-- ✅ **Responsive**: Tüm ekran boyutlarına uyumlu
-- ✅ **Export**: PNG, SVG, CSV formatlarında indirme
-- ✅ **Zoom/Pan**: Grafikleri yakınlaştırma ve kaydırma
-- ✅ **Tooltip**: Detaylı veri gösterimi
-- ✅ **Animation**: Smooth giriş animasyonları
-- ✅ **Dark/Light Mode**: Tema desteği
-- ✅ **Accessibility**: Ekran okuyucu desteği
 
 ## 🎯 Navigasyon
 
 ### Klavye Kısayolları
 - **↓ (Aşağı Ok)**: Sonraki bölüme git
 - **↑ (Yukarı Ok)**: Önceki bölüme git
-
-### Navigasyon Noktaları
-Sağ taraftaki navigasyon noktalarına tıklayarak bölümler arasında hızlıca gezinebilirsiniz:
-- Kapak
-- Ekip
-- Şirket
-- Problem
-- SWOT
-- SIPOC
-- Mevcut Durum
-- Kök Neden
-- İyileştirmeler
-- İletişim
-
-## 📊 Proje Verileri
-
-### Şirket İstatistikleri
-- **5.000** Aktif Araç
-- **250** Çalışan
-- **15.000** Aylık İşlem
-- **%98** Müşteri Memnuniyeti
-
-### Tespit Edilen Sorunlar
-- ⏱️ Ortalama işlem süresi: **45 dakika** (Hedef: 15 dakika)
-- ❌ Hata oranı: **%12**
-- 🔄 Tekrar işlemler: **4x**
-- 💸 Yıllık ek maliyet: **500.000 TL**
-
-### İyileştirme Önerileri
-1. **Süreç Otomasyonu** (Yüksek Öncelik)
-2. **Sistem Entegrasyonu** (Yüksek Öncelik)
-3. **Mobil Uygulama** (Yüksek Öncelik)
-4. **Analitik Dashboard** (Orta Öncelik)
-5. **Personel Eğitimi** (Orta Öncelik)
-6. **CRM Entegrasyonu** (Düşük Öncelik)
 
 ## 👥 Proje Ekibi
 
@@ -299,15 +199,5 @@ Proje, aşağıdaki ekran boyutlarında optimize edilmiştir:
 ## 📄 Lisans
 
 Bu proje eğitim amaçlı hazırlanmıştır.
-
-## 🔮 Gelecek Geliştirmeler
-
-- [ ] Çoklu dil desteği (TR/EN)
-- [ ] PDF export özelliği
-- [ ] Print-friendly görünüm
-- [ ] Interaktif veri düzenleme
-- [ ] Backend entegrasyonu
-- [ ] Gerçek zamanlı veri güncellemeleri
-- [ ] Kullanıcı yorum sistemi
 
 ## 🙏 Teşekkürler

@@ -689,6 +689,7 @@ body.light-theme #mission-vision {
 /* Section 5: SWOT Analysis */
 #swot {
     background: var(--bg-dark);
+    overflow: visible;
 }
 
 body.light-theme #swot {
@@ -802,6 +803,68 @@ body.light-theme #swot {
     position: absolute;
     left: 0;
     color: rgba(255, 255, 255, 0.7);
+}
+
+/* SWOT Item Structure */
+.swot-item {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.swot-title {
+    display: block;
+    position: relative;
+}
+
+.swot-description {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    min-width: 280px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(15px);
+    color: white;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    border-radius: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    margin-top: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    pointer-events: none;
+}
+
+.swot-item:hover .swot-description {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.swot-item:hover {
+    padding-left: 30px;
+}
+
+/* Ensure parent doesn't clip the description */
+.swot-quadrant {
+    overflow: visible !important;
+}
+
+.swot-grid {
+    position: relative;
+    z-index: 1;
+    overflow: visible;
+}
+
+#swot {
+    overflow: visible;
 }
 
 /* TOWS Matrix */
@@ -2332,6 +2395,18 @@ a, button, .nav-dot, .glass-card {
 
     .swot-grid {
         grid-template-columns: 1fr;
+    }
+
+    .swot-description {
+        left: -20px;
+        right: -20px;
+        width: calc(100% + 40px);
+        font-size: 0.9rem;
+        padding: 15px;
+    }
+
+    .swot-item:hover {
+        padding-left: 25px;
     }
 
     .sipoc-diagram {
