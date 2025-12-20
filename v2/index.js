@@ -308,6 +308,41 @@
         
         // Single optimized scroll event listener with passive flag
         window.addEventListener('scroll', unifiedScrollHandler, { passive: true });
+        
+        // Also listen to wheel events to catch scroll start immediately
+        let wheelTimeout = null;
+        window.addEventListener('wheel', function(e) {
+            // Disable hover immediately on wheel scroll
+            if (!isCurrentlyScrolling) {
+                disableHoverEvents();
+            }
+            
+            // Clear existing timeout
+            if (wheelTimeout) {
+                clearTimeout(wheelTimeout);
+            }
+            
+            // Re-enable after wheel stops
+            wheelTimeout = setTimeout(() => {
+                enableHoverEvents();
+            }, 200);
+        }, { passive: true });
+        
+        // Also handle touch scroll for mobile
+        window.addEventListener('touchstart', function(e) {
+            if (!isCurrentlyScrolling) {
+                disableHoverEvents();
+            }
+        }, { passive: true });
+        
+        window.addEventListener('touchmove', function(e) {
+            if (scrollTimeout) {
+                clearTimeout(scrollTimeout);
+            }
+            scrollTimeout = setTimeout(() => {
+                enableHoverEvents();
+            }, 200);
+        }, { passive: true });
 
         // ============================================
         // PROGRESSIVE REVEAL

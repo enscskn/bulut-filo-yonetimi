@@ -364,21 +364,8 @@ body.light-theme .glass-card {
 }
 
 /* Disable ALL hover effects during scrolling to prevent scroll lag */
-body.is-scrolling .glass-card:hover,
-body.is-scrolling .glass-card:hover::before {
-    transform: none !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
-    transition: none !important;
-}
-
-/* Disable all transform-based hover effects during scrolling */
-body.is-scrolling *:hover {
-    transform: none !important;
-    transition: none !important;
-    box-shadow: none !important;
-}
-
-/* Force disable all transitions during scroll to prevent lag */
+/* Use pointer-events to completely disable hover state during scroll */
+/* This prevents CSS :hover pseudo-class from being triggered */
 body.is-scrolling .glass-card,
 body.is-scrolling .analysis-card,
 body.is-scrolling .ebo-item,
@@ -394,9 +381,54 @@ body.is-scrolling .usecase-card,
 body.is-scrolling .wireframe-screen,
 body.is-scrolling .swot-quadrant,
 body.is-scrolling .sipoc-box,
-body.is-scrolling .card-3d {
+body.is-scrolling .card-3d,
+body.is-scrolling .hmw-card,
+body.is-scrolling .pyramid-layer,
+body.is-scrolling .persona-card,
+body.is-scrolling .raci-table tr,
+body.is-scrolling .nav-dot:not(.active) {
+    pointer-events: none !important;
     transition: none !important;
     animation: none !important;
+    transform: none !important;
+}
+
+/* Disable hover state completely during scroll - this is critical */
+body.is-scrolling .glass-card:hover,
+body.is-scrolling .glass-card:hover::before,
+body.is-scrolling .analysis-card:hover,
+body.is-scrolling .ebo-item:hover,
+body.is-scrolling .stakeholder-card:hover,
+body.is-scrolling .empathy-card:hover,
+body.is-scrolling .requirement-card:hover,
+body.is-scrolling .kano-card:hover,
+body.is-scrolling .user-story-card:hover,
+body.is-scrolling .invest-item:hover,
+body.is-scrolling .scenario-card:hover,
+body.is-scrolling .actor-card:hover,
+body.is-scrolling .usecase-card:hover,
+body.is-scrolling .wireframe-screen:hover,
+body.is-scrolling .swot-quadrant:hover,
+body.is-scrolling .sipoc-box:hover,
+body.is-scrolling .card-3d:hover,
+body.is-scrolling .hmw-card:hover,
+body.is-scrolling .pyramid-layer:hover,
+body.is-scrolling .persona-card:hover,
+body.is-scrolling .raci-table tr:hover,
+body.is-scrolling *:hover {
+    transform: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+    pointer-events: none !important;
+}
+
+/* Keep navigation dots clickable but disable hover effects */
+body.is-scrolling .nav-dot {
+    pointer-events: auto !important;
+}
+body.is-scrolling .nav-dot:hover {
+    transform: none !important;
+    box-shadow: none !important;
 }
 
 /* 3D Tilt Effect */
