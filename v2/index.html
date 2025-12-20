@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulut Filo Yönetimi - Kiralama Modülü Analiz Projesi</title>
+    <link rel="icon" type="image/jpg" href="../v1/images/bulut_filo_ynetimi_logo.jpg">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Particle Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Progress Bar -->
+    <div id="progress-bar"></div>
+
+    <!-- Navigation Dots -->
+    <nav id="nav-menu">
+        <div class="nav-dot" data-section="cover" data-tooltip="Açılış"></div>
+        <div class="nav-dot" data-section="section-1" data-tooltip="3M & EBO"></div>
+        <div class="nav-dot" data-section="section-2" data-tooltip="Güç/İlgi"></div>
+        <div class="nav-dot" data-section="section-3" data-tooltip="RACI"></div>
+        <div class="nav-dot" data-section="section-4" data-tooltip="Persona"></div>
+        <div class="nav-dot" data-section="section-5" data-tooltip="HMW"></div>
+        <div class="nav-dot" data-section="section-6" data-tooltip="Piramit"></div>
+        <div class="nav-dot" data-section="section-7" data-tooltip="Gereksinimler"></div>
+        <div class="nav-dot" data-section="section-8" data-tooltip="KANO"></div>
+        <div class="nav-dot" data-section="section-9" data-tooltip="INVEST"></div>
+        <div class="nav-dot" data-section="section-10" data-tooltip="Kabul"></div>
+        <div class="nav-dot" data-section="section-11" data-tooltip="UML"></div>
+        <div class="nav-dot" data-section="section-12" data-tooltip="Storyboard"></div>
+        <div class="nav-dot" data-section="footer" data-tooltip="Bitiş"></div>
+    </nav>
+
+    <!-- Section 1: Cover -->
+    <section id="cover">
+        <div class="cover-bg-overlay"></div>
+        <div class="cover-content parallax" data-speed="0.5">
+            <div class="cover-logo" data-animate="scale-up">
+                <img src="../v1/images/bulut_filo_ynetimi_logo.jpg" alt="Bulut Filo Yönetimi Logo" class="logo-img">
+            </div>
+            <h1 class="cover-title" data-animate="fade-up" data-delay="300">Kiralama Modülü</h1>
+            <p class="cover-subtitle" data-animate="fade-up" data-delay="500">İş Süreci Analizi ve Gereksinim Mühendisliği</p>
+            <p class="cover-company" data-animate="fade-up" data-delay="700">Bulut Filo Yönetimi - BPM Projesi</p>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- Section 1: 3M Analizi ve EBO -->
+    <section id="section-1" class="content-section">
+        <div class="geometric-pattern"></div>
+        <div class="container">
+            <h2 data-aos="fade-up" style="color: white;">1. Mevcut Sürecin 3M Analizi ve EBO ile İyileştirilmesi</h2>
+            
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>1.1. 3M Analizi (Muda, Mura, Muri)</h3>
+                
+                <div class="analysis-grid">
+                    <div class="analysis-card">
+                        <div class="card-icon">🗑️</div>
+                        <h4>Muda (İsraf)</h4>
+                        <ul>
+                            <li><strong>Hatalı Üretim:</strong> Trafik cezalarının müşteriye yansıtılamaması ve sigorta/bakım sürelerinin kaçırılması</li>
+                            <li><strong>Bekleme:</strong> Manuel risk analizi ve sözleşme üretimi süreçlerinin yavaşlığı</li>
+                            <li><strong>Gereksiz İşlem:</strong> Bireysel ve kurumsal operasyonların ayrı yönetilmesi</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="analysis-card">
+                        <div class="card-icon">📊</div>
+                        <h4>Mura (Düzensizlik)</h4>
+                        <p>Araç boşluk ve doluluk oranlarının dijital olarak izlenememesi, personelin bazı dönemlerde aşırı yoğunlaşmasına, bazı dönemlerde ise atıl kalmasına neden olan dengesizlik</p>
+                    </div>
+                    
+                    <div class="analysis-card">
+                        <div class="card-icon">⚡</div>
+                        <h4>Muri (Aşırı Yüklenme)</h4>
+                        <p>Personelin manuel evrak işleri, ceza takibi ve risk analizi gibi süreçlerle boğuşması, çalışanlar üzerinde zihinsel ve operasyonel aşırı yüklenme</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>1.2. EBO Yöntemi ile İyileştirme (TO-BE Süreci)</h3>
+                
+                <div class="ebo-grid">
+                    <div class="ebo-item">
+                        <div class="ebo-icon">❌</div>
+                        <h4>Elimine Et</h4>
+                        <ul>
+                            <li>Manuel sözleşme hazırlama süreçleri</li>
+                            <li>Fiziksel evrak takibi</li>
+                            <li>Müşteri risk skorlamasındaki insan inisiyatifi</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="ebo-item">
+                        <div class="ebo-icon">🔗</div>
+                        <h4>Birleştir</h4>
+                        <ul>
+                            <li>Bireysel ve kurumsal kiralama operasyonları "Tek Panel" altında</li>
+                            <li>Araç takip verileri ile finansal veriler entegrasyonu</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="ebo-item">
+                        <div class="ebo-icon">⚡</div>
+                        <h4>Optimize Et</h4>
+                        <ul>
+                            <li>Ceza ve hasar yönetim süreçleri otomatik bildirimlerle</li>
+                            <li>Raporlama süreçleri gerçek zamanlı</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card metrics-card" data-aos="fade-up" data-aos-delay="300">
+                <h3>1.3. Analitik Katma Değer</h3>
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <div class="metric-number">30%</div>
+                        <div class="metric-desc">İş Yükü Azalımı</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-number">80%</div>
+                        <div class="metric-desc">Gelir Koruma</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-number">↑</div>
+                        <div class="metric-desc">Pazar Hızı</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Güç/İlgi Matrisi -->
+    <section id="section-2" class="content-section">
+        <div class="container">
+            <h2 data-aos="fade-up">2. Güç/İlgi (Power/Interest) Matrisi</h2>
+            
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Paydaş Listesi</h3>
+                <div class="stakeholder-grid">
+                    <div class="stakeholder-card high-power high-interest">
+                        <h4>Yüksek Güç / Yüksek İlgi</h4>
+                        <ul>
+                            <li>Bulut Filo Yönetim Kurulu</li>
+                            <li>Pilot Kiralama Firmaları</li>
+                            <li>Yazılım Geliştirme & Ürün Ekibi</li>
+                        </ul>
+                        <div class="strategy-badge">Yakın Yönet</div>
+                    </div>
+                    
+                    <div class="stakeholder-card medium-power high-interest">
+                        <h4>Orta Güç / Yüksek İlgi</h4>
+                        <ul>
+                            <li>Satış ve Pazarlama Ekibi</li>
+                        </ul>
+                        <div class="strategy-badge">Bilgilendir</div>
+                    </div>
+                    
+                    <div class="stakeholder-card medium-power low-interest">
+                        <h4>Orta Güç / Düşük İlgi</h4>
+                        <ul>
+                            <li>Mevcut Niş Rakipler</li>
+                        </ul>
+                        <div class="strategy-badge">İzle</div>
+                    </div>
+                    
+                    <div class="stakeholder-card low-power high-interest">
+                        <h4>Düşük Güç / Yüksek İlgi</h4>
+                        <ul>
+                            <li>Genel Kullanıcılar (Sürücüler)</li>
+                        </ul>
+                        <div class="strategy-badge">Memnun Et</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: RACI Matrisi -->
+    <section id="section-3" class="content-section">
+        <div class="geometric-pattern"></div>
+        <div class="container">
+            <h2 data-aos="fade-up" style="color: white;">3. Kiralama Yönetim Modülü - RACI Matrisi</h2>
+            
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="table-responsive">
+                    <table class="raci-table">
+                        <thead>
+                            <tr>
+                                <th>Aktivite / İş Paketi</th>
+                                <th>Stratejik Proje Ekibi</th>
+                                <th>Yönetim Kurulu (BFY)</th>
+                                <th>Yazılım & Ürün Ekibi</th>
+                                <th>Satış & Pazarlama</th>
+                                <th>Pilot Müşteriler</th>
+                                <th>Destek & Operasyon</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Strateji ve MVP Kapsam Belirleme</strong></td>
+                                <td class="role-r">R</td>
+                                <td class="role-a">A</td>
+                                <td class="role-c">C</td>
+                                <td class="role-c">C</td>
+                                <td class="role-i">I</td>
+                                <td class="role-i">I</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Çekirdek Modül Geliştirme</strong></td>
+                                <td class="role-c">C</td>
+                                <td class="role-i">I</td>
+                                <td class="role-ra">R / A</td>
+                                <td class="role-i">I</td>
+                                <td class="role-c">C</td>
+                                <td class="role-i">I</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Pilot Program ve Geri Bildirim</strong></td>
+                                <td class="role-a">A</td>
+                                <td class="role-i">I</td>
+                                <td class="role-r">R</td>
+                                <td class="role-c">C</td>
+                                <td class="role-r">R</td>
+                                <td class="role-i">I</td>
+                            </tr>
+                            <tr>
+                                <td><strong>KVKK ve Veri Güvenliği Uyumu</strong></td>
+                                <td class="role-r">R</td>
+                                <td class="role-a">A</td>
+                                <td class="role-r">R</td>
+                                <td class="role-i">I</td>
+                                <td class="role-i">I</td>
+                                <td class="role-c">C</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Eğitim Materyalleri ve Lansman</strong></td>
+                                <td class="role-a">A</td>
+                                <td class="role-i">I</td>
+                                <td class="role-c">C</td>
+                                <td class="role-r">R</td>
+                                <td class="role-i">I</td>
+                                <td class="role-r">R</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Satış Sonrası Destek ve KPI Takibi</strong></td>
+                                <td class="role-i">I</td>
+                                <td class="role-a">A</td>
+                                <td class="role-c">C</td>
+                                <td class="role-i">I</td>
+                                <td class="role-i">I</td>
+                                <td class="role-r">R</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="raci-legend">
+                    <div class="legend-item"><span class="legend-r">R</span> Responsible - Sorumlu</div>
+                    <div class="legend-item"><span class="legend-a">A</span> Accountable - Hesap Verebilir</div>
+                    <div class="legend-item"><span class="legend-c">C</span> Consulted - Danışılan</div>
+                    <div class="legend-item"><span class="legend-i">I</span> Informed - Bilgilendirilen</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Persona ve Empati Haritası -->
+    <section id="section-4" class="content-section">
+        <div class="container">
+            <h2 data-aos="fade-up">4. Persona ve Empati Haritası</h2>
+            
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>4.1. Persona: "Geleneksel Ahmet Bey"</h3>
+                <div class="persona-card">
+                    <div class="persona-header">
+                        <div class="persona-avatar">👨‍💼</div>
+                        <div class="persona-info">
+                            <h4>Ahmet Yılmaz</h4>
+                            <p><strong>Rol:</strong> Orta ölçekli "Yıldız Rent A Car" firmasının sahibi</p>
+                            <p><strong>Yaş/Eğitim:</strong> 45 yaş, İşletme mezunu</p>
+                            <p><strong>Tecrübe:</strong> 15 yıldır araç kiralama sektöründe</p>
+                            <p><strong>Mevcut Araç Sayısı:</strong> 45 (Bireysel ve kurumsal karma kiralama)</p>
+                            <p><strong>Teknoloji Kullanımı:</strong> Temel seviye (Excel, WhatsApp, basit muhasebe programı)</p>
+                        </div>
+                    </div>
+                    <div class="persona-motivation">
+                        <h4>Motivasyonu:</h4>
+                        <p>Operasyonel karmaşıklığı azaltmak, kaçak gelirleri (ceza, hasar) engellemek ve kârlılığını artırmak</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>4.2. Empati Haritası</h3>
+                <div class="empathy-grid">
+                    <div class="empathy-card">
+                        <h4>💬 Ne Söylüyor?</h4>
+                        <ul>
+                            <li>"Trafik cezalarını müşteriden tahsil edene kadar canım çıkıyor."</li>
+                            <li>"Hangi aracım boşta, hangisi bakıma girmeli takip etmekte zorlanıyorum."</li>
+                            <li>"Rakipler dijitalleşiyor, ben hala Excel ile uğraşıyorum."</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="empathy-card">
+                        <h4>🧠 Ne Düşünüyor?</h4>
+                        <ul>
+                            <li>"Acaba bu kiralama gerçekten kârlı mı yoksa zarar mı ediyorum?"</li>
+                            <li>"Müşterinin riskli olup olmadığını nasıl daha hızlı anlarım?"</li>
+                            <li>"Sistem çok karmaşık gelirse personelim kullanamaz."</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="empathy-card">
+                        <h4>👆 Ne Yapıyor?</h4>
+                        <ul>
+                            <li>Araçların yerini öğrenmek için şoförleri veya müşterileri arıyor</li>
+                            <li>Sözleşmeleri manuel olarak, kağıt üzerinde hazırlıyor</li>
+                            <li>Ceza bildirimlerini e-devletten tek tek kontrol edip not alıyor</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="empathy-card">
+                        <h4>❤️ Ne Hissediyor?</h4>
+                        <div class="feeling-section">
+                            <div class="pain-points">
+                                <strong>😰 Sancı (Pain):</strong>
+                                <ul>
+                                    <li>Gelir kaybı korkusu</li>
+                                    <li>KVKK cezası alma endişesi</li>
+                                    <li>Operasyonel yorgunluk</li>
+                                </ul>
+                            </div>
+                            <div class="gain-points">
+                                <strong>✨ Kazanç (Gain):</strong>
+                                <ul>
+                                    <li>Kontrol sahibi olma isteği</li>
+                                    <li>Daha fazla kurumsal müşteri kazanma hırsı</li>
+                                    <li>Huzur</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: How Might We İdeasyonları -->
+    <section id="section-5" class="content-section">
+        <div class="geometric-pattern"></div>
+        <div class="container">
+            <h2 data-aos="fade-up" style="color: white;">5. "How Might We..." (HMW) İdeasyonları</h2>
+            
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="hmw-card">
+                    <div class="hmw-number">HMW 1</div>
+                    <h3>Gelir Sızıntılarını Önleme</h3>
+                    <p class="hmw-question">
+                        <strong>"Nasıl yapabiliriz ki;</strong> araç kiralama firmalarının en büyük gider kalemi olan trafik cezalarını ve hasar maliyetlerini, manuel takip gerektirmeden otomatik olarak müşteriye yansıtıp gelir kayıplarını sıfıra indirelim?"
+                    </p>
+                    <div class="hmw-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Odak Noktası:</span>
+                            <span class="detail-value">Tahsil edilemeyen cezalar ve hasar yönetimindeki "Muda" (israf)</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Beklenen Değer:</span>
+                            <span class="detail-value highlight">%80 oranında gelir kaybı iyileşmesi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="hmw-card">
+                    <div class="hmw-number">HMW 2</div>
+                    <h3>Operasyonel Karmaşıklığı Sadeleştirme</h3>
+                    <p class="hmw-question">
+                        <strong>"Nasıl yapabiliriz ki;</strong> teknolojiye mesafeli personellerin dahi zorlanmadan kullanabileceği, tek tuşla sözleşme üreten ve tüm filoyu tek ekrandan yöneten bir yapı kurarak operasyonel hızı artıralım?"
+                    </p>
+                    <div class="hmw-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Odak Noktası:</span>
+                            <span class="detail-value">Manuel evrak işleri, Excel bağımlılığı ve personelin sisteme adaptasyon direnci</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Beklenen Değer:</span>
+                            <span class="detail-value highlight">Operasyonel iş yükünün %30 azaltılması</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="hmw-card">
+                    <div class="hmw-number">HMW 3</div>
+                    <h3>Risk ve Güven Yönetimini Otomatikleştirme</h3>
+                    <p class="hmw-question">
+                        <strong>"Nasıl yapabiliriz ki;</strong> kiralama öncesinde müşterinin risk profilini (adli sicil, ödeme geçmişi vb.) saniyeler içinde analiz eden bir sistem sunarak firmaları riskli kiralamalardan koruyup kârlılıklarını güvence altına alalım?"
+                    </p>
+                    <div class="hmw-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Odak Noktası:</span>
+                            <span class="detail-value">Riskli müşterilerden kaynaklanan maddi kayıplar ve hızlı karar verme ihtiyacı</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Beklenen Değer:</span>
+                            <span class="detail-value highlight">Veriye dayalı güvenli büyüme ve yüksek kârlılıklı müşteri segmentasyonu</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: Gereksinim Piramidi -->
+    <section id="section-6" class="content-section">
+        <div class="container">
+            <h2 data-aos="fade-up">6. Gereksinim Piramidi</h2>
+            
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="pyramid-container">
+                    <div class="pyramid-layer layer-1">
+                        <div class="layer-icon">🎯</div>
+                        <h3>1. KATMAN: İŞ HEDEFLERİ</h3>
+                        <ul>
+                            <li><strong>Pazar Liderliği:</strong> 18 ay içinde hedef pazarda %10 pazar payına ulaşmak</li>
+                            <li><strong>Operasyonel Verimlilik:</strong> Modülü kullanan firmaların iş yükünü %30 oranında azaltmak</li>
+                            <li><strong>Finansal Koruma:</strong> Tahsil edilemeyen gelir kayıplarını %80 oranında düşürmek</li>
+                            <li><strong>Stratejik Dönüşüm:</strong> Şirketi "araç takip firması"ndan "operasyonel teknoloji ortağı"na dönüştürmek</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pyramid-layer layer-2">
+                        <div class="layer-icon">👥</div>
+                        <h3>2. KATMAN: KULLANICI İHTİYAÇLARI</h3>
+                        <ul>
+                            <li><strong>Merkezi Yönetim:</strong> Bireysel ve kurumsal operasyonları tek bir panelden yönetme ihtiyacı</li>
+                            <li><strong>Hız ve Otomasyon:</strong> Manuel evrak işlerinden kurtulup "tek tuşla" sözleşme üretme ihtiyacı</li>
+                            <li><strong>Güven ve Risk Kontrolü:</strong> Kiralama öncesi müşterinin risk profilini anlık görme ihtiyacı</li>
+                            <li><strong>Şeffaflık:</strong> Araçların doluluk oranlarını ve kârlılık verilerini anlık izleme ihtiyacı</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pyramid-layer layer-3">
+                        <div class="layer-icon">⚙️</div>
+                        <h3>3. KATMAN: TEKNİK VE FONKSİYONEL ÖZELLİKLER</h3>
+                        <ul>
+                            <li><strong>Entegre Panel:</strong> Hem kısa hem uzun dönem kiralamayı destekleyen kullanıcı arayüzü</li>
+                            <li><strong>Algoritmik Risk Skorlaması:</strong> Ehliyet ve geçmiş verileri işleyen otomatik puanlama motoru</li>
+                            <li><strong>API Entegrasyonları:</strong> Muhasebe programları ve dış sistemlerle veri alışverişi</li>
+                            <li><strong>Mobil Uygulama:</strong> Saha personeli için araç teslim ve kontrol ekranları</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="pyramid-relationship">
+                    <p><strong>Katmanlar Arası İlişki:</strong> Tabandaki Teknik Özellikler → Kullanıcı İhtiyaçlarını Karşılar → İş Hedeflerine Hizmet Eder</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: Çözüm Gereksinimleri -->
+    <section id="section-7" class="content-section">
+        <div class="geometric-pattern"></div>
+        <div class="container">
+            <h2 data-aos="fade-up" style="color: white;">7. Çözüm Gereksinimleri</h2>
+            
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>7.1. Fonksiyonel Gereksinimler (Sistem Ne Yapacak?)</h3>
+                <div class="requirement-grid">
+                    <div class="requirement-card">
+                        <div class="req-number">FG1</div>
+                        <h4>Otomatik Sözleşme ve Belge Üretimi</h4>
+                        <p>Sistem; araç, müşteri ve tarih bilgileri girildikten sonra yasal mevzuata uygun dijital kiralama sözleşmesini <strong>1 saniye içinde</strong> PDF formatında oluşturabilmelidir.</p>
+                    </div>
+                    
+                    <div class="requirement-card">
+                        <div class="req-number">FG2</div>
+                        <h4>Algoritmik Risk Skorlaması</h4>
+                        <p>Sistem, bireysel müşterilerin ehliyet ve geçmiş kiralama verilerini kullanarak <strong>0-100 arasında</strong> bir risk puanı hesaplamalı ve bu puanı operasyon sorumlusuna anlık olarak raporlamalıdır.</p>
+                    </div>
+                    
+                    <div class="requirement-card">
+                        <div class="req-number">FG3</div>
+                        <h4>Ceza ve Hasar Entegrasyonu</h4>
+                        <p>Sistem, e-devlet veya ilgili veri sağlayıcılar üzerinden gelen trafik cezası ve hasar kayıtlarını otomatik olarak tespit etmeli ve ilgili kiracı hesabına <strong>%100 doğrulukla</strong> yansıtmalıdır.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>7.2. Fonksiyonel Olmayan Gereksinimler (Sistem Nasıl Çalışacak?)</h3>
+                <div class="requirement-grid">
+                    <div class="requirement-card">
+                        <div class="req-number">FOG1</div>
+                        <h4>Performans ve Tepki Süresi</h4>
+                        <p>Müşteri risk sorgulama ve raporlama motoru, kullanıcı talebi gönderdikten sonra en geç <strong>3 saniye içinde</strong> sonuç döndürmelidir.</p>
+                    </div>
+                    
+                    <div class="requirement-card">
+                        <div class="req-number">FOG2</div>
+                        <h4>Güvenlik ve KVKK Uyumluluğu</h4>
+                        <p>Sistem, sürücülerin biyometrik ve kişisel verilerini KVKK standartlarına <strong>%100 uyumlu</strong> şekilde <strong>AES-256 şifreleme</strong> yöntemiyle saklamalıdır.</p>
+                    </div>
+                    
+                    <div class="requirement-card">
+                        <div class="req-number">FOG3</div>
+                        <h4>Kullanılabilirlik ve Erişilebilirlik</h4>
+                        <p>Bulut tabanlı platform, 7/24 operasyonel sürekliliği sağlamak amacıyla yıllık <strong>%99.9 oranında</strong> çalışma süresi (uptime) garantisi sunmalıdır.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 8: KANO Modeli -->
+    <section id="section-8" class="content-section">
+        <div class="container">
+            <h2 data-aos="fade-up">8. KANO Modeli ile Önceliklendirme</h2>
+            
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>8.1. Özellik Sınıflandırması</h3>
+                <div class="kano-grid">
+                    <div class="kano-card must-be">
+                        <div class="kano-header">
+                            <div class="kano-icon">🚫</div>
+                            <h4>Olmazsa Olmaz (Must-Be)</h4>
+                        </div>
+                        <ul>
+                            <li>Tek Panelde Bireysel/Kurumsal Yönetim</li>
+                            <li>Otomatik Sözleşme Üretimi</li>
+                            <li>Temel Araç ve Sürücü Atama</li>
+                        </ul>
+                        <p class="kano-description">Bu özellikler sistemde yoksa müşteri sistemi asla kullanmaz. Varlıkları ekstra memnuniyet yaratmaz ama yoklukları büyük bir hayal kırıklığıdır.</p>
+                    </div>
+                    
+                    <div class="kano-card performance">
+                        <div class="kano-header">
+                            <div class="kano-icon">📈</div>
+                            <h4>Performans (Linear)</h4>
+                        </div>
+                        <ul>
+                            <li>Detaylı Ceza ve Hasar Yönetimi</li>
+                            <li>Gelişmiş Raporlama Paneli</li>
+                            <li>Otomatik Fatura Planlama</li>
+                        </ul>
+                        <p class="kano-description">Bu özellikler ne kadar iyi çalışırsa (hız, doğruluk, detay), Ahmet Bey'in memnuniyeti o kadar doğrusal artar.</p>
+                    </div>
+                    
+                    <div class="kano-card delighters">
+                        <div class="kano-header">
+                            <div class="kano-icon">✨</div>
+                            <h4>Heyecan Verici (Delighters)</h4>
+                        </div>
+                        <ul>
+                            <li>Algoritmik Risk Skorlaması (Bireysel)</li>
+                            <li>Mobil Saha Personeli Uygulaması</li>
+                            <li>Veriye Dayalı Sektörel Analiz Raporları</li>
+                        </ul>
+                        <p class="kano-description">Müşteri başlangıçta bunları beklemez. Ancak sunulduğunda "Vay canına!" etkisi yaratır ve Bulut Filo'yu rakiplerinden keskin bir şekilde ayırır.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 9: INVEST Analizi -->
+    <section id="section-9" class="content-section">
+        <div class="geometric-pattern"></div>
+        <div class="container">
+            <h2 data-aos="fade-up" style="color: white;">9. Kullanıcı Hikayeleri (User Stories) ve INVEST Analizi</h2>
+            
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="user-stories-grid">
+                    <div class="user-story-card">
+                        <div class="story-id">US.01</div>
+                        <h4>Otomatik Sözleşme Üretimi</h4>
+                        <p class="story-text">
+                            Bir <strong>Araç Kiralama İşletmecisi</strong> olarak, sisteme müşteri bilgilerini girdiğimde <strong>otomatik sözleşme üretilmesini</strong> istiyorum; böylece manuel evrak işlerinden kurtulup operasyonumu hızlandırabilirim.
+                        </p>
+                        <div class="story-value">Yüksek: Manuel iş yükünü (Muda) doğrudan azaltır.</div>
+                    </div>
+                    
+                    <div class="user-story-card">
+                        <div class="story-id">US.02</div>
+                        <h4>Risk Skoru Görüntüleme</h4>
+                        <p class="story-text">
+                            Bir <strong>Araç Kiralama İşletmecisi</strong> olarak, kiralama öncesi müşterinin <strong>risk skorunu</strong> görmek istiyorum; böylece riskli kiralamalardan kaçınarak finansal güvenliğimi sağlayabilirim.
+                        </p>
+                        <div class="story-value critical">Kritik: Doğrudan kârlılığı korur ve kayıpları önler.</div>
+                    </div>
+                    
+                    <div class="user-story-card">
+                        <div class="story-id">US.03</div>
+                        <h4>Otomatik Trafik Cezası Takibi</h4>
+                        <p class="story-text">
+                            Bir <strong>Araç Kiralama İşletmecisi</strong> olarak, araçlarıma gelen <strong>trafik cezalarını</strong> sistemde otomatik görmek istiyorum; böylece bu cezaları müşteriye anında yansıtıp gelir kaybımı önleyebilirim.
+                        </p>
+                        <div class="story-value">Yüksek: %80 oranında gelir kaybı iyileşmesi hedefine hizmet eder.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>9.1. INVEST Analizi</h3>
+                <div class="invest-grid">
+                    <div class="invest-item">
+                        <div class="invest-letter">I</div>
+                        <h4>Independent</h4>
+                        <p>Örneğin; otomatik sözleşme üretimi (US.01), trafik cezası takibi (US.03) özelliğinden bağımsız olarak geliştirilebilir ve test edilebilir.</p>
+                    </div>
+                    
+                    <div class="invest-item">
+                        <div class="invest-letter">N</div>
+                        <h4>Negotiable</h4>
+                        <p>Sözleşmenin hangi formatta (PDF/HTML) olacağı veya risk skorunun hangi verileri (ehliyet/finans) kullanacağı yazılım ekibiyle tartışılabilir.</p>
+                    </div>
+                    
+                    <div class="invest-item">
+                        <div class="invest-letter">V</div>
+                        <h4>Valuable</h4>
+                        <p>Her üç hikaye de Ahmet Bey'in en büyük operasyonel ve finansal sorunlarını doğrudan çözer.</p>
+                    </div>
+                    
+                    <div class="invest-item">
+                        <div class="invest-letter">E</div>
+                        <h4>Estimable</h4>
+                        <p>RICE skorlamasında belirtilen "çaba" (kişi-ay) değerleri, bu hikayelerin teknik büyüklüğünün öngörülebilir olduğunu kanıtlar.</p>
+                    </div>
+                    
+                    <div class="invest-item">
+                        <div class="invest-letter">S</div>
+                        <h4>Small</h4>
+                        <p>Her bir hikaye, bir Scrum sprinti (genellikle 2 hafta) içerisinde tamamlanabilecek kadar odaklanmış ve küçüktür.</p>
+                    </div>
+                    
+                    <div class="invest-item">
+                        <div class="invest-letter">T</div>
+                        <h4>Testable</h4>
+                        <p>"Sistem PDF sözleşme üretiyor mu?", "Risk puanı 0-100 arasında dönüyor mu?" gibi sorularla başarıları kolayca ölçülebilir.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 10: Kabul Kriterleri -->
+    <section id="section-10" class="content-section">
+        <div class="container">
+            <h2 data-aos="fade-up">10. Kabul Kriterleri (Gherkin/BDD)</h2>
+            
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <div class="scenario-number">Senaryo 1</div>
+                        <h3>Otomatik Sözleşme Üretimi (US.01)</h3>
+                    </div>
+                    <div class="gherkin-steps">
+                        <div class="step given">
+                            <span class="step-keyword">Given</span>
+                            <span class="step-text">Operasyon personeli, sistemdeki "Yeni Kiralama" ekranındadır.</span>
+                        </div>
+                        <div class="step when">
+                            <span class="step-keyword">When</span>
+                            <span class="step-text">Geçerli müşteri, araç ve tarih bilgileri girilip "Sözleşme Oluştur" butonuna tıklandığında.</span>
+                        </div>
+                        <div class="step then">
+                            <span class="step-keyword">Then</span>
+                            <span class="step-text">Sistem, yasal mevzuata uygun dijital sözleşmeyi <strong>1 saniye içinde</strong> PDF formatında üretmeli ve ekranda önizleme olarak göstermelidir.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <div class="scenario-number">Senaryo 2</div>
+                        <h3>Müşteri Risk Skorlaması (US.02)</h3>
+                    </div>
+                    <div class="gherkin-steps">
+                        <div class="step given">
+                            <span class="step-keyword">Given</span>
+                            <span class="step-text">Yeni bir bireysel müşterinin ehliyet ve kimlik bilgileri sisteme tanımlanmıştır.</span>
+                        </div>
+                        <div class="step when">
+                            <span class="step-keyword">When</span>
+                            <span class="step-text">"Risk Analizi Yap" komutu verildiğinde.</span>
+                        </div>
+                        <div class="step then">
+                            <span class="step-keyword">Then</span>
+                            <span class="step-text">Sistem, dış veri kaynaklarını kullanarak <strong>3 saniye içinde</strong> <strong>0 ile 100 arasında</strong> bir risk puanı döndürmeli ve Ahmet Bey'e "Kiralanabilir" veya "Riskli" uyarısını göstermelidir.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <div class="scenario-number">Senaryo 3</div>
+                        <h3>Otomatik Trafik Cezası Yansıtma (US.03)</h3>
+                    </div>
+                    <div class="gherkin-steps">
+                        <div class="step given">
+                            <span class="step-keyword">Given</span>
+                            <span class="step-text">Sisteme entegre veri sağlayıcıdan (e-devlet vb.) belirli bir plakaya ait yeni bir trafik cezası bilgisi gelmiştir.</span>
+                        </div>
+                        <div class="step when">
+                            <span class="step-keyword">When</span>
+                            <span class="step-text">Sistem, ceza tarihindeki aktif kiralama kaydını ve ilgili müşteriyi otomatik olarak tespit ettiğinde.</span>
+                        </div>
+                        <div class="step then">
+                            <span class="step-keyword">Then</span>
+                            <span class="step-text">Ceza tutarı, manuel müdahaleye gerek kalmadan müşterinin cari hesabına borç olarak kaydedilmeli ve firmaya anlık bildirim gönderilmelidir.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 11: UML Use Case Diyagramı -->
+    <section id="section-11" class="content-section">
+        <div class="geometric-pattern"></div>
+        <div class="container">
+            <h2 data-aos="fade-up" style="color: white;">11. UML Use Case Diyagramı Analizi</h2>
+            
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>11.1. Aktörler (Actors)</h3>
+                <div class="actor-grid">
+                    <div class="actor-card primary">
+                        <div class="actor-icon">👤</div>
+                        <h4>Operasyon Sorumlusu</h4>
+                        <p>Kiralama süreçlerini başlatan, sözleşme üreten ve araç atamalarını yapan ana aktördür.</p>
+                    </div>
+                    
+                    <div class="actor-card primary">
+                        <div class="actor-icon">👔</div>
+                        <h4>Şirket Yetkili Personeli</h4>
+                        <p>Kurumsal kiralamalarda sürücü ataması ve talep yönetimi yapan aktördür.</p>
+                    </div>
+                    
+                    <div class="actor-card external">
+                        <div class="actor-icon">👥</div>
+                        <h4>Müşteri (Bireysel/Kurumsal)</h4>
+                        <p>Sisteme veri girişi yapan ve çıktıları (sözleşme, fatura) alan dış aktördür.</p>
+                    </div>
+                    
+                    <div class="actor-card secondary">
+                        <div class="actor-icon">🔌</div>
+                        <h4>Dış Veri Sistemleri</h4>
+                        <p>Risk skorlaması ve ceza takibi için veri sağlayan API servisleridir (E-devlet, Tramer vb.).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>11.2. Kullanım Durumları (Use Cases)</h3>
+                <div class="usecase-grid">
+                    <div class="usecase-card">
+                        <div class="usecase-id">UC.01</div>
+                        <h4>Sözleşme Yönetimi</h4>
+                        <p>Dijital sözleşme üretme ve saklama süreci.</p>
+                    </div>
+                    
+                    <div class="usecase-card">
+                        <div class="usecase-id">UC.02</div>
+                        <h4>Risk Analizi Sorgulama</h4>
+                        <p>Müşteri verileriyle risk puanı hesaplama etkileşimi.</p>
+                    </div>
+                    
+                    <div class="usecase-card">
+                        <div class="usecase-id">UC.03</div>
+                        <h4>Ceza ve Hasar İşleme</h4>
+                        <p>Gelen verilerin otomatik olarak kiralama kaydıyla eşleştirilmesi.</p>
+                    </div>
+                    
+                    <div class="usecase-card">
+                        <div class="usecase-id">UC.04</div>
+                        <h4>Araç/Sürücü Atama</h4>
+                        <p>Filo ve sürücü verilerinin kiralama ile ilişkilendirilmesi.</p>
+                    </div>
+                    
+                    <div class="usecase-card">
+                        <div class="usecase-id">UC.05</div>
+                        <h4>Finansal Raporlama</h4>
+                        <p>Fatura ve kârlılık verilerinin görüntülenmesi.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="300">
+                <h3>11.3. İlişkiler ve Sistem Sınırı</h3>
+                <div class="relationship-info">
+                    <div class="info-item">
+                        <strong>Sistem Sınırı:</strong> Tüm bu işlemler <strong>"Kiralama Yönetim Modülü"</strong> sınırları içerisinde gerçekleşir.
+                    </div>
+                    <div class="info-item">
+                        <strong>&lt;&lt;include&gt;&gt; (Dahil Etme):</strong> "Risk Analizi Sorgulama" işlemi, her zaman "Müşteri Verisi Doğrulama" alt sürecini dahil eder.
+                    </div>
+                    <div class="info-item">
+                        <strong>&lt;&lt;extend&gt;&gt; (Genişletme):</strong> "Sözleşme Yönetimi", kiralama tipine göre (bireysel veya kurumsal) farklılaşan şablonlarla genişletilebilir.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 12: Storyboard -->
+    <section id="section-12" class="content-section">
+        <div class="geometric-pattern"></div>
+        <div class="container">
+            <h2 data-aos="fade-up" style="color: white;">12. Storyboard (Hikayeleştirme)</h2>
+            
+            <!-- Scenario 1 -->
+            <div class="scenario-header" data-aos="fade-up" data-aos-delay="100">
+                <div class="scenario-number">01</div>
+                <h3>Riskli Kiralamayı Önleme ve Hızlı Sözleşme</h3>
+                <p class="scenario-subtitle">Manuel süreçlerin yarattığı yavaşlık ve risk yönetimi eksikliğinin çözümü</p>
+            </div>
+
+            <div class="storyboard-phase problem-phase" data-aos="fade-up" data-aos-delay="200">
+                <div class="phase-header">
+                    <div class="phase-icon problem-icon">😰</div>
+                    <h4>Problem (Sancı)</h4>
+                </div>
+                <div class="phase-content glass-card">
+                    <div class="storyboard-visual">
+                        <div class="visual-character">
+                            <div class="character-avatar">👨‍💼</div>
+                            <div class="character-name">Ahmet Bey</div>
+                        </div>
+                        <div class="visual-scene">
+                            <div class="scene-element">🏢</div>
+                            <div class="scene-element">📄</div>
+                            <div class="scene-element">⏱️</div>
+                        </div>
+                    </div>
+                    <div class="storyboard-text">
+                        <p>Ahmet Bey'in ofisine bir müşteri gelir ve <strong>acil araç kiralamak</strong> istediğini söyler. Ahmet Bey, müşterinin riskli olup olmadığını bilmeden manuel olarak kağıt üzerinde sözleşme hazırlamaya başlar. Bu işlem 15-20 dakika sürer ve Ahmet Bey içten içe "Acaba bu müşteri güvenilir mi?" diye endişelenir.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="storyboard-phase interaction-phase" data-aos="fade-up" data-aos-delay="300">
+                <div class="phase-header">
+                    <div class="phase-icon interaction-icon">💻</div>
+                    <h4>Etkileşim (Wireframe)</h4>
+                </div>
+                <div class="phase-content glass-card">
+                    <div class="wireframe-container">
+                        <div class="wireframe-screen">
+                            <div class="screen-header">
+                                <div class="screen-title">Kiralama Modülü</div>
+                                <div class="screen-status">🟢 Aktif</div>
+                            </div>
+                            <div class="wireframe-content">
+                                <div class="input-group">
+                                    <label>Müşteri Bilgileri</label>
+                                    <input type="text" placeholder="TC Kimlik No" readonly value="12345678901">
+                                </div>
+                                <div class="risk-score-display">
+                                    <div class="score-badge score-safe">
+                                        <span class="score-icon">✅</span>
+                                        <div class="score-info">
+                                            <div class="score-label">Risk Skoru</div>
+                                            <div class="score-value">85</div>
+                                            <div class="score-status">Güvenli</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="action-button primary">📄 Dijital Sözleşme Üret</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="storyboard-text">
+                        <p>Ahmet Bey, yeni modülü açar. Müşterinin bilgilerini girer girmez sistem <strong>"Risk Skoru: 85 (Güvenli)"</strong> uyarısını verir. Ahmet Bey rahatlar ve "Dijital Sözleşme Üret" butonuna basar.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="storyboard-phase solution-phase" data-aos="fade-up" data-aos-delay="400">
+                <div class="phase-header">
+                    <div class="phase-icon solution-icon">✨</div>
+                    <h4>Çözüm (Mutlu Son)</h4>
+                </div>
+                <div class="phase-content glass-card">
+                    <div class="solution-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-marker">1</div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Saniyeler İçinde</div>
+                                <div class="timeline-text">PDF sözleşme ekrana gelir</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker">2</div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Dijital Onay</div>
+                                <div class="timeline-text">Müşteri dijital onayını verir</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker">3</div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">2 Dakika İçinde</div>
+                                <div class="timeline-text">Anahtarı teslim alıp ofisten ayrılır</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="storyboard-text">
+                        <p>Saniyeler içinde PDF sözleşme ekrana gelir. Müşteri dijital onayını verir ve <strong>2 dakika içinde</strong> anahtarı teslim alıp ofisten ayrılır. Ahmet Bey, hem zamandan tasarruf etmiş hem de riskli bir kiralamadan kaçındığından emin olmuştur.</p>
+                        <div class="solution-results">
+                            <div class="result-card">
+                                <div class="result-icon">⏱️</div>
+                                <div class="result-value">15-20dk → 2dk</div>
+                                <div class="result-label">%90 Süre Azalması</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-icon">✅</div>
+                                <div class="result-value">Risk Kontrolü</div>
+                                <div class="result-label">Güvenli Kiralama</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-icon">😊</div>
+                                <div class="result-value">Memnuniyet</div>
+                                <div class="result-label">Hem Müşteri Hem Ahmet Bey</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scenario 2 -->
+            <div class="scenario-header" data-aos="fade-up" data-aos-delay="500">
+                <div class="scenario-number">02</div>
+                <h3>Kaçak Gelirlerin (Trafik Cezası) Kurtarılması</h3>
+                <p class="scenario-subtitle">Manuel takibin imkansız olduğu ceza yönetimindeki finansal sızıntıların çözümü</p>
+            </div>
+
+            <div class="storyboard-phase problem-phase" data-aos="fade-up" data-aos-delay="600">
+                <div class="phase-header">
+                    <div class="phase-icon problem-icon">💸</div>
+                    <h4>Problem (Sancı)</h4>
+                </div>
+                <div class="phase-content glass-card">
+                    <div class="storyboard-visual">
+                        <div class="visual-character">
+                            <div class="character-avatar">👨‍💼</div>
+                            <div class="character-name">Ahmet Bey</div>
+                        </div>
+                        <div class="visual-scene">
+                            <div class="scene-element">🌙</div>
+                            <div class="scene-element">📋</div>
+                            <div class="scene-element">💳</div>
+                        </div>
+                    </div>
+                    <div class="storyboard-text">
+                        <p>Ahmet Bey akşam ofisi kapatırken <strong>e-devletten plakaları kontrol eder</strong> ve 15 gün öncesine ait bir hız cezası geldiğini fark eder. Ancak o tarihte aracı kimin kiraladığını bulmak için eski klasörleri ve Excel dosyalarını karıştırmak zorundadır. Çoğu zaman pes eder ve cezayı kendi cebinden öder; bu da ciddi bir gelir kaybıdır.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="storyboard-phase interaction-phase" data-aos="fade-up" data-aos-delay="700">
+                <div class="phase-header">
+                    <div class="phase-icon interaction-icon">💻</div>
+                    <h4>Etkileşim (Wireframe)</h4>
+                </div>
+                <div class="phase-content glass-card">
+                    <div class="wireframe-container">
+                        <div class="wireframe-screen">
+                            <div class="screen-header">
+                                <div class="screen-title">Ceza ve Hasar Yönetimi</div>
+                                <div class="screen-status">🟢 Aktif</div>
+                            </div>
+                            <div class="wireframe-content">
+                                <div class="ceza-list">
+                                    <div class="ceza-item matched">
+                                        <div class="ceza-info">
+                                            <div class="ceza-date">📅 15 Gün Önce</div>
+                                            <div class="ceza-plate">🚗 Plaka: 34 ABC 123</div>
+                                            <div class="ceza-type">⚡ Hız Cezası</div>
+                                        </div>
+                                        <div class="ceza-match">
+                                            <div class="match-badge">
+                                                <span class="match-icon">✅</span>
+                                                <span>Eşleştirildi</span>
+                                            </div>
+                                            <div class="match-customer">👤 US.03</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="action-button success">💰 Müşteriye Yansıt</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="storyboard-text">
+                        <p>Ahmet Bey, modülün <strong>"Ceza ve Hasar Yönetimi"</strong> paneline girer. Sistem, o cezayı otomatik olarak tespit etmiş ve ceza tarihindeki kiracıyla (US.03) eşleştirmiştir.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="storyboard-phase solution-phase" data-aos="fade-up" data-aos-delay="800">
+                <div class="phase-header">
+                    <div class="phase-icon solution-icon">💰</div>
+                    <h4>Çözüm (Mutlu Son)</h4>
+                </div>
+                <div class="phase-content glass-card">
+                    <div class="storyboard-text">
+                        <p>Ahmet Bey tek bir tıkla <strong>"Müşteriye Yansıt"</strong> komutunu verir. Ceza tutarı anında müşterinin hesabına borç olarak kaydedilir ve faturalandırılır. Ahmet Bey, sistemin kendi kendine "para kurtardığını" görerek huzurla ofisten ayrılır.</p>
+                        <div class="solution-results">
+                            <div class="result-card highlight">
+                                <div class="result-icon">💰</div>
+                                <div class="result-value">Gelir Kurtarıldı</div>
+                                <div class="result-label">Cezalar Artık Kaybolmuyor</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-icon">⚡</div>
+                                <div class="result-value">Anında İşlem</div>
+                                <div class="result-label">Manuel Arama Yok</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-icon">😌</div>
+                                <div class="result-value">Huzur</div>
+                                <div class="result-label">Sistem Kendi Kendine Para Kurtarıyor</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card analysis-summary" data-aos="fade-up" data-aos-delay="900">
+                <h3>Analiz Özeti</h3>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <h4>🔄 Dönüşüm</h4>
+                        <p>Bu hikayeler, Ahmet Bey'in <strong>"operasyonel yorgunluğunu"</strong> azaltıp onu <strong>"stratejik bir işletmeci"</strong> haline getirdiğimizi kanıtlar.</p>
+                    </div>
+                    <div class="summary-item">
+                        <h4>📈 Katma Değer</h4>
+                        <p>Manuel süreçlerin (Muda) elimine edilmesiyle elde edilen <strong>%30 verimlilik artışı</strong> burada somutlaşır.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section id="footer">
+        <div class="container">
+            <div class="footer-header" data-aos="fade-up">
+                <h2>Bulut Filo Yönetimi</h2>
+                <p>Kiralama Modülü - İş Süreci Analizi ve Gereksinim Mühendisliği</p>
+                <div class="footer-divider"></div>
+            </div>
+            <div class="footer-content">
+                <div class="footer-section" data-aos="fade-up" data-aos-delay="200">
+                    <h3>👥 Proje Ekibi</h3>
+                    <div class="team-info">
+                        <div class="team-member-footer">
+                            <div class="member-avatar">
+                                <img src="../v1/images/balci.JPG" alt="Enes Balcı" class="avatar-img">
+                            </div>
+                            <div class="member-details">
+                                <h4>Enes Balcı</h4>
+                                <p class="member-role">Kıdemli İş Analisti</p>
+                                <p class="member-email">enes.balci@bulutfilo.com</p>
+                            </div>
+                        </div>
+                        <div class="team-member-footer">
+                            <div class="member-avatar">
+                                <img src="../v1/images/boi.JPG" alt="Enes Coşkun" class="avatar-img">
+                            </div>
+                            <div class="member-details">
+                                <h4>Enes Coşkun</h4>
+                                <p class="member-role">Kıdemli İş Geliştirme Uzmanı</p>
+                                <p class="member-email">enes.coskun@bulutfilo.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="project-stats">
+                <div class="stat-item">
+                    <span class="stat-number">12</span>
+                    <span class="stat-label">Analiz Bölümü</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">Kullanıcı Hikayesi</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">2</span>
+                    <span class="stat-label">Uzman Ekip</span>
+                </div>
+            </div>
+            <div class="footer-bottom" data-aos="fade-up" data-aos-delay="500">
+                <div class="footer-divider"></div>
+                <div class="copyright">
+                    <p>&copy; 2025 Bulut Filo Yönetimi. Tüm hakları saklıdır.</p>
+                    <p>Bu sunum, Kiralama Modülü geliştirme projesi kapsamında hazırlanmıştır.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="index.js"></script>
+</body>
+</html>
