@@ -363,73 +363,6 @@ body.light-theme .glass-card {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
-/* Disable ALL hover effects during scrolling to prevent scroll lag */
-/* Use pointer-events to completely disable hover state during scroll */
-/* This prevents CSS :hover pseudo-class from being triggered */
-body.is-scrolling .glass-card,
-body.is-scrolling .analysis-card,
-body.is-scrolling .ebo-item,
-body.is-scrolling .stakeholder-card,
-body.is-scrolling .empathy-card,
-body.is-scrolling .requirement-card,
-body.is-scrolling .kano-card,
-body.is-scrolling .user-story-card,
-body.is-scrolling .invest-item,
-body.is-scrolling .scenario-card,
-body.is-scrolling .actor-card,
-body.is-scrolling .usecase-card,
-body.is-scrolling .wireframe-screen,
-body.is-scrolling .swot-quadrant,
-body.is-scrolling .sipoc-box,
-body.is-scrolling .card-3d,
-body.is-scrolling .hmw-card,
-body.is-scrolling .pyramid-layer,
-body.is-scrolling .persona-card,
-body.is-scrolling .raci-table tr,
-body.is-scrolling .nav-dot:not(.active) {
-    pointer-events: none !important;
-    transition: none !important;
-    animation: none !important;
-    transform: none !important;
-}
-
-/* Disable hover state completely during scroll - this is critical */
-body.is-scrolling .glass-card:hover,
-body.is-scrolling .glass-card:hover::before,
-body.is-scrolling .analysis-card:hover,
-body.is-scrolling .ebo-item:hover,
-body.is-scrolling .stakeholder-card:hover,
-body.is-scrolling .empathy-card:hover,
-body.is-scrolling .requirement-card:hover,
-body.is-scrolling .kano-card:hover,
-body.is-scrolling .user-story-card:hover,
-body.is-scrolling .invest-item:hover,
-body.is-scrolling .scenario-card:hover,
-body.is-scrolling .actor-card:hover,
-body.is-scrolling .usecase-card:hover,
-body.is-scrolling .wireframe-screen:hover,
-body.is-scrolling .swot-quadrant:hover,
-body.is-scrolling .sipoc-box:hover,
-body.is-scrolling .card-3d:hover,
-body.is-scrolling .hmw-card:hover,
-body.is-scrolling .pyramid-layer:hover,
-body.is-scrolling .persona-card:hover,
-body.is-scrolling .raci-table tr:hover,
-body.is-scrolling *:hover {
-    transform: none !important;
-    transition: none !important;
-    box-shadow: none !important;
-    pointer-events: none !important;
-}
-
-/* Keep navigation dots clickable but disable hover effects */
-body.is-scrolling .nav-dot {
-    pointer-events: auto !important;
-}
-body.is-scrolling .nav-dot:hover {
-    transform: none !important;
-    box-shadow: none !important;
-}
 
 /* 3D Tilt Effect */
 .card-3d {
@@ -4792,7 +4725,7 @@ body.light-theme .stat-label {
 /* Empathy Grid */
 .empathy-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
     gap: 25px;
     margin-top: 30px;
 }
@@ -5527,14 +5460,6 @@ body.light-theme .stat-label {
     border-color: rgba(255, 255, 255, 0.3);
 }
 
-#section-1 .card-icon {
-    animation: float-icon 3s ease-in-out infinite;
-    transition: transform 0.3s;
-}
-
-#section-1 .analysis-card:hover .card-icon {
-    transform: scale(1.2) rotate(5deg);
-}
 
 @keyframes float-icon {
     0%, 100% { transform: translateY(0px); }
@@ -5561,8 +5486,8 @@ body.light-theme .stat-label {
 }
 
 #section-1 .ebo-item:hover::after {
-    width: 300px;
-    height: 300px;
+    width: 600px;
+    height: 600px;
 }
 
 #section-1 .ebo-item:hover {
@@ -5679,7 +5604,6 @@ body.light-theme .stat-label {
 }
 
 #section-3 .raci-table tr:hover {
-    transform: scale(1.02);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -5716,22 +5640,6 @@ body.light-theme .stat-label {
 #section-3 .legend-item:hover {
     background: rgba(255, 255, 255, 0.1);
     transform: translateX(10px);
-}
-
-/* Section 4: Persona - Special Animations */
-#section-4 .persona-card {
-    animation: persona-enter 1s ease-out;
-}
-
-@keyframes persona-enter {
-    from {
-        opacity: 0;
-        transform: scale(0.9) rotate(-5deg);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1) rotate(0deg);
-    }
 }
 
 #section-4 .persona-avatar {
@@ -5830,12 +5738,6 @@ body.light-theme .stat-label {
     box-shadow: 0 5px 20px rgba(249, 115, 22, 0.5);
 }
 
-@keyframes number-spin {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(5deg); }
-    75% { transform: rotate(-5deg); }
-}
-
 #section-5 .hmw-question {
     position: relative;
     transition: all 0.3s ease;
@@ -5883,11 +5785,6 @@ body.light-theme .stat-label {
 
 #section-6 .pyramid-layer:hover .layer-icon {
     transform: scale(1.3) rotate(360deg);
-}
-
-@keyframes icon-rotate {
-    0%, 100% { transform: rotate(0deg); }
-    50% { transform: rotate(10deg); }
 }
 
 #section-6 .pyramid-layer li {
@@ -6527,11 +6424,6 @@ body.light-theme .stat-label {
     transform: translateY(-5px);
 }
 
-/* Disable hover effects during scrolling */
-body.is-scrolling .glass-card:hover {
-    transform: none !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-}
 
 /* Smooth Scroll Behavior */
 html {

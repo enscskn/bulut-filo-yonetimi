@@ -230,50 +230,8 @@
         let scrollRafId = null;
         let lastScrollY = window.scrollY;
         let scrollUpdateCounter = 0;
-        let scrollTimeout = null;
-        let isCurrentlyScrolling = false;
-        
-        // Global flag to check if scrolling is active
-        window.isScrollingActive = false;
-        
-        // Disable hover events during scroll
-        function disableHoverEvents() {
-            isCurrentlyScrolling = true;
-            window.isScrollingActive = true;
-            document.body.classList.add('is-scrolling');
-        }
-        
-        function enableHoverEvents() {
-            isCurrentlyScrolling = false;
-            window.isScrollingActive = false;
-            document.body.classList.remove('is-scrolling');
-        }
-        
-        // Wrapper function to prevent hover effects during scroll
-        function safeHoverHandler(handler) {
-            return function(event) {
-                if (!window.isScrollingActive) {
-                    handler.call(this, event);
-                }
-            };
-        }
         
         function unifiedScrollHandler() {
-            // Disable hover effects immediately when scrolling starts
-            if (!isCurrentlyScrolling) {
-                disableHoverEvents();
-            }
-            
-            // Clear existing timeout
-            if (scrollTimeout) {
-                clearTimeout(scrollTimeout);
-            }
-            
-            // Re-enable hover effects after scroll stops (250ms delay for better UX)
-            scrollTimeout = setTimeout(() => {
-                enableHoverEvents();
-            }, 250);
-            
             if (scrollRafId === null) {
                 scrollRafId = requestAnimationFrame(() => {
                     const currentScrollY = window.scrollY;
@@ -308,41 +266,6 @@
         
         // Single optimized scroll event listener with passive flag
         window.addEventListener('scroll', unifiedScrollHandler, { passive: true });
-        
-        // Also listen to wheel events to catch scroll start immediately
-        let wheelTimeout = null;
-        window.addEventListener('wheel', function(e) {
-            // Disable hover immediately on wheel scroll
-            if (!isCurrentlyScrolling) {
-                disableHoverEvents();
-            }
-            
-            // Clear existing timeout
-            if (wheelTimeout) {
-                clearTimeout(wheelTimeout);
-            }
-            
-            // Re-enable after wheel stops
-            wheelTimeout = setTimeout(() => {
-                enableHoverEvents();
-            }, 200);
-        }, { passive: true });
-        
-        // Also handle touch scroll for mobile
-        window.addEventListener('touchstart', function(e) {
-            if (!isCurrentlyScrolling) {
-                disableHoverEvents();
-            }
-        }, { passive: true });
-        
-        window.addEventListener('touchmove', function(e) {
-            if (scrollTimeout) {
-                clearTimeout(scrollTimeout);
-            }
-            scrollTimeout = setTimeout(() => {
-                enableHoverEvents();
-            }, 200);
-        }, { passive: true });
 
         // ============================================
         // PROGRESSIVE REVEAL
@@ -2514,21 +2437,17 @@
             characterObserver.observe(avatar);
         });
 
-        // Wireframe screen interaction - optimized for scroll
+        // Wireframe screen interaction
         document.querySelectorAll('.wireframe-screen').forEach(screen => {
-            screen.addEventListener('mouseenter', safeHoverHandler(function() {
-                if (!window.isScrollingActive) {
-                    this.style.transform = 'translateY(-5px)';
-                    this.style.boxShadow = '0 25px 80px rgba(0, 0, 0, 0.6)';
-                }
-            }));
+            screen.addEventListener('mouseenter', () => {
+                screen.style.transform = 'translateY(-5px)';
+                screen.style.boxShadow = '0 25px 80px rgba(0, 0, 0, 0.6)';
+            });
 
-            screen.addEventListener('mouseleave', safeHoverHandler(function() {
-                if (!window.isScrollingActive) {
-                    this.style.transform = 'translateY(0)';
-                    this.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.5)';
-                }
-            }));
+            screen.addEventListener('mouseleave', () => {
+                screen.style.transform = 'translateY(0)';
+                screen.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.5)';
+            });
         });
 
         // Action button interactions
