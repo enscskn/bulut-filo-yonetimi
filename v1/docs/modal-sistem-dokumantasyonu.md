@@ -2,7 +2,9 @@
 
 ## 📋 Genel Bakış
 
-Improvements bölümündeki her karta tıklandığında, o iyileştirme ile ilgili detaylı bilgilerin gösterildiği bir modal (popup) sistemi eklendi.
+**Proje:** Bulut Filo Yönetimi - Kiralama Modülü BPM Analiz Projesi
+
+Improvements bölümündeki her karta tıklandığında, o iyileştirme ile ilgili detaylı bilgilerin gösterildiği bir modal (popup) sistemi eklendi. Bu sistem, 6 farklı iyileştirme önerisi için detaylı bilgiler sunmaktadır.
 
 ---
 

@@ -2,7 +2,9 @@
 
 ## Genel Bakış
 
-Süreç Metrikleri Dashboard bölümüne **6 adet yeni ApexCharts grafiği** eklendi. Bu grafikler, mevcut `createComparisonChart` fonksiyonunun kalitesinde ve gelişmişliğinde tasarlandı.
+**Proje:** Bulut Filo Yönetimi - Kiralama Modülü BPM Analiz Projesi
+
+Süreç Metrikleri Dashboard bölümüne **6 adet yeni ApexCharts grafiği** eklendi. Bu grafikler, mevcut `createComparisonChart` fonksiyonunun kalitesinde ve gelişmişliğinde tasarlandı. Tüm grafikler, kiralama süreçlerinin analizi ve iyileştirme fırsatlarının görselleştirilmesi için kullanılmaktadır.
 
 ---
 
