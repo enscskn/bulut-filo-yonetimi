@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Risk Puanlama ve Hızlı Sözleşme Oluşturma</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#17cf73",
+                        "primary-dark": "#10b981",
+                        "background-main": "#020617", // Slate 950
+                        "surface-card": "#0f172a",    // Slate 900
+                        "surface-raised": "#1e293b",  // Slate 800
+                        "text-main": "#f1f5f9",       // Slate 100
+                        "text-sub": "#94a3b8",        // Slate 400
+                        "border-color": "#1e293b",    // Slate 800
+                        "input-bg": "#020617",        // Slate 950
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3)',
+                        'card': '0 0 0 1px rgba(30, 41, 59, 1), 0 1px 3px 0 rgba(0, 0, 0, 0.3)',
+                        'glow': '0 0 20px -5px rgba(23, 207, 115, 0.15)'
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body class="bg-background-main text-text-main min-h-screen flex flex-col font-display transition-colors duration-200">
+<header class="sticky top-0 z-40 w-full bg-surface-card border-b border-border-color transition-colors duration-200 shadow-lg shadow-black/20">
+<div class="px-6 lg:px-10 py-3 flex items-center justify-between">
+<div class="flex items-center gap-4 text-text-main">
+<div class="size-8 text-primary">
+<span class="material-symbols-outlined text-3xl">directions_car</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-tight">Kiralama Yöneticisi</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-end gap-8 items-center">
+<nav class="flex items-center gap-6">
+<a class="text-sm font-medium text-text-sub hover:text-primary transition-colors" href="#">Panel</a>
+<a class="text-sm font-medium text-text-main hover:text-primary transition-colors" href="#">Sözleşmeler</a>
+<a class="text-sm font-medium text-text-sub hover:text-primary transition-colors" href="#">Cezalar &amp; Hasar</a>
+<a class="text-sm font-medium text-text-sub hover:text-primary transition-colors" href="#">Profil</a>
+</nav>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 border border-border-color cursor-pointer relative shadow-sm" data-alt="Kiralama yöneticisinin profil resmi" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBusZagYBwJU0BXuomTJwkkI8-qGPML1n12pxTxU9LvCpiA2b8DEle4BK81QeieD1egZfQDyrzcQ68GN6e4xVpPAtqI3cedl3t7qMaTor87Dtqe0eup0VA_RKtI9vTJoR2eqShbERBnaYLpD35L9qQVpjPmw-6Y7u1ribTGAXApED2w5g_OW-3fvafgmcdKqsvaDOs6mVyYWHPa36CD20f20dw9lmZOxiSajiOeNGU46yq1CN0tCEoljPkcMrPUgRluy66_7T-QUxkl");'>
+<div class="absolute bottom-0 right-0 size-2.5 bg-primary rounded-full border-2 border-surface-card"></div>
+</div>
+</div>
+<button class="md:hidden p-2 text-text-main hover:bg-surface-raised rounded-lg transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<main class="flex-1 w-full max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-8">
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="flex-1 flex flex-col gap-6">
+<div class="flex flex-col gap-2">
+<h1 class="text-3xl md:text-4xl font-black tracking-tight text-text-main">Yeni Kiralama Girişi</h1>
+<p class="text-text-sub text-base font-normal">Risk durumunu kontrol etmek ve anında sözleşme oluşturmak için müşteri detaylarını girin.</p>
+</div>
+<div class="bg-surface-card border border-border-color rounded-xl p-6 md:p-8 shadow-card transition-all duration-200 hover:border-primary/30">
+<form class="flex flex-col gap-6" onsubmit="event.preventDefault();">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<label class="flex flex-col gap-2 group">
+<span class="text-sm font-semibold text-text-main group-focus-within:text-primary transition-colors">Müşteri No / T.C. Kimlik No</span>
+<div class="relative">
+<input id="customer-id" class="w-full h-12 px-4 rounded-lg border border-border-color bg-input-bg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none placeholder:text-gray-600 text-text-main" placeholder="örn. 123456789" type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-3 text-gray-500 text-xl pointer-events-none group-focus-within:text-primary transition-colors">badge</span>
+</div>
+</label>
+<label class="flex flex-col gap-2 group">
+<span class="text-sm font-semibold text-text-main group-focus-within:text-primary transition-colors">Ehliyet Numarası</span>
+<div class="relative">
+<input id="license-number" class="w-full h-12 px-4 rounded-lg border border-border-color bg-input-bg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none placeholder:text-gray-600 text-text-main" placeholder="örn. E-123-456" type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-3 text-gray-500 text-xl pointer-events-none group-focus-within:text-primary transition-colors">id_card</span>
+</div>
+</label>
+</div>
+<div class="grid grid-cols-1 gap-6">
+<label class="flex flex-col gap-2 group">
+<span class="text-sm font-semibold text-text-main group-focus-within:text-primary transition-colors">Ad ve Soyad</span>
+<div class="relative">
+<input id="customer-name" class="w-full h-12 px-4 rounded-lg border border-border-color bg-input-bg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none placeholder:text-gray-600 text-text-main" placeholder="Ali Yılmaz" type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-3 text-gray-500 text-xl pointer-events-none group-focus-within:text-primary transition-colors">person</span>
+</div>
+</label>
+</div>
+<div class="grid grid-cols-1 gap-6">
+<label class="flex flex-col gap-2 group">
+<span class="text-sm font-semibold text-text-main group-focus-within:text-primary transition-colors">Araç Seçimi</span>
+<div class="relative">
+<select id="vehicle-select" class="w-full h-12 px-4 rounded-lg border border-border-color bg-input-bg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none appearance-none cursor-pointer text-text-main">
+<option disabled="" selected="" value="">Filodan bir araç seçin</option>
+<option value="toyota-corolla">Toyota Corolla 2022 (Sedan) - Müsait</option>
+<option value="ford-focus">Ford Focus 2021 (Hatchback) - Müsait</option>
+<option value="bmw-320i">BMW 320i 2023 (Lüks) - Müsait</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-gray-500 text-xl pointer-events-none group-focus-within:text-primary transition-colors">expand_more</span>
+</div>
+</label>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<label class="flex flex-col gap-2 group">
+<span class="text-sm font-semibold text-text-main group-focus-within:text-primary transition-colors">Kiralama Başlangıç Tarihi</span>
+<input id="start-date" class="w-full h-12 px-4 rounded-lg border border-border-color bg-input-bg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none text-text-main" type="date"/>
+</label>
+<label class="flex flex-col gap-2 group">
+<span class="text-sm font-semibold text-text-main group-focus-within:text-primary transition-colors">Süre (Gün)</span>
+<div class="flex items-center">
+<button type="button" onclick="decreaseDays()" class="size-12 rounded-l-lg border border-r-0 border-border-color bg-surface-raised text-text-sub hover:bg-surface-card hover:text-primary flex items-center justify-center transition-colors group-focus-within:border-primary group-focus-within:ring-1 group-focus-within:ring-primary/20">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<input id="rental-days" class="h-12 w-full text-center border-y border-border-color bg-input-bg text-text-main focus:outline-none focus:border-primary focus:z-10 focus:ring-1 focus:ring-primary/20" type="number" value="3" min="1" max="365"/>
+<button type="button" onclick="increaseDays()" class="size-12 rounded-r-lg border border-l-0 border-border-color bg-surface-raised text-text-sub hover:bg-surface-card hover:text-primary flex items-center justify-center transition-colors group-focus-within:border-primary group-focus-within:ring-1 group-focus-within:ring-primary/20">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+</label>
+</div>
+</form>
+</div>
+<div class="mt-2">
+<button type="button" onclick="createContract()" class="group relative w-full flex items-center justify-center gap-3 bg-primary hover:bg-primary-dark text-white font-bold text-lg py-4 rounded-xl shadow-lg shadow-primary/20 transition-all active:scale-[0.99] hover:shadow-glow">
+<span class="material-symbols-outlined">description</span>
+                        Dijital Sözleşme Oluştur
+                        <span class="absolute right-6 opacity-0 group-hover:opacity-100 transition-opacity material-symbols-outlined">arrow_forward</span>
+</button>
+<p class="text-center text-xs text-text-sub mt-3 flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-sm">lock</span>
+                        Şifreli &amp; Güvenli İşlem
+                    </p>
+</div>
+</div>
+<div class="lg:w-[360px] flex flex-col gap-6">
+<div class="bg-surface-card rounded-xl border border-border-color shadow-card overflow-hidden transition-colors duration-200">
+<div class="p-5 border-b border-border-color bg-surface-raised/50 flex justify-between items-center">
+<h3 class="font-bold text-text-main">Risk Analizi</h3>
+<span class="material-symbols-outlined text-text-sub" title="Yapay zeka destekli analiz">smart_toy</span>
+</div>
+<div class="p-6 flex flex-col items-center">
+<div class="relative size-32 mb-4">
+<svg class="size-full -rotate-90 transform" viewBox="0 0 36 36">
+<path class="text-surface-raised" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<path id="risk-circle" class="text-primary drop-shadow-md" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="85, 100" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span id="risk-score" class="text-3xl font-black text-text-main tracking-tighter">85</span>
+<span id="risk-status" class="text-xs font-bold uppercase text-primary tracking-wide">Güvenli</span>
+</div>
+</div>
+<div class="w-full space-y-3 mt-2">
+<div class="flex items-center gap-3 text-sm text-text-main">
+<div class="size-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm text-primary">check</span>
+</div>
+<span class="flex-1">Kimlik Doğrulandı</span>
+</div>
+<div class="flex items-center gap-3 text-sm text-text-main">
+<div class="size-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm text-primary">check</span>
+</div>
+<span class="flex-1">Ödenmemiş Borç Yok</span>
+</div>
+<div class="flex items-center gap-3 text-sm text-text-main">
+<div class="size-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm text-primary">check</span>
+</div>
+<span class="flex-1">Geçerli Ehliyet (&gt;2 Yıl)</span>
+</div>
+<div class="flex items-center gap-3 text-sm text-text-main">
+<div class="size-6 rounded-full bg-orange-900/30 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm text-orange-400">priority_high</span>
+</div>
+<span class="flex-1 text-gray-500 line-through decoration-gray-600">Önceki Kiralama Hasarı</span>
+</div>
+</div>
+</div>
+<div class="bg-primary/5 p-4 border-t border-primary/10">
+<p class="text-xs text-center text-primary font-medium">
+                            Yapay Zeka Güven Skoru: Yüksek
+                        </p>
+</div>
+</div>
+<div class="bg-blue-900/20 rounded-xl p-5 border border-blue-900/50">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-blue-400">info</span>
+<div>
+<h4 class="font-bold text-sm text-blue-100 mb-1">Hızlı Geçiş Aktif</h4>
+<p class="text-xs text-blue-300 leading-relaxed">
+                                Bu müşteri hızlı işlem için uygundur. Standart araçlar için depozito gerekmez.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4" id="contract-modal">
+<div class="bg-surface-card w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] border border-border-color">
+<div class="px-6 py-4 border-b border-border-color flex justify-between items-center bg-surface-raised">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-green-900/30 rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<h3 class="font-bold text-text-main">Sözleşme Önizlemesi</h3>
+<p class="text-xs text-text-sub">Ref: <span id="contract-ref">#RNT-2023-8894</span></p>
+</div>
+</div>
+<button type="button" onclick="closeContractModal()" class="text-text-sub hover:text-text-main transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto bg-background-main p-6">
+<div class="bg-surface-raised w-full aspect-[1/1.4] shadow-sm p-8 mx-auto max-w-[500px] text-[10px] text-gray-400 flex flex-col gap-4 border border-border-color">
+<div class="w-full h-8 bg-surface-card mb-4"></div>
+<div class="w-3/4 h-2 bg-surface-card"></div>
+<div class="w-full h-2 bg-surface-card"></div>
+<div class="w-full h-2 bg-surface-card"></div>
+<div class="w-5/6 h-2 bg-surface-card"></div>
+<br/>
+<div class="grid grid-cols-2 gap-4">
+<div class="h-20 bg-surface-card border border-dashed border-gray-700"></div>
+<div class="h-20 bg-surface-card border border-dashed border-gray-700"></div>
+</div>
+<br/>
+<div class="w-full h-2 bg-surface-card"></div>
+<div class="w-full h-2 bg-surface-card"></div>
+<div class="mt-auto w-1/2 h-10 border-b border-gray-700"></div>
+</div>
+</div>
+<div class="p-6 bg-surface-card border-t border-border-color">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2 text-primary text-sm font-medium">
+<span class="material-symbols-outlined text-lg">check_circle</span>
+                        Sözleşme 02:00 içinde hazır
+                    </div>
+<span class="text-xs text-text-sub">Müşteri imzası bekleniyor</span>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 py-3 px-4 rounded-lg border border-border-color text-text-main font-medium hover:bg-surface-raised transition-colors">Detayları Düzenle</button>
+<button class="flex-[2] py-3 px-4 rounded-lg bg-primary hover:bg-primary-dark text-white font-bold shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">draw</span>
+                        Müşteri Dijital Onayı
+                    </button>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+    // Gün sayısı kontrolü
+    function increaseDays() {
+        const daysInput = document.getElementById('rental-days');
+        const currentValue = parseInt(daysInput.value) || 3;
+        if (currentValue < 365) {
+            daysInput.value = currentValue + 1;
+        }
+    }
+
+    function decreaseDays() {
+        const daysInput = document.getElementById('rental-days');
+        const currentValue = parseInt(daysInput.value) || 3;
+        if (currentValue > 1) {
+            daysInput.value = currentValue - 1;
+        }
+    }
+
+    // Risk skoru güncelleme
+    function updateRiskScore() {
+        const customerId = document.getElementById('customer-id').value;
+        const licenseNumber = document.getElementById('license-number').value;
+        const customerName = document.getElementById('customer-name').value;
+        
+        // Basit risk hesaplama simülasyonu
+        let riskScore = 85;
+        let riskStatus = 'Güvenli';
+        let riskColor = '#17cf73';
+        
+        if (customerId && customerId.length >= 11) {
+            // TC kimlik doğrulandı
+            riskScore = Math.min(95, riskScore + 5);
+        }
+        
+        if (licenseNumber && licenseNumber.length > 0) {
+            // Ehliyet doğrulandı
+            riskScore = Math.min(95, riskScore + 5);
+        }
+        
+        if (!customerName || customerName.length < 3) {
+            // Eksik bilgi
+            riskScore = Math.max(50, riskScore - 10);
+        }
+        
+        // Risk durumunu belirle
+        if (riskScore >= 80) {
+            riskStatus = 'Güvenli';
+            riskColor = '#17cf73';
+        } else if (riskScore >= 60) {
+            riskStatus = 'Orta Risk';
+            riskColor = '#f59e0b';
+        } else {
+            riskStatus = 'Yüksek Risk';
+            riskColor = '#ef4444';
+        }
+        
+        // UI güncelleme
+        document.getElementById('risk-score').textContent = riskScore;
+        document.getElementById('risk-status').textContent = riskStatus;
+        document.getElementById('risk-status').style.color = riskColor;
+        
+        // Daire güncelleme
+        const circle = document.getElementById('risk-circle');
+        const percentage = riskScore;
+        circle.setAttribute('stroke-dasharray', `${percentage}, 100`);
+        circle.style.stroke = riskColor;
+    }
+
+    // Sözleşme oluşturma
+    function createContract() {
+        const customerId = document.getElementById('customer-id').value;
+        const customerName = document.getElementById('customer-name').value;
+        const vehicleSelect = document.getElementById('vehicle-select').value;
+        const startDate = document.getElementById('start-date').value;
+        const rentalDays = document.getElementById('rental-days').value;
+        
+        // Form validasyonu
+        if (!customerId || customerId.length < 11) {
+            alert('Lütfen geçerli bir T.C. Kimlik No giriniz.');
+            return;
+        }
+        
+        if (!customerName || customerName.length < 3) {
+            alert('Lütfen müşteri adını giriniz.');
+            return;
+        }
+        
+        if (!vehicleSelect || vehicleSelect === '') {
+            alert('Lütfen bir araç seçiniz.');
+            return;
+        }
+        
+        if (!startDate) {
+            alert('Lütfen kiralama başlangıç tarihini seçiniz.');
+            return;
+        }
+        
+        // Sözleşme referans numarası oluştur
+        const contractRef = '#RNT-' + new Date().getFullYear() + '-' + Math.floor(Math.random() * 9000 + 1000);
+        document.getElementById('contract-ref').textContent = contractRef;
+        
+        // Modal'ı göster
+        const modal = document.getElementById('contract-modal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
+
+    // Modal kapatma
+    function closeContractModal() {
+        const modal = document.getElementById('contract-modal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+
+    // ESC tuşu ile modal kapatma
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeContractModal();
+        }
+    });
+
+    // Modal dışına tıklayınca kapatma
+    document.getElementById('contract-modal')?.addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeContractModal();
+        }
+    });
+
+    // Input değişikliklerini dinle
+    document.addEventListener('DOMContentLoaded', function() {
+        const inputs = ['customer-id', 'license-number', 'customer-name'];
+        inputs.forEach(id => {
+            const input = document.getElementById(id);
+            if (input) {
+                input.addEventListener('input', updateRiskScore);
+                input.addEventListener('blur', updateRiskScore);
+            }
+        });
+        
+        // Gün sayısı input kontrolü
+        const daysInput = document.getElementById('rental-days');
+        if (daysInput) {
+            daysInput.addEventListener('change', function() {
+                let value = parseInt(this.value) || 3;
+                if (value < 1) value = 1;
+                if (value > 365) value = 365;
+                this.value = value;
+            });
+        }
+        
+        // Bugünün tarihini varsayılan olarak ayarla
+        const startDateInput = document.getElementById('start-date');
+        if (startDateInput && !startDateInput.value) {
+            const today = new Date().toISOString().split('T')[0];
+            startDateInput.value = today;
+        }
+    });
+</script>
+
+</body></html>

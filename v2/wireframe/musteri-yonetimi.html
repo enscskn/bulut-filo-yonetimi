@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RentManager - Müşteri Profili Yönetimi</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#17cf73",
+                        "primary-dark": "#10b981",
+                        "background-main": "#020617",
+                        "surface-card": "#0f172a",
+                        "surface-raised": "#1e293b",
+                        "text-main": "#f1f5f9",
+                        "text-sub": "#94a3b8",
+                        "border-color": "#1e293b",
+                        "background": "#020617",
+                        "surface": "#0f172a",
+                        "surface-hover": "#1e293b",
+                        "border": "#1e293b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569; 
+        }
+    </style>
+</head>
+<body class="bg-background-main-main text-text-main font-display antialiased overflow-hidden">
+<div class="flex h-screen w-full">
+<main class="flex-1 flex flex-col min-w-0 overflow-hidden bg-background-main-main">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-color bg-surface-card/80 backdrop-blur-md px-6 py-3 shrink-0 z-10">
+<div class="flex items-center gap-4 text-text-main">
+<div class="md:hidden p-2 -ml-2 rounded-lg hover:bg-surface-card-hover cursor-pointer">
+<span class="material-symbols-outlined text-text-sub">menu</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">manage_accounts</span>
+<h2 class="text-text-main text-lg font-bold leading-tight tracking-[-0.015em]">Müşteri Yönetimi</h2>
+</div>
+</div>
+<div class="flex flex-1 justify-end gap-4 items-center">
+<div class="hidden sm:flex gap-2">
+<button class="flex items-center justify-center rounded-lg size-10 hover:bg-surface-card-hover text-text-sub hover:text-text-main transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-lg size-10 hover:bg-surface-card-hover text-text-sub hover:text-text-main transition-colors">
+<span class="material-symbols-outlined text-[20px]">help</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-4 md:p-8">
+<div class="max-w-7xl mx-auto flex flex-col gap-6">
+<div class="flex flex-wrap items-end justify-between gap-4">
+<div class="flex min-w-72 flex-col gap-2">
+<h1 class="text-text-main text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Müşteri Profili Yönetimi</h1>
+<p class="text-text-sub text-sm md:text-base font-normal leading-normal">Aktif müşteriler, geçmiş kiralamalar ve risk analiz raporları.</p>
+</div>
+<button class="flex items-center justify-center rounded-lg h-10 px-5 bg-primary hover:bg-primary-dark text-text-main text-sm font-bold leading-normal tracking-[0.015em] transition-colors shadow-lg shadow-primary/20 gap-2">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span class="truncate">Müşteri Ekle</span>
+</button>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<div class="flex-1">
+<label class="flex flex-col h-11 w-full">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-surface-card border border-border-color focus-within:border-primary/50 focus-within:ring-1 focus-within:ring-primary/20 transition-all shadow-sm">
+<div class="text-text-sub flex items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-main focus:outline-0 focus:ring-0 border-none bg-transparent h-full placeholder:text-text-sub px-4 pl-2 text-sm font-normal leading-normal" placeholder="Hızlı arama yap..."/>
+</div>
+</label>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center h-11 px-4 rounded-lg bg-surface-card border border-border-color text-text-main hover:bg-surface-card-hover hover:border-border-color-color hover:text-text-main transition-colors text-sm font-medium gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[20px] text-text-sub">filter_list</span>
+<span>Filtreler</span>
+</button>
+<button class="flex items-center justify-center h-11 px-4 rounded-lg bg-surface-card border border-border-color text-text-sub hover:text-text-main hover:border-border-color-color transition-colors text-sm font-medium gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span class="hidden sm:inline">Dışa Aktar</span>
+</button>
+</div>
+</div>
+<div class="w-full p-5 bg-surface-card border border-border-color rounded-xl shadow-sm grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+<div class="flex flex-col gap-2">
+<label class="text-xs font-bold text-text-sub uppercase tracking-wider">Müşteri ID</label>
+<input id="filter-id" oninput="filterCustomers()" class="w-full h-10 px-3 rounded-lg bg-surface-raised border border-border-color text-text-main text-sm placeholder:text-slate-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="ID giriniz..." type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-xs font-bold text-text-sub uppercase tracking-wider">Ad Soyad</label>
+<input id="filter-name" oninput="filterCustomers()" class="w-full h-10 px-3 rounded-lg bg-surface-raised border border-border-color text-text-main text-sm placeholder:text-slate-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="İsim giriniz..." type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-xs font-bold text-text-sub uppercase tracking-wider">Ehliyet No</label>
+<input id="filter-license" oninput="filterCustomers()" class="w-full h-10 px-3 rounded-lg bg-surface-raised border border-border-color text-text-main text-sm placeholder:text-slate-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="Ehliyet no..." type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-xs font-bold text-text-sub uppercase tracking-wider">Risk Puanı</label>
+<div class="relative">
+<select id="filter-risk" onchange="filterCustomers()" class="w-full h-10 px-3 rounded-lg bg-surface-raised border border-border-color text-text-main text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all appearance-none cursor-pointer">
+<option class="text-text-sub" value="">Tümü</option>
+<option value="safe">Güvenli (70+)</option>
+<option value="medium">Orta Risk (30-70)</option>
+<option value="high">Yüksek Risk (0-30)</option>
+</select>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-sub">
+<span class="material-symbols-outlined text-[20px]">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+<div class="w-full overflow-hidden rounded-xl border border-border-color bg-surface-card shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-raised/50 border-b border-border-color">
+<th class="px-6 py-4 text-xs font-semibold text-text-sub uppercase tracking-wider w-24">ID</th>
+<th class="px-6 py-4 text-xs font-semibold text-text-sub uppercase tracking-wider">Müşteri</th>
+<th class="px-6 py-4 text-xs font-semibold text-text-sub uppercase tracking-wider">İletişim</th>
+<th class="px-6 py-4 text-xs font-semibold text-text-sub uppercase tracking-wider">Ehliyet</th>
+<th class="px-6 py-4 text-xs font-semibold text-text-sub uppercase tracking-wider">Risk Puanı</th>
+<th class="px-6 py-4 text-xs font-semibold text-text-sub uppercase tracking-wider text-right">İşlemler</th>
+</tr>
+</thead>
+<tbody id="customers-table" class="divide-y divide-slate-700">
+<tr class="hover:bg-surface-raised/50 transition-colors group">
+<td class="px-6 py-4 text-sm text-text-sub">#1024</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-8 shrink-0 border border-border-color-color" data-alt="Portrait of customer Ahmet Yılmaz" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDEgNeURy6M2a0RCauLM_2Uasv2c41HPRzECBWl2RPk5GBPr58mIPbDgulv284OM5aSpQLjXt8-thMpK5gmKrEXsK5y_VW0IRZQ02uxl1h4fKLcEciZ5o5K7Np6YZtomi6dSBktBnD9CjZEzn9V959egYQiQZHWflmv5FZYGx2vDZT87taI3A8TUzEMf2EJ03uVjO_8vS6hFWrNeF7qbmDwuSDBuoe01ALOVFPDfh5tWYYBGF6fqkWaJ8SnRk0AzcniElSXAuC5R8yj");'></div>
+<div class="flex flex-col">
+<span class="text-text-main text-sm font-medium">Ahmet Yılmaz</span>
+<span class="text-text-sub text-xs">Katılım: 12 Oca 2023</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-text-main text-sm font-medium">+90 555 123 4567</span>
+<span class="text-text-sub text-xs">ahmet@mail.com</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-text-sub">E-123456</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-950/40 text-emerald-400 border border-emerald-800">
+<span class="size-1.5 rounded-full bg-emerald-500"></span>
+                                        Güvenli (95)
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button onclick="editCustomer(this)" class="p-1.5 rounded-md hover:bg-surface-raised text-text-sub hover:text-text-main transition-colors" title="Düzenle">
+<span class="material-symbols-outlined text-[18px]">edit_square</span>
+</button>
+<button onclick="deleteCustomer(this)" class="p-1.5 rounded-md hover:bg-red-900/30 text-text-sub hover:text-red-400 transition-colors" title="Sil">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-raised/50 transition-colors group">
+<td class="px-6 py-4 text-sm text-text-sub">#1025</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-8 shrink-0 border border-border-color-color" data-alt="Portrait of customer Ayşe Demir" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAOU0xBm_xQYnNu7kZzwNLaeP1DExmQ97RBIvehojFKE84jYY6CQSOkvcLCtAVs0HkvVBInvatQPkkceVVEhAlRhqIGXikiAKIoYxHdyWs4vnMqP5Fy2Miev4mPop-iLVk3-UJYEn_07os70wOn42K2Xoq8obnYj5dws25X7bcFRjIJzmB9S2NjNyMrdzTKZX0PTHVb24-8j51MqGxKHijfRZyqHZZl3JEdn21B-lt7FA2lJbh9vh3uN5QTexrCLON_fUiQ81wIjpCl");'></div>
+<div class="flex flex-col">
+<span class="text-text-main text-sm font-medium">Ayşe Demir</span>
+<span class="text-text-sub text-xs">Katılım: 20 Şub 2023</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-text-main text-sm font-medium">+90 532 987 6543</span>
+<span class="text-text-sub text-xs">ayse@mail.com</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-text-sub">B-987654</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-950/40 text-amber-400 border border-amber-800">
+<span class="size-1.5 rounded-full bg-amber-500"></span>
+                                        Orta Risk (65)
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button onclick="editCustomer(this)" class="p-1.5 rounded-md hover:bg-surface-raised text-text-sub hover:text-text-main transition-colors" title="Düzenle">
+<span class="material-symbols-outlined text-[18px]">edit_square</span>
+</button>
+<button onclick="deleteCustomer(this)" class="p-1.5 rounded-md hover:bg-red-900/30 text-text-sub hover:text-red-400 transition-colors" title="Sil">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-raised/50 transition-colors group">
+<td class="px-6 py-4 text-sm text-text-sub">#1026</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-8 shrink-0 border border-border-color-color" data-alt="Portrait of customer Mehmet Kaya" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCNXROy5TZnxjLX10LyFiTF-DmcNgKYEd4GE0d1zAshkL0TuTUNh0tQafPC_uefAVFpXueAVhlvMLtolyJFRrsvChUGHmL9Sx3KRkpwfoXZe8e0NigCEZCNupRgweh71KGTiY9T1_2ghmOewpKwL1Bad7cCCGo7mm-ToRMmj200p1-Z4ftcwvRPDB8q7Gh78wTl3hvD20lARShT8lxTVbHnj7kXmx1FDwvqkZkot7D1rz6wR7Ry5mgxPQglxNHcRqaKb8q8vCHLFW6o");'></div>
+<div class="flex flex-col">
+<span class="text-text-main text-sm font-medium">Mehmet Kaya</span>
+<span class="text-text-sub text-xs">Katılım: 05 Mar 2023</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-text-main text-sm font-medium">+90 542 456 7890</span>
+<span class="text-text-sub text-xs">mehmet@mail.com</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-text-sub">E-654321</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-red-950/40 text-red-400 border border-red-800">
+<span class="size-1.5 rounded-full bg-red-500"></span>
+                                        Yüksek Risk (30)
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button onclick="editCustomer(this)" class="p-1.5 rounded-md hover:bg-surface-raised text-text-sub hover:text-text-main transition-colors" title="Düzenle">
+<span class="material-symbols-outlined text-[18px]">edit_square</span>
+</button>
+<button onclick="deleteCustomer(this)" class="p-1.5 rounded-md hover:bg-red-900/30 text-text-sub hover:text-red-400 transition-colors" title="Sil">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-raised/50 transition-colors group">
+<td class="px-6 py-4 text-sm text-text-sub">#1027</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-8 shrink-0 border border-border-color-color" data-alt="Portrait of customer Fatma Çelik" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBqjRkf2sZoBgC9S0KTiaV-QsN9OeBagk2_4OsFOmvacS8TILy9GJrkSmVfj-8RKWTYVgnNlwaNPKS-xVk-J7MyX2egopmigZMuFetSxAn67VyGELl_eerEtnvUok2GaBWyIwQfZy4joy_4HWSxe3RlHpdRKROC8Y5dMiQNgQQjePgYozhZ8DeIT0ntUvu5nffmN85KkXcrgmh8egxjzlm3a1zTge6cPmTSO1Uu6Dh9gBTx2SXzLx6Ufz4MMGIcQJ7uNDjlktzCoV4M");'></div>
+<div class="flex flex-col">
+<span class="text-text-main text-sm font-medium">Fatma Çelik</span>
+<span class="text-text-sub text-xs">Katılım: 15 Nis 2023</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-text-main text-sm font-medium">+90 533 222 3344</span>
+<span class="text-text-sub text-xs">fatma@mail.com</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-text-sub">B-112233</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-950/40 text-emerald-400 border border-emerald-800">
+<span class="size-1.5 rounded-full bg-emerald-500"></span>
+                                        Güvenli (98)
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button onclick="editCustomer(this)" class="p-1.5 rounded-md hover:bg-surface-raised text-text-sub hover:text-text-main transition-colors" title="Düzenle">
+<span class="material-symbols-outlined text-[18px]">edit_square</span>
+</button>
+<button onclick="deleteCustomer(this)" class="p-1.5 rounded-md hover:bg-red-900/30 text-text-sub hover:text-red-400 transition-colors" title="Sil">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-raised/50 transition-colors group">
+<td class="px-6 py-4 text-sm text-text-sub">#1028</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-8 shrink-0 border border-border-color-color" data-alt="Portrait of customer Ali Vural" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuChNE85d-njhZmW96eCdmGjZ28aoP8o3cqdNME-9dTc_UdxiwhQJAbZohekdYUKMiw75-L4sUdC4MxR8jM9YrqOLsbiU2DkRAIQ5cwmhYp6KNBilGuxNYNnaC0A7YSAkUdmA_Cx4eHE4P3nt0CO61vAObNDxnhnd-B2ACJBk0VbDmBkijk1KeIxOo7gNH_jjWF8PtCwNLz5UISiYqc1E6Lf3n8C5WeX1e6-WEs3BBxCOAi0Z-R0-I0peYEprr2IXMetIKpwWUKhH3cm");'></div>
+<div class="flex flex-col">
+<span class="text-text-main text-sm font-medium">Ali Vural</span>
+<span class="text-text-sub text-xs">Katılım: 28 May 2023</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-text-main text-sm font-medium">+90 505 555 9988</span>
+<span class="text-text-sub text-xs">ali@mail.com</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-text-sub">E-998877</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-950/40 text-emerald-400 border border-emerald-800">
+<span class="size-1.5 rounded-full bg-emerald-500"></span>
+                                        Güvenli (88)
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button onclick="editCustomer(this)" class="p-1.5 rounded-md hover:bg-surface-raised text-text-sub hover:text-text-main transition-colors" title="Düzenle">
+<span class="material-symbols-outlined text-[18px]">edit_square</span>
+</button>
+<button onclick="deleteCustomer(this)" class="p-1.5 rounded-md hover:bg-red-900/30 text-text-sub hover:text-red-400 transition-colors" title="Sil">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="flex items-center justify-between border-t border-border-color px-6 py-4 bg-surface-raised/50">
+<p class="text-sm text-text-sub">
+<span class="font-medium text-text-main">1</span> - <span class="font-medium text-text-main">5</span> / <span class="font-medium text-text-main">248</span> kayıt gösteriliyor
+                        </p>
+<div class="flex gap-2">
+<button class="flex items-center justify-center px-3 h-8 text-sm font-medium text-text-sub bg-transparent border border-border-color rounded-lg hover:bg-surface-card-hover hover:text-text-main disabled:opacity-50 disabled:cursor-not-allowed">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+                                Önceki
+                            </button>
+<button class="flex items-center justify-center px-3 h-8 text-sm font-medium text-text-main bg-primary rounded-lg hover:bg-primary-dark transition-colors shadow-lg shadow-primary/20">
+                                1
+                            </button>
+<button class="flex items-center justify-center px-3 h-8 text-sm font-medium text-text-sub bg-transparent border border-border-color rounded-lg hover:bg-surface-card-hover hover:text-text-main transition-colors">
+                                2
+                            </button>
+<button class="flex items-center justify-center px-3 h-8 text-sm font-medium text-text-sub bg-transparent border border-border-color rounded-lg hover:bg-surface-card-hover hover:text-text-main transition-colors">
+                                3
+                            </button>
+<button class="flex items-center justify-center px-3 h-8 text-sm font-medium text-text-sub bg-transparent border border-border-color rounded-lg hover:bg-surface-card-hover hover:text-text-main">
+                                Sonraki
+                                <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+<script>
+    // Müşteri filtreleme
+    function filterCustomers() {
+        const idFilter = document.getElementById('filter-id').value.toLowerCase();
+        const nameFilter = document.getElementById('filter-name').value.toLowerCase();
+        const licenseFilter = document.getElementById('filter-license').value.toLowerCase();
+        const riskFilter = document.getElementById('filter-risk').value;
+        
+        const rows = document.querySelectorAll('.customer-row');
+        rows.forEach(row => {
+            const id = row.dataset.id || '';
+            const name = (row.dataset.name || '').toLowerCase();
+            const license = (row.dataset.license || '').toLowerCase();
+            const risk = row.dataset.risk || '';
+            
+            const matchId = !idFilter || id.includes(idFilter);
+            const matchName = !nameFilter || name.includes(nameFilter);
+            const matchLicense = !licenseFilter || license.includes(licenseFilter);
+            const matchRisk = !riskFilter || risk === riskFilter;
+            
+            if (matchId && matchName && matchLicense && matchRisk) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+    
+    // Müşteri düzenleme
+    function editCustomer(button) {
+        const row = button.closest('.customer-row');
+        const name = row.dataset.name;
+        alert(`Müşteri düzenleme formu açılacak: ${name} (Demo)`);
+    }
+    
+    // Müşteri silme
+    function deleteCustomer(button) {
+        const row = button.closest('.customer-row');
+        const name = row.dataset.name;
+        
+        if (confirm(`${name} adlı müşteriyi silmek istediğinizden emin misiniz?`)) {
+            row.style.transition = 'opacity 0.3s, transform 0.3s';
+            row.style.opacity = '0';
+            row.style.transform = 'translateX(-20px)';
+            
+            setTimeout(() => {
+                row.remove();
+            }, 300);
+        }
+    }
+</script>
+
+</body></html>

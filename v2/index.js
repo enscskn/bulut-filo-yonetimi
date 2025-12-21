@@ -3988,6 +3988,386 @@
             }
         });
 
+        // ============================================
+        // ILISKI IMAGE ZOOM & DRAG FUNCTIONALITY
+        // ============================================
+        
+        // Iliski image zoom state
+        const iliskiZoomState = {
+            zoom: 1,
+            translateX: 0,
+            translateY: 0,
+            lastTranslateX: 0,
+            lastTranslateY: 0
+        };
+        
+        const iliskiDragState = {
+            isDragging: false,
+            startX: 0,
+            startY: 0
+        };
+        
+        const iliskiMinZoom = 0.5;
+        const iliskiMaxZoom = 3;
+        const iliskiZoomStep = 0.2;
+        
+        // Iliski zoom functions
+        function zoomInIliski() {
+            if (iliskiZoomState.zoom < iliskiMaxZoom) {
+                iliskiZoomState.zoom += iliskiZoomStep;
+                applyIliskiZoom();
+            }
+        }
+        
+        function zoomOutIliski() {
+            if (iliskiZoomState.zoom > iliskiMinZoom) {
+                iliskiZoomState.zoom -= iliskiZoomStep;
+                applyIliskiZoom();
+            }
+        }
+        
+        function resetZoomIliski() {
+            iliskiZoomState.zoom = 1;
+            iliskiZoomState.translateX = 0;
+            iliskiZoomState.translateY = 0;
+            iliskiZoomState.lastTranslateX = 0;
+            iliskiZoomState.lastTranslateY = 0;
+            applyIliskiZoom();
+        }
+        
+        function applyIliskiZoom() {
+            const image = document.getElementById('iliski-image');
+            if (image) {
+                const state = iliskiZoomState;
+                image.style.transform = `scale(${state.zoom}) translate(${state.translateX}px, ${state.translateY}px)`;
+            }
+        }
+        
+        // Initialize iliski image functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const iliskiImage = document.getElementById('iliski-image');
+            if (!iliskiImage) return;
+            
+            // Find the container by traversing up from the image
+            const iliskiContainer = iliskiImage.closest('.persona-image-container');
+            
+            if (iliskiImage && iliskiContainer) {
+                // Mouse wheel zoom - always work when over container
+                iliskiContainer.addEventListener('wheel', function(e) {
+                    // Always allow zoom when over the container
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomInIliski();
+                    } else {
+                        zoomOutIliski();
+                    }
+                }, { passive: false });
+                
+                // Also add wheel listener directly to image for better control
+                iliskiImage.addEventListener('wheel', function(e) {
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomInIliski();
+                    } else {
+                        zoomOutIliski();
+                    }
+                }, { passive: false });
+                
+                // Mouse drag events
+                iliskiImage.addEventListener('mousedown', function(e) {
+                    if (e.button === 0) { // Left mouse button
+                        iliskiDragState.isDragging = true;
+                        iliskiDragState.startX = e.clientX - iliskiZoomState.translateX;
+                        iliskiDragState.startY = e.clientY - iliskiZoomState.translateY;
+                        iliskiImage.classList.add('dragging');
+                        e.preventDefault();
+                    }
+                });
+                
+                document.addEventListener('mousemove', function(e) {
+                    if (iliskiDragState.isDragging) {
+                        iliskiZoomState.translateX = e.clientX - iliskiDragState.startX;
+                        iliskiZoomState.translateY = e.clientY - iliskiDragState.startY;
+                        
+                        // Apply boundaries
+                        const containerRect = iliskiContainer.getBoundingClientRect();
+                        const imageRect = iliskiImage.getBoundingClientRect();
+                        const scaledWidth = imageRect.width * iliskiZoomState.zoom;
+                        const scaledHeight = imageRect.height * iliskiZoomState.zoom;
+                        
+                        const maxTranslateX = Math.max(0, (scaledWidth - containerRect.width) / 2);
+                        const maxTranslateY = Math.max(0, (scaledHeight - containerRect.height) / 2);
+                        
+                        iliskiZoomState.translateX = Math.max(-maxTranslateX, Math.min(maxTranslateX, iliskiZoomState.translateX));
+                        iliskiZoomState.translateY = Math.max(-maxTranslateY, Math.min(maxTranslateY, iliskiZoomState.translateY));
+                        
+                        applyIliskiZoom();
+                    }
+                });
+                
+                document.addEventListener('mouseup', function() {
+                    if (iliskiDragState.isDragging) {
+                        iliskiDragState.isDragging = false;
+                        iliskiZoomState.lastTranslateX = iliskiZoomState.translateX;
+                        iliskiZoomState.lastTranslateY = iliskiZoomState.translateY;
+                        iliskiImage.classList.remove('dragging');
+                    }
+                });
+                
+                // Context menu prevention
+                iliskiImage.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                });
+                
+                // Touch zoom and drag support
+                let initialDistance = 0;
+                let initialZoom = 1;
+                let initialTranslateX = 0;
+                let initialTranslateY = 0;
+                let touchStartX = 0;
+                let touchStartY = 0;
+                
+                iliskiImage.addEventListener('touchstart', function(e) {
+                    if (e.touches.length === 1) {
+                        // Single touch - drag
+                        touchStartX = e.touches[0].clientX - iliskiZoomState.translateX;
+                        touchStartY = e.touches[0].clientY - iliskiZoomState.translateY;
+                    } else if (e.touches.length === 2) {
+                        // Two touches - zoom
+                        e.preventDefault();
+                        initialDistance = getDistance(e.touches[0], e.touches[1]);
+                        initialZoom = iliskiZoomState.zoom;
+                        initialTranslateX = iliskiZoomState.translateX;
+                        initialTranslateY = iliskiZoomState.translateY;
+                    }
+                });
+                
+                iliskiImage.addEventListener('touchmove', function(e) {
+                    if (e.touches.length === 1) {
+                        // Single touch - drag
+                        e.preventDefault();
+                        iliskiZoomState.translateX = e.touches[0].clientX - touchStartX;
+                        iliskiZoomState.translateY = e.touches[0].clientY - touchStartY;
+                        
+                        // Apply boundaries
+                        const containerRect = iliskiContainer.getBoundingClientRect();
+                        const imageRect = iliskiImage.getBoundingClientRect();
+                        const scaledWidth = imageRect.width * iliskiZoomState.zoom;
+                        const scaledHeight = imageRect.height * iliskiZoomState.zoom;
+                        
+                        const maxTranslateX = Math.max(0, (scaledWidth - containerRect.width) / 2);
+                        const maxTranslateY = Math.max(0, (scaledHeight - containerRect.height) / 2);
+                        
+                        iliskiZoomState.translateX = Math.max(-maxTranslateX, Math.min(maxTranslateX, iliskiZoomState.translateX));
+                        iliskiZoomState.translateY = Math.max(-maxTranslateY, Math.min(maxTranslateY, iliskiZoomState.translateY));
+                        
+                        applyIliskiZoom();
+                    } else if (e.touches.length === 2) {
+                        // Two touches - zoom
+                        e.preventDefault();
+                        const currentDistance = getDistance(e.touches[0], e.touches[1]);
+                        const scale = currentDistance / initialDistance;
+                        const newZoom = initialZoom * scale;
+                        
+                        if (newZoom >= iliskiMinZoom && newZoom <= iliskiMaxZoom) {
+                            iliskiZoomState.zoom = newZoom;
+                            applyIliskiZoom();
+                        }
+                    }
+                });
+            }
+        });
+
+        // ============================================
+        // BPM2 IMAGE ZOOM & DRAG FUNCTIONALITY
+        // ============================================
+        
+        // BPM2 image zoom state
+        const bpm2ZoomState = {
+            zoom: 1,
+            translateX: 0,
+            translateY: 0,
+            lastTranslateX: 0,
+            lastTranslateY: 0
+        };
+        
+        const bpm2DragState = {
+            isDragging: false,
+            startX: 0,
+            startY: 0
+        };
+        
+        const bpm2MinZoom = 0.5;
+        const bpm2MaxZoom = 3;
+        const bpm2ZoomStep = 0.2;
+        
+        // BPM2 zoom functions
+        function zoomInBpm2() {
+            if (bpm2ZoomState.zoom < bpm2MaxZoom) {
+                bpm2ZoomState.zoom += bpm2ZoomStep;
+                applyBpm2Zoom();
+            }
+        }
+        
+        function zoomOutBpm2() {
+            if (bpm2ZoomState.zoom > bpm2MinZoom) {
+                bpm2ZoomState.zoom -= bpm2ZoomStep;
+                applyBpm2Zoom();
+            }
+        }
+        
+        function resetZoomBpm2() {
+            bpm2ZoomState.zoom = 1;
+            bpm2ZoomState.translateX = 0;
+            bpm2ZoomState.translateY = 0;
+            bpm2ZoomState.lastTranslateX = 0;
+            bpm2ZoomState.lastTranslateY = 0;
+            applyBpm2Zoom();
+        }
+        
+        function applyBpm2Zoom() {
+            const image = document.getElementById('bpm2-image');
+            if (image) {
+                const state = bpm2ZoomState;
+                image.style.transform = `scale(${state.zoom}) translate(${state.translateX}px, ${state.translateY}px)`;
+            }
+        }
+        
+        // Initialize bpm2 image functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const bpm2Image = document.getElementById('bpm2-image');
+            if (!bpm2Image) return;
+            
+            // Find the container by traversing up from the image
+            const bpm2Container = bpm2Image.closest('.persona-image-container');
+            
+            if (bpm2Image && bpm2Container) {
+                // Mouse wheel zoom - always work when over container
+                bpm2Container.addEventListener('wheel', function(e) {
+                    // Always allow zoom when over the container
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomInBpm2();
+                    } else {
+                        zoomOutBpm2();
+                    }
+                }, { passive: false });
+                
+                // Also add wheel listener directly to image for better control
+                bpm2Image.addEventListener('wheel', function(e) {
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomInBpm2();
+                    } else {
+                        zoomOutBpm2();
+                    }
+                }, { passive: false });
+                
+                // Mouse drag events
+                bpm2Image.addEventListener('mousedown', function(e) {
+                    if (e.button === 0) { // Left mouse button
+                        bpm2DragState.isDragging = true;
+                        bpm2DragState.startX = e.clientX - bpm2ZoomState.translateX;
+                        bpm2DragState.startY = e.clientY - bpm2ZoomState.translateY;
+                        bpm2Image.classList.add('dragging');
+                        e.preventDefault();
+                    }
+                });
+                
+                document.addEventListener('mousemove', function(e) {
+                    if (bpm2DragState.isDragging) {
+                        bpm2ZoomState.translateX = e.clientX - bpm2DragState.startX;
+                        bpm2ZoomState.translateY = e.clientY - bpm2DragState.startY;
+                        
+                        // Apply boundaries
+                        const containerRect = bpm2Container.getBoundingClientRect();
+                        const imageRect = bpm2Image.getBoundingClientRect();
+                        const scaledWidth = imageRect.width * bpm2ZoomState.zoom;
+                        const scaledHeight = imageRect.height * bpm2ZoomState.zoom;
+                        
+                        const maxTranslateX = Math.max(0, (scaledWidth - containerRect.width) / 2);
+                        const maxTranslateY = Math.max(0, (scaledHeight - containerRect.height) / 2);
+                        
+                        bpm2ZoomState.translateX = Math.max(-maxTranslateX, Math.min(maxTranslateX, bpm2ZoomState.translateX));
+                        bpm2ZoomState.translateY = Math.max(-maxTranslateY, Math.min(maxTranslateY, bpm2ZoomState.translateY));
+                        
+                        applyBpm2Zoom();
+                    }
+                });
+                
+                document.addEventListener('mouseup', function() {
+                    if (bpm2DragState.isDragging) {
+                        bpm2DragState.isDragging = false;
+                        bpm2ZoomState.lastTranslateX = bpm2ZoomState.translateX;
+                        bpm2ZoomState.lastTranslateY = bpm2ZoomState.translateY;
+                        bpm2Image.classList.remove('dragging');
+                    }
+                });
+                
+                // Context menu prevention
+                bpm2Image.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                });
+                
+                // Touch zoom and drag support
+                let initialDistance = 0;
+                let initialZoom = 1;
+                let initialTranslateX = 0;
+                let initialTranslateY = 0;
+                let touchStartX = 0;
+                let touchStartY = 0;
+                
+                bpm2Image.addEventListener('touchstart', function(e) {
+                    if (e.touches.length === 1) {
+                        // Single touch - drag
+                        touchStartX = e.touches[0].clientX - bpm2ZoomState.translateX;
+                        touchStartY = e.touches[0].clientY - bpm2ZoomState.translateY;
+                    } else if (e.touches.length === 2) {
+                        // Two touches - zoom
+                        e.preventDefault();
+                        initialDistance = getDistance(e.touches[0], e.touches[1]);
+                        initialZoom = bpm2ZoomState.zoom;
+                        initialTranslateX = bpm2ZoomState.translateX;
+                        initialTranslateY = bpm2ZoomState.translateY;
+                    }
+                });
+                
+                bpm2Image.addEventListener('touchmove', function(e) {
+                    if (e.touches.length === 1) {
+                        // Single touch - drag
+                        e.preventDefault();
+                        bpm2ZoomState.translateX = e.touches[0].clientX - touchStartX;
+                        bpm2ZoomState.translateY = e.touches[0].clientY - touchStartY;
+                        
+                        // Apply boundaries
+                        const containerRect = bpm2Container.getBoundingClientRect();
+                        const imageRect = bpm2Image.getBoundingClientRect();
+                        const scaledWidth = imageRect.width * bpm2ZoomState.zoom;
+                        const scaledHeight = imageRect.height * bpm2ZoomState.zoom;
+                        
+                        const maxTranslateX = Math.max(0, (scaledWidth - containerRect.width) / 2);
+                        const maxTranslateY = Math.max(0, (scaledHeight - containerRect.height) / 2);
+                        
+                        bpm2ZoomState.translateX = Math.max(-maxTranslateX, Math.min(maxTranslateX, bpm2ZoomState.translateX));
+                        bpm2ZoomState.translateY = Math.max(-maxTranslateY, Math.min(maxTranslateY, bpm2ZoomState.translateY));
+                        
+                        applyBpm2Zoom();
+                    } else if (e.touches.length === 2) {
+                        // Two touches - zoom
+                        e.preventDefault();
+                        const currentDistance = getDistance(e.touches[0], e.touches[1]);
+                        const scale = currentDistance / initialDistance;
+                        const newZoom = initialZoom * scale;
+                        
+                        if (newZoom >= bpm2MinZoom && newZoom <= bpm2MaxZoom) {
+                            bpm2ZoomState.zoom = newZoom;
+                            applyBpm2Zoom();
+                        }
+                    }
+                });
+            }
+        });
+
         // Add title animation keyframes
         const titleAnimationStyle = document.createElement('style');
         titleAnimationStyle.textContent = `
@@ -4003,3 +4383,309 @@
             }
         `;
         document.head.appendChild(titleAnimationStyle);
+
+        // ============================================
+        // WIREFRAME INTERACTIVE FUNCTIONALITY
+        // ============================================
+        
+        // Kiralama gün sayısı kontrolü
+        function increaseDays() {
+            const daysInput = document.getElementById('rental-days');
+            if (daysInput) {
+                const currentValue = parseInt(daysInput.value) || 1;
+                daysInput.value = currentValue + 1;
+            }
+        }
+        
+        function decreaseDays() {
+            const daysInput = document.getElementById('rental-days');
+            if (daysInput) {
+                const currentValue = parseInt(daysInput.value) || 1;
+                if (currentValue > 1) {
+                    daysInput.value = currentValue - 1;
+                }
+            }
+        }
+        
+        // Sözleşme oluşturma simülasyonu
+        function createContract() {
+            const daysInput = document.getElementById('rental-days');
+            const days = daysInput ? parseInt(daysInput.value) || 3 : 3;
+            
+            // Basit bir bildirim göster
+            alert(`✅ Dijital sözleşme başarıyla oluşturuldu!\n\nKiralama süresi: ${days} gün\nRisk skoru: 85 (Güvenli)\n\nSözleşme PDF formatında hazır.`);
+        }
+        
+        // Müşteriye yansıtma simülasyonu
+        function reflectToCustomer() {
+            // Basit bir bildirim göster
+            alert('✅ Ceza başarıyla müşteriye yansıtıldı!\n\nCeza tutarı müşterinin cari hesabına borç olarak kaydedildi.\nMüşteriye bildirim gönderildi.');
+        }
+
+        // ============================================
+        // WIREFRAME NAVIGATION SYSTEM
+        // ============================================
+        
+        // Wireframe sayfa geçişi - İlk container için
+        function navigateToWireframePage(pageName) {
+            const containerId = 'wireframe-main';
+            const sidebarId = 'wireframe-sidebar';
+            
+            // Sadece ilgili container içindeki sayfaları gizle
+            const mainContainer = document.getElementById(containerId);
+            if (!mainContainer) return;
+            
+            const allPages = mainContainer.querySelectorAll('.wireframe-page');
+            allPages.forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            // Seçilen sayfayı göster
+            const targetPage = mainContainer.querySelector(`.wireframe-page[data-page="${pageName}"]`);
+            if (targetPage) {
+                // Sayfa tipine göre display özelliğini ayarla
+                if (targetPage.querySelector('iframe')) {
+                    // Iframe içeren sayfalar için block
+                    targetPage.style.display = 'block';
+                    targetPage.style.overflow = 'hidden';
+                } else {
+                    // Direkt HTML içeren sayfalar için block (içerik flex kullanabilir)
+                    targetPage.style.display = 'block';
+                    // Scroll edilebilir içerik için overflow-y-auto
+                    targetPage.style.overflow = '';
+                }
+                // Container'ın yüksekliğini ve genişliğini koru
+                targetPage.style.height = '100%';
+                targetPage.style.width = '100%';
+            }
+            
+            // Navigasyon menüsündeki aktif durumu güncelle - sadece ilgili sidebar
+            const sidebar = document.getElementById(sidebarId);
+            if (sidebar) {
+                const allNavItems = sidebar.querySelectorAll('.wireframe-nav-item');
+                allNavItems.forEach(item => {
+                    item.classList.remove('bg-primary/10', 'text-primary', 'border', 'border-primary/20');
+                    item.classList.add('text-text-sub');
+                });
+                
+                const activeNavItem = sidebar.querySelector(`.wireframe-nav-item[data-page="${pageName}"]`);
+                if (activeNavItem) {
+                    activeNavItem.classList.remove('text-text-sub');
+                    activeNavItem.classList.add('bg-primary/10', 'text-primary', 'border', 'border-primary/20');
+                }
+            }
+        }
+        
+        // Wireframe sayfasını dinamik olarak yükle
+        async function loadWireframePage(pageName, targetPage) {
+            try {
+                const response = await fetch(`wireframe/${pageName}.html`);
+                if (!response.ok) {
+                    throw new Error(`Failed to load ${pageName}.html`);
+                }
+                const html = await response.text();
+                
+                // HTML'i parse et ve main içeriğini al
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                
+                // Body içindeki ana container'ı bul (flex h-screen olan div)
+                const bodyContent = doc.body;
+                let mainContainer = bodyContent.querySelector('div.flex.h-screen') || 
+                                    bodyContent.querySelector('div.flex') || 
+                                    bodyContent.querySelector('body > div');
+                
+                if (!mainContainer && bodyContent.children.length > 0) {
+                    // İlk div'i al veya main içeren div'i bul
+                    mainContainer = Array.from(bodyContent.children).find(child => 
+                        child.tagName === 'DIV' && (child.querySelector('main') || child.querySelector('aside'))
+                    ) || bodyContent.children[0];
+                }
+                
+                if (mainContainer) {
+                    // Wireframe'in kendi sidebar'ını kaldır
+                    const sidebar = mainContainer.querySelector('aside');
+                    if (sidebar) sidebar.remove();
+                    
+                    // Main içeriğini bul
+                    let mainContent = mainContainer.querySelector('main');
+                    if (!mainContent) {
+                        // Eğer main yoksa, container'ın kendisini kullan ama layout class'larını kaldır
+                        mainContent = mainContainer;
+                    }
+                    
+                    // MainContent'i clone et (DOM'dan çıkarmadan önce)
+                    const clonedContent = mainContent.cloneNode(true);
+                    
+                    // Clone'un layout class'larını kaldır
+                    const layoutClasses = ['flex', 'flex-1', 'flex-col', 'h-screen', 'w-full', 'min-h-screen', 'overflow-hidden', 'overflow-x-hidden', 'antialiased', 'min-w-0'];
+                    layoutClasses.forEach(cls => {
+                        if (clonedContent.classList) {
+                            clonedContent.classList.remove(cls);
+                        }
+                    });
+                    
+                    // Clone'un style'ını ayarla - sidebar'ın yanında görünmesi için
+                    clonedContent.style.cssText = 'width: 100% !important; max-width: 100% !important; height: auto !important; min-height: 100% !important; display: block !important; position: relative !important; margin: 0 !important; padding: 0 !important; overflow: visible !important; float: none !important; margin-left: 0 !important; margin-right: 0 !important;';
+                    
+                    // Clone içindeki tüm flex h-screen yapılarını da düzelt
+                    const allFlexScreens = clonedContent.querySelectorAll('.flex.h-screen, .flex.h-screen.w-full');
+                    allFlexScreens.forEach(el => {
+                        el.classList.remove('flex', 'h-screen', 'w-full');
+                        el.style.cssText = 'display: block !important; width: 100% !important; height: auto !important; min-height: 100% !important;';
+                    });
+                    
+                    // İçeriği wrapper div'e koy
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'wireframe-content-wrapper';
+                    wrapper.style.cssText = 'width: 100%; height: 100%; overflow-y: auto; overflow-x: hidden; position: relative;';
+                    wrapper.appendChild(clonedContent);
+                    
+                    // İçeriği güncelle
+                    targetPage.innerHTML = '';
+                    targetPage.appendChild(wrapper);
+                    targetPage.style.display = 'block';
+                } else {
+                    targetPage.innerHTML = '<div class="p-8 text-center text-text-sub"><p>Sayfa içeriği yüklenemedi.</p></div>';
+                }
+            } catch (error) {
+                console.error(`Error loading wireframe page ${pageName}:`, error);
+                targetPage.innerHTML = `<div class="p-8 text-center text-text-sub"><p>Sayfa yüklenirken bir hata oluştu: ${error.message}</p></div>`;
+            }
+        }
+        
+        // Wireframe sayfa geçişi - İkinci container için
+        function navigateToWireframePage2(pageName) {
+            const containerId = 'wireframe-main-2';
+            const sidebarId = 'wireframe-sidebar-2';
+            
+            // Sadece ilgili container içindeki sayfaları gizle
+            const mainContainer = document.getElementById(containerId);
+            if (!mainContainer) return;
+            
+            const allPages = mainContainer.querySelectorAll('.wireframe-page');
+            allPages.forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            // Seçilen sayfayı göster
+            const targetPage = mainContainer.querySelector(`.wireframe-page[data-page="${pageName}"]`);
+            if (targetPage) {
+                // Sayfa tipine göre display özelliğini ayarla
+                if (targetPage.querySelector('iframe')) {
+                    // Iframe içeren sayfalar için block
+                    targetPage.style.display = 'block';
+                    targetPage.style.overflow = 'hidden';
+                } else {
+                    // Direkt HTML içeren sayfalar için block (içerik flex kullanabilir)
+                    targetPage.style.display = 'block';
+                    // Scroll edilebilir içerik için overflow-y-auto
+                    targetPage.style.overflow = '';
+                }
+                // Container'ın yüksekliğini ve genişliğini koru
+                targetPage.style.height = '100%';
+                targetPage.style.width = '100%';
+            }
+            
+            // Navigasyon menüsündeki aktif durumu güncelle - sadece ilgili sidebar
+            const sidebar = document.getElementById(sidebarId);
+            if (sidebar) {
+                const allNavItems = sidebar.querySelectorAll('.wireframe-nav-item');
+                allNavItems.forEach(item => {
+                    item.classList.remove('bg-primary/10', 'text-primary', 'border', 'border-primary/20');
+                    item.classList.add('text-text-sub');
+                });
+                
+                const activeNavItem = sidebar.querySelector(`.wireframe-nav-item[data-page="${pageName}"]`);
+                if (activeNavItem) {
+                    activeNavItem.classList.remove('text-text-sub');
+                    activeNavItem.classList.add('bg-primary/10', 'text-primary', 'border', 'border-primary/20');
+                }
+            }
+        }
+        
+        // Wireframe sayfasını dinamik olarak yükle - İkinci container için
+        async function loadWireframePage2(pageName, targetPage) {
+            try {
+                const response = await fetch(`wireframe/${pageName}.html`);
+                if (!response.ok) {
+                    throw new Error(`Failed to load ${pageName}.html`);
+                }
+                const html = await response.text();
+                
+                // HTML'i parse et ve main içeriğini al
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                
+                // Body içindeki ana container'ı bul
+                const bodyContent = doc.body;
+                let mainContainer = bodyContent.querySelector('div.flex.h-screen') || 
+                                    bodyContent.querySelector('div.flex') || 
+                                    bodyContent.querySelector('body > div');
+                
+                if (!mainContainer && bodyContent.children.length > 0) {
+                    mainContainer = Array.from(bodyContent.children).find(child => 
+                        child.tagName === 'DIV' && (child.querySelector('main') || child.querySelector('aside'))
+                    ) || bodyContent.children[0];
+                }
+                
+                if (mainContainer) {
+                    // Wireframe'in kendi sidebar'ını kaldır
+                    const sidebar = mainContainer.querySelector('aside');
+                    if (sidebar) sidebar.remove();
+                    
+                    // Main içeriğini bul
+                    let mainContent = mainContainer.querySelector('main');
+                    if (!mainContent) {
+                        mainContent = mainContainer;
+                    }
+                    
+                    // MainContent'i clone et
+                    const clonedContent = mainContent.cloneNode(true);
+                    
+                    // Clone'un layout class'larını kaldır
+                    const layoutClasses = ['flex', 'flex-1', 'flex-col', 'h-screen', 'w-full', 'min-h-screen', 'overflow-hidden', 'overflow-x-hidden', 'antialiased', 'min-w-0'];
+                    layoutClasses.forEach(cls => {
+                        if (clonedContent.classList) {
+                            clonedContent.classList.remove(cls);
+                        }
+                    });
+                    
+                    // Clone'un style'ını ayarla
+                    clonedContent.style.cssText = 'width: 100% !important; max-width: 100% !important; height: auto !important; min-height: 100% !important; display: block !important; position: relative !important; margin: 0 !important; padding: 0 !important; overflow: visible !important; float: none !important; margin-left: 0 !important; margin-right: 0 !important;';
+                    
+                    // Clone içindeki tüm flex h-screen yapılarını da düzelt
+                    const allFlexScreens = clonedContent.querySelectorAll('.flex.h-screen, .flex.h-screen.w-full');
+                    allFlexScreens.forEach(el => {
+                        el.classList.remove('flex', 'h-screen', 'w-full');
+                        el.style.cssText = 'display: block !important; width: 100% !important; height: auto !important; min-height: 100% !important;';
+                    });
+                    
+                    // İçeriği wrapper div'e koy
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'wireframe-content-wrapper';
+                    wrapper.style.cssText = 'width: 100%; height: 100%; overflow-y: auto; overflow-x: hidden; position: relative;';
+                    wrapper.appendChild(clonedContent);
+                    
+                    // İçeriği güncelle
+                    targetPage.innerHTML = '';
+                    targetPage.appendChild(wrapper);
+                    targetPage.style.display = 'block';
+                } else {
+                    targetPage.innerHTML = '<div class="p-8 text-center text-text-sub"><p>Sayfa içeriği yüklenemedi.</p></div>';
+                }
+            } catch (error) {
+                console.error(`Error loading wireframe page ${pageName}:`, error);
+                targetPage.innerHTML = `<div class="p-8 text-center text-text-sub"><p>Sayfa yüklenirken bir hata oluştu: ${error.message}</p></div>`;
+            }
+        }
+        
+        // Sayfa yüklendiğinde ilk sayfayı aktif yap
+        document.addEventListener('DOMContentLoaded', function() {
+            // İlk sayfayı aktif yap
+            const firstNavItem = document.querySelector('.wireframe-nav-item[data-page="yeni-kiralama"]');
+            if (firstNavItem) {
+                firstNavItem.classList.add('bg-primary/10', 'text-primary', 'border', 'border-primary/20');
+                firstNavItem.classList.remove('text-text-sub');
+            }
+        });

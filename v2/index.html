@@ -7,6 +7,38 @@
     <link rel="icon" type="image/jpg" href="../v1/images/bulut_filo_ynetimi_logo.jpg">
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#17cf73",
+                        "primary-dark": "#10b981",
+                        "background-main": "#020617",
+                        "surface-card": "#0f172a",
+                        "surface-raised": "#1e293b",
+                        "text-main": "#f1f5f9",
+                        "text-sub": "#94a3b8",
+                        "border-color": "#1e293b",
+                        "input-bg": "#020617",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3)',
+                        'card': '0 0 0 1px rgba(30, 41, 59, 1), 0 1px 3px 0 rgba(0, 0, 0, 0.3)',
+                        'glow': '0 0 20px -5px rgba(23, 207, 115, 0.15)'
+                    }
+                },
+            },
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -57,7 +89,7 @@
     <!-- Section 2: Team -->
     <section id="team">
         <div class="container">
-            <h2 data-aos="fade-up">Proje Ekibi</h2>
+            <h2 style="font-size: 2rem;" data-aos="fade-up">Proje Ekibi</h2>
             <div class="team-grid">
                 <div class="glass-card card-3d team-member" data-aos="fade-right" data-aos-delay="100">
                     <div class="team-avatar">
@@ -86,7 +118,7 @@
             <h2 data-aos="fade-up" style="color: white;">1. Mevcut Sürecin 3M Analizi ve EBO ile İyileştirilmesi</h2>
             
             <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
-                <h3>1.1. 3M Analizi (Muda, Mura, Muri)</h3>
+                <h3 style="font-size: 2rem;">1.1. 3M Analizi (Muda, Mura, Muri)</h3>
                 
                 <div class="analysis-grid">
                     <div class="analysis-card">
@@ -114,7 +146,7 @@
             </div>
 
             <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
-                <h3>1.2. EBO Yöntemi ile İyileştirme (TO-BE Süreci)</h3>
+                <h3 style="font-size: 2rem;">1.2. EBO Yöntemi ile İyileştirme (TO-BE Süreci)</h3>
                 
                 <div class="ebo-grid">
                     <div class="ebo-item">
@@ -145,10 +177,19 @@
                         </ul>
                     </div>
                 </div>
+                
+                <div class="persona-image-container" style="margin-top: 30px;">
+                    <img src="./images/bpm2.png" alt="TO-BE Süreci BPMN Diyagramı" class="persona-image" id="bpm2-image">
+                    <div class="zoom-controls">
+                        <button class="zoom-btn zoom-in" onclick="zoomInBpm2()">🔍+</button>
+                        <button class="zoom-btn zoom-out" onclick="zoomOutBpm2()">🔍-</button>
+                        <button class="zoom-btn zoom-reset" onclick="resetZoomBpm2()">⌂</button>
+                    </div>
+                </div>
             </div>
 
             <div class="glass-card metrics-card" data-aos="fade-up" data-aos-delay="300">
-                <h3>1.3. Analitik Katma Değer</h3>
+                <h3 style="font-size: 2rem;">1.3. Analitik Katma Değer</h3>
                 <div class="metrics-grid">
                     <div class="metric-box">
                         <div class="metric-number">30%</div>
@@ -173,7 +214,7 @@
             <h2 data-aos="fade-up">2. Güç/İlgi (Power/Interest) Matrisi</h2>
             
             <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
-                <h3>Paydaş Listesi</h3>
+                <h3 style="font-size: 2rem;">Paydaş Listesi</h3>
                 <div class="stakeholder-grid">
                     <div class="stakeholder-card high-power high-interest">
                         <h4>Yüksek Güç / Yüksek İlgi</h4>
@@ -308,7 +349,7 @@
             <h2 data-aos="fade-up">4. Persona ve Empati Haritası</h2>
             
             <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
-                <h3>4.1. Persona: "Geleneksel Ahmet Bey"</h3>
+                <h3 style="font-size: 2rem;">4.1. Persona: "Geleneksel Ahmet Bey"</h3>
                 <div class="persona-image-container">
                     <img src="./images/persona.png" alt="Persona: Geleneksel Ahmet Bey" class="persona-image" id="persona-image">
                     <div class="zoom-controls">
@@ -337,7 +378,7 @@
             </div>
 
             <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
-                <h3>4.2. Empati Haritası</h3>
+                <h3 style="font-size: 2rem;">4.2. Empati Haritası</h3>
                 <div class="persona-image-container">
                     <img src="./images/empati.png" alt="Empati Haritası: Geleneksel Ahmet Bey" class="persona-image" id="empati-image">
                     <div class="zoom-controls">
@@ -531,7 +572,7 @@
             <h2 data-aos="fade-up" style="color: white;">7. Çözüm Gereksinimleri</h2>
             
             <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
-                <h3>7.1. Fonksiyonel Gereksinimler (Sistem Ne Yapacak?)</h3>
+                <h3 style="font-size: 2rem;">7.1. Fonksiyonel Gereksinimler (Sistem Ne Yapacak?)</h3>
                 <div class="requirement-grid">
                     <div class="requirement-card">
                         <div class="req-number">FG1</div>
@@ -554,7 +595,7 @@
             </div>
 
             <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
-                <h3>7.2. Fonksiyonel Olmayan Gereksinimler (Sistem Nasıl Çalışacak?)</h3>
+                <h3 style="font-size: 2rem;">7.2. Fonksiyonel Olmayan Gereksinimler (Sistem Nasıl Çalışacak?)</h3>
                 <div class="requirement-grid">
                     <div class="requirement-card">
                         <div class="req-number">FOG1</div>
@@ -592,7 +633,7 @@
                         <button class="zoom-btn zoom-reset" onclick="resetZoomKano()">⌂</button>
                     </div>
                 </div>
-                <h3 style="margin-top: 30px;">8.1. Özellik Sınıflandırması</h3>
+                <h3 style="font-size: 2rem; margin-top: 30px;">8.1. Özellik Sınıflandırması</h3>
                 <div class="kano-grid">
                     <div class="kano-card must-be">
                         <div class="kano-header">
@@ -675,41 +716,41 @@
             </div>
 
             <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
-                <h3>9.1. INVEST Analizi</h3>
+                <h3 style="font-size: 2rem;">9.1. INVEST Analizi</h3>
                 <div class="invest-grid">
                     <div class="invest-item">
                         <div class="invest-letter">I</div>
-                        <h4>Independent</h4>
+                        <h4 style="font-size: 1.5rem;">Independent</h4>
                         <p>Örneğin; otomatik sözleşme üretimi (US.01), trafik cezası takibi (US.03) özelliğinden bağımsız olarak geliştirilebilir ve test edilebilir.</p>
                     </div>
                     
                     <div class="invest-item">
                         <div class="invest-letter">N</div>
-                        <h4>Negotiable</h4>
+                        <h4 style="font-size: 1.5rem;">Negotiable</h4>
                         <p>Sözleşmenin hangi formatta (PDF/HTML) olacağı veya risk skorunun hangi verileri (ehliyet/finans) kullanacağı yazılım ekibiyle tartışılabilir.</p>
                     </div>
                     
                     <div class="invest-item">
                         <div class="invest-letter">V</div>
-                        <h4>Valuable</h4>
+                        <h4 style="font-size: 1.5rem;">Valuable</h4>
                         <p>Her üç hikaye de Ahmet Bey'in en büyük operasyonel ve finansal sorunlarını doğrudan çözer.</p>
                     </div>
                     
                     <div class="invest-item">
                         <div class="invest-letter">E</div>
-                        <h4>Estimable</h4>
+                        <h4 style="font-size: 1.5rem;">Estimable</h4>
                         <p>RICE skorlamasında belirtilen "çaba" (kişi-ay) değerleri, bu hikayelerin teknik büyüklüğünün öngörülebilir olduğunu kanıtlar.</p>
                     </div>
                     
                     <div class="invest-item">
                         <div class="invest-letter">S</div>
-                        <h4>Small</h4>
+                        <h4 style="font-size: 1.5rem;">Small</h4>
                         <p>Her bir hikaye, bir Scrum sprinti (genellikle 2 hafta) içerisinde tamamlanabilecek kadar odaklanmış ve küçüktür.</p>
                     </div>
                     
                     <div class="invest-item">
                         <div class="invest-letter">T</div>
-                        <h4>Testable</h4>
+                        <h4 style="font-size: 1.5rem;">Testable</h4>
                         <p>"Sistem PDF sözleşme üretiyor mu?", "Risk puanı 0-100 arasında dönüyor mu?" gibi sorularla başarıları kolayca ölçülebilir.</p>
                     </div>
                 </div>
@@ -800,7 +841,7 @@
             <h2 data-aos="fade-up" style="color: white;">11. UML Use Case Diyagramı Analizi</h2>
             
             <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
-                <h3>11.1. Aktörler (Actors)</h3>
+                <h3 style="font-size: 2rem;">11.1. Aktörler (Actors)</h3>
                 <div class="actor-grid">
                     <div class="actor-card primary">
                         <div class="actor-icon">👤</div>
@@ -829,7 +870,7 @@
             </div>
 
             <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
-                <h3>11.2. Kullanım Durumları (Use Cases)</h3>
+                <h3 style="font-size: 2rem;">11.2. Kullanım Durumları (Use Cases)</h3>
                 <div class="usecase-grid">
                     <div class="usecase-card">
                         <div class="usecase-id">UC.01</div>
@@ -864,8 +905,16 @@
             </div>
 
             <div class="glass-card" data-aos="fade-up" data-aos-delay="300">
-                <h3>11.3. İlişkiler ve Sistem Sınırı</h3>
-                <div class="relationship-info">
+                <h3 style="font-size: 2rem;">11.3. İlişkiler ve Sistem Sınırı</h3>
+                <div class="persona-image-container" style="margin-top: 30px;">
+                    <img src="./images/iliski-ve-sistem-siniri.jpg" alt="İlişkiler ve Sistem Sınırı" class="persona-image" id="iliski-image">
+                    <div class="zoom-controls">
+                        <button class="zoom-btn zoom-in" onclick="zoomInIliski()">🔍+</button>
+                        <button class="zoom-btn zoom-out" onclick="zoomOutIliski()">🔍-</button>
+                        <button class="zoom-btn zoom-reset" onclick="resetZoomIliski()">⌂</button>
+                    </div>
+                </div>
+                <div class="relationship-info" style="margin-top: 30px;">
                     <div class="info-item">
                         <strong>Sistem Sınırı:</strong> Tüm bu işlemler <strong>"Kiralama Yönetim Modülü"</strong> sınırları içerisinde gerçekleşir.
                     </div>
@@ -933,29 +982,271 @@
                     <h4>Etkileşim (Wireframe)</h4>
                 </div>
                 <div class="phase-content glass-card">
-                    <div class="wireframe-container">
-                        <div class="wireframe-screen">
-                            <div class="screen-header">
-                                <div class="screen-title">Kiralama Modülü</div>
-                                <div class="screen-status">🟢 Aktif</div>
-                            </div>
-                            <div class="wireframe-content">
-                                <div class="input-group">
-                                    <label>Müşteri Bilgileri</label>
-                                    <input type="text" placeholder="TC Kimlik No" readonly value="12345678901">
+                    <div class="wireframe-container" id="wireframe-app" style="max-width: 100%; overflow-x: auto;">
+                        <!-- Wireframe Application Structure -->
+                        <div class="flex h-screen bg-background-main text-text-main" style="min-height: 800px;">
+                            <!-- Sidebar Navigation -->
+                            <aside class="w-72 bg-surface-card border-r border-border-color flex flex-col hidden md:flex shrink-0" id="wireframe-sidebar">
+                                <div class="p-6 flex items-center gap-3">
+                                    <div class="bg-primary/10 p-2 rounded-lg">
+                                        <span class="material-symbols-outlined text-primary text-2xl">directions_car</span>
+                                    </div>
+                                    <div>
+                                        <h1 class="text-text-main text-lg font-bold leading-tight">Rental Admin</h1>
+                                        <p class="text-text-sub text-xs font-normal">Ofis Yöneticisi</p>
+                                    </div>
                                 </div>
-                                <div class="risk-score-display">
-                                    <div class="score-badge score-safe">
-                                        <span class="score-icon">✅</span>
-                                        <div class="score-info">
-                                            <div class="score-label">Risk Skoru</div>
-                                            <div class="score-value">85</div>
-                                            <div class="score-status">Güvenli</div>
+                                <nav class="flex-1 px-4 py-4 flex flex-col gap-2 overflow-y-auto">
+                                    <a class="wireframe-nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-text-sub hover:bg-surface-raised hover:text-primary transition-colors" href="#" data-page="yeni-kiralama" onclick="navigateToWireframePage('yeni-kiralama'); return false;">
+                                        <span class="material-symbols-outlined">description</span>
+                                        <span class="text-sm font-medium">Yeni Kiralama</span>
+                                    </a>
+                                    <a class="wireframe-nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-text-sub hover:bg-surface-raised hover:text-primary transition-colors" href="#" data-page="ceza-ve-hasar" onclick="navigateToWireframePage('ceza-ve-hasar'); return false;">
+                                        <span class="material-symbols-outlined">gavel</span>
+                                        <span class="text-sm font-medium">Ceza ve Hasar</span>
+                                    </a>
+                                    <a class="wireframe-nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-text-sub hover:bg-surface-raised hover:text-primary transition-colors" href="#" data-page="rezervasyon-sistemi" onclick="navigateToWireframePage('rezervasyon-sistemi'); return false;">
+                                        <span class="material-symbols-outlined">calendar_month</span>
+                                        <span class="text-sm font-medium">Rezervasyon</span>
+                                    </a>
+                                    <a class="wireframe-nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-text-sub hover:bg-surface-raised hover:text-primary transition-colors" href="#" data-page="musteri-yonetimi" onclick="navigateToWireframePage('musteri-yonetimi'); return false;">
+                                        <span class="material-symbols-outlined">group</span>
+                                        <span class="text-sm font-medium">Müşteriler</span>
+                                    </a>
+                                    <a class="wireframe-nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-text-sub hover:bg-surface-raised hover:text-primary transition-colors" href="#" data-page="arac-yonetimi" onclick="navigateToWireframePage('arac-yonetimi'); return false;">
+                                        <span class="material-symbols-outlined">directions_car</span>
+                                        <span class="text-sm font-medium">Araç Filosu</span>
+                                    </a>
+                                    <div class="my-2 border-t border-border-color"></div>
+                                    <a class="wireframe-nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-text-sub hover:bg-surface-raised hover:text-primary transition-colors" href="#" data-page="raporlar" onclick="navigateToWireframePage('raporlar'); return false;">
+                                        <span class="material-symbols-outlined">bar_chart</span>
+                                        <span class="text-sm font-medium">Raporlar</span>
+                                    </a>
+                                    <a class="wireframe-nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-text-sub hover:bg-surface-raised hover:text-primary transition-colors" href="#" data-page="ayarlar" onclick="navigateToWireframePage('ayarlar'); return false;">
+                                        <span class="material-symbols-outlined">settings</span>
+                                        <span class="text-sm font-medium">Ayarlar</span>
+                                    </a>
+                                </nav>
+                                <div class="p-4 border-t border-border-color">
+                                    <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-raised cursor-pointer transition-colors">
+                                        <div class="w-10 h-10 rounded-full bg-cover bg-center border border-border-color" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDZii72iJtAj-eXWTxmw46O9qgQBTZznrw8_gPhQBRvy6ptNS5T8MYpSpkWC0xOM_rB2POM2aUqzyxHnfW_kQBWChnpFgbPGhaZgNrZbuh-HWvBbhNuRwRKO2yeLo22ng76RPeohxA_PZEsNGkSIUr7MdIrwZhKrWJcgOmWyc9kTC4xSGN2h2f0R6f4jUc3ssGstjZvADpS3G1fA-IbA4TiYar0rBSMjlC2VLo1lPuKn36v22_Jq59KM4x3Na_Ui2wY58uK-GTwHAEb');"></div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-medium text-text-main truncate">Mehmet Yılmaz</p>
+                                            <p class="text-xs text-text-sub truncate">mehmet@rentacar.com</p>
                                         </div>
                                     </div>
                                 </div>
-                                <button class="action-button primary">📄 Dijital Sözleşme Üret</button>
-                            </div>
+                            </aside>
+                            <!-- Main Content Area -->
+                            <main class="flex-1 flex flex-col h-full min-w-0 overflow-hidden" id="wireframe-main">
+                                <div class="wireframe-page h-full w-full" data-page="yeni-kiralama" style="display: block;">
+                                    <div class="flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto p-8 h-full">
+                                        <div class="flex-1 flex flex-col gap-6">
+                                            <div class="flex flex-col gap-2">
+                                                <h1 class="text-3xl md:text-4xl font-black tracking-tight text-text-main">Yeni Kiralama Girişi</h1>
+                                                <p class="text-text-sub text-base font-normal">Risk durumunu kontrol etmek ve anında sözleşme oluşturmak için müşteri detaylarını girin.</p>
+                                            </div>
+                                            <div class="bg-surface-card border border-border-color rounded-xl p-6 md:p-8 shadow-card transition-all duration-200 hover:border-primary/30">
+                                                <form class="flex flex-col gap-6" onsubmit="event.preventDefault();">
+                                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                        <label class="flex flex-col gap-2 group">
+                                                            <span class="text-sm font-semibold text-text-main group-focus-within:text-primary transition-colors">Müşteri No / T.C. Kimlik No</span>
+                                                            <div class="relative">
+                                                                <input class="w-full h-12 px-4 rounded-lg border border-border-color bg-input-bg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none placeholder:text-gray-600 text-text-main" placeholder="örn. 123456789" type="text" value="12345678901"/>
+                                                                <span class="material-symbols-outlined absolute right-3 top-3 text-gray-500 text-xl pointer-events-none group-focus-within:text-primary transition-colors">badge</span>
+                                                            </div>
+                                                        </label>
+                                                        <label class="flex flex-col gap-2 group">
+                                                            <span class="text-sm font-semibold text-text-main group-focus-within:text-primary transition-colors">Ehliyet Numarası</span>
+                                                            <div class="relative">
+                                                                <input class="w-full h-12 px-4 rounded-lg border border-border-color bg-input-bg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none placeholder:text-gray-600 text-text-main" placeholder="örn. E-123-456" type="text"/>
+                                                                <span class="material-symbols-outlined absolute right-3 top-3 text-gray-500 text-xl pointer-events-none group-focus-within:text-primary transition-colors">id_card</span>
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                    <div class="grid grid-cols-1 gap-6">
+                                                        <label class="flex flex-col gap-2 group">
+                                                            <span class="text-sm font-semibold text-text-main group-focus-within:text-primary transition-colors">Ad ve Soyad</span>
+                                                            <div class="relative">
+                                                                <input class="w-full h-12 px-4 rounded-lg border border-border-color bg-input-bg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none placeholder:text-gray-600 text-text-main" placeholder="Ali Yılmaz" type="text"/>
+                                                                <span class="material-symbols-outlined absolute right-3 top-3 text-gray-500 text-xl pointer-events-none group-focus-within:text-primary transition-colors">person</span>
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                    <div class="grid grid-cols-1 gap-6">
+                                                        <label class="flex flex-col gap-2 group">
+                                                            <span class="text-sm font-semibold text-text-main group-focus-within:text-primary transition-colors">Araç Seçimi</span>
+                                                            <div class="relative">
+                                                                <select class="w-full h-12 px-4 rounded-lg border border-border-color bg-input-bg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none appearance-none cursor-pointer text-text-main">
+                                                                    <option disabled="" selected="" value="">Filodan bir araç seçin</option>
+                                                                    <option value="toyota-corolla">Toyota Corolla 2022 (Sedan) - Müsait</option>
+                                                                    <option value="ford-focus">Ford Focus 2021 (Hatchback) - Müsait</option>
+                                                                    <option value="bmw-320i">BMW 320i 2023 (Lüks) - Müsait</option>
+                                                                </select>
+                                                                <span class="material-symbols-outlined absolute right-3 top-3 text-gray-500 text-xl pointer-events-none group-focus-within:text-primary transition-colors">expand_more</span>
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                        <label class="flex flex-col gap-2 group">
+                                                            <span class="text-sm font-semibold text-text-main group-focus-within:text-primary transition-colors">Kiralama Başlangıç Tarihi</span>
+                                                            <input class="w-full h-12 px-4 rounded-lg border border-border-color bg-input-bg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none text-text-main" type="date"/>
+                                                        </label>
+                                                        <label class="flex flex-col gap-2 group">
+                                                            <span class="text-sm font-semibold text-text-main group-focus-within:text-primary transition-colors">Süre (Gün)</span>
+                                                            <div class="flex items-center">
+                                                                <button type="button" class="size-12 rounded-l-lg border border-r-0 border-border-color bg-surface-raised text-text-sub hover:bg-surface-card hover:text-primary flex items-center justify-center transition-colors" onclick="decreaseDays()">
+                                                                    <span class="material-symbols-outlined text-sm">remove</span>
+                                                                </button>
+                                                                <input id="rental-days" class="h-12 w-full text-center border-y border-border-color bg-input-bg text-text-main focus:outline-none focus:border-primary focus:z-10 focus:ring-1 focus:ring-primary/20" type="number" value="3" min="1"/>
+                                                                <button type="button" class="size-12 rounded-r-lg border border-l-0 border-border-color bg-surface-raised text-text-sub hover:bg-surface-card hover:text-primary flex items-center justify-center transition-colors" onclick="increaseDays()">
+                                                                    <span class="material-symbols-outlined text-sm">add</span>
+                                                                </button>
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="mt-2">
+                                                <button onclick="createContract()" class="group relative w-full flex items-center justify-center gap-3 bg-primary hover:bg-primary-dark text-white font-bold text-lg py-4 rounded-xl shadow-lg shadow-primary/20 transition-all active:scale-[0.99] hover:shadow-glow">
+                                                    <span class="material-symbols-outlined">description</span>
+                                                    Dijital Sözleşme Oluştur
+                                                    <span class="absolute right-6 opacity-0 group-hover:opacity-100 transition-opacity material-symbols-outlined">arrow_forward</span>
+                                                </button>
+                                                <p class="text-center text-xs text-text-sub mt-3 flex items-center justify-center gap-1">
+                                                    <span class="material-symbols-outlined text-sm">lock</span>
+                                                    Şifreli &amp; Güvenli İşlem
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="lg:w-[360px] flex flex-col gap-6">
+                                            <div class="bg-surface-card rounded-xl border border-border-color shadow-card overflow-hidden transition-colors duration-200">
+                                                <div class="p-5 border-b border-border-color bg-surface-raised/50 flex justify-between items-center">
+                                                    <h3 class="font-bold text-text-main">Risk Analizi</h3>
+                                                    <span class="material-symbols-outlined text-text-sub" title="Yapay zeka destekli analiz">smart_toy</span>
+                                                </div>
+                                                <div class="p-6 flex flex-col items-center">
+                                                    <div class="relative size-32 mb-4">
+                                                        <svg class="size-full -rotate-90 transform" viewBox="0 0 36 36">
+                                                            <path class="text-surface-raised" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+                                                            <path class="text-primary drop-shadow-md" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="85, 100" stroke-linecap="round" stroke-width="3"></path>
+                                                        </svg>
+                                                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                                            <span class="text-3xl font-black text-text-main tracking-tighter">85</span>
+                                                            <span class="text-xs font-bold uppercase text-primary tracking-wide">Güvenli</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-full space-y-3 mt-2">
+                                                        <div class="flex items-center gap-3 text-sm text-text-main">
+                                                            <div class="size-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                                                <span class="material-symbols-outlined text-sm text-primary">check</span>
+                                                            </div>
+                                                            <span class="flex-1">Kimlik Doğrulandı</span>
+                                                        </div>
+                                                        <div class="flex items-center gap-3 text-sm text-text-main">
+                                                            <div class="size-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                                                <span class="material-symbols-outlined text-sm text-primary">check</span>
+                                                            </div>
+                                                            <span class="flex-1">Ödenmemiş Borç Yok</span>
+                                                        </div>
+                                                        <div class="flex items-center gap-3 text-sm text-text-main">
+                                                            <div class="size-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                                                <span class="material-symbols-outlined text-sm text-primary">check</span>
+                                                            </div>
+                                                            <span class="flex-1">Geçerli Ehliyet (&gt;2 Yıl)</span>
+                                                        </div>
+                                                        <div class="flex items-center gap-3 text-sm text-text-main">
+                                                            <div class="size-6 rounded-full bg-orange-900/30 flex items-center justify-center shrink-0">
+                                                                <span class="material-symbols-outlined text-sm text-orange-400">priority_high</span>
+                                                            </div>
+                                                            <span class="flex-1 text-gray-500 line-through decoration-gray-600">Önceki Kiralama Hasarı</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="bg-primary/5 p-4 border-t border-primary/10">
+                                                    <p class="text-xs text-center text-primary font-medium">
+                                                        Yapay Zeka Güven Skoru: Yüksek
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="bg-blue-900/20 rounded-xl p-5 border border-blue-900/50">
+                                                <div class="flex gap-3">
+                                                    <span class="material-symbols-outlined text-blue-400">info</span>
+                                                    <div>
+                                                        <h4 class="font-bold text-sm text-blue-100 mb-1">Hızlı Geçiş Aktif</h4>
+                                                        <p class="text-xs text-blue-300 leading-relaxed">
+                                                            Bu müşteri hızlı işlem için uygundur. Standart araçlar için depozito gerekmez.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Other wireframe pages will be loaded dynamically -->
+                                <div class="wireframe-page h-full w-full" data-page="ceza-ve-hasar" style="display: none;">
+                                    <div class="max-w-7xl mx-auto p-8 h-full overflow-y-auto">
+                                        <div class="flex flex-col gap-2 mb-6">
+                                            <h1 class="text-3xl md:text-4xl font-black tracking-tight text-text-main">Ceza ve Hasar Yönetimi</h1>
+                                            <p class="text-text-sub text-base font-normal">Otomatik eşleştirilen cezaları ve hasarları müşterilere yansıtın.</p>
+                                        </div>
+                                        <div class="bg-surface-card border border-border-color rounded-xl p-6 shadow-card">
+                                            <div class="space-y-4">
+                                                <div class="bg-blue-900/40 border border-blue-700/50 rounded-lg p-4 hover:bg-blue-900/60 transition-all cursor-pointer">
+                                                    <div class="flex items-start justify-between gap-4">
+                                                        <div class="flex-1">
+                                                            <div class="flex items-center gap-3 mb-2">
+                                                                <span class="material-symbols-outlined text-blue-400">calendar_today</span>
+                                                                <span class="text-sm font-medium text-blue-200">15 Gün Önce</span>
+                                                                <span class="px-2 py-1 rounded-full bg-green-900/30 text-green-400 text-xs font-medium border border-green-800 flex items-center gap-1">
+                                                                    <span class="material-symbols-outlined text-xs">check_circle</span>
+                                                                    Eşleştirildi
+                                                                </span>
+                                                            </div>
+                                                            <div class="flex items-center gap-2 mb-2">
+                                                                <span class="material-symbols-outlined text-blue-300 text-lg">directions_car</span>
+                                                                <span class="text-sm font-semibold text-blue-100">Plaka: 34 ABC 123</span>
+                                                            </div>
+                                                            <div class="flex items-center gap-2 mb-3">
+                                                                <span class="material-symbols-outlined text-orange-400 text-lg">speed</span>
+                                                                <span class="text-sm text-blue-200">Hız Cezası</span>
+                                                                <span class="ml-auto text-lg font-bold text-blue-100">₺850.00</span>
+                                                            </div>
+                                                            <div class="flex items-center gap-2 pt-2 border-t border-blue-800/50">
+                                                                <span class="material-symbols-outlined text-blue-300 text-sm">person</span>
+                                                                <span class="text-xs text-blue-300">Müşteri: Ali Vural (US.03)</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-6 pt-6 border-t border-border-color">
+                                                <button onclick="reflectToCustomer()" class="group relative w-full flex items-center justify-center gap-3 bg-primary hover:bg-primary-dark text-white font-bold text-lg py-4 rounded-xl shadow-lg shadow-primary/20 transition-all active:scale-[0.99] hover:shadow-glow">
+                                                    <span class="material-symbols-outlined">attach_money</span>
+                                                    Müşteriye Yansıt
+                                                    <span class="absolute right-6 opacity-0 group-hover:opacity-100 transition-opacity material-symbols-outlined">arrow_forward</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Wireframe pages with embedded HTML content -->
+                                <div class="wireframe-page h-full w-full" data-page="rezervasyon-sistemi" style="display: none;">
+                                    <iframe src="wireframe/rezervasyon-sistemi.html" class="w-full h-full border-0" style="min-height: 800px;"></iframe>
+                                </div>
+                                <div class="wireframe-page h-full w-full" data-page="musteri-yonetimi" style="display: none;">
+                                    <iframe src="wireframe/musteri-yonetimi.html" class="w-full h-full border-0" style="min-height: 800px;"></iframe>
+                                </div>
+                                <div class="wireframe-page h-full w-full" data-page="arac-yonetimi" style="display: none;">
+                                    <iframe src="wireframe/arac-yonetimi.html" class="w-full h-full border-0" style="min-height: 800px;"></iframe>
+                                </div>
+                                <div class="wireframe-page h-full w-full" data-page="raporlar" style="display: none;">
+                                    <iframe src="wireframe/raporlar.html" class="w-full h-full border-0" style="min-height: 800px;"></iframe>
+                                </div>
+                                <div class="wireframe-page h-full w-full" data-page="ayarlar" style="display: none;">
+                                    <iframe src="wireframe/ayarlar.html" class="w-full h-full border-0" style="min-height: 800px;"></iframe>
+                                </div>
+                            </main>
                         </div>
                     </div>
                     <div class="storyboard-text">
@@ -1052,31 +1343,86 @@
                     <h4>Etkileşim (Wireframe)</h4>
                 </div>
                 <div class="phase-content glass-card">
-                    <div class="wireframe-container">
-                        <div class="wireframe-screen">
-                            <div class="screen-header">
-                                <div class="screen-title">Ceza ve Hasar Yönetimi</div>
-                                <div class="screen-status">🟢 Aktif</div>
-                            </div>
-                            <div class="wireframe-content">
-                                <div class="ceza-list">
-                                    <div class="ceza-item matched">
-                                        <div class="ceza-info">
-                                            <div class="ceza-date">📅 15 Gün Önce</div>
-                                            <div class="ceza-plate">🚗 Plaka: 34 ABC 123</div>
-                                            <div class="ceza-type">⚡ Hız Cezası</div>
-                                        </div>
-                                        <div class="ceza-match">
-                                            <div class="match-badge">
-                                                <span class="match-icon">✅</span>
-                                                <span>Eşleştirildi</span>
-                                            </div>
-                                            <div class="match-customer">👤 US.03</div>
+                    <div class="wireframe-container" id="wireframe-app-2" style="max-width: 100%; overflow-x: auto;">
+                        <!-- Wireframe Application Structure - Same as first one, but navigate to ceza-ve-hasar -->
+                        <div class="flex h-screen bg-background-main text-text-main" style="min-height: 800px;">
+                            <!-- Sidebar Navigation -->
+                            <aside class="w-72 bg-surface-card border-r border-border-color flex flex-col hidden md:flex shrink-0" id="wireframe-sidebar-2">
+                                <div class="p-6 flex items-center gap-3">
+                                    <div class="bg-primary/10 p-2 rounded-lg">
+                                        <span class="material-symbols-outlined text-primary text-2xl">directions_car</span>
+                                    </div>
+                                    <div>
+                                        <h1 class="text-text-main text-lg font-bold leading-tight">Rental Admin</h1>
+                                        <p class="text-text-sub text-xs font-normal">Ofis Yöneticisi</p>
+                                    </div>
+                                </div>
+                                <nav class="flex-1 px-4 py-4 flex flex-col gap-2 overflow-y-auto">
+                                    <a class="wireframe-nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-text-sub hover:bg-surface-raised hover:text-primary transition-colors" href="#" data-page="yeni-kiralama" onclick="navigateToWireframePage2('yeni-kiralama'); return false;">
+                                        <span class="material-symbols-outlined">description</span>
+                                        <span class="text-sm font-medium">Yeni Kiralama</span>
+                                    </a>
+                                    <a class="wireframe-nav-item flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/10 text-primary border border-primary/20" href="#" data-page="ceza-ve-hasar" onclick="navigateToWireframePage2('ceza-ve-hasar'); return false;">
+                                        <span class="material-symbols-outlined">gavel</span>
+                                        <span class="text-sm font-medium">Ceza ve Hasar</span>
+                                    </a>
+                                    <a class="wireframe-nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-text-sub hover:bg-surface-raised hover:text-primary transition-colors" href="#" data-page="rezervasyon-sistemi" onclick="navigateToWireframePage2('rezervasyon-sistemi'); return false;">
+                                        <span class="material-symbols-outlined">calendar_month</span>
+                                        <span class="text-sm font-medium">Rezervasyon</span>
+                                    </a>
+                                    <a class="wireframe-nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-text-sub hover:bg-surface-raised hover:text-primary transition-colors" href="#" data-page="musteri-yonetimi" onclick="navigateToWireframePage2('musteri-yonetimi'); return false;">
+                                        <span class="material-symbols-outlined">group</span>
+                                        <span class="text-sm font-medium">Müşteriler</span>
+                                    </a>
+                                    <a class="wireframe-nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-text-sub hover:bg-surface-raised hover:text-primary transition-colors" href="#" data-page="arac-yonetimi" onclick="navigateToWireframePage2('arac-yonetimi'); return false;">
+                                        <span class="material-symbols-outlined">directions_car</span>
+                                        <span class="text-sm font-medium">Araç Filosu</span>
+                                    </a>
+                                    <div class="my-2 border-t border-border-color"></div>
+                                    <a class="wireframe-nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-text-sub hover:bg-surface-raised hover:text-primary transition-colors" href="#" data-page="raporlar" onclick="navigateToWireframePage2('raporlar'); return false;">
+                                        <span class="material-symbols-outlined">bar_chart</span>
+                                        <span class="text-sm font-medium">Raporlar</span>
+                                    </a>
+                                    <a class="wireframe-nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-text-sub hover:bg-surface-raised hover:text-primary transition-colors" href="#" data-page="ayarlar" onclick="navigateToWireframePage2('ayarlar'); return false;">
+                                        <span class="material-symbols-outlined">settings</span>
+                                        <span class="text-sm font-medium">Ayarlar</span>
+                                    </a>
+                                </nav>
+                                <div class="p-4 border-t border-border-color">
+                                    <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-raised cursor-pointer transition-colors">
+                                        <div class="w-10 h-10 rounded-full bg-cover bg-center border border-border-color" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDZii72iJtAj-eXWTxmw46O9qgQBTZznrw8_gPhQBRvy6ptNS5T8MYpSpkWC0xOM_rB2POM2aUqzyxHnfW_kQBWChnpFgbPGhaZgNrZbuh-HWvBbhNuRwRKO2yeLo22ng76RPeohxA_PZEsNGkSIUr7MdIrwZhKrWJcgOmWyc9kTC4xSGN2h2f0R6f4jUc3ssGstjZvADpS3G1fA-IbA4TiYar0rBSMjlC2VLo1lPuKn36v22_Jq59KM4x3Na_Ui2wY58uK-GTwHAEb');"></div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-medium text-text-main truncate">Mehmet Yılmaz</p>
+                                            <p class="text-xs text-text-sub truncate">mehmet@rentacar.com</p>
                                         </div>
                                     </div>
                                 </div>
-                                <button class="action-button success">💰 Müşteriye Yansıt</button>
-                            </div>
+                            </aside>
+                            <!-- Main Content Area -->
+                            <main class="flex-1 flex flex-col h-full min-w-0 overflow-hidden" id="wireframe-main-2">
+                                <div class="wireframe-page h-full w-full" data-page="yeni-kiralama" style="display: none;">
+                                    <iframe src="wireframe/yeni-kiralama.html" class="w-full h-full border-0" style="min-height: 800px;"></iframe>
+                                </div>
+                                <div class="wireframe-page h-full w-full" data-page="ceza-ve-hasar" style="display: block;">
+                                    <iframe src="wireframe/ceza-ve-hasar.html" class="w-full h-full border-0" style="min-height: 800px;"></iframe>
+                                </div>
+                                <!-- Wireframe pages with embedded HTML content -->
+                                <div class="wireframe-page h-full w-full" data-page="rezervasyon-sistemi" style="display: none;">
+                                    <iframe src="wireframe/rezervasyon-sistemi.html" class="w-full h-full border-0" style="min-height: 800px;"></iframe>
+                                </div>
+                                <div class="wireframe-page h-full w-full" data-page="musteri-yonetimi" style="display: none;">
+                                    <iframe src="wireframe/musteri-yonetimi.html" class="w-full h-full border-0" style="min-height: 800px;"></iframe>
+                                </div>
+                                <div class="wireframe-page h-full w-full" data-page="arac-yonetimi" style="display: none;">
+                                    <iframe src="wireframe/arac-yonetimi.html" class="w-full h-full border-0" style="min-height: 800px;"></iframe>
+                                </div>
+                                <div class="wireframe-page h-full w-full" data-page="raporlar" style="display: none;">
+                                    <iframe src="wireframe/raporlar.html" class="w-full h-full border-0" style="min-height: 800px;"></iframe>
+                                </div>
+                                <div class="wireframe-page h-full w-full" data-page="ayarlar" style="display: none;">
+                                    <iframe src="wireframe/ayarlar.html" class="w-full h-full border-0" style="min-height: 800px;"></iframe>
+                                </div>
+                            </main>
                         </div>
                     </div>
                     <div class="storyboard-text">
@@ -1115,7 +1461,7 @@
             </div>
 
             <div class="glass-card analysis-summary" data-aos="fade-up" data-aos-delay="900">
-                <h3>Analiz Özeti</h3>
+                <h3 style="font-size: 2rem;">Analiz Özeti</h3>
                 <div class="summary-grid">
                     <div class="summary-item">
                         <h4>🔄 Dönüşüm</h4>

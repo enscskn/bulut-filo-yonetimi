@@ -3822,7 +3822,18 @@ body.light-theme .stat-label {
     background-clip: text;
     line-height: 1;
     margin-bottom: 20px;
-    opacity: 0.2;
+    opacity: 0.7;
+    stroke: black;
+    -webkit-text-stroke: 1px white;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    -webkit-text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    -moz-text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    -ms-text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    -o-text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    -webkit-text-stroke-width: 1px;
+    -moz-text-stroke-width: 1px;
+    -ms-text-stroke-width: 1px;
+    -o-text-stroke-width: 1px;
 }
 
 .scenario-header h2 {
@@ -6136,8 +6147,8 @@ body.light-theme .stat-label {
 }
 
 #section-11 .usecase-card:hover::before {
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
 }
 
 #section-11 .usecase-card:hover {
