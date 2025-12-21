@@ -81,7 +81,7 @@
 <h1 class="text-text-main text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Müşteri Profili Yönetimi</h1>
 <p class="text-text-sub text-sm md:text-base font-normal leading-normal">Aktif müşteriler, geçmiş kiralamalar ve risk analiz raporları.</p>
 </div>
-<button class="flex items-center justify-center rounded-lg h-10 px-5 bg-primary hover:bg-primary-dark text-text-main text-sm font-bold leading-normal tracking-[0.015em] transition-colors shadow-lg shadow-primary/20 gap-2">
+<button onclick="openAddCustomerModal()" class="flex items-center justify-center rounded-lg h-10 px-5 bg-primary hover:bg-primary-dark text-text-main text-sm font-bold leading-normal tracking-[0.015em] transition-colors shadow-lg shadow-primary/20 gap-2">
 <span class="material-symbols-outlined text-[20px]">add</span>
 <span class="truncate">Müşteri Ekle</span>
 </button>
@@ -93,7 +93,7 @@
 <div class="text-text-sub flex items-center justify-center pl-4 rounded-l-lg border-r-0">
 <span class="material-symbols-outlined text-[20px]">search</span>
 </div>
-<input class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-main focus:outline-0 focus:ring-0 border-none bg-transparent h-full placeholder:text-text-sub px-4 pl-2 text-sm font-normal leading-normal" placeholder="Hızlı arama yap..."/>
+<input id="quick-search" oninput="quickSearchCustomers()" class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-main focus:outline-0 focus:ring-0 border-none bg-transparent h-full placeholder:text-text-sub px-4 pl-2 text-sm font-normal leading-normal" placeholder="Hızlı arama yap..."/>
 </div>
 </label>
 </div>
@@ -408,6 +408,115 @@
             }, 300);
         }
     }
+    
+    // Hızlı arama
+    function quickSearchCustomers() {
+        const searchTerm = document.getElementById('quick-search').value.toLowerCase();
+        const rows = document.querySelectorAll('.customer-row');
+        
+        rows.forEach(row => {
+            const name = (row.dataset.name || '').toLowerCase();
+            const id = (row.dataset.id || '').toLowerCase();
+            const license = (row.dataset.license || '').toLowerCase();
+            
+            if (name.includes(searchTerm) || id.includes(searchTerm) || license.includes(searchTerm)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+    
+    // Müşteri ekleme modalı
+    function openAddCustomerModal() {
+        const modal = document.getElementById('add-customer-modal');
+        if (modal) {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        } else {
+            alert('Müşteri ekleme formu açılacak. (Demo)');
+        }
+    }
+    
+    function closeAddCustomerModal() {
+        const modal = document.getElementById('add-customer-modal');
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+    }
+    
+    function saveNewCustomer() {
+        alert('Müşteri başarıyla eklendi! (Demo)');
+        closeAddCustomerModal();
+    }
+</script>
+
+<!-- Müşteri Ekleme Modal -->
+<div id="add-customer-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+    <div class="bg-surface-card w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] border border-border-color">
+        <div class="px-6 py-4 border-b border-border-color flex justify-between items-center bg-surface-raised">
+            <div class="flex items-center gap-3">
+                <div class="size-8 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined">person_add</span>
+                </div>
+                <div>
+                    <h3 class="font-bold text-text-main">Yeni Müşteri Ekle</h3>
+                    <p class="text-xs text-text-sub">Müşteri bilgilerini girin</p>
+                </div>
+            </div>
+            <button onclick="closeAddCustomerModal()" class="text-text-sub hover:text-text-main transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <div class="flex-1 overflow-y-auto bg-background-main p-6">
+            <form class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-xs font-semibold text-text-sub mb-2 block">Ad Soyad *</label>
+                        <input type="text" required class="w-full h-10 px-3 rounded-lg bg-surface-raised border border-border-color text-text-main text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" placeholder="Ad Soyad">
+                    </div>
+                    <div>
+                        <label class="text-xs font-semibold text-text-sub mb-2 block">T.C. Kimlik No *</label>
+                        <input type="text" required maxlength="11" class="w-full h-10 px-3 rounded-lg bg-surface-raised border border-border-color text-text-main text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" placeholder="12345678901">
+                    </div>
+                    <div>
+                        <label class="text-xs font-semibold text-text-sub mb-2 block">Telefon *</label>
+                        <input type="tel" required class="w-full h-10 px-3 rounded-lg bg-surface-raised border border-border-color text-text-main text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" placeholder="+90 555 123 4567">
+                    </div>
+                    <div>
+                        <label class="text-xs font-semibold text-text-sub mb-2 block">E-posta</label>
+                        <input type="email" class="w-full h-10 px-3 rounded-lg bg-surface-raised border border-border-color text-text-main text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" placeholder="email@example.com">
+                    </div>
+                    <div>
+                        <label class="text-xs font-semibold text-text-sub mb-2 block">Ehliyet No *</label>
+                        <input type="text" required class="w-full h-10 px-3 rounded-lg bg-surface-raised border border-border-color text-text-main text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" placeholder="E-123-456">
+                    </div>
+                    <div>
+                        <label class="text-xs font-semibold text-text-sub mb-2 block">Ehliyet Tarihi</label>
+                        <input type="date" class="w-full h-10 px-3 rounded-lg bg-surface-raised border border-border-color text-text-main text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="p-6 bg-surface-card border-t border-border-color">
+            <div class="flex gap-3">
+                <button onclick="closeAddCustomerModal()" class="flex-1 py-3 px-4 rounded-lg border border-border-color text-text-main font-medium hover:bg-surface-raised transition-colors">İptal</button>
+                <button onclick="saveNewCustomer()" class="flex-[2] py-3 px-4 rounded-lg bg-primary hover:bg-primary-dark text-white font-bold shadow-lg shadow-primary/20 transition-all">
+                    Müşteri Ekle
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ESC tuşu ile modal kapatma
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeAddCustomerModal();
+        }
+    });
 </script>
 
 </body></html>

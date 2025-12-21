@@ -64,11 +64,11 @@
 </div>
 <div class="flex items-center gap-4">
 <div class="flex items-center bg-background-main rounded-lg p-1 border border-border-color">
-<button class="px-3 py-1.5 text-sm font-medium rounded-md text-text-sub hover:text-text-main hover:bg-surface-raised transition-colors">Haftalık</button>
-<button class="px-3 py-1.5 text-sm font-medium rounded-md bg-surface-raised text-text-main shadow-sm border border-border-color">Aylık</button>
-<button class="px-3 py-1.5 text-sm font-medium rounded-md text-text-sub hover:text-text-main hover:bg-surface-raised transition-colors">Yıllık</button>
+<button onclick="changeReportPeriod('weekly')" class="report-period-btn px-3 py-1.5 text-sm font-medium rounded-md text-text-sub hover:text-text-main hover:bg-surface-raised transition-colors" data-period="weekly">Haftalık</button>
+<button onclick="changeReportPeriod('monthly')" class="report-period-btn px-3 py-1.5 text-sm font-medium rounded-md bg-surface-raised text-text-main shadow-sm border border-border-color active" data-period="monthly">Aylık</button>
+<button onclick="changeReportPeriod('yearly')" class="report-period-btn px-3 py-1.5 text-sm font-medium rounded-md text-text-sub hover:text-text-main hover:bg-surface-raised transition-colors" data-period="yearly">Yıllık</button>
 </div>
-<button class="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-colors shadow-lg shadow-primary/20">
+<button onclick="downloadReport()" class="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-colors shadow-lg shadow-primary/20">
 <span class="material-symbols-outlined text-[20px]">download</span>
 <span>Raporu İndir</span>
 </button>
@@ -450,6 +450,59 @@
     // Rapor oluşturma
     function generateReport() {
         alert('Rapor oluşturuluyor... (Demo)');
+    }
+    
+    // Rapor dönemi değiştirme
+    function changeReportPeriod(period) {
+        const buttons = document.querySelectorAll('.report-period-btn');
+        buttons.forEach(btn => {
+            btn.classList.remove('bg-surface-raised', 'text-text-main', 'shadow-sm', 'border', 'border-border-color', 'active');
+            btn.classList.add('text-text-sub');
+        });
+        
+        const activeBtn = document.querySelector(`[data-period="${period}"]`);
+        if (activeBtn) {
+            activeBtn.classList.add('bg-surface-raised', 'text-text-main', 'shadow-sm', 'border', 'border-border-color', 'active');
+            activeBtn.classList.remove('text-text-sub');
+        }
+        
+        // Rapor verilerini güncelle
+        updateReportData(period);
+    }
+    
+    // Rapor verilerini güncelle
+    function updateReportData(period) {
+        console.log(`Rapor dönemi değiştirildi: ${period}`);
+        // Burada grafik ve istatistikleri güncelle
+    }
+    
+    // Rapor indirme
+    function downloadReport() {
+        const period = document.querySelector('.report-period-btn.active')?.dataset.period || 'monthly';
+        alert(`${period} raporu indiriliyor... (Demo)`);
+        // Simüle edilmiş indirme
+        setTimeout(() => {
+            alert('Rapor başarıyla indirildi!');
+        }, 1000);
+    }
+    
+    // Grafik kartlarına tıklama
+    document.addEventListener('DOMContentLoaded', function() {
+        const chartCards = document.querySelectorAll('.bg-surface-card.rounded-xl.border');
+        chartCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const title = this.querySelector('h3, h4')?.textContent;
+                if (title) {
+                    showChartDetail(title);
+                }
+            });
+            card.style.cursor = 'pointer';
+        });
+    });
+    
+    // Grafik detayı göster
+    function showChartDetail(title) {
+        alert(`${title} grafiğinin detaylı görünümü açılacak. (Demo)`);
     }
     
     // Sayfa yüklendiğinde

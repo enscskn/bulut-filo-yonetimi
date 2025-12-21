@@ -72,7 +72,7 @@
 <button class="p-2 text-text-sub hover:text-text-main hover:bg-background-main rounded-full transition-colors">
 <span class="material-symbols-outlined">help</span>
 </button>
-<button class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 shadow-lg shadow-primary/20 transition-all">
+<button onclick="openNewReservationModal()" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 shadow-lg shadow-primary/20 transition-all">
 <span class="material-symbols-outlined text-lg">add</span>
 <span class="hidden sm:inline">Yeni Rezervasyon</span>
 </button>
@@ -562,9 +562,117 @@
         alert('Yeni rezervasyon ekleme formu açılacak. (Demo)');
     }
     
+    // Yeni rezervasyon modalı
+    function openNewReservationModal() {
+        const modal = document.getElementById('new-reservation-modal');
+        if (modal) {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        } else {
+            alert('Yeni rezervasyon ekleme formu açılacak. (Demo)');
+        }
+    }
+    
+    function closeNewReservationModal() {
+        const modal = document.getElementById('new-reservation-modal');
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+    }
+    
+    // Rezervasyon detay paneli göster/gizle
+    function toggleReservationSidebar() {
+        const sidebar = document.querySelector('.w-80.border-l.border-border-color');
+        if (sidebar) {
+            sidebar.style.display = sidebar.style.display === 'none' ? 'flex' : 'none';
+        }
+    }
+    
+    // Rezervasyon kartlarına çift tıklama ile detay göster
+    document.addEventListener('DOMContentLoaded', function() {
+        const reservationCards = document.querySelectorAll('[onclick*="showReservationDetail"]');
+        reservationCards.forEach(card => {
+            card.addEventListener('dblclick', function() {
+                const resId = this.getAttribute('onclick').match(/'([^']+)'/)?.[1];
+                if (resId) {
+                    showReservationDetail(resId);
+                }
+            });
+        });
+    });
+    
     // Sayfa yüklendiğinde
     document.addEventListener('DOMContentLoaded', function() {
         updateCalendar();
+    });
+</script>
+
+<!-- Yeni Rezervasyon Modal -->
+<div id="new-reservation-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+    <div class="bg-surface-card-card w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] border border-border-color">
+        <div class="px-6 py-4 border-b border-border-color flex justify-between items-center bg-surface-card-raised">
+            <div class="flex items-center gap-3">
+                <div class="size-8 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined">add</span>
+                </div>
+                <div>
+                    <h3 class="font-bold text-text-main">Yeni Rezervasyon</h3>
+                    <p class="text-xs text-text-sub">Müşteri ve araç bilgilerini girin</p>
+                </div>
+            </div>
+            <button onclick="closeNewReservationModal()" class="text-text-sub hover:text-text-main transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <div class="flex-1 overflow-y-auto bg-background-main p-6">
+            <form class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-xs font-semibold text-text-sub mb-2 block">Müşteri</label>
+                        <input type="text" placeholder="Müşteri ara..." class="w-full h-10 px-3 rounded-lg bg-surface-card-raised border border-border-color text-text-main text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+                    </div>
+                    <div>
+                        <label class="text-xs font-semibold text-text-sub mb-2 block">Araç</label>
+                        <select class="w-full h-10 px-3 rounded-lg bg-surface-card-raised border border-border-color text-text-main text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+                            <option>Araç seçin...</option>
+                            <option>Renault Clio - 34 AB 123</option>
+                            <option>Fiat Egea - 34 CD 456</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-xs font-semibold text-text-sub mb-2 block">Başlangıç Tarihi</label>
+                        <input type="date" class="w-full h-10 px-3 rounded-lg bg-surface-card-raised border border-border-color text-text-main text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+                    </div>
+                    <div>
+                        <label class="text-xs font-semibold text-text-sub mb-2 block">Bitiş Tarihi</label>
+                        <input type="date" class="w-full h-10 px-3 rounded-lg bg-surface-card-raised border border-border-color text-text-main text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="p-6 bg-surface-card-card border-t border-border-color">
+            <div class="flex gap-3">
+                <button onclick="closeNewReservationModal()" class="flex-1 py-3 px-4 rounded-lg border border-border-color text-text-main font-medium hover:bg-surface-card-raised transition-colors">İptal</button>
+                <button onclick="saveNewReservation()" class="flex-[2] py-3 px-4 rounded-lg bg-primary hover:bg-primary-dark text-white font-bold shadow-lg shadow-primary/20 transition-all">
+                    Rezervasyon Oluştur
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function saveNewReservation() {
+        alert('Rezervasyon başarıyla oluşturuldu! (Demo)');
+        closeNewReservationModal();
+    }
+    
+    // ESC tuşu ile modal kapatma
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeNewReservationModal();
+        }
     });
 </script>
 
