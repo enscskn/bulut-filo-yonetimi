@@ -2057,14 +2057,21 @@
             const image = document.getElementById('bpmn-image');
             
             if (imageContainer && image) {
-                // Mouse wheel zoom
+                // Mouse wheel zoom - only when Ctrl key is pressed or over image
                 imageContainer.addEventListener('wheel', function(e) {
-                    e.preventDefault();
-                    if (e.deltaY < 0) {
-                        zoomIn();
-                    } else {
-                        zoomOut();
+                    // Only prevent default if Ctrl key is pressed (zoom mode) or hovering over image
+                    const isOverImage = e.target === image || image.contains(e.target);
+                    const isCtrlPressed = e.ctrlKey || e.metaKey;
+                    
+                    if (isCtrlPressed || isOverImage) {
+                        e.preventDefault();
+                        if (e.deltaY < 0) {
+                            zoomIn();
+                        } else {
+                            zoomOut();
+                        }
                     }
+                    // Otherwise, allow normal scroll
                 });
                 
                 // Mouse drag events
@@ -2222,14 +2229,20 @@
                     }
                 });
                 
-                // Mouse wheel zoom
+                // Mouse wheel zoom - only when Ctrl key is pressed
                 image.addEventListener('wheel', function(e) {
-                    e.preventDefault();
-                    if (e.deltaY < 0) {
-                        zoomInProduct(imageId);
-                    } else {
-                        zoomOutProduct(imageId);
+                    // Only prevent default if Ctrl key is pressed (zoom mode)
+                    const isCtrlPressed = e.ctrlKey || e.metaKey;
+                    
+                    if (isCtrlPressed) {
+                        e.preventDefault();
+                        if (e.deltaY < 0) {
+                            zoomInProduct(imageId);
+                        } else {
+                            zoomOutProduct(imageId);
+                        }
                     }
+                    // Otherwise, allow normal scroll
                 });
                 
                 // Context menu prevention
@@ -2616,11 +2629,26 @@
 
         // Section 1: 3M Analysis - Interactive Cards
         const analysisCards = document.querySelectorAll('#section-1 .analysis-card');
+        let isAnalysisCardScrolling = false;
+        let analysisCardScrollTimeout = null;
+        
+        // Detect scroll to disable hover effects for analysis cards
+        window.addEventListener('scroll', () => {
+            isAnalysisCardScrolling = true;
+            if (analysisCardScrollTimeout) clearTimeout(analysisCardScrollTimeout);
+            analysisCardScrollTimeout = setTimeout(() => {
+                isAnalysisCardScrolling = false;
+            }, 150);
+        }, { passive: true });
+        
         analysisCards.forEach((card, index) => {
             card.style.animationDelay = `${index * 0.2}s`;
             
             card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
+                // Don't apply transform if scrolling
+                if (isAnalysisCardScrolling) return;
+                
+                // Use CSS hover instead of inline transform to prevent scroll lag
                 const icon = this.querySelector('.card-icon');
                 if (icon) {
                     icon.style.animation = 'none';
@@ -2631,7 +2659,7 @@
             });
             
             card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
+                // No need to reset transform since we're not using it anymore
             });
         });
 
@@ -3001,6 +3029,963 @@
             }, { threshold: 0.3 });
             
             titleObserver.observe(title);
+        });
+
+        // ============================================
+        // PERSONA IMAGE ZOOM & DRAG FUNCTIONALITY
+        // ============================================
+        
+        // Persona image zoom state
+        const personaZoomState = {
+            zoom: 1,
+            translateX: 0,
+            translateY: 0,
+            lastTranslateX: 0,
+            lastTranslateY: 0
+        };
+        
+        const personaDragState = {
+            isDragging: false,
+            startX: 0,
+            startY: 0
+        };
+        
+        const personaMinZoom = 0.5;
+        const personaMaxZoom = 3;
+        const personaZoomStep = 0.2;
+        
+        // Helper function to calculate distance between two touches
+        function getDistance(touch1, touch2) {
+            const dx = touch1.clientX - touch2.clientX;
+            const dy = touch1.clientY - touch2.clientY;
+            return Math.sqrt(dx * dx + dy * dy);
+        }
+        
+        // Persona zoom functions
+        function zoomInPersona() {
+            if (personaZoomState.zoom < personaMaxZoom) {
+                personaZoomState.zoom += personaZoomStep;
+                applyPersonaZoom();
+            }
+        }
+        
+        function zoomOutPersona() {
+            if (personaZoomState.zoom > personaMinZoom) {
+                personaZoomState.zoom -= personaZoomStep;
+                applyPersonaZoom();
+            }
+        }
+        
+        function resetZoomPersona() {
+            personaZoomState.zoom = 1;
+            personaZoomState.translateX = 0;
+            personaZoomState.translateY = 0;
+            personaZoomState.lastTranslateX = 0;
+            personaZoomState.lastTranslateY = 0;
+            applyPersonaZoom();
+        }
+        
+        function applyPersonaZoom() {
+            const image = document.getElementById('persona-image');
+            if (image) {
+                const state = personaZoomState;
+                image.style.transform = `scale(${state.zoom}) translate(${state.translateX}px, ${state.translateY}px)`;
+            }
+        }
+        
+        // Initialize persona image functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const personaImage = document.getElementById('persona-image');
+            if (!personaImage) return;
+            
+            // Find the container by traversing up from the image
+            const personaContainer = personaImage.closest('.persona-image-container');
+            
+            if (personaImage && personaContainer) {
+                // Mouse wheel zoom - always work when over container
+                personaContainer.addEventListener('wheel', function(e) {
+                    // Always allow zoom when over the container
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomInPersona();
+                    } else {
+                        zoomOutPersona();
+                    }
+                }, { passive: false });
+                
+                // Also add wheel listener directly to image for better control
+                personaImage.addEventListener('wheel', function(e) {
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomInPersona();
+                    } else {
+                        zoomOutPersona();
+                    }
+                }, { passive: false });
+                
+                // Mouse drag events
+                personaImage.addEventListener('mousedown', function(e) {
+                    if (e.button === 0) { // Left mouse button
+                        personaDragState.isDragging = true;
+                        personaDragState.startX = e.clientX - personaZoomState.translateX;
+                        personaDragState.startY = e.clientY - personaZoomState.translateY;
+                        personaImage.classList.add('dragging');
+                        e.preventDefault();
+                    }
+                });
+                
+                document.addEventListener('mousemove', function(e) {
+                    if (personaDragState.isDragging) {
+                        personaZoomState.translateX = e.clientX - personaDragState.startX;
+                        personaZoomState.translateY = e.clientY - personaDragState.startY;
+                        
+                        // Apply boundaries
+                        const containerRect = personaContainer.getBoundingClientRect();
+                        const imageRect = personaImage.getBoundingClientRect();
+                        const scaledWidth = imageRect.width * personaZoomState.zoom;
+                        const scaledHeight = imageRect.height * personaZoomState.zoom;
+                        
+                        const maxTranslateX = Math.max(0, (scaledWidth - containerRect.width) / 2);
+                        const maxTranslateY = Math.max(0, (scaledHeight - containerRect.height) / 2);
+                        
+                        personaZoomState.translateX = Math.max(-maxTranslateX, Math.min(maxTranslateX, personaZoomState.translateX));
+                        personaZoomState.translateY = Math.max(-maxTranslateY, Math.min(maxTranslateY, personaZoomState.translateY));
+                        
+                        applyPersonaZoom();
+                    }
+                });
+                
+                document.addEventListener('mouseup', function() {
+                    if (personaDragState.isDragging) {
+                        personaDragState.isDragging = false;
+                        personaZoomState.lastTranslateX = personaZoomState.translateX;
+                        personaZoomState.lastTranslateY = personaZoomState.translateY;
+                        personaImage.classList.remove('dragging');
+                    }
+                });
+                
+                // Context menu prevention
+                personaImage.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                });
+                
+                // Touch zoom and drag support
+                let initialDistance = 0;
+                let initialZoom = 1;
+                let initialTranslateX = 0;
+                let initialTranslateY = 0;
+                let touchStartX = 0;
+                let touchStartY = 0;
+                
+                personaImage.addEventListener('touchstart', function(e) {
+                    if (e.touches.length === 1) {
+                        // Single touch - drag
+                        touchStartX = e.touches[0].clientX - personaZoomState.translateX;
+                        touchStartY = e.touches[0].clientY - personaZoomState.translateY;
+                    } else if (e.touches.length === 2) {
+                        // Two touches - zoom
+                        e.preventDefault();
+                        initialDistance = getDistance(e.touches[0], e.touches[1]);
+                        initialZoom = personaZoomState.zoom;
+                        initialTranslateX = personaZoomState.translateX;
+                        initialTranslateY = personaZoomState.translateY;
+                    }
+                });
+                
+                personaImage.addEventListener('touchmove', function(e) {
+                    if (e.touches.length === 1) {
+                        // Single touch - drag
+                        e.preventDefault();
+                        personaZoomState.translateX = e.touches[0].clientX - touchStartX;
+                        personaZoomState.translateY = e.touches[0].clientY - touchStartY;
+                        
+                        // Apply boundaries
+                        const containerRect = personaContainer.getBoundingClientRect();
+                        const imageRect = personaImage.getBoundingClientRect();
+                        const scaledWidth = imageRect.width * personaZoomState.zoom;
+                        const scaledHeight = imageRect.height * personaZoomState.zoom;
+                        
+                        const maxTranslateX = Math.max(0, (scaledWidth - containerRect.width) / 2);
+                        const maxTranslateY = Math.max(0, (scaledHeight - containerRect.height) / 2);
+                        
+                        personaZoomState.translateX = Math.max(-maxTranslateX, Math.min(maxTranslateX, personaZoomState.translateX));
+                        personaZoomState.translateY = Math.max(-maxTranslateY, Math.min(maxTranslateY, personaZoomState.translateY));
+                        
+                        applyPersonaZoom();
+                    } else if (e.touches.length === 2) {
+                        // Two touches - zoom
+                        e.preventDefault();
+                        const currentDistance = getDistance(e.touches[0], e.touches[1]);
+                        const scale = currentDistance / initialDistance;
+                        const newZoom = initialZoom * scale;
+                        
+                        if (newZoom >= personaMinZoom && newZoom <= personaMaxZoom) {
+                            personaZoomState.zoom = newZoom;
+                            applyPersonaZoom();
+                        }
+                    }
+                });
+            }
+        });
+
+        // ============================================
+        // EMPATI IMAGE ZOOM & DRAG FUNCTIONALITY
+        // ============================================
+        
+        // Empati image zoom state
+        const empatiZoomState = {
+            zoom: 1,
+            translateX: 0,
+            translateY: 0,
+            lastTranslateX: 0,
+            lastTranslateY: 0
+        };
+        
+        const empatiDragState = {
+            isDragging: false,
+            startX: 0,
+            startY: 0
+        };
+        
+        const empatiMinZoom = 0.5;
+        const empatiMaxZoom = 3;
+        const empatiZoomStep = 0.2;
+        
+        // Empati zoom functions
+        function zoomInEmpati() {
+            if (empatiZoomState.zoom < empatiMaxZoom) {
+                empatiZoomState.zoom += empatiZoomStep;
+                applyEmpatiZoom();
+            }
+        }
+        
+        function zoomOutEmpati() {
+            if (empatiZoomState.zoom > empatiMinZoom) {
+                empatiZoomState.zoom -= empatiZoomStep;
+                applyEmpatiZoom();
+            }
+        }
+        
+        function resetZoomEmpati() {
+            empatiZoomState.zoom = 1;
+            empatiZoomState.translateX = 0;
+            empatiZoomState.translateY = 0;
+            empatiZoomState.lastTranslateX = 0;
+            empatiZoomState.lastTranslateY = 0;
+            applyEmpatiZoom();
+        }
+        
+        function applyEmpatiZoom() {
+            const image = document.getElementById('empati-image');
+            if (image) {
+                const state = empatiZoomState;
+                image.style.transform = `scale(${state.zoom}) translate(${state.translateX}px, ${state.translateY}px)`;
+            }
+        }
+        
+        // Initialize empati image functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const empatiImage = document.getElementById('empati-image');
+            if (!empatiImage) return;
+            
+            // Find the container by traversing up from the image
+            const empatiContainer = empatiImage.closest('.persona-image-container');
+            
+            if (empatiImage && empatiContainer) {
+                // Mouse wheel zoom - always work when over container or image
+                empatiContainer.addEventListener('wheel', function(e) {
+                    // Always allow zoom when over the container
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomInEmpati();
+                    } else {
+                        zoomOutEmpati();
+                    }
+                }, { passive: false });
+                
+                // Also add wheel listener directly to image for better control
+                empatiImage.addEventListener('wheel', function(e) {
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomInEmpati();
+                    } else {
+                        zoomOutEmpati();
+                    }
+                }, { passive: false });
+                
+                // Mouse drag events
+                empatiImage.addEventListener('mousedown', function(e) {
+                    if (e.button === 0) { // Left mouse button
+                        empatiDragState.isDragging = true;
+                        empatiDragState.startX = e.clientX - empatiZoomState.translateX;
+                        empatiDragState.startY = e.clientY - empatiZoomState.translateY;
+                        empatiImage.classList.add('dragging');
+                        e.preventDefault();
+                    }
+                });
+                
+                document.addEventListener('mousemove', function(e) {
+                    if (empatiDragState.isDragging) {
+                        empatiZoomState.translateX = e.clientX - empatiDragState.startX;
+                        empatiZoomState.translateY = e.clientY - empatiDragState.startY;
+                        
+                        // Apply boundaries
+                        const containerRect = empatiContainer.getBoundingClientRect();
+                        const imageRect = empatiImage.getBoundingClientRect();
+                        const scaledWidth = imageRect.width * empatiZoomState.zoom;
+                        const scaledHeight = imageRect.height * empatiZoomState.zoom;
+                        
+                        const maxTranslateX = Math.max(0, (scaledWidth - containerRect.width) / 2);
+                        const maxTranslateY = Math.max(0, (scaledHeight - containerRect.height) / 2);
+                        
+                        empatiZoomState.translateX = Math.max(-maxTranslateX, Math.min(maxTranslateX, empatiZoomState.translateX));
+                        empatiZoomState.translateY = Math.max(-maxTranslateY, Math.min(maxTranslateY, empatiZoomState.translateY));
+                        
+                        applyEmpatiZoom();
+                    }
+                });
+                
+                document.addEventListener('mouseup', function() {
+                    if (empatiDragState.isDragging) {
+                        empatiDragState.isDragging = false;
+                        empatiZoomState.lastTranslateX = empatiZoomState.translateX;
+                        empatiZoomState.lastTranslateY = empatiZoomState.translateY;
+                        empatiImage.classList.remove('dragging');
+                    }
+                });
+                
+                // Context menu prevention
+                empatiImage.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                });
+                
+                // Touch zoom and drag support
+                let initialDistance = 0;
+                let initialZoom = 1;
+                let initialTranslateX = 0;
+                let initialTranslateY = 0;
+                let touchStartX = 0;
+                let touchStartY = 0;
+                
+                empatiImage.addEventListener('touchstart', function(e) {
+                    if (e.touches.length === 1) {
+                        // Single touch - drag
+                        touchStartX = e.touches[0].clientX - empatiZoomState.translateX;
+                        touchStartY = e.touches[0].clientY - empatiZoomState.translateY;
+                    } else if (e.touches.length === 2) {
+                        // Two touches - zoom
+                        e.preventDefault();
+                        initialDistance = getDistance(e.touches[0], e.touches[1]);
+                        initialZoom = empatiZoomState.zoom;
+                        initialTranslateX = empatiZoomState.translateX;
+                        initialTranslateY = empatiZoomState.translateY;
+                    }
+                });
+                
+                empatiImage.addEventListener('touchmove', function(e) {
+                    if (e.touches.length === 1) {
+                        // Single touch - drag
+                        e.preventDefault();
+                        empatiZoomState.translateX = e.touches[0].clientX - touchStartX;
+                        empatiZoomState.translateY = e.touches[0].clientY - touchStartY;
+                        
+                        // Apply boundaries
+                        const containerRect = empatiContainer.getBoundingClientRect();
+                        const imageRect = empatiImage.getBoundingClientRect();
+                        const scaledWidth = imageRect.width * empatiZoomState.zoom;
+                        const scaledHeight = imageRect.height * empatiZoomState.zoom;
+                        
+                        const maxTranslateX = Math.max(0, (scaledWidth - containerRect.width) / 2);
+                        const maxTranslateY = Math.max(0, (scaledHeight - containerRect.height) / 2);
+                        
+                        empatiZoomState.translateX = Math.max(-maxTranslateX, Math.min(maxTranslateX, empatiZoomState.translateX));
+                        empatiZoomState.translateY = Math.max(-maxTranslateY, Math.min(maxTranslateY, empatiZoomState.translateY));
+                        
+                        applyEmpatiZoom();
+                    } else if (e.touches.length === 2) {
+                        // Two touches - zoom
+                        e.preventDefault();
+                        const currentDistance = getDistance(e.touches[0], e.touches[1]);
+                        const scale = currentDistance / initialDistance;
+                        const newZoom = initialZoom * scale;
+                        
+                        if (newZoom >= empatiMinZoom && newZoom <= empatiMaxZoom) {
+                            empatiZoomState.zoom = newZoom;
+                            applyEmpatiZoom();
+                        }
+                    }
+                });
+            }
+        });
+
+        // ============================================
+        // PIRAMIT IMAGE ZOOM & DRAG FUNCTIONALITY
+        // ============================================
+        
+        // Piramit image zoom state
+        const piramitZoomState = {
+            zoom: 1,
+            translateX: 0,
+            translateY: 0,
+            lastTranslateX: 0,
+            lastTranslateY: 0
+        };
+        
+        const piramitDragState = {
+            isDragging: false,
+            startX: 0,
+            startY: 0
+        };
+        
+        const piramitMinZoom = 0.5;
+        const piramitMaxZoom = 3;
+        const piramitZoomStep = 0.2;
+        
+        // Piramit zoom functions
+        function zoomInPiramit() {
+            if (piramitZoomState.zoom < piramitMaxZoom) {
+                piramitZoomState.zoom += piramitZoomStep;
+                applyPiramitZoom();
+            }
+        }
+        
+        function zoomOutPiramit() {
+            if (piramitZoomState.zoom > piramitMinZoom) {
+                piramitZoomState.zoom -= piramitZoomStep;
+                applyPiramitZoom();
+            }
+        }
+        
+        function resetZoomPiramit() {
+            piramitZoomState.zoom = 1;
+            piramitZoomState.translateX = 0;
+            piramitZoomState.translateY = 0;
+            piramitZoomState.lastTranslateX = 0;
+            piramitZoomState.lastTranslateY = 0;
+            applyPiramitZoom();
+        }
+        
+        function applyPiramitZoom() {
+            const image = document.getElementById('piramit-image');
+            if (image) {
+                const state = piramitZoomState;
+                image.style.transform = `scale(${state.zoom}) translate(${state.translateX}px, ${state.translateY}px)`;
+            }
+        }
+        
+        // Initialize piramit image functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const piramitImage = document.getElementById('piramit-image');
+            if (!piramitImage) return;
+            
+            // Find the container by traversing up from the image
+            const piramitContainer = piramitImage.closest('.persona-image-container');
+            
+            if (piramitImage && piramitContainer) {
+                // Mouse wheel zoom - always work when over container
+                piramitContainer.addEventListener('wheel', function(e) {
+                    // Always allow zoom when over the container
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomInPiramit();
+                    } else {
+                        zoomOutPiramit();
+                    }
+                }, { passive: false });
+                
+                // Also add wheel listener directly to image for better control
+                piramitImage.addEventListener('wheel', function(e) {
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomInPiramit();
+                    } else {
+                        zoomOutPiramit();
+                    }
+                }, { passive: false });
+                
+                // Mouse drag events
+                piramitImage.addEventListener('mousedown', function(e) {
+                    if (e.button === 0) { // Left mouse button
+                        piramitDragState.isDragging = true;
+                        piramitDragState.startX = e.clientX - piramitZoomState.translateX;
+                        piramitDragState.startY = e.clientY - piramitZoomState.translateY;
+                        piramitImage.classList.add('dragging');
+                        e.preventDefault();
+                    }
+                });
+                
+                document.addEventListener('mousemove', function(e) {
+                    if (piramitDragState.isDragging) {
+                        piramitZoomState.translateX = e.clientX - piramitDragState.startX;
+                        piramitZoomState.translateY = e.clientY - piramitDragState.startY;
+                        
+                        // Apply boundaries
+                        const containerRect = piramitContainer.getBoundingClientRect();
+                        const imageRect = piramitImage.getBoundingClientRect();
+                        const scaledWidth = imageRect.width * piramitZoomState.zoom;
+                        const scaledHeight = imageRect.height * piramitZoomState.zoom;
+                        
+                        const maxTranslateX = Math.max(0, (scaledWidth - containerRect.width) / 2);
+                        const maxTranslateY = Math.max(0, (scaledHeight - containerRect.height) / 2);
+                        
+                        piramitZoomState.translateX = Math.max(-maxTranslateX, Math.min(maxTranslateX, piramitZoomState.translateX));
+                        piramitZoomState.translateY = Math.max(-maxTranslateY, Math.min(maxTranslateY, piramitZoomState.translateY));
+                        
+                        applyPiramitZoom();
+                    }
+                });
+                
+                document.addEventListener('mouseup', function() {
+                    if (piramitDragState.isDragging) {
+                        piramitDragState.isDragging = false;
+                        piramitZoomState.lastTranslateX = piramitZoomState.translateX;
+                        piramitZoomState.lastTranslateY = piramitZoomState.translateY;
+                        piramitImage.classList.remove('dragging');
+                    }
+                });
+                
+                // Context menu prevention
+                piramitImage.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                });
+                
+                // Touch zoom and drag support
+                let initialDistance = 0;
+                let initialZoom = 1;
+                let initialTranslateX = 0;
+                let initialTranslateY = 0;
+                let touchStartX = 0;
+                let touchStartY = 0;
+                
+                piramitImage.addEventListener('touchstart', function(e) {
+                    if (e.touches.length === 1) {
+                        // Single touch - drag
+                        touchStartX = e.touches[0].clientX - piramitZoomState.translateX;
+                        touchStartY = e.touches[0].clientY - piramitZoomState.translateY;
+                    } else if (e.touches.length === 2) {
+                        // Two touches - zoom
+                        e.preventDefault();
+                        initialDistance = getDistance(e.touches[0], e.touches[1]);
+                        initialZoom = piramitZoomState.zoom;
+                        initialTranslateX = piramitZoomState.translateX;
+                        initialTranslateY = piramitZoomState.translateY;
+                    }
+                });
+                
+                piramitImage.addEventListener('touchmove', function(e) {
+                    if (e.touches.length === 1) {
+                        // Single touch - drag
+                        e.preventDefault();
+                        piramitZoomState.translateX = e.touches[0].clientX - touchStartX;
+                        piramitZoomState.translateY = e.touches[0].clientY - touchStartY;
+                        
+                        // Apply boundaries
+                        const containerRect = piramitContainer.getBoundingClientRect();
+                        const imageRect = piramitImage.getBoundingClientRect();
+                        const scaledWidth = imageRect.width * piramitZoomState.zoom;
+                        const scaledHeight = imageRect.height * piramitZoomState.zoom;
+                        
+                        const maxTranslateX = Math.max(0, (scaledWidth - containerRect.width) / 2);
+                        const maxTranslateY = Math.max(0, (scaledHeight - containerRect.height) / 2);
+                        
+                        piramitZoomState.translateX = Math.max(-maxTranslateX, Math.min(maxTranslateX, piramitZoomState.translateX));
+                        piramitZoomState.translateY = Math.max(-maxTranslateY, Math.min(maxTranslateY, piramitZoomState.translateY));
+                        
+                        applyPiramitZoom();
+                    } else if (e.touches.length === 2) {
+                        // Two touches - zoom
+                        e.preventDefault();
+                        const currentDistance = getDistance(e.touches[0], e.touches[1]);
+                        const scale = currentDistance / initialDistance;
+                        const newZoom = initialZoom * scale;
+                        
+                        if (newZoom >= piramitMinZoom && newZoom <= piramitMaxZoom) {
+                            piramitZoomState.zoom = newZoom;
+                            applyPiramitZoom();
+                        }
+                    }
+                });
+            }
+        });
+
+        // ============================================
+        // KANO IMAGE ZOOM & DRAG FUNCTIONALITY
+        // ============================================
+        
+        // Kano image zoom state
+        const kanoZoomState = {
+            zoom: 1,
+            translateX: 0,
+            translateY: 0,
+            lastTranslateX: 0,
+            lastTranslateY: 0
+        };
+        
+        const kanoDragState = {
+            isDragging: false,
+            startX: 0,
+            startY: 0
+        };
+        
+        const kanoMinZoom = 0.5;
+        const kanoMaxZoom = 3;
+        const kanoZoomStep = 0.2;
+        
+        // Kano zoom functions
+        function zoomInKano() {
+            if (kanoZoomState.zoom < kanoMaxZoom) {
+                kanoZoomState.zoom += kanoZoomStep;
+                applyKanoZoom();
+            }
+        }
+        
+        function zoomOutKano() {
+            if (kanoZoomState.zoom > kanoMinZoom) {
+                kanoZoomState.zoom -= kanoZoomStep;
+                applyKanoZoom();
+            }
+        }
+        
+        function resetZoomKano() {
+            kanoZoomState.zoom = 1;
+            kanoZoomState.translateX = 0;
+            kanoZoomState.translateY = 0;
+            kanoZoomState.lastTranslateX = 0;
+            kanoZoomState.lastTranslateY = 0;
+            applyKanoZoom();
+        }
+        
+        function applyKanoZoom() {
+            const image = document.getElementById('kano-image');
+            if (image) {
+                const state = kanoZoomState;
+                image.style.transform = `scale(${state.zoom}) translate(${state.translateX}px, ${state.translateY}px)`;
+            }
+        }
+        
+        // Initialize kano image functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const kanoImage = document.getElementById('kano-image');
+            if (!kanoImage) return;
+            
+            // Find the container by traversing up from the image
+            const kanoContainer = kanoImage.closest('.persona-image-container');
+            
+            if (kanoImage && kanoContainer) {
+                // Mouse wheel zoom - always work when over container
+                kanoContainer.addEventListener('wheel', function(e) {
+                    // Always allow zoom when over the container
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomInKano();
+                    } else {
+                        zoomOutKano();
+                    }
+                }, { passive: false });
+                
+                // Also add wheel listener directly to image for better control
+                kanoImage.addEventListener('wheel', function(e) {
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomInKano();
+                    } else {
+                        zoomOutKano();
+                    }
+                }, { passive: false });
+                
+                // Mouse drag events
+                kanoImage.addEventListener('mousedown', function(e) {
+                    if (e.button === 0) { // Left mouse button
+                        kanoDragState.isDragging = true;
+                        kanoDragState.startX = e.clientX - kanoZoomState.translateX;
+                        kanoDragState.startY = e.clientY - kanoZoomState.translateY;
+                        kanoImage.classList.add('dragging');
+                        e.preventDefault();
+                    }
+                });
+                
+                document.addEventListener('mousemove', function(e) {
+                    if (kanoDragState.isDragging) {
+                        kanoZoomState.translateX = e.clientX - kanoDragState.startX;
+                        kanoZoomState.translateY = e.clientY - kanoDragState.startY;
+                        
+                        // Apply boundaries
+                        const containerRect = kanoContainer.getBoundingClientRect();
+                        const imageRect = kanoImage.getBoundingClientRect();
+                        const scaledWidth = imageRect.width * kanoZoomState.zoom;
+                        const scaledHeight = imageRect.height * kanoZoomState.zoom;
+                        
+                        const maxTranslateX = Math.max(0, (scaledWidth - containerRect.width) / 2);
+                        const maxTranslateY = Math.max(0, (scaledHeight - containerRect.height) / 2);
+                        
+                        kanoZoomState.translateX = Math.max(-maxTranslateX, Math.min(maxTranslateX, kanoZoomState.translateX));
+                        kanoZoomState.translateY = Math.max(-maxTranslateY, Math.min(maxTranslateY, kanoZoomState.translateY));
+                        
+                        applyKanoZoom();
+                    }
+                });
+                
+                document.addEventListener('mouseup', function() {
+                    if (kanoDragState.isDragging) {
+                        kanoDragState.isDragging = false;
+                        kanoZoomState.lastTranslateX = kanoZoomState.translateX;
+                        kanoZoomState.lastTranslateY = kanoZoomState.translateY;
+                        kanoImage.classList.remove('dragging');
+                    }
+                });
+                
+                // Context menu prevention
+                kanoImage.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                });
+                
+                // Touch zoom and drag support
+                let initialDistance = 0;
+                let initialZoom = 1;
+                let initialTranslateX = 0;
+                let initialTranslateY = 0;
+                let touchStartX = 0;
+                let touchStartY = 0;
+                
+                kanoImage.addEventListener('touchstart', function(e) {
+                    if (e.touches.length === 1) {
+                        // Single touch - drag
+                        touchStartX = e.touches[0].clientX - kanoZoomState.translateX;
+                        touchStartY = e.touches[0].clientY - kanoZoomState.translateY;
+                    } else if (e.touches.length === 2) {
+                        // Two touches - zoom
+                        e.preventDefault();
+                        initialDistance = getDistance(e.touches[0], e.touches[1]);
+                        initialZoom = kanoZoomState.zoom;
+                        initialTranslateX = kanoZoomState.translateX;
+                        initialTranslateY = kanoZoomState.translateY;
+                    }
+                });
+                
+                kanoImage.addEventListener('touchmove', function(e) {
+                    if (e.touches.length === 1) {
+                        // Single touch - drag
+                        e.preventDefault();
+                        kanoZoomState.translateX = e.touches[0].clientX - touchStartX;
+                        kanoZoomState.translateY = e.touches[0].clientY - touchStartY;
+                        
+                        // Apply boundaries
+                        const containerRect = kanoContainer.getBoundingClientRect();
+                        const imageRect = kanoImage.getBoundingClientRect();
+                        const scaledWidth = imageRect.width * kanoZoomState.zoom;
+                        const scaledHeight = imageRect.height * kanoZoomState.zoom;
+                        
+                        const maxTranslateX = Math.max(0, (scaledWidth - containerRect.width) / 2);
+                        const maxTranslateY = Math.max(0, (scaledHeight - containerRect.height) / 2);
+                        
+                        kanoZoomState.translateX = Math.max(-maxTranslateX, Math.min(maxTranslateX, kanoZoomState.translateX));
+                        kanoZoomState.translateY = Math.max(-maxTranslateY, Math.min(maxTranslateY, kanoZoomState.translateY));
+                        
+                        applyKanoZoom();
+                    } else if (e.touches.length === 2) {
+                        // Two touches - zoom
+                        e.preventDefault();
+                        const currentDistance = getDistance(e.touches[0], e.touches[1]);
+                        const scale = currentDistance / initialDistance;
+                        const newZoom = initialZoom * scale;
+                        
+                        if (newZoom >= kanoMinZoom && newZoom <= kanoMaxZoom) {
+                            kanoZoomState.zoom = newZoom;
+                            applyKanoZoom();
+                        }
+                    }
+                });
+            }
+        });
+
+        // ============================================
+        // SENARYO IMAGE ZOOM & DRAG FUNCTIONALITY
+        // ============================================
+        
+        // Senaryo image zoom state
+        const senaryoZoomState = {
+            zoom: 1,
+            translateX: 0,
+            translateY: 0,
+            lastTranslateX: 0,
+            lastTranslateY: 0
+        };
+        
+        const senaryoDragState = {
+            isDragging: false,
+            startX: 0,
+            startY: 0
+        };
+        
+        const senaryoMinZoom = 0.5;
+        const senaryoMaxZoom = 3;
+        const senaryoZoomStep = 0.2;
+        
+        // Senaryo zoom functions
+        function zoomInSenaryo() {
+            if (senaryoZoomState.zoom < senaryoMaxZoom) {
+                senaryoZoomState.zoom += senaryoZoomStep;
+                applySenaryoZoom();
+            }
+        }
+        
+        function zoomOutSenaryo() {
+            if (senaryoZoomState.zoom > senaryoMinZoom) {
+                senaryoZoomState.zoom -= senaryoZoomStep;
+                applySenaryoZoom();
+            }
+        }
+        
+        function resetZoomSenaryo() {
+            senaryoZoomState.zoom = 1;
+            senaryoZoomState.translateX = 0;
+            senaryoZoomState.translateY = 0;
+            senaryoZoomState.lastTranslateX = 0;
+            senaryoZoomState.lastTranslateY = 0;
+            applySenaryoZoom();
+        }
+        
+        function applySenaryoZoom() {
+            const image = document.getElementById('senaryo-image');
+            if (image) {
+                const state = senaryoZoomState;
+                image.style.transform = `scale(${state.zoom}) translate(${state.translateX}px, ${state.translateY}px)`;
+            }
+        }
+        
+        // Initialize senaryo image functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const senaryoImage = document.getElementById('senaryo-image');
+            if (!senaryoImage) return;
+            
+            // Find the container by traversing up from the image
+            const senaryoContainer = senaryoImage.closest('.persona-image-container');
+            
+            if (senaryoImage && senaryoContainer) {
+                // Mouse wheel zoom - always work when over container
+                senaryoContainer.addEventListener('wheel', function(e) {
+                    // Always allow zoom when over the container
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomInSenaryo();
+                    } else {
+                        zoomOutSenaryo();
+                    }
+                }, { passive: false });
+                
+                // Also add wheel listener directly to image for better control
+                senaryoImage.addEventListener('wheel', function(e) {
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomInSenaryo();
+                    } else {
+                        zoomOutSenaryo();
+                    }
+                }, { passive: false });
+                
+                // Mouse drag events
+                senaryoImage.addEventListener('mousedown', function(e) {
+                    if (e.button === 0) { // Left mouse button
+                        senaryoDragState.isDragging = true;
+                        senaryoDragState.startX = e.clientX - senaryoZoomState.translateX;
+                        senaryoDragState.startY = e.clientY - senaryoZoomState.translateY;
+                        senaryoImage.classList.add('dragging');
+                        e.preventDefault();
+                    }
+                });
+                
+                document.addEventListener('mousemove', function(e) {
+                    if (senaryoDragState.isDragging) {
+                        senaryoZoomState.translateX = e.clientX - senaryoDragState.startX;
+                        senaryoZoomState.translateY = e.clientY - senaryoDragState.startY;
+                        
+                        // Apply boundaries
+                        const containerRect = senaryoContainer.getBoundingClientRect();
+                        const imageRect = senaryoImage.getBoundingClientRect();
+                        const scaledWidth = imageRect.width * senaryoZoomState.zoom;
+                        const scaledHeight = imageRect.height * senaryoZoomState.zoom;
+                        
+                        const maxTranslateX = Math.max(0, (scaledWidth - containerRect.width) / 2);
+                        const maxTranslateY = Math.max(0, (scaledHeight - containerRect.height) / 2);
+                        
+                        senaryoZoomState.translateX = Math.max(-maxTranslateX, Math.min(maxTranslateX, senaryoZoomState.translateX));
+                        senaryoZoomState.translateY = Math.max(-maxTranslateY, Math.min(maxTranslateY, senaryoZoomState.translateY));
+                        
+                        applySenaryoZoom();
+                    }
+                });
+                
+                document.addEventListener('mouseup', function() {
+                    if (senaryoDragState.isDragging) {
+                        senaryoDragState.isDragging = false;
+                        senaryoZoomState.lastTranslateX = senaryoZoomState.translateX;
+                        senaryoZoomState.lastTranslateY = senaryoZoomState.translateY;
+                        senaryoImage.classList.remove('dragging');
+                    }
+                });
+                
+                // Context menu prevention
+                senaryoImage.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                });
+                
+                // Touch zoom and drag support
+                let initialDistance = 0;
+                let initialZoom = 1;
+                let initialTranslateX = 0;
+                let initialTranslateY = 0;
+                let touchStartX = 0;
+                let touchStartY = 0;
+                
+                senaryoImage.addEventListener('touchstart', function(e) {
+                    if (e.touches.length === 1) {
+                        // Single touch - drag
+                        touchStartX = e.touches[0].clientX - senaryoZoomState.translateX;
+                        touchStartY = e.touches[0].clientY - senaryoZoomState.translateY;
+                    } else if (e.touches.length === 2) {
+                        // Two touches - zoom
+                        e.preventDefault();
+                        initialDistance = getDistance(e.touches[0], e.touches[1]);
+                        initialZoom = senaryoZoomState.zoom;
+                        initialTranslateX = senaryoZoomState.translateX;
+                        initialTranslateY = senaryoZoomState.translateY;
+                    }
+                });
+                
+                senaryoImage.addEventListener('touchmove', function(e) {
+                    if (e.touches.length === 1) {
+                        // Single touch - drag
+                        e.preventDefault();
+                        senaryoZoomState.translateX = e.touches[0].clientX - touchStartX;
+                        senaryoZoomState.translateY = e.touches[0].clientY - touchStartY;
+                        
+                        // Apply boundaries
+                        const containerRect = senaryoContainer.getBoundingClientRect();
+                        const imageRect = senaryoImage.getBoundingClientRect();
+                        const scaledWidth = imageRect.width * senaryoZoomState.zoom;
+                        const scaledHeight = imageRect.height * senaryoZoomState.zoom;
+                        
+                        const maxTranslateX = Math.max(0, (scaledWidth - containerRect.width) / 2);
+                        const maxTranslateY = Math.max(0, (scaledHeight - containerRect.height) / 2);
+                        
+                        senaryoZoomState.translateX = Math.max(-maxTranslateX, Math.min(maxTranslateX, senaryoZoomState.translateX));
+                        senaryoZoomState.translateY = Math.max(-maxTranslateY, Math.min(maxTranslateY, senaryoZoomState.translateY));
+                        
+                        applySenaryoZoom();
+                    } else if (e.touches.length === 2) {
+                        // Two touches - zoom
+                        e.preventDefault();
+                        const currentDistance = getDistance(e.touches[0], e.touches[1]);
+                        const scale = currentDistance / initialDistance;
+                        const newZoom = initialZoom * scale;
+                        
+                        if (newZoom >= senaryoMinZoom && newZoom <= senaryoMaxZoom) {
+                            senaryoZoomState.zoom = newZoom;
+                            applySenaryoZoom();
+                        }
+                    }
+                });
+            }
         });
 
         // Add title animation keyframes

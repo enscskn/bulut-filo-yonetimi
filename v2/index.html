@@ -24,6 +24,7 @@
     <!-- Navigation Dots -->
     <nav id="nav-menu">
         <div class="nav-dot" data-section="cover" data-tooltip="Açılış"></div>
+        <div class="nav-dot" data-section="team" data-tooltip="Ekip"></div>
         <div class="nav-dot" data-section="section-1" data-tooltip="3M & EBO"></div>
         <div class="nav-dot" data-section="section-2" data-tooltip="Güç/İlgi"></div>
         <div class="nav-dot" data-section="section-3" data-tooltip="RACI"></div>
@@ -51,6 +52,31 @@
             <p class="cover-company" data-animate="fade-up" data-delay="700">Bulut Filo Yönetimi - BPM Projesi</p>
         </div>
         <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- Section 2: Team -->
+    <section id="team">
+        <div class="container">
+            <h2 data-aos="fade-up">Proje Ekibi</h2>
+            <div class="team-grid">
+                <div class="glass-card card-3d team-member" data-aos="fade-right" data-aos-delay="100">
+                    <div class="team-avatar">
+                        <img src="../v2/images/balci.JPG" alt="Enes Balcı" class="team-avatar-img">
+                    </div>
+                    <h3 class="team-name">Enes Balcı</h3>
+                    <p class="team-role">Kıdemli İş Analisti</p>
+                    <p class="team-description">Kıdemli iş analisti olarak projelerin planlanması, yönetilmesi ve sonuçlandırılmasında öncü rol oynar. Uzmanlığı ve deneyimi ile proje bünyesinde iş akışını en üst seviyeye taşımak için çalışır.</p>
+                </div>
+                <div class="glass-card card-3d team-member" data-aos="fade-up" data-aos-delay="200">
+                    <div class="team-avatar">
+                        <img src="../v2/images/boi.JPG" alt="Enes Coşkun" class="team-avatar-img">
+                    </div>
+                    <h3 class="team-name">Enes Coşkun</h3>
+                    <p class="team-role">Kıdemli İş Geliştirme Uzmanı</p>
+                    <p class="team-description">Kıdemli İş Geliştirme Uzmanı olarak, sektördeki yenilikleri takip ederek yeni fırsatları keşfetmek ve yeni pazarlara geçmeyi amaçlar. Uzmanlığı ve deneyimi ile müşteri memnuniyetini en üst seviyeye taşımak için çalışır.</p>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Section 1: 3M Analizi ve EBO -->
@@ -283,7 +309,15 @@
             
             <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
                 <h3>4.1. Persona: "Geleneksel Ahmet Bey"</h3>
-                <div class="persona-card">
+                <div class="persona-image-container">
+                    <img src="./images/persona.png" alt="Persona: Geleneksel Ahmet Bey" class="persona-image" id="persona-image">
+                    <div class="zoom-controls">
+                        <button class="zoom-btn zoom-in" onclick="zoomInPersona()">🔍+</button>
+                        <button class="zoom-btn zoom-out" onclick="zoomOutPersona()">🔍-</button>
+                        <button class="zoom-btn zoom-reset" onclick="resetZoomPersona()">⌂</button>
+                    </div>
+                </div>
+                <div class="persona-card" style="margin-top: 30px;">
                     <div class="persona-header">
                         <div class="persona-avatar">👨‍💼</div>
                         <div class="persona-info">
@@ -304,7 +338,15 @@
 
             <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
                 <h3>4.2. Empati Haritası</h3>
-                <div class="empathy-grid">
+                <div class="persona-image-container">
+                    <img src="./images/empati.png" alt="Empati Haritası: Geleneksel Ahmet Bey" class="persona-image" id="empati-image">
+                    <div class="zoom-controls">
+                        <button class="zoom-btn zoom-in" onclick="zoomInEmpati()">🔍+</button>
+                        <button class="zoom-btn zoom-out" onclick="zoomOutEmpati()">🔍-</button>
+                        <button class="zoom-btn zoom-reset" onclick="resetZoomEmpati()">⌂</button>
+                    </div>
+                </div>
+                <div class="empathy-grid" style="margin-top: 30px;">
                     <div class="empathy-card">
                         <h4>💬 Ne Söylüyor?</h4>
                         <ul>
@@ -432,7 +474,15 @@
             <h2 data-aos="fade-up">6. Gereksinim Piramidi</h2>
             
             <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="pyramid-container">
+                <div class="persona-image-container">
+                    <img src="./images/piramit.png" alt="Gereksinim Piramidi" class="persona-image" id="piramit-image">
+                    <div class="zoom-controls">
+                        <button class="zoom-btn zoom-in" onclick="zoomInPiramit()">🔍+</button>
+                        <button class="zoom-btn zoom-out" onclick="zoomOutPiramit()">🔍-</button>
+                        <button class="zoom-btn zoom-reset" onclick="resetZoomPiramit()">⌂</button>
+                    </div>
+                </div>
+                <div class="pyramid-container" style="margin-top: 30px;">
                     <div class="pyramid-layer layer-1">
                         <div class="layer-icon">🎯</div>
                         <h3>1. KATMAN: İŞ HEDEFLERİ</h3>
@@ -534,7 +584,15 @@
             <h2 data-aos="fade-up">8. KANO Modeli ile Önceliklendirme</h2>
             
             <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
-                <h3>8.1. Özellik Sınıflandırması</h3>
+                <div class="persona-image-container">
+                    <img src="./images/kano.png" alt="KANO Modeli ile Önceliklendirme" class="persona-image" id="kano-image">
+                    <div class="zoom-controls">
+                        <button class="zoom-btn zoom-in" onclick="zoomInKano()">🔍+</button>
+                        <button class="zoom-btn zoom-out" onclick="zoomOutKano()">🔍-</button>
+                        <button class="zoom-btn zoom-reset" onclick="resetZoomKano()">⌂</button>
+                    </div>
+                </div>
+                <h3 style="margin-top: 30px;">8.1. Özellik Sınıflandırması</h3>
                 <div class="kano-grid">
                     <div class="kano-card must-be">
                         <div class="kano-header">
@@ -827,6 +885,17 @@
         <div class="geometric-pattern"></div>
         <div class="container">
             <h2 data-aos="fade-up" style="color: white;">12. Storyboard (Hikayeleştirme)</h2>
+            
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="50">
+                <div class="persona-image-container">
+                    <img src="./images/senaryo.png" alt="Storyboard Senaryoları" class="persona-image" id="senaryo-image">
+                    <div class="zoom-controls">
+                        <button class="zoom-btn zoom-in" onclick="zoomInSenaryo()">🔍+</button>
+                        <button class="zoom-btn zoom-out" onclick="zoomOutSenaryo()">🔍-</button>
+                        <button class="zoom-btn zoom-reset" onclick="resetZoomSenaryo()">⌂</button>
+                    </div>
+                </div>
+            </div>
             
             <!-- Scenario 1 -->
             <div class="scenario-header" data-aos="fade-up" data-aos-delay="100">
