@@ -537,6 +537,88 @@
             });
         });
 
+        // Keyboard navigation with arrow keys
+        let keyboardNavigationEnabled = true;
+        let lastKeyPressTime = 0;
+        const KEYBOARD_DEBOUNCE = 500; // Prevent rapid key presses
+
+        function navigateToSection(direction) {
+            // Don't navigate if scrolling is in progress or debounce time hasn't passed
+            if (isScrolling || Date.now() - lastKeyPressTime < KEYBOARD_DEBOUNCE) {
+                return;
+            }
+
+            // Get all sections in order
+            const sectionIds = Array.from(navDots).map(dot => dot.getAttribute('data-section'));
+            const currentSectionId = sectionIds.find(id => {
+                const section = document.getElementById(id);
+                if (!section) return false;
+                const rect = section.getBoundingClientRect();
+                return rect.top <= window.innerHeight / 3 && rect.bottom >= window.innerHeight / 3;
+            }) || sectionIds[0];
+
+            const currentIndex = sectionIds.indexOf(currentSectionId);
+            let targetIndex;
+
+            if (direction === 'next') {
+                targetIndex = Math.min(currentIndex + 1, sectionIds.length - 1);
+            } else {
+                targetIndex = Math.max(currentIndex - 1, 0);
+            }
+
+            // Don't navigate if already at the boundary
+            if (targetIndex === currentIndex) {
+                return;
+            }
+
+            const targetSectionId = sectionIds[targetIndex];
+            const targetSection = document.getElementById(targetSectionId);
+            const targetDot = navDots[targetIndex];
+
+            if (targetSection && targetDot) {
+                isScrolling = true;
+                lastKeyPressTime = Date.now();
+
+                // Update active class immediately
+                navDots.forEach(d => d.classList.remove('active'));
+                targetDot.classList.add('active');
+
+                // Smooth scroll to target section
+                targetSection.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 1000);
+            }
+        }
+
+        // Keyboard event listener
+        document.addEventListener('keydown', (e) => {
+            // Don't navigate if user is typing in an input field
+            const activeElement = document.activeElement;
+            const isInputFocused = activeElement && (
+                activeElement.tagName === 'INPUT' ||
+                activeElement.tagName === 'TEXTAREA' ||
+                activeElement.isContentEditable
+            );
+
+            if (!keyboardNavigationEnabled || isInputFocused) {
+                return;
+            }
+
+            // Handle arrow keys
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+                e.preventDefault();
+                navigateToSection('next');
+            } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                e.preventDefault();
+                navigateToSection('prev');
+            }
+        });
+
         // Count Up Animation
         function animateCount(element) {
             const target = parseInt(element.getAttribute('data-count'));
