@@ -1562,8 +1562,8 @@ body.light-theme .bpmn-diagram {
 }
 
 .zoom-btn {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(10px);
@@ -4565,7 +4565,9 @@ body.light-theme .stat-label {
 }
 
 .stakeholder-card {
+    position: relative;
     padding: 25px;
+    padding-bottom: 60px;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 15px;
     border: 2px solid rgba(255, 255, 255, 0.1);
@@ -4600,7 +4602,7 @@ body.light-theme .stat-label {
 .stakeholder-card ul {
     list-style: none;
     padding: 0;
-    margin-bottom: 15px;
+    margin-bottom: 0;
 }
 
 .stakeholder-card li {
@@ -4609,6 +4611,9 @@ body.light-theme .stat-label {
 }
 
 .strategy-badge {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
     display: inline-block;
     padding: 8px 15px;
     background: rgba(255, 255, 255, 0.1);
@@ -4616,7 +4621,7 @@ body.light-theme .stat-label {
     color: var(--text-light);
     font-size: 0.9rem;
     font-weight: 600;
-    margin-top: 10px;
+    margin-top: 0;
 }
 
 /* RACI Table */
@@ -4799,6 +4804,10 @@ body.light-theme .stat-label {
     font-size: 1.2rem;
 }
 
+.empathy-card h4 + .feeling-section {
+    margin-top: -40px;
+}
+
 .empathy-card ul {
     list-style: none;
     padding: 0;
@@ -4930,6 +4939,8 @@ body.light-theme .stat-label {
 .layer-1 {
     background: linear-gradient(135deg, rgba(249, 115, 22, 0.2), rgba(239, 68, 68, 0.2));
     border-color: rgba(249, 115, 22, 0.4);
+    margin-left: 100px;
+    margin-right: 100px;
 }
 
 .layer-2 {
@@ -4942,8 +4953,7 @@ body.light-theme .stat-label {
 .layer-3 {
     background: linear-gradient(135deg, rgba(156, 163, 175, 0.2), rgba(107, 114, 128, 0.2));
     border-color: rgba(156, 163, 175, 0.4);
-    margin-left: 100px;
-    margin-right: 100px;
+
 }
 
 .layer-icon {
@@ -5626,11 +5636,6 @@ body.light-theme .stat-label {
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
 }
 
-#section-2 .strategy-badge {
-    animation: badge-glow 2s ease-in-out infinite;
-    transition: all 0.3s;
-}
-
 #section-2 .stakeholder-card:hover .strategy-badge {
     transform: scale(1.1);
     box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
@@ -5971,16 +5976,6 @@ body.light-theme .stat-label {
     transform: translateY(-10px) rotate(1deg);
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
     border-color: rgba(255, 255, 255, 0.3);
-}
-
-#section-9 .story-id {
-    animation: story-id-glow 2s ease-in-out infinite;
-    transition: all 0.3s;
-}
-
-#section-9 .user-story-card:hover .story-id {
-    transform: scale(1.2);
-    box-shadow: 0 5px 20px rgba(249, 115, 22, 0.5);
 }
 
 @keyframes story-id-glow {

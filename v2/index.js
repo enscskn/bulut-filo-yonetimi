@@ -2064,12 +2064,12 @@
                     const isCtrlPressed = e.ctrlKey || e.metaKey;
                     
                     if (isCtrlPressed || isOverImage) {
-                        e.preventDefault();
-                        if (e.deltaY < 0) {
-                            zoomIn();
-                        } else {
-                            zoomOut();
-                        }
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomIn();
+                    } else {
+                        zoomOut();
+                    }
                     }
                     // Otherwise, allow normal scroll
                 });
@@ -2235,12 +2235,12 @@
                     const isCtrlPressed = e.ctrlKey || e.metaKey;
                     
                     if (isCtrlPressed) {
-                        e.preventDefault();
-                        if (e.deltaY < 0) {
-                            zoomInProduct(imageId);
-                        } else {
-                            zoomOutProduct(imageId);
-                        }
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomInProduct(imageId);
+                    } else {
+                        zoomOutProduct(imageId);
+                    }
                     }
                     // Otherwise, allow normal scroll
                 });
