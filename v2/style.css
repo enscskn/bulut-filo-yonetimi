@@ -676,7 +676,6 @@ body.light-theme #mission-vision {
 }
 
 .pain-points {
-    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 20px;
     margin-top: 50px;
