@@ -61,6 +61,26 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #475569;
         }
+        .violation-item {
+            transition: all 0.3s ease;
+        }
+        .violation-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .violation-item.new-item {
+            animation: slideIn 0.4s ease-out;
+        }
     </style>
 </head>
 <body class="bg-background-main text-text-main min-h-screen flex flex-col font-display transition-colors duration-200">
@@ -132,7 +152,7 @@ Hasarlar
 <div class="bg-surface-card border border-border-color rounded-xl p-6 shadow-card">
 <div id="violations-list" class="space-y-4">
 <!-- Ceza 1 -->
-<div class="violation-item bg-blue-900/40 border border-blue-700/50 rounded-lg p-4 hover:bg-blue-900/60 transition-all cursor-pointer" data-type="fine" data-status="matched">
+<div class="violation-item bg-blue-900/40 border border-blue-700/50 rounded-lg p-4 hover:bg-blue-900/60 transition-all cursor-pointer" data-type="fine" data-status="matched" data-id="1" onclick="showViolationDetail('1')">
 <div class="flex items-start justify-between gap-4">
 <div class="flex-1">
 <div class="flex items-center gap-3 mb-2">
@@ -157,7 +177,7 @@ Eşleştirildi
 <span class="text-xs text-blue-300">Müşteri: Ali Vural (US.03)</span>
 </div>
 </div>
-<div class="flex flex-col gap-2">
+<div class="flex flex-col gap-2" onclick="event.stopPropagation()">
 <button onclick="reflectViolation(this)" class="px-3 py-1.5 rounded-md bg-primary hover:bg-primary-dark text-white text-xs font-medium transition-colors">
 Yansıt
 </button>
@@ -169,7 +189,7 @@ Kaldır
 </div>
 
 <!-- Ceza 2 -->
-<div class="violation-item bg-blue-900/40 border border-blue-700/50 rounded-lg p-4 hover:bg-blue-900/60 transition-all cursor-pointer" data-type="fine" data-status="pending">
+<div class="violation-item bg-blue-900/40 border border-blue-700/50 rounded-lg p-4 hover:bg-blue-900/60 transition-all cursor-pointer" data-type="fine" data-status="pending" data-id="2" onclick="showViolationDetail('2')">
 <div class="flex items-start justify-between gap-4">
 <div class="flex-1">
 <div class="flex items-center gap-3 mb-2">
@@ -194,7 +214,7 @@ Beklemede
 <span class="text-xs text-blue-300">Müşteri: Eşleştiriliyor...</span>
 </div>
 </div>
-<div class="flex flex-col gap-2">
+<div class="flex flex-col gap-2" onclick="event.stopPropagation()">
 <button onclick="matchViolation(this)" class="px-3 py-1.5 rounded-md bg-primary hover:bg-primary-dark text-white text-xs font-medium transition-colors">
 Eşleştir
 </button>
@@ -206,7 +226,7 @@ Kaldır
 </div>
 
 <!-- Hasar 1 -->
-<div class="violation-item bg-purple-900/40 border border-purple-700/50 rounded-lg p-4 hover:bg-purple-900/60 transition-all cursor-pointer" data-type="damage" data-status="matched">
+<div class="violation-item bg-purple-900/40 border border-purple-700/50 rounded-lg p-4 hover:bg-purple-900/60 transition-all cursor-pointer" data-type="damage" data-status="matched" data-id="3" onclick="showViolationDetail('3')">
 <div class="flex items-start justify-between gap-4">
 <div class="flex-1">
 <div class="flex items-center gap-3 mb-2">
@@ -231,7 +251,7 @@ Eşleştirildi
 <span class="text-xs text-purple-300">Müşteri: Mehmet Kaya (US.07)</span>
 </div>
 </div>
-<div class="flex flex-col gap-2">
+<div class="flex flex-col gap-2" onclick="event.stopPropagation()">
 <button onclick="reflectViolation(this)" class="px-3 py-1.5 rounded-md bg-primary hover:bg-primary-dark text-white text-xs font-medium transition-colors">
 Yansıt
 </button>
@@ -247,7 +267,7 @@ Kaldır
 <button onclick="reflectAllMatched()" class="group relative w-full flex items-center justify-center gap-3 bg-primary hover:bg-primary-dark text-white font-bold text-lg py-4 rounded-xl shadow-lg shadow-primary/20 transition-all active:scale-[0.99] hover:shadow-glow">
 <span class="material-symbols-outlined">attach_money</span>
 Tüm Eşleştirilenleri Müşteriye Yansıt
-<span class="absolute right-6 opacity-0 group-hover:opacity-100 transition-opacity material-symbols-outlined">arrow_forward</span>
+                        <span class="absolute right-6 opacity-0 group-hover:opacity-100 transition-opacity material-symbols-outlined">arrow_forward</span>
 </button>
 </div>
 </div>
@@ -278,7 +298,88 @@ Tamam
 </div>
 </div>
 
+<!-- Detay Görüntüleme Modal -->
+<div id="detail-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+<div class="bg-surface-card w-full max-w-3xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] border border-border-color">
+<div class="px-6 py-4 border-b border-border-color flex justify-between items-center bg-surface-raised">
+<div class="flex items-center gap-3">
+<div id="detail-icon" class="size-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl">info</span>
+</div>
+<div>
+<h3 id="detail-title" class="font-bold text-text-main text-lg">Ceza/Hasar Detayları</h3>
+<p id="detail-subtitle" class="text-xs text-text-sub">Detaylı bilgiler</p>
+</div>
+</div>
+<button onclick="closeDetailModal()" class="text-text-sub hover:text-text-main transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto bg-background-main p-6">
+<div id="detail-content" class="space-y-4">
+<!-- Detay içeriği buraya dinamik olarak eklenecek -->
+</div>
+</div>
+<div class="p-6 bg-surface-card border-t border-border-color">
+<button onclick="closeDetailModal()" class="w-full py-3 px-4 rounded-lg bg-primary hover:bg-primary-dark text-white font-bold shadow-lg shadow-primary/20 transition-all">
+Kapat
+</button>
+</div>
+</div>
+</div>
+
 <script>
+    // Veri yönetimi - localStorage kullanarak verileri sakla
+    let violationsData = [];
+    let nextId = 4; // Mevcut 3 örnek veri var, sonraki ID 4'ten başlayacak
+
+    // Sayfa yüklendiğinde localStorage'dan verileri yükle
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedData = localStorage.getItem('violationsData');
+        if (savedData) {
+            violationsData = JSON.parse(savedData);
+            nextId = Math.max(...violationsData.map(v => v.id), 3) + 1;
+        } else {
+            // Örnek veriler
+            violationsData = [
+                {
+                    id: 1,
+                    type: 'fine',
+                    status: 'matched',
+                    plate: '34 ABC 123',
+                    amount: 850.00,
+                    date: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000),
+                    description: 'Hız Cezası',
+                    customer: 'Ali Vural (US.03)',
+                    violationType: 'speed'
+                },
+                {
+                    id: 2,
+                    type: 'fine',
+                    status: 'pending',
+                    plate: '06 XYZ 789',
+                    amount: 1200.00,
+                    date: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
+                    description: 'Kırmızı Işık İhlali',
+                    customer: '',
+                    violationType: 'traffic'
+                },
+                {
+                    id: 3,
+                    type: 'damage',
+                    status: 'matched',
+                    plate: '34 DEF 456',
+                    amount: 3500.00,
+                    date: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000),
+                    description: 'Ön Tampon Hasarı',
+                    customer: 'Mehmet Kaya (US.07)',
+                    violationType: 'front_bumper'
+                }
+            ];
+            localStorage.setItem('violationsData', JSON.stringify(violationsData));
+        }
+    });
+
     // Filtreleme fonksiyonları
     function filterByType(type) {
         const items = document.querySelectorAll('.violation-item');
@@ -319,6 +420,14 @@ Tamam
     // Ceza/Hasar işlemleri
     function reflectViolation(button) {
         const item = button.closest('.violation-item');
+        const violationId = item.dataset.id;
+        const violation = violationsData.find(v => v.id == violationId);
+        
+        if (violation) {
+            violation.status = 'reflected';
+            localStorage.setItem('violationsData', JSON.stringify(violationsData));
+        }
+        
         const customer = item.querySelector('.text-xs').textContent;
         const amount = item.querySelector('.text-lg.font-bold').textContent;
         
@@ -339,6 +448,15 @@ Tamam
     
     function matchViolation(button) {
         const item = button.closest('.violation-item');
+        const violationId = item.dataset.id;
+        const violation = violationsData.find(v => v.id == violationId);
+        
+        if (violation) {
+            violation.status = 'matched';
+            violation.customer = 'Ali Vural (US.03)';
+            localStorage.setItem('violationsData', JSON.stringify(violationsData));
+        }
+        
         const statusBadge = item.querySelector('.rounded-full');
         
         // Durumu güncelle
@@ -347,8 +465,10 @@ Tamam
         item.dataset.status = 'matched';
         
         // Müşteri bilgisini güncelle
-        const customerInfo = item.querySelector('.text-xs.text-blue-300');
-        customerInfo.textContent = 'Müşteri: Ali Vural (US.03)';
+        const customerInfo = item.querySelector('.text-xs.text-blue-300, .text-xs.text-purple-300');
+        if (customerInfo) {
+            customerInfo.textContent = 'Müşteri: Ali Vural (US.03)';
+        }
         
         // Butonu güncelle
         button.textContent = 'Yansıt';
@@ -360,6 +480,12 @@ Tamam
     function removeViolation(button) {
         if (confirm('Bu ceza/hasarı kaldırmak istediğinizden emin misiniz?')) {
             const item = button.closest('.violation-item');
+            const violationId = item.dataset.id;
+            
+            // Veri yapısından kaldır
+            violationsData = violationsData.filter(v => v.id != violationId);
+            localStorage.setItem('violationsData', JSON.stringify(violationsData));
+            
             item.style.transition = 'opacity 0.3s, transform 0.3s';
             item.style.opacity = '0';
             item.style.transform = 'translateX(-20px)';
@@ -413,35 +539,265 @@ Tamam
     // Ceza/Hasar ekleme modalı
     function openAddViolationModal() {
         const modal = document.getElementById('add-violation-modal');
-        if (modal) {
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        } else {
-            alert('Ceza/Hasar ekleme formu açılacak. (Demo)');
-        }
+        // Formu sıfırla
+        document.getElementById('add-violation-form').reset();
+        document.getElementById('violation-type').value = '';
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
     }
     
     function closeAddViolationModal() {
         const modal = document.getElementById('add-violation-modal');
-        if (modal) {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
     }
     
     function saveNewViolation() {
-        alert('Ceza/Hasar başarıyla eklendi! (Demo)');
+        const form = document.getElementById('add-violation-form');
+        const formData = new FormData(form);
+        
+        const type = document.getElementById('violation-type').value;
+        const plate = document.getElementById('violation-plate').value.trim();
+        const amount = parseFloat(document.getElementById('violation-amount').value);
+        const date = document.getElementById('violation-date').value;
+        const customer = document.getElementById('violation-customer').value.trim();
+        const description = document.getElementById('violation-description').value.trim();
+        
+        // Validasyon
+        if (!type || !plate || !amount || !date) {
+            alert('Lütfen zorunlu alanları doldurun.');
+            return;
+        }
+        
+        // Yeni ceza/hasar oluştur
+        const newViolation = {
+            id: nextId++,
+            type: type,
+            status: customer ? 'matched' : 'pending',
+            plate: plate,
+            amount: amount,
+            date: new Date(date),
+            description: description || (type === 'fine' ? 'Ceza' : 'Hasar'),
+            customer: customer || '',
+            violationType: type === 'fine' ? 'traffic' : 'damage'
+        };
+        
+        violationsData.push(newViolation);
+        localStorage.setItem('violationsData', JSON.stringify(violationsData));
+        
+        // Listeye ekle
+        addViolationToList(newViolation);
+        
+        // Formu kapat
         closeAddViolationModal();
+        showSuccess(`${type === 'fine' ? 'Ceza' : 'Hasar'} başarıyla eklendi!`);
+    }
+    
+    function addViolationToList(violation) {
+        const list = document.getElementById('violations-list');
+        const daysAgo = Math.floor((Date.now() - violation.date.getTime()) / (1000 * 60 * 60 * 24));
+        
+        const bgColor = violation.type === 'fine' ? 'bg-blue-900/40' : 'bg-purple-900/40';
+        const borderColor = violation.type === 'fine' ? 'border-blue-700/50' : 'border-purple-700/50';
+        const hoverColor = violation.type === 'fine' ? 'hover:bg-blue-900/60' : 'hover:bg-purple-900/60';
+        const textColor = violation.type === 'fine' ? 'text-blue' : 'text-purple';
+        
+        let statusBadge = '';
+        if (violation.status === 'matched') {
+            statusBadge = '<span class="px-2 py-1 rounded-full bg-green-900/30 text-green-400 text-xs font-medium border border-green-800 flex items-center gap-1"><span class="material-symbols-outlined text-xs">check_circle</span>Eşleştirildi</span>';
+        } else if (violation.status === 'pending') {
+            statusBadge = '<span class="px-2 py-1 rounded-full bg-amber-900/30 text-amber-400 text-xs font-medium border border-amber-800 flex items-center gap-1"><span class="material-symbols-outlined text-xs">schedule</span>Beklemede</span>';
+        } else {
+            statusBadge = '<span class="px-2 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-xs font-medium border border-emerald-800 flex items-center gap-1"><span class="material-symbols-outlined text-xs">check_circle</span>Yansıtıldı</span>';
+        }
+        
+        const icon = violation.type === 'fine' ? 'speed' : 'build';
+        const iconColor = violation.type === 'fine' ? 'text-orange-400' : 'text-red-400';
+        
+        const customerText = violation.customer || 'Eşleştiriliyor...';
+        const customerClass = violation.customer ? `${textColor}-300` : `${textColor}-300`;
+        
+        const buttonText = violation.status === 'matched' ? 'Yansıt' : (violation.status === 'pending' ? 'Eşleştir' : 'Yansıtıldı');
+        const buttonOnClick = violation.status === 'matched' ? 'reflectViolation(this)' : (violation.status === 'pending' ? 'matchViolation(this)' : '');
+        const buttonDisabled = violation.status === 'reflected' ? 'disabled' : '';
+        const buttonClass = violation.status === 'reflected' ? 'bg-emerald-900/30 text-emerald-400' : 'bg-primary hover:bg-primary-dark text-white';
+        
+        const itemHTML = `
+            <div class="violation-item ${bgColor} border ${borderColor} rounded-lg p-4 ${hoverColor} transition-all cursor-pointer new-item" data-type="${violation.type}" data-status="${violation.status}" data-id="${violation.id}" onclick="showViolationDetail('${violation.id}')">
+                <div class="flex items-start justify-between gap-4">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="material-symbols-outlined ${textColor}-400">calendar_today</span>
+                            <span class="text-sm font-medium ${textColor}-200">${daysAgo} Gün Önce</span>
+                            ${statusBadge}
+                        </div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="material-symbols-outlined ${textColor}-300 text-lg">directions_car</span>
+                            <span class="text-sm font-semibold ${textColor}-100">Plaka: ${violation.plate}</span>
+                        </div>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="material-symbols-outlined ${iconColor} text-lg">${icon}</span>
+                            <span class="text-sm ${textColor}-200">${violation.description}</span>
+                            <span class="ml-auto text-lg font-bold ${textColor}-100">₺${violation.amount.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+                        </div>
+                        <div class="flex items-center gap-2 pt-2 border-t ${textColor}-800/50">
+                            <span class="material-symbols-outlined ${customerClass} text-sm">person</span>
+                            <span class="text-xs ${customerClass}">Müşteri: ${customerText}</span>
+</div>
+</div>
+                    <div class="flex flex-col gap-2" onclick="event.stopPropagation()">
+                        <button onclick="${buttonOnClick}" ${buttonDisabled} class="px-3 py-1.5 rounded-md ${buttonClass} text-xs font-medium transition-colors">
+                            ${buttonText}
+                        </button>
+                        <button onclick="removeViolation(this)" class="px-3 py-1.5 rounded-md bg-red-900/30 hover:bg-red-900/50 text-red-400 text-xs font-medium transition-colors">
+                            Kaldır
+                        </button>
+</div>
+</div>
+</div>
+        `;
+        
+        list.insertAdjacentHTML('beforeend', itemHTML);
+        
+        // Animasyonu kaldır
+        setTimeout(() => {
+            const newItem = list.querySelector('.new-item');
+            if (newItem) {
+                newItem.classList.remove('new-item');
+            }
+        }, 400);
     }
     
     // Ceza/Hasar detay görüntüleme
-    function showViolationDetail(button) {
-        const item = button.closest('.violation-item');
-        const type = item.dataset.type === 'fine' ? 'Ceza' : 'Hasar';
-        const amount = item.querySelector('.text-lg.font-bold')?.textContent || 'Bilinmiyor';
-        const customer = item.querySelector('.text-xs')?.textContent || 'Bilinmiyor';
+    function showViolationDetail(violationId) {
+        const violation = violationsData.find(v => v.id == violationId);
         
-        alert(`${type} Detayı:\nMüşteri: ${customer}\nTutar: ${amount}\n\nDetaylı bilgi görüntüleme formu açılacak. (Demo)`);
+        if (!violation) {
+            // Eğer veri yapısında yoksa, DOM'dan oku
+            const item = document.querySelector(`[data-id="${violationId}"]`);
+            if (!item) return;
+            
+            const type = item.dataset.type === 'fine' ? 'Ceza' : 'Hasar';
+            const plate = item.querySelector('.text-sm.font-semibold')?.textContent.replace('Plaka: ', '') || 'Bilinmiyor';
+            const amount = item.querySelector('.text-lg.font-bold')?.textContent || 'Bilinmiyor';
+            const description = item.querySelector('.text-sm')?.textContent || 'Bilinmiyor';
+            const customer = item.querySelector('.text-xs')?.textContent.replace('Müşteri: ', '') || 'Bilinmiyor';
+            const date = item.querySelector('.text-sm.font-medium')?.textContent || 'Bilinmiyor';
+            const status = item.dataset.status;
+            
+            displayDetailModal({
+                type: type,
+                plate: plate,
+                amount: amount,
+                description: description,
+                customer: customer,
+                date: date,
+                status: status
+            });
+        } else {
+            const daysAgo = Math.floor((Date.now() - new Date(violation.date).getTime()) / (1000 * 60 * 60 * 24));
+            const formattedDate = new Date(violation.date).toLocaleDateString('tr-TR', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            displayDetailModal({
+                type: violation.type === 'fine' ? 'Ceza' : 'Hasar',
+                plate: violation.plate,
+                amount: violation.amount.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2}),
+                description: violation.description,
+                customer: violation.customer || 'Eşleştirilmemiş',
+                date: formattedDate,
+                daysAgo: daysAgo,
+                status: violation.status,
+                id: violation.id
+            });
+        }
+    }
+    
+    function displayDetailModal(data) {
+        const modal = document.getElementById('detail-modal');
+        const icon = document.getElementById('detail-icon');
+        const title = document.getElementById('detail-title');
+        const subtitle = document.getElementById('detail-subtitle');
+        const content = document.getElementById('detail-content');
+        
+        // İkon ve başlık güncelle
+        const isFine = data.type === 'Ceza';
+        icon.innerHTML = `<span class="material-symbols-outlined text-xl">${isFine ? 'gavel' : 'build'}</span>`;
+        icon.className = `size-10 ${isFine ? 'bg-blue-900/30' : 'bg-purple-900/30'} rounded-lg flex items-center justify-center ${isFine ? 'text-blue-400' : 'text-purple-400'}`;
+        
+        title.textContent = `${data.type} Detayları`;
+        subtitle.textContent = `Plaka: ${data.plate}`;
+        
+        // Durum badge'i
+        let statusBadge = '';
+        if (data.status === 'matched') {
+            statusBadge = '<span class="px-3 py-1 rounded-full bg-green-900/30 text-green-400 text-sm font-medium border border-green-800 flex items-center gap-2 w-fit"><span class="material-symbols-outlined text-sm">check_circle</span>Eşleştirildi</span>';
+        } else if (data.status === 'pending') {
+            statusBadge = '<span class="px-3 py-1 rounded-full bg-amber-900/30 text-amber-400 text-sm font-medium border border-amber-800 flex items-center gap-2 w-fit"><span class="material-symbols-outlined text-sm">schedule</span>Beklemede</span>';
+        } else {
+            statusBadge = '<span class="px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm font-medium border border-emerald-800 flex items-center gap-2 w-fit"><span class="material-symbols-outlined text-sm">check_circle</span>Yansıtıldı</span>';
+        }
+        
+        // Detay içeriği
+        content.innerHTML = `
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-surface-card rounded-lg p-4 border border-border-color">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="material-symbols-outlined text-primary text-lg">directions_car</span>
+                        <span class="text-xs font-semibold text-text-sub uppercase">Plaka</span>
+                    </div>
+                    <p class="text-lg font-bold text-text-main">${data.plate}</p>
+                </div>
+                <div class="bg-surface-card rounded-lg p-4 border border-border-color">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="material-symbols-outlined text-primary text-lg">attach_money</span>
+                        <span class="text-xs font-semibold text-text-sub uppercase">Tutar</span>
+                    </div>
+                    <p class="text-lg font-bold text-text-main">₺${data.amount}</p>
+                </div>
+                <div class="bg-surface-card rounded-lg p-4 border border-border-color">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="material-symbols-outlined text-primary text-lg">calendar_today</span>
+                        <span class="text-xs font-semibold text-text-sub uppercase">Tarih</span>
+                    </div>
+                    <p class="text-lg font-bold text-text-main">${data.date}</p>
+                    ${data.daysAgo !== undefined ? `<p class="text-xs text-text-sub mt-1">${data.daysAgo} gün önce</p>` : ''}
+                </div>
+                <div class="bg-surface-card rounded-lg p-4 border border-border-color">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="material-symbols-outlined text-primary text-lg">person</span>
+                        <span class="text-xs font-semibold text-text-sub uppercase">Müşteri</span>
+                    </div>
+                    <p class="text-lg font-bold text-text-main">${data.customer}</p>
+</div>
+</div>
+            <div class="bg-surface-card rounded-lg p-4 border border-border-color">
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="material-symbols-outlined text-primary text-lg">description</span>
+                    <span class="text-xs font-semibold text-text-sub uppercase">Açıklama</span>
+                </div>
+                <p class="text-text-main">${data.description}</p>
+            </div>
+            <div class="bg-surface-card rounded-lg p-4 border border-border-color">
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="material-symbols-outlined text-primary text-lg">info</span>
+                    <span class="text-xs font-semibold text-text-sub uppercase">Durum</span>
+                </div>
+                ${statusBadge}
+            </div>
+        `;
+        
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
+    
+    function closeDetailModal() {
+        const modal = document.getElementById('detail-modal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
     }
     
     // ESC tuşu ile modal kapatma
@@ -449,6 +805,7 @@ Tamam
         if (e.key === 'Escape') {
             closeSuccessModal();
             closeAddViolationModal();
+            closeDetailModal();
         }
     });
     
@@ -464,27 +821,33 @@ Tamam
             closeAddViolationModal();
         }
     });
+    
+    document.getElementById('detail-modal')?.addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeDetailModal();
+        }
+    });
 </script>
 
 <!-- Ceza/Hasar Ekleme Modal -->
 <div id="add-violation-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-    <div class="bg-surface-card w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] border border-border-color">
-        <div class="px-6 py-4 border-b border-border-color flex justify-between items-center bg-surface-raised">
-            <div class="flex items-center gap-3">
+<div class="bg-surface-card w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] border border-border-color">
+<div class="px-6 py-4 border-b border-border-color flex justify-between items-center bg-surface-raised">
+<div class="flex items-center gap-3">
                 <div class="size-8 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
                     <span class="material-symbols-outlined">gavel</span>
-                </div>
-                <div>
+</div>
+<div>
                     <h3 class="font-bold text-text-main">Yeni Ceza/Hasar Ekle</h3>
                     <p class="text-xs text-text-sub">Ceza veya hasar bilgilerini girin</p>
-                </div>
-            </div>
+</div>
+</div>
             <button onclick="closeAddViolationModal()" class="text-text-sub hover:text-text-main transition-colors">
-                <span class="material-symbols-outlined">close</span>
-            </button>
-        </div>
-        <div class="flex-1 overflow-y-auto bg-background-main p-6">
-            <form class="space-y-4">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto bg-background-main p-6">
+            <form id="add-violation-form" class="space-y-4" onsubmit="event.preventDefault(); saveNewViolation();">
                 <div>
                     <label class="text-xs font-semibold text-text-sub mb-2 block">Tür *</label>
                     <select id="violation-type" required class="w-full h-10 px-3 rounded-lg bg-surface-raised border border-border-color text-text-main text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary">
@@ -496,28 +859,28 @@ Tamam
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="text-xs font-semibold text-text-sub mb-2 block">Plaka *</label>
-                        <input type="text" required class="w-full h-10 px-3 rounded-lg bg-surface-raised border border-border-color text-text-main text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" placeholder="34 ABC 123">
+                        <input id="violation-plate" type="text" required class="w-full h-10 px-3 rounded-lg bg-surface-raised border border-border-color text-text-main text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" placeholder="34 ABC 123">
                     </div>
                     <div>
                         <label class="text-xs font-semibold text-text-sub mb-2 block">Tutar *</label>
-                        <input type="number" required min="0" step="0.01" class="w-full h-10 px-3 rounded-lg bg-surface-raised border border-border-color text-text-main text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" placeholder="850.00">
+                        <input id="violation-amount" type="number" required min="0" step="0.01" class="w-full h-10 px-3 rounded-lg bg-surface-raised border border-border-color text-text-main text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" placeholder="850.00">
                     </div>
                     <div>
                         <label class="text-xs font-semibold text-text-sub mb-2 block">Tarih *</label>
-                        <input type="date" required class="w-full h-10 px-3 rounded-lg bg-surface-raised border border-border-color text-text-main text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+                        <input id="violation-date" type="date" required class="w-full h-10 px-3 rounded-lg bg-surface-raised border border-border-color text-text-main text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary">
                     </div>
                     <div>
                         <label class="text-xs font-semibold text-text-sub mb-2 block">Müşteri</label>
-                        <input type="text" class="w-full h-10 px-3 rounded-lg bg-surface-raised border border-border-color text-text-main text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" placeholder="Müşteri ara...">
-                    </div>
+                        <input id="violation-customer" type="text" class="w-full h-10 px-3 rounded-lg bg-surface-raised border border-border-color text-text-main text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" placeholder="Müşteri ara...">
+</div>
                     <div class="md:col-span-2">
                         <label class="text-xs font-semibold text-text-sub mb-2 block">Açıklama</label>
-                        <textarea rows="3" class="w-full px-3 py-2 rounded-lg bg-surface-raised border border-border-color text-text-main text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" placeholder="Ceza veya hasar açıklaması..."></textarea>
-                    </div>
+                        <textarea id="violation-description" rows="3" class="w-full px-3 py-2 rounded-lg bg-surface-raised border border-border-color text-text-main text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" placeholder="Ceza veya hasar açıklaması..."></textarea>
+</div>
                 </div>
             </form>
 </div>
-        <div class="p-6 bg-surface-card border-t border-border-color">
+<div class="p-6 bg-surface-card border-t border-border-color">
 <div class="flex gap-3">
                 <button onclick="closeAddViolationModal()" class="flex-1 py-3 px-4 rounded-lg border border-border-color text-text-main font-medium hover:bg-surface-raised transition-colors">İptal</button>
                 <button onclick="saveNewViolation()" class="flex-[2] py-3 px-4 rounded-lg bg-primary hover:bg-primary-dark text-white font-bold shadow-lg shadow-primary/20 transition-all">
