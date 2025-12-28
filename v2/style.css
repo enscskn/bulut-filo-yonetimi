@@ -4623,6 +4623,196 @@ body.light-theme .stat-label {
     margin-top: 0;
 }
 
+/* Power/Interest Matrix - New Design */
+.power-interest-matrix {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr auto;
+    gap: 0;
+    margin-top: 30px;
+    position: relative;
+}
+
+.matrix-y-axis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-right: 15px;
+    height: 100%;
+}
+
+.matrix-y-axis .axis-label-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 50%;
+    padding: 20px 0;
+}
+
+.matrix-y-axis .axis-label {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.matrix-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
+}
+
+.matrix-cell {
+    background: rgba(15, 23, 42, 0.8);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    min-height: 280px;
+}
+
+.matrix-cell:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Cell Colors */
+.matrix-cell.high-power-low-interest {
+    border-left: 4px solid #f59e0b;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(15, 23, 42, 0.9) 100%);
+}
+
+.matrix-cell.high-power-high-interest {
+    border-left: 4px solid #a855f7;
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(15, 23, 42, 0.9) 100%);
+}
+
+.matrix-cell.low-power-low-interest {
+    border-left: 4px solid #6b7280;
+    background: linear-gradient(135deg, rgba(107, 114, 128, 0.1) 0%, rgba(15, 23, 42, 0.9) 100%);
+}
+
+.matrix-cell.low-power-high-interest {
+    border-left: 4px solid #22d3ee;
+    background: linear-gradient(135deg, rgba(34, 211, 238, 0.1) 0%, rgba(15, 23, 42, 0.9) 100%);
+}
+
+.cell-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.cell-emoji {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.cell-header h4 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.strategy-name {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.strategy-name.satisfy {
+    color: #f59e0b;
+}
+
+.strategy-name.manage {
+    color: #a855f7;
+}
+
+.strategy-name.monitor {
+    color: #9ca3af;
+}
+
+.strategy-name.inform {
+    color: #22d3ee;
+}
+
+.cell-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.info-block {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.info-block strong {
+    color: rgba(255, 255, 255, 0.95);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.matrix-x-axis {
+    grid-column: 2;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 15px;
+}
+
+.matrix-x-axis .axis-label {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Responsive Power/Interest Matrix */
+@media (max-width: 992px) {
+    .power-interest-matrix {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+    }
+    
+    .matrix-y-axis {
+        display: none;
+    }
+    
+    .matrix-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .matrix-cell {
+        min-height: auto;
+        padding: 20px;
+    }
+    
+    .matrix-x-axis {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .cell-header h4 {
+        font-size: 0.9rem;
+    }
+    
+    .info-block {
+        font-size: 0.85rem;
+    }
+}
+
 /* RACI Table */
 .table-responsive {
     overflow-x: auto;

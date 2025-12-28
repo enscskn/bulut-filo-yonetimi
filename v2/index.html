@@ -214,40 +214,100 @@
             <h2 data-aos="fade-up">Güç/İlgi (Power/Interest) Matrisi</h2>
             
             <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
-                <h3 style="font-size: 2rem;">Paydaş Listesi</h3>
-                <div class="stakeholder-grid">
-                    <div class="stakeholder-card high-power high-interest">
-                        <h4>Yüksek Güç / Yüksek İlgi</h4>
-                        <ul>
-                            <li>Bulut Filo Yönetim Kurulu</li>
-                            <li>Pilot Kiralama Firmaları</li>
-                            <li>Yazılım Geliştirme & Ürün Ekibi</li>
-                        </ul>
-                        <div class="strategy-badge">Yakın Yönet</div>
+                <h3 style="font-size: 2rem;">Paydaş Analizi ve Yönetim Stratejisi</h3>
+                
+                <div class="power-interest-matrix">
+                    <!-- Y Axis Label -->
+                    <div class="matrix-y-axis">
+                        <div class="axis-label-container">
+                            <span class="axis-label">Yüksek Güç</span>
+                        </div>
+                        <div class="axis-label-container">
+                            <span class="axis-label">Düşük Güç</span>
+                        </div>
                     </div>
                     
-                    <div class="stakeholder-card medium-power high-interest">
-                        <h4>Orta Güç / Yüksek İlgi</h4>
-                        <ul>
-                            <li>Satış ve Pazarlama Ekibi</li>
-                        </ul>
-                        <div class="strategy-badge">Bilgilendir</div>
+                    <!-- Matrix Grid -->
+                    <div class="matrix-grid">
+                        <!-- Row 1: High Power -->
+                        <div class="matrix-cell high-power-low-interest" data-aos="fade-right" data-aos-delay="100">
+                            <div class="cell-header">
+                                <span class="cell-emoji">😊</span>
+                                <h4>Yüksek Güç / Düşük İlgi: <span class="strategy-name satisfy">MEMNUN TUT</span></h4>
+                            </div>
+                            <div class="cell-content">
+                                <div class="info-block">
+                                    <strong>Kimler:</strong> Bulut Filo Yönetim Kurulu (stratejik kararlar için)
+                                </div>
+                                <div class="info-block">
+                                    <strong>Neden Bu Grupta:</strong> Proje bütçesini onaylayabilirler ama günlük detaylarla ilgilenmezler.
+                                </div>
+                                <div class="info-block">
+                                    <strong>Nasıl Yaklaşmalıyız:</strong> Sadece önemli gelişmeleri bildirin. Onay gereken konularda hızlıca görüş alın.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="matrix-cell high-power-high-interest" data-aos="fade-left" data-aos-delay="150">
+                            <div class="cell-header">
+                                <span class="cell-emoji">👥</span>
+                                <h4>Yüksek Güç / Yüksek İlgi: <span class="strategy-name manage">YAKINDAN YÖNET</span></h4>
+                            </div>
+                            <div class="cell-content">
+                                <div class="info-block">
+                                    <strong>Kimler:</strong> Yazılım Geliştirme & Ürün Ekibi, Pilot Kiralama Firmaları, Stratejik Proje Ekibi
+                                </div>
+                                <div class="info-block">
+                                    <strong>Neden Bu Grupta:</strong> Hem projeyi yönlendirebilirler hem de başarısını çok istiyorlar. Asıl işi yapacak kişiler.
+                                </div>
+                                <div class="info-block">
+                                    <strong>Nasıl Yaklaşmalıyız:</strong> Her gün konuşun! Tüm kararları birlikte alın. Onlar olmadan hiçbir şey yapmayın.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Row 2: Low Power -->
+                        <div class="matrix-cell low-power-low-interest" data-aos="fade-right" data-aos-delay="200">
+                            <div class="cell-header">
+                                <span class="cell-emoji">👁️</span>
+                                <h4>Düşük Güç / Düşük İlgi: <span class="strategy-name monitor">İZLE</span></h4>
+                            </div>
+                            <div class="cell-content">
+                                <div class="info-block">
+                                    <strong>Kimler:</strong> Mevcut Niş Rakipler, Sektör Dernekleri
+                                </div>
+                                <div class="info-block">
+                                    <strong>Neden Bu Grupta:</strong> Projeyi pek etkilemezler ve fazla ilgilenmezler. Ama bazen durumları değişebilir.
+                                </div>
+                                <div class="info-block">
+                                    <strong>Nasıl Yaklaşmalıyız:</strong> Sadece genel bilgi verin. Çok zaman harcamayın ama gözden kaçırmayın.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="matrix-cell low-power-high-interest" data-aos="fade-left" data-aos-delay="250">
+                            <div class="cell-header">
+                                <span class="cell-emoji">ℹ️</span>
+                                <h4>Düşük Güç / Yüksek İlgi: <span class="strategy-name inform">BİLGİLENDİR</span></h4>
+                            </div>
+                            <div class="cell-content">
+                                <div class="info-block">
+                                    <strong>Kimler:</strong> Genel Kullanıcılar (Sürücüler), Satış ve Pazarlama Ekibi, Destek & Operasyon
+                                </div>
+                                <div class="info-block">
+                                    <strong>Neden Bu Grupta:</strong> Proje kararlarını alamazlar ama projeden en çok etkilenecekler. Onlar mutlu olmazsa proje başarısız olur.
+                                </div>
+                                <div class="info-block">
+                                    <strong>Nasıl Yaklaşmalıyız:</strong> Sürekli bilgilendirin. Görüşlerini alın. Endişelerini dinleyin ve dikkate alın.
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="stakeholder-card medium-power low-interest">
-                        <h4>Orta Güç / Düşük İlgi</h4>
-                        <ul>
-                            <li>Mevcut Niş Rakipler</li>
-                        </ul>
-                        <div class="strategy-badge">İzle</div>
-                    </div>
-                    
-                    <div class="stakeholder-card low-power high-interest">
-                        <h4>Düşük Güç / Yüksek İlgi</h4>
-                        <ul>
-                            <li>Genel Kullanıcılar (Sürücüler)</li>
-                        </ul>
-                        <div class="strategy-badge">Memnun Et</div>
+                    <!-- X Axis Labels -->
+                    <div class="matrix-x-axis">
+                        <span class="axis-label">Düşük İlgi</span>
+                        <span class="axis-label">Yüksek İlgi</span>
                     </div>
                 </div>
             </div>
