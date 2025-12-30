@@ -2889,7 +2889,7 @@
         });
 
         // Section 10: Gherkin Steps - Sequential Reveal
-        const gherkinSteps = document.querySelectorAll('#section-10 .step');
+        const gherkinSteps = document.querySelectorAll('#section-11 .step');
         const stepObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
@@ -2914,7 +2914,7 @@
         });
 
         // Section 11: Actor Cards - 3D Flip
-        const actorCards = document.querySelectorAll('#section-11 .actor-card');
+        const actorCards = document.querySelectorAll('#section-12 .actor-card');
         actorCards.forEach(card => {
             card.style.perspective = '1000px';
             
@@ -2928,7 +2928,7 @@
         });
 
         // Use Case Cards - Stagger Animation
-        const usecaseCards = document.querySelectorAll('#section-11 .usecase-card');
+        const usecaseCards = document.querySelectorAll('#section-12 .usecase-card');
         const usecaseObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
@@ -2953,7 +2953,7 @@
         });
 
         // Section 12: Enhanced Storyboard Animations
-        const storyboardPhases = document.querySelectorAll('#section-12 .storyboard-phase');
+        const storyboardPhases = document.querySelectorAll('#section-13 .storyboard-phase');
         storyboardPhases.forEach((phase, index) => {
             phase.style.animationDelay = `${index * 0.2}s`;
         });

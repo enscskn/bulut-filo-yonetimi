@@ -65,11 +65,12 @@
         <div class="nav-dot" data-section="section-6" data-tooltip="Piramit"></div>
         <div class="nav-dot" data-section="section-7" data-tooltip="Gereksinimler"></div>
         <div class="nav-dot" data-section="section-8" data-tooltip="KANO"></div>
-        <div class="nav-dot" data-section="section-9" data-tooltip="INVEST"></div>
-        <div class="nav-dot" data-section="section-10" data-tooltip="Kabul"></div>
-        <div class="nav-dot" data-section="section-11" data-tooltip="UML"></div>
-        <div class="nav-dot" data-section="section-12" data-tooltip="Storyboard"></div>
-        <div class="nav-dot" data-section="section-13" data-tooltip="User Story Map"></div>
+        <div class="nav-dot" data-section="section-9" data-tooltip="User Stories"></div>
+        <div class="nav-dot" data-section="section-10" data-tooltip="INVEST"></div>
+        <div class="nav-dot" data-section="section-11" data-tooltip="Kabul"></div>
+        <div class="nav-dot" data-section="section-12" data-tooltip="UML"></div>
+        <div class="nav-dot" data-section="section-13" data-tooltip="Storyboard"></div>
+        <div class="nav-dot" data-section="section-14" data-tooltip="User Story Map"></div>
         <div class="nav-dot" data-section="footer" data-tooltip="Bitiş"></div>
     </nav>
 
@@ -119,19 +120,9 @@
             <h2 data-aos="fade-up" style="color: white;">Mevcut Sürecin 3M Analizi ve EBO ile İyileştirilmesi</h2>
             
             <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
-                <h3 style="font-size: 2rem;">3M Analizi (Muda, Mura, Muri)</h3>
+                <h3 style="font-size: 2rem;">3M Analizi (Mura, Muri, Muda)</h3>
                 
                 <div class="analysis-grid">
-                    <div class="analysis-card">
-                        <div class="card-icon">🗑️</div>
-                        <h4>Muda (İsraf)</h4>
-                        <ul>
-                            <li><strong>Hatalı Üretim:</strong> Trafik cezalarının müşteriye yansıtılamaması ve sigorta/bakım sürelerinin kaçırılması</li>
-                            <li><strong>Bekleme:</strong> Manuel risk analizi ve sözleşme üretimi süreçlerinin yavaşlığı</li>
-                            <li><strong>Gereksiz İşlem:</strong> Bireysel ve kurumsal operasyonların ayrı yönetilmesi</li>
-                        </ul>
-                    </div>
-                    
                     <div class="analysis-card">
                         <div class="card-icon">📊</div>
                         <h4>Mura (Düzensizlik)</h4>
@@ -143,65 +134,114 @@
                         <h4>Muri (Aşırı Yüklenme)</h4>
                         <p>Personelin manuel evrak işleri, ceza takibi ve risk analizi gibi süreçlerle boğuşması, çalışanlar üzerinde zihinsel ve operasyonel aşırı yüklenme</p>
                     </div>
+                    
+                    <div class="analysis-card">
+                        <div class="card-icon">🗑️</div>
+                        <h4>Muda (İsraf)</h4>
+                        <ul>
+                            <li><strong>Hatalı Üretim:</strong> Trafik cezalarının müşteriye yansıtılamaması ve sigorta/bakım sürelerinin kaçırılması</li>
+                            <li><strong>Bekleme:</strong> Manuel risk analizi ve sözleşme üretimi süreçlerinin yavaşlığı</li>
+                            <li><strong>Gereksiz İşlem:</strong> Bireysel ve kurumsal operasyonların ayrı yönetilmesi</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
+            <!-- EBO Analizi Bölümü -->
             <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
                 <h3 style="font-size: 2rem;">EBO Yöntemi ile İyileştirme (TO-BE Süreci)</h3>
                 
                 <div class="ebo-grid">
-                    <div class="ebo-item">
-                        <div class="ebo-icon">❌</div>
-                        <h4>Elimine Et</h4>
+                    <!-- Elimine Et -->
+                    <div class="ebo-item ebo-eliminate-card">
+                        <div class="ebo-item-header">
+                            <div class="ebo-icon">❌</div>
+                            <h4>1. Elimine Et</h4>
+                        </div>
                         <ul>
-                            <li>Manuel sözleşme hazırlama süreçleri</li>
-                            <li>Fiziksel evrak takibi</li>
-                            <li>Müşteri risk skorlamasındaki insan inisiyatifi</li>
+                            <li><strong>Manuel Sözleşme Hazırlama</strong> süreçleri tamamen kaldırıldı</li>
+                            <li><strong>Fiziksel Evrak Takibi</strong> ve arşivleme zorunluluğu</li>
+                            <li><strong>Manuel Risk Skorlaması</strong> ve insan inisiyatifi bağımlılığı</li>
                         </ul>
+                        <div class="ebo-metric-box eliminate-metric">
+                            <div class="ebo-metric-comparison">
+                                <span class="ebo-metric-old">15 DK</span>
+                                <span class="ebo-metric-arrow">→</span>
+                                <span class="ebo-metric-new">5 DK</span>
+                            </div>
+                            <div class="ebo-metric-result">%67 Zaman Azalması</div>
+                        </div>
                     </div>
                     
-                    <div class="ebo-item">
-                        <div class="ebo-icon">🔗</div>
-                        <h4>Birleştir</h4>
+                    <!-- Birleştir -->
+                    <div class="ebo-item ebo-combine-card">
+                        <div class="ebo-item-header">
+                            <div class="ebo-icon">🔗</div>
+                            <h4>2. Birleştir</h4>
+                        </div>
                         <ul>
-                            <li>Bireysel ve kurumsal kiralama operasyonları "Tek Panel" altında</li>
-                            <li>Araç takip verileri ile finansal veriler entegrasyonu</li>
+                            <li><strong>Tek Panel:</strong> Bireysel ve kurumsal kiralama operasyonları tek ekranda</li>
+                            <li><strong>Veri Entegrasyonu:</strong> Araç takip ve finansal veriler senkronize</li>
+                            <li><strong>Ceza Eşleştirme:</strong> Otomatik plaka-müşteri eşleştirmesi</li>
                         </ul>
+                        <div class="ebo-metric-box combine-metric">
+                            <div class="ebo-metric-comparison">
+                                <span class="ebo-metric-old">4 Sistem</span>
+                                <span class="ebo-metric-arrow">→</span>
+                                <span class="ebo-metric-new">1 Panel</span>
+                            </div>
+                            <div class="ebo-metric-result">%75 Verimlilik Artışı</div>
+                        </div>
                     </div>
                     
-                    <div class="ebo-item">
-                        <div class="ebo-icon">⚡</div>
-                        <h4>Optimize Et</h4>
+                    <!-- Otomatize Et -->
+                    <div class="ebo-item ebo-automate-card">
+                        <div class="ebo-item-header">
+                            <div class="ebo-icon">⚡</div>
+                            <h4>3. Otomatize Et</h4>
+                        </div>
                         <ul>
-                            <li>Ceza ve hasar yönetim süreçleri otomatik bildirimlerle</li>
-                            <li>Raporlama süreçleri gerçek zamanlı</li>
+                            <li><strong>AI Risk Skoru:</strong> Müşteri risk analizi yapay zeka ile anlık</li>
+                            <li><strong>Otomatik Bildirim:</strong> Ceza ve hasar bildirimleri anında</li>
+                            <li><strong>Gerçek Zamanlı Rapor:</strong> Dashboard üzerinden anlık raporlama</li>
                         </ul>
+                        <div class="ebo-metric-box automate-metric">
+                            <div class="ebo-metric-comparison">
+                                <span class="ebo-metric-old">2 Saat</span>
+                                <span class="ebo-metric-arrow">→</span>
+                                <span class="ebo-metric-new">30 SN</span>
+                            </div>
+                            <div class="ebo-metric-result">%99 Zaman Tasarrufu</div>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="persona-image-container" style="margin-top: 30px;">
+                <div class="glass-card metrics-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="metrics-grid">
+                        <div class="metric-box">
+                            <div class="metric-number">30%</div>
+                            <div class="metric-desc">İş Yükü Azalımı</div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-number">80%</div>
+                            <div class="metric-desc">Gelir Koruma</div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-number">↑</div>
+                            <div class="metric-desc">Pazar Hızı</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- TO-BE Süreci Diyagramı -->
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="300">
+                <h3 style="font-size: 1.5rem; margin-bottom: 20px;">TO-BE Süreci Diyagramı</h3>
+                <div class="persona-image-container">
                     <img src="./images/bpm2.png" alt="TO-BE Süreci BPMN Diyagramı" class="persona-image" id="bpm2-image">
                     <div class="zoom-controls">
                         <button class="zoom-btn zoom-in" onclick="zoomInBpm2()">🔍+</button>
                         <button class="zoom-btn zoom-out" onclick="zoomOutBpm2()">🔍-</button>
                         <button class="zoom-btn zoom-reset" onclick="resetZoomBpm2()">⌂</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="glass-card metrics-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="metrics-grid">
-                    <div class="metric-box">
-                        <div class="metric-number">30%</div>
-                        <div class="metric-desc">İş Yükü Azalımı</div>
-                    </div>
-                    <div class="metric-box">
-                        <div class="metric-number">80%</div>
-                        <div class="metric-desc">Gelir Koruma</div>
-                    </div>
-                    <div class="metric-box">
-                        <div class="metric-number">↑</div>
-                        <div class="metric-desc">Pazar Hızı</div>
                     </div>
                 </div>
             </div>
@@ -502,66 +542,145 @@
     </section>
 
     <!-- Section 5: How Might We İdeasyonları -->
-    <section id="section-5" class="content-section">
+    <section id="section-5" class="content-section hmw-section">
         <div class="geometric-pattern"></div>
+        <!-- Dekoratif Floating Elementler -->
+        <div class="hmw-floating-elements">
+            <div class="floating-shape shape-1">💡</div>
+            <div class="floating-shape shape-2">🚀</div>
+            <div class="floating-shape shape-3">⚡</div>
+        </div>
         <div class="container">
-            <h2 data-aos="fade-up" style="color: white;">"How Might We..." (HMW) İdeasyonları</h2>
+            <!-- HMW Başlık Alanı -->
+            <div class="hmw-hero" data-aos="fade-up">
+                <h2 class="hmw-main-title">"Nasıl Yapabiliriz?"</h2>
+                <p class="hmw-subtitle">(How Might We...)</p>
+                <p class="hmw-intro">
+                    Araç kiralama firmalarının sorunlarını <span class="text-accent">yaratıcı fırsatlara</span> dönüştürmek için <span class="text-accent">beyin fırtınası</span> yapıyoruz.
+                </p>
+                <div class="hmw-tags">
+                    <span class="hmw-tag tag-pulse">💡 Fikir Üretimi</span>
+                    <span class="hmw-tag">🎯 Problem Çözme</span>
+                    <span class="hmw-tag">🚀 İnovasyon</span>
+                </div>
+            </div>
             
-            <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="hmw-card">
-                    <div class="hmw-number">HMW 1</div>
-                    <h3>Gelir Sızıntılarını Önleme</h3>
-                    <p class="hmw-question">
-                        <strong>"Nasıl yapabiliriz ki;</strong> araç kiralama firmalarının en büyük gider kalemi olan trafik cezalarını ve hasar maliyetlerini, manuel takip gerektirmeden otomatik olarak müşteriye yansıtıp gelir kayıplarını sıfıra indirelim?"
-                    </p>
-                    <div class="hmw-details">
-                        <div class="detail-item">
-                            <span class="detail-label">Odak Noktası:</span>
-                            <span class="detail-value">Tahsil edilemeyen cezalar ve hasar yönetimindeki "Muda" (israf)</span>
+            <!-- Görev Açıklama Kartı -->
+            <div class="hmw-mission-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="mission-glow"></div>
+                <div class="mission-header">
+                    <div class="mission-icon-wrapper">
+                        <div class="mission-icon">👤</div>
+                        <div class="mission-icon-ring"></div>
+                    </div>
+                    <div class="mission-title-area">
+                        <span class="mission-label-top">GÖREV</span>
+                        <h3 class="mission-title">Çözüm Odaklı Fırsat Cümleleri Oluşturma</h3>
+                    </div>
+                </div>
+                <div class="mission-content">
+                    <div class="mission-indicator">
+                        <span class="indicator-icon">💬</span>
+                        <span class="indicator-text">Nasıl çalışır?</span>
+                    </div>
+                    <p>Kiralama firmalarının yaşadığı <span class="text-accent">her sorunu, bir çözüm fırsatına</span> dönüştüreceğiz. "Nasıl yapabiliriz ki..." sorusuyla başlayan her cümle, yeni bir fikrin kapısını aralar!</p>
+                </div>
+            </div>
+            
+            <!-- HMW Kartları -->
+            <div class="hmw-cards-wrapper">
+                <!-- HMW 1 - Gelir Sızıntıları -->
+                <div class="hmw-card-item hmw-gold" data-aos="fade-up" data-aos-delay="150">
+                    <div class="card-number-badge">01</div>
+                    <div class="card-glow-effect"></div>
+                    <div class="hmw-card-header">
+                        <div class="hmw-card-icon">💰</div>
+                        <h4 class="hmw-card-title">Gelir Sızıntılarını Önleme</h4>
+                    </div>
+                    <div class="hmw-question-box">
+                        <div class="question-marker">
+                            <span>?</span>
                         </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Beklenen Değer:</span>
-                            <span class="detail-value highlight">%80 oranında gelir kaybı iyileşmesi</span>
+                        <div class="question-content">
+                            <span class="question-prefix">Nasıl yapabiliriz ki</span>
+                            <p>Araç kiralama firmalarının en büyük gider kalemi olan trafik cezalarını ve hasar maliyetlerini, <span class="text-accent">manuel takip gerektirmeden</span> otomatik olarak müşteriye yansıtıp gelir kayıplarını sıfıra indirelim?</p>
+                        </div>
+                    </div>
+                    <div class="hmw-focus-box">
+                        <span class="focus-badge">ODAK</span>
+                        <span class="focus-text">Tahsil edilemeyen cezalar ve hasar yönetimindeki "Muda" (israf)</span>
+                    </div>
+                    <div class="hmw-value-badge">
+                        <div class="value-icon-area">
+                            <span class="value-icon">📈</span>
+                        </div>
+                        <div class="value-content">
+                            <span class="value-label">Beklenen Değer</span>
+                            <span class="value-text">%80 Gelir İyileşmesi</span>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="hmw-card">
-                    <div class="hmw-number">HMW 2</div>
-                    <h3>Operasyonel Karmaşıklığı Sadeleştirme</h3>
-                    <p class="hmw-question">
-                        <strong>"Nasıl yapabiliriz ki;</strong> teknolojiye mesafeli personellerin dahi zorlanmadan kullanabileceği, tek tuşla sözleşme üreten ve tüm filoyu tek ekrandan yöneten bir yapı kurarak operasyonel hızı artıralım?"
-                    </p>
-                    <div class="hmw-details">
-                        <div class="detail-item">
-                            <span class="detail-label">Odak Noktası:</span>
-                            <span class="detail-value">Manuel evrak işleri, Excel bağımlılığı ve personelin sisteme adaptasyon direnci</span>
+                
+                <!-- HMW 2 - Operasyonel Sadeleştirme -->
+                <div class="hmw-card-item hmw-emerald" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-number-badge">02</div>
+                    <div class="card-glow-effect"></div>
+                    <div class="hmw-card-header">
+                        <div class="hmw-card-icon">⚡</div>
+                        <h4 class="hmw-card-title">Operasyonel Karmaşıklığı Sadeleştirme</h4>
+                    </div>
+                    <div class="hmw-question-box">
+                        <div class="question-marker">
+                            <span>?</span>
                         </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Beklenen Değer:</span>
-                            <span class="detail-value highlight">Operasyonel iş yükünün %30 azaltılması</span>
+                        <div class="question-content">
+                            <span class="question-prefix">Nasıl yapabiliriz ki</span>
+                            <p>Teknolojiye mesafeli personellerin dahi zorlanmadan kullanabileceği, <span class="text-accent">tek tuşla sözleşme üreten</span> ve tüm filoyu tek ekrandan yöneten bir yapı kurarak operasyonel hızı artıralım?</p>
+                        </div>
+                    </div>
+                    <div class="hmw-focus-box">
+                        <span class="focus-badge">ODAK</span>
+                        <span class="focus-text">Manuel evrak işleri, Excel bağımlılığı ve personelin sisteme adaptasyon direnci</span>
+                    </div>
+                    <div class="hmw-value-badge">
+                        <div class="value-icon-area">
+                            <span class="value-icon">⚙️</span>
+                        </div>
+                        <div class="value-content">
+                            <span class="value-label">Beklenen Değer</span>
+                            <span class="value-text">%30 İş Yükü Azalması</span>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="glass-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="hmw-card">
-                    <div class="hmw-number">HMW 3</div>
-                    <h3>Risk ve Güven Yönetimini Otomatikleştirme</h3>
-                    <p class="hmw-question">
-                        <strong>"Nasıl yapabiliriz ki;</strong> kiralama öncesinde müşterinin risk profilini (adli sicil, ödeme geçmişi vb.) saniyeler içinde analiz eden bir sistem sunarak firmaları riskli kiralamalardan koruyup kârlılıklarını güvence altına alalım?"
-                    </p>
-                    <div class="hmw-details">
-                        <div class="detail-item">
-                            <span class="detail-label">Odak Noktası:</span>
-                            <span class="detail-value">Riskli müşterilerden kaynaklanan maddi kayıplar ve hızlı karar verme ihtiyacı</span>
+                
+                <!-- HMW 3 - Risk Yönetimi -->
+                <div class="hmw-card-item hmw-violet" data-aos="fade-up" data-aos-delay="250">
+                    <div class="card-number-badge">03</div>
+                    <div class="card-glow-effect"></div>
+                    <div class="hmw-card-header">
+                        <div class="hmw-card-icon">🛡️</div>
+                        <h4 class="hmw-card-title">Risk ve Güven Yönetimini Otomatikleştirme</h4>
+                    </div>
+                    <div class="hmw-question-box">
+                        <div class="question-marker">
+                            <span>?</span>
                         </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Beklenen Değer:</span>
-                            <span class="detail-value highlight">Veriye dayalı güvenli büyüme ve yüksek kârlılıklı müşteri segmentasyonu</span>
+                        <div class="question-content">
+                            <span class="question-prefix">Nasıl yapabiliriz ki</span>
+                            <p>Kiralama öncesinde müşterinin risk profilini (adli sicil, ödeme geçmişi vb.) <span class="text-accent">saniyeler içinde analiz eden</span> bir sistem sunarak firmaları riskli kiralamalardan koruyup kârlılıklarını güvence altına alalım?</p>
+                        </div>
+                    </div>
+                    <div class="hmw-focus-box">
+                        <span class="focus-badge">ODAK</span>
+                        <span class="focus-text">Riskli müşterilerden kaynaklanan maddi kayıplar ve hızlı karar verme ihtiyacı</span>
+                    </div>
+                    <div class="hmw-value-badge">
+                        <div class="value-icon-area">
+                            <span class="value-icon">🎯</span>
+                        </div>
+                        <div class="value-content">
+                            <span class="value-label">Beklenen Değer</span>
+                            <span class="value-text">Güvenli Büyüme & Segmentasyon</span>
                         </div>
                     </div>
                 </div>
@@ -738,152 +857,179 @@
         </div>
     </section>
 
-    <!-- Section 9: INVEST Analizi -->
-    <section id="section-9" class="content-section">
+    <!-- Section 9: Kullanıcı Hikayeleri (User Stories) -->
+    <section id="section-9" class="content-section user-stories-section">
         <div class="geometric-pattern"></div>
         <div class="container">
-            <h2 data-aos="fade-up" style="color: white;">Kullanıcı Hikayeleri (User Stories) ve INVEST Analizi</h2>
+            <!-- Başlık Alanı -->
+            <div class="user-stories-hero" data-aos="fade-up">
+                <div class="us-badge">
+                    <span class="badge-icon">📖</span>
+                    <span>User Stories</span>
+                </div>
+                <h2 class="user-stories-main-title">Kullanıcı Hikayeleri</h2>
+                <div class="user-stories-title-underline"></div>
+                <p class="user-stories-subtitle">Sistemin kullanıcı perspektifinden tanımlanmış gereksinimleri</p>
+            </div>
             
-            <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="user-stories-grid">
-                    <div class="user-story-card">
-                        <h4>Otomatik Sözleşme Üretimi</h4>
-                        <p class="story-text">
-                            Bir <strong>Araç Kiralama İşletmecisi</strong> olarak, sisteme müşteri bilgilerini girdiğimde <strong>otomatik sözleşme üretilmesini</strong> istiyorum; böylece manuel evrak işlerinden kurtulup operasyonumu hızlandırabilirim.
-                        </p>
-                        <div class="story-value">Yüksek: Manuel iş yükünü (Muda) doğrudan azaltır.</div>
-                    </div>
-                    
-                    <div class="user-story-card">
-                        <h4>Risk Skoru Görüntüleme</h4>
-                        <p class="story-text">
-                            Bir <strong>Araç Kiralama İşletmecisi</strong> olarak, kiralama öncesi müşterinin <strong>risk skorunu</strong> görmek istiyorum; böylece riskli kiralamalardan kaçınarak finansal güvenliğimi sağlayabilirim.
-                        </p>
-                        <div class="story-value critical">Kritik: Doğrudan kârlılığı korur ve kayıpları önler.</div>
-                    </div>
-                    
-                    <div class="user-story-card">
-                        <h4>Otomatik Trafik Cezası Takibi</h4>
-                        <p class="story-text">
-                            Bir <strong>Araç Kiralama İşletmecisi</strong> olarak, araçlarıma gelen <strong>trafik cezalarını</strong> sistemde otomatik görmek istiyorum; böylece bu cezaları müşteriye anında yansıtıp gelir kaybımı önleyebilirim.
-                        </p>
-                        <div class="story-value">Yüksek: %80 oranında gelir kaybı iyileşmesi hedefine hizmet eder.</div>
+            <!-- Kullanıcı Haritası Görselleri -->
+            <div class="user-stories-gallery">
+                <!-- Görsel 1 -->
+                <div class="glass-card us-image-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 20px; display: flex; align-items: center; gap: 12px;">
+                        <span class="us-image-number">01</span>
+                        Kullanıcı Hikaye Haritası - Bölüm 1
+                    </h3>
+                    <div class="persona-image-container">
+                        <img src="images/kullanici_haritasi1.png" alt="Kullanıcı Hikaye Haritası 1" class="persona-image" id="usharita1-image">
+                        <div class="zoom-controls">
+                            <button class="zoom-btn zoom-in" onclick="zoomInUsharita1()">🔍+</button>
+                            <button class="zoom-btn zoom-out" onclick="zoomOutUsharita1()">🔍-</button>
+                            <button class="zoom-btn zoom-reset" onclick="resetZoomUsharita1()">⌂</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
-                <h3 style="font-size: 2rem;">INVEST Analizi</h3>
-                <div class="invest-grid">
-                    <div class="invest-item">
-                        <div class="invest-letter">I</div>
-                        <h4 style="font-size: 1.5rem;">Independent (Bağımsız)</h4>
-                        <p>Örneğin; otomatik sözleşme üretimi (US.01), trafik cezası takibi (US.03) özelliğinden bağımsız olarak geliştirilebilir ve test edilebilir.</p>
+                
+                <!-- Görsel 2 -->
+                <div class="glass-card us-image-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 20px; display: flex; align-items: center; gap: 12px;">
+                        <span class="us-image-number">02</span>
+                        Kullanıcı Hikaye Haritası - Bölüm 2
+                    </h3>
+                    <div class="persona-image-container">
+                        <img src="images/kullanici_haritasi2.png" alt="Kullanıcı Hikaye Haritası 2" class="persona-image" id="usharita2-image">
+                        <div class="zoom-controls">
+                            <button class="zoom-btn zoom-in" onclick="zoomInUsharita2()">🔍+</button>
+                            <button class="zoom-btn zoom-out" onclick="zoomOutUsharita2()">🔍-</button>
+                            <button class="zoom-btn zoom-reset" onclick="resetZoomUsharita2()">⌂</button>
+                        </div>
                     </div>
-                    
-                    <div class="invest-item">
-                        <div class="invest-letter">N</div>
-                        <h4 style="font-size: 1.5rem;">Negotiable (Pazarlık Edilebilir)</h4>
-                        <p>Sözleşmenin hangi formatta (PDF/HTML) olacağı veya risk skorunun hangi verileri (ehliyet/finans) kullanacağı yazılım ekibiyle tartışılabilir.</p>
-                    </div>
-                    
-                    <div class="invest-item">
-                        <div class="invest-letter">V</div>
-                        <h4 style="font-size: 1.5rem;">Valuable (Değerli)</h4>
-                        <p>Her üç hikaye de Ahmet Bey'in en büyük operasyonel ve finansal sorunlarını doğrudan çözer.</p>
-                    </div>
-                    
-                    <div class="invest-item">
-                        <div class="invest-letter">E</div>
-                        <h4 style="font-size: 1.5rem;">Estimable (Tahmin Edilebilir)</h4>
-                        <p>RICE skorlamasında belirtilen "çaba" (kişi-ay) değerleri, bu hikayelerin teknik büyüklüğünün öngörülebilir olduğunu kanıtlar.</p>
-                    </div>
-                    
-                    <div class="invest-item">
-                        <div class="invest-letter">S</div>
-                        <h4 style="font-size: 1.5rem;">Small (Küçük)</h4>
-                        <p>Her bir hikaye, bir Scrum sprinti (genellikle 2 hafta) içerisinde tamamlanabilecek kadar odaklanmış ve küçüktür.</p>
-                    </div>
-                    
-                    <div class="invest-item">
-                        <div class="invest-letter">T</div>
-                        <h4 style="font-size: 1.5rem;">Testable (Test Edilebilir)</h4>
-                        <p>"Sistem PDF sözleşme üretiyor mu?", "Risk puanı 0-100 arasında dönüyor mu?" gibi sorularla başarıları kolayca ölçülebilir.</p>
+                </div>
+                
+                <!-- Görsel 3 -->
+                <div class="glass-card us-image-card" data-aos="fade-up" data-aos-delay="300">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 20px; display: flex; align-items: center; gap: 12px;">
+                        <span class="us-image-number">03</span>
+                        Kullanıcı Hikaye Haritası - Bölüm 3
+                    </h3>
+                    <div class="persona-image-container">
+                        <img src="images/kullanici_haritasi3.png" alt="Kullanıcı Hikaye Haritası 3" class="persona-image" id="usharita3-image">
+                        <div class="zoom-controls">
+                            <button class="zoom-btn zoom-in" onclick="zoomInUsharita3()">🔍+</button>
+                            <button class="zoom-btn zoom-out" onclick="zoomOutUsharita3()">🔍-</button>
+                            <button class="zoom-btn zoom-reset" onclick="resetZoomUsharita3()">⌂</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Section 10: Kabul Kriterleri -->
+    <!-- Section 10: INVEST Analizi -->
     <section id="section-10" class="content-section">
+        <div class="geometric-pattern"></div>
         <div class="container">
-            <h2 data-aos="fade-up">Kabul Kriterleri (Gherkin/BDD)</h2>
+            <!-- INVEST Başlık -->
+            <div class="invest-hero" data-aos="fade-up">
+                <h2 class="invest-main-title">INVEST Analizi</h2>
+                <div class="invest-title-underline"></div>
+            </div>
             
-            <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <div class="scenario-number">Senaryo 1</div>
-                        <h3>Otomatik Sözleşme Üretimi (US.01)</h3>
-                    </div>
-                    <div class="gherkin-steps">
-                        <div class="step given">
-                            <span class="step-keyword">Given</span>
-                            <span class="step-text">Operasyon personeli, sistemdeki "Yeni Kiralama" ekranındadır.</span>
-                        </div>
-                        <div class="step when">
-                            <span class="step-keyword">When</span>
-                            <span class="step-text">Geçerli müşteri, araç ve tarih bilgileri girilip "Sözleşme Oluştur" butonuna tıklandığında.</span>
-                        </div>
-                        <div class="step then">
-                            <span class="step-keyword">Then</span>
-                            <span class="step-text">Sistem, yasal mevzuata uygun dijital sözleşmeyi <strong>1 saniye içinde</strong> PDF formatında üretmeli ve ekranda önizleme olarak göstermelidir.</span>
-                        </div>
-                    </div>
+            <!-- INVEST Tablo Kartı -->
+            <div class="glass-card invest-table-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="invest-table-header">
+                    <span class="invest-table-title">INVEST Değerlendirmesi</span>
                 </div>
-            </div>
-
-            <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <div class="scenario-number">Senaryo 2</div>
-                        <h3>Müşteri Risk Skorlaması (US.02)</h3>
+                
+                <div class="invest-table">
+                    <!-- Tablo Başlıkları -->
+                    <div class="invest-table-row invest-table-head">
+                        <div class="invest-col-criteria">KRİTER</div>
+                        <div class="invest-col-eval">DEĞERLENDİRME</div>
+                        <div class="invest-col-desc">AÇIKLAMA</div>
                     </div>
-                    <div class="gherkin-steps">
-                        <div class="step given">
-                            <span class="step-keyword">Given</span>
-                            <span class="step-text">Yeni bir bireysel müşterinin ehliyet ve kimlik bilgileri sisteme tanımlanmıştır.</span>
+                    
+                    <!-- I - Independent -->
+                    <div class="invest-table-row invest-row-i">
+                        <div class="invest-col-criteria">
+                            <span class="invest-letter-inline">I</span>
+                            <span class="invest-criteria-text">Independent (Bağımsız)</span>
                         </div>
-                        <div class="step when">
-                            <span class="step-keyword">When</span>
-                            <span class="step-text">"Risk Analizi Yap" komutu verildiğinde.</span>
+                        <div class="invest-col-eval">
+                            <span class="invest-badge invest-yes">Evet</span>
                         </div>
-                        <div class="step then">
-                            <span class="step-keyword">Then</span>
-                            <span class="step-text">Sistem, dış veri kaynaklarını kullanarak <strong>3 saniye içinde</strong> <strong>0 ile 100 arasında</strong> bir risk puanı döndürmeli ve Ahmet Bey'e "Kiralanabilir" veya "Riskli" uyarısını göstermelidir.</span>
+                        <div class="invest-col-desc">
+                            Ortak liste oluşturma özelliği, sosyal akış veya rehber eşleşmesi özelliklerinden bağımsız geliştirilebilir ve kendi başına değer sunar.
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="glass-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <div class="scenario-number">Senaryo 3</div>
-                        <h3>Otomatik Trafik Cezası Yansıtma (US.03)</h3>
+                    
+                    <!-- N - Negotiable -->
+                    <div class="invest-table-row invest-row-n">
+                        <div class="invest-col-criteria">
+                            <span class="invest-letter-inline">N</span>
+                            <span class="invest-criteria-text">Negotiable (Müzakere Edilebilir)</span>
+                        </div>
+                        <div class="invest-col-eval">
+                            <span class="invest-badge invest-yes">Evet</span>
+                        </div>
+                        <div class="invest-col-desc">
+                            Listenin kaç kişiyle paylaşılabileceği, kimlerin silme yetkisine sahip olacağı gibi detaylar ekip içinde müzakereye açıktır.
+                        </div>
                     </div>
-                    <div class="gherkin-steps">
-                        <div class="step given">
-                            <span class="step-keyword">Given</span>
-                            <span class="step-text">Sisteme entegre veri sağlayıcıdan (e-devlet vb.) belirli bir plakaya ait yeni bir trafik cezası bilgisi gelmiştir.</span>
+                    
+                    <!-- V - Valuable -->
+                    <div class="invest-table-row invest-row-v">
+                        <div class="invest-col-criteria">
+                            <span class="invest-letter-inline">V</span>
+                            <span class="invest-criteria-text">Valuable (Değerli)</span>
                         </div>
-                        <div class="step when">
-                            <span class="step-keyword">When</span>
-                            <span class="step-text">Sistem, ceza tarihindeki aktif kiralama kaydını ve ilgili müşteriyi otomatik olarak tespit ettiğinde.</span>
+                        <div class="invest-col-eval">
+                            <span class="invest-badge invest-yes">Evet</span>
                         </div>
-                        <div class="step then">
-                            <span class="step-keyword">Then</span>
-                            <span class="step-text">Ceza tutarı, manuel müdahaleye gerek kalmadan müşterinin cari hesabına borç olarak kaydedilmeli ve firmaya anlık bildirim gönderilmelidir.</span>
+                        <div class="invest-col-desc">
+                            Bu hikaye, projenin temel stratejisi olan "sosyal bağlılık" ve Mert'in "karar felci" sorununu çözme değerini doğrudan karşılar.
+                        </div>
+                    </div>
+                    
+                    <!-- E - Estimable -->
+                    <div class="invest-table-row invest-row-e">
+                        <div class="invest-col-criteria">
+                            <span class="invest-letter-inline">E</span>
+                            <span class="invest-criteria-text">Estimable (Tahmin Edilebilir)</span>
+                        </div>
+                        <div class="invest-col-eval">
+                            <span class="invest-badge invest-yes">Evet</span>
+                        </div>
+                        <div class="invest-col-desc">
+                            Liste yönetimi (ekleme/çıkarma/puanlama) fonksiyonları teknik olarak nettir. Ekip, veritabanı ve UI tasarımı için efor tahmini yapabilir.
+                        </div>
+                    </div>
+                    
+                    <!-- S - Small -->
+                    <div class="invest-table-row invest-row-s">
+                        <div class="invest-col-criteria">
+                            <span class="invest-letter-inline">S</span>
+                            <span class="invest-criteria-text">Small (Küçük)</span>
+                        </div>
+                        <div class="invest-col-eval">
+                            <span class="invest-badge invest-yes">Evet</span>
+                        </div>
+                        <div class="invest-col-desc">
+                            Sadece ortak liste oluşturma ve temel içerik ekleme fonksiyonu, tek bir sprint (genelde 2 hafta) içinde tamamlanabilecek boyuttadır.
+                        </div>
+                    </div>
+                    
+                    <!-- T - Testable -->
+                    <div class="invest-table-row invest-row-t">
+                        <div class="invest-col-criteria">
+                            <span class="invest-letter-inline">T</span>
+                            <span class="invest-criteria-text">Testable (Test Edilebilir)</span>
+                        </div>
+                        <div class="invest-col-eval">
+                            <span class="invest-badge invest-yes">Evet</span>
+                        </div>
+                        <div class="invest-col-desc">
+                            "İki farklı kullanıcı aynı listeyi görüyor mu?", "Eklenen içerik her iki tarafta güncelleniyor mu?" gibi net senaryolarla test edilebilir.
                         </div>
                     </div>
                 </div>
@@ -891,8 +1037,213 @@
         </div>
     </section>
 
-    <!-- Section 11: UML Use Case Diyagramı -->
-    <section id="section-11" class="content-section">
+    <!-- Section 11: Kabul Kriterleri -->
+    <section id="section-11" class="content-section acceptance-section">
+        <div class="geometric-pattern"></div>
+        <div class="container">
+            <!-- Başlık Alanı -->
+            <div class="acceptance-hero" data-aos="fade-up">
+                <div class="acceptance-badge">
+                    <span class="badge-icon">✓</span>
+                    <span>BDD / Gherkin Format</span>
+                </div>
+                <h2 class="acceptance-main-title">Kabul Kriterleri</h2>
+                <div class="acceptance-title-underline"></div>
+                <p class="acceptance-subtitle">Kullanıcı hikayelerinin test edilebilir senaryoları</p>
+            </div>
+            
+            <!-- Senaryo Kartları -->
+            <div class="acceptance-cards">
+                <!-- Senaryo 1 -->
+                <div class="acceptance-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="acceptance-card-glow"></div>
+                    <div class="acceptance-card-header">
+                        <div class="scenario-badge">
+                            <span class="scenario-num">01</span>
+                        </div>
+                        <div class="scenario-info">
+                            <span class="scenario-tag">US.01</span>
+                            <h3>Otomatik Sözleşme Üretimi</h3>
+                        </div>
+                        <div class="scenario-icon">📄</div>
+                    </div>
+                    
+                    <div class="gherkin-timeline">
+                        <div class="gherkin-step gherkin-given">
+                            <div class="step-indicator">
+                                <div class="step-dot"></div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-content">
+                                <span class="step-label">GIVEN</span>
+                                <p>Operasyon personeli, sistemdeki <strong>"Yeni Kiralama"</strong> ekranındadır.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="gherkin-step gherkin-when">
+                            <div class="step-indicator">
+                                <div class="step-dot"></div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-content">
+                                <span class="step-label">WHEN</span>
+                                <p>Geçerli müşteri, araç ve tarih bilgileri girilip <strong>"Sözleşme Oluştur"</strong> butonuna tıklandığında.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="gherkin-step gherkin-then">
+                            <div class="step-indicator">
+                                <div class="step-dot"></div>
+                            </div>
+                            <div class="step-content">
+                                <span class="step-label">THEN</span>
+                                <p>Sistem, yasal mevzuata uygun dijital sözleşmeyi <strong>1 saniye içinde</strong> PDF formatında üretmeli ve ekranda önizleme olarak göstermelidir.</p>
+                                <div class="step-metric">
+                                    <span class="metric-icon">⚡</span>
+                                    <span class="metric-value">&lt; 1 sn</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Senaryo 2 -->
+                <div class="acceptance-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="acceptance-card-glow"></div>
+                    <div class="acceptance-card-header">
+                        <div class="scenario-badge scenario-badge-blue">
+                            <span class="scenario-num">02</span>
+                        </div>
+                        <div class="scenario-info">
+                            <span class="scenario-tag">US.02</span>
+                            <h3>Müşteri Risk Skorlaması</h3>
+                        </div>
+                        <div class="scenario-icon">🛡️</div>
+                    </div>
+                    
+                    <div class="gherkin-timeline">
+                        <div class="gherkin-step gherkin-given">
+                            <div class="step-indicator">
+                                <div class="step-dot"></div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-content">
+                                <span class="step-label">GIVEN</span>
+                                <p>Yeni bir bireysel müşterinin <strong>ehliyet ve kimlik bilgileri</strong> sisteme tanımlanmıştır.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="gherkin-step gherkin-when">
+                            <div class="step-indicator">
+                                <div class="step-dot"></div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-content">
+                                <span class="step-label">WHEN</span>
+                                <p><strong>"Risk Analizi Yap"</strong> komutu verildiğinde.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="gherkin-step gherkin-then">
+                            <div class="step-indicator">
+                                <div class="step-dot"></div>
+                            </div>
+                            <div class="step-content">
+                                <span class="step-label">THEN</span>
+                                <p>Sistem, dış veri kaynaklarını kullanarak <strong>3 saniye içinde</strong> <strong>0 ile 100 arasında</strong> bir risk puanı döndürmeli ve "Kiralanabilir" veya "Riskli" uyarısını göstermelidir.</p>
+                                <div class="step-metrics-row">
+                                    <div class="step-metric">
+                                        <span class="metric-icon">⏱️</span>
+                                        <span class="metric-value">&lt; 3 sn</span>
+                                    </div>
+                                    <div class="step-metric">
+                                        <span class="metric-icon">📊</span>
+                                        <span class="metric-value">0-100 Skor</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Senaryo 3 -->
+                <div class="acceptance-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="acceptance-card-glow"></div>
+                    <div class="acceptance-card-header">
+                        <div class="scenario-badge scenario-badge-purple">
+                            <span class="scenario-num">03</span>
+                        </div>
+                        <div class="scenario-info">
+                            <span class="scenario-tag">US.03</span>
+                            <h3>Otomatik Trafik Cezası Yansıtma</h3>
+                        </div>
+                        <div class="scenario-icon">🚗</div>
+                    </div>
+                    
+                    <div class="gherkin-timeline">
+                        <div class="gherkin-step gherkin-given">
+                            <div class="step-indicator">
+                                <div class="step-dot"></div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-content">
+                                <span class="step-label">GIVEN</span>
+                                <p>Sisteme entegre veri sağlayıcıdan <strong>(e-devlet vb.)</strong> belirli bir plakaya ait yeni bir trafik cezası bilgisi gelmiştir.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="gherkin-step gherkin-when">
+                            <div class="step-indicator">
+                                <div class="step-dot"></div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-content">
+                                <span class="step-label">WHEN</span>
+                                <p>Sistem, ceza tarihindeki <strong>aktif kiralama kaydını</strong> ve ilgili müşteriyi otomatik olarak tespit ettiğinde.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="gherkin-step gherkin-then">
+                            <div class="step-indicator">
+                                <div class="step-dot"></div>
+                            </div>
+                            <div class="step-content">
+                                <span class="step-label">THEN</span>
+                                <p>Ceza tutarı, <strong>manuel müdahaleye gerek kalmadan</strong> müşterinin cari hesabına borç olarak kaydedilmeli ve firmaya <strong>anlık bildirim</strong> gönderilmelidir.</p>
+                                <div class="step-metric step-metric-success">
+                                    <span class="metric-icon">✓</span>
+                                    <span class="metric-value">Otomatik İşlem</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Alt Bilgi -->
+            <div class="acceptance-footer" data-aos="fade-up" data-aos-delay="400">
+                <div class="acceptance-stats">
+                    <div class="stat-item">
+                        <span class="stat-value">3</span>
+                        <span class="stat-label">Test Senaryosu</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-value">9</span>
+                        <span class="stat-label">Gherkin Adımı</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-value">%100</span>
+                        <span class="stat-label">Kapsam</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 12: UML Use Case Diyagramı -->
+    <section id="section-12" class="content-section">
         <div class="geometric-pattern"></div>
         <div class="container">
             <h2 data-aos="fade-up" style="color: white;">UML Use Case Diyagramı Analizi</h2>
@@ -986,8 +1337,8 @@
         </div>
     </section>
 
-    <!-- Section 12: Storyboard -->
-    <section id="section-12" class="content-section">
+    <!-- Section 13: Storyboard -->
+    <section id="section-13" class="content-section">
         <div class="geometric-pattern"></div>
         <div class="container">
             <h2 data-aos="fade-up" style="color: white;">12. Storyboard (Hikayeleştirme)</h2>
@@ -1348,8 +1699,8 @@
         </div>
     </section>
 
-    <!-- Section 13: User Story Mapping (Yol Haritası) -->
-    <section id="section-13" class="content-section">
+    <!-- Section 14: User Story Mapping (Yol Haritası) -->
+    <section id="section-14" class="content-section">
         <div class="geometric-pattern"></div>
         <div class="container">
             <h2 data-aos="fade-up" style="color: white;">User Story Mapping (Yol Haritası)</h2>
@@ -1615,5 +1966,91 @@
     </section>
 
     <script src="index.js"></script>
+    
+    <!-- User Stories Zoom Script -->
+    <script>
+        // Kullanıcı Haritası 1 Zoom
+        const usharita1ZoomState = { zoom: 1, translateX: 0, translateY: 0, lastTranslateX: 0, lastTranslateY: 0 };
+        const usharita1DragState = { isDragging: false, startX: 0, startY: 0 };
+        const usharita1MinZoom = 0.5, usharita1MaxZoom = 4, usharita1ZoomStep = 0.2;
+        
+        function zoomInUsharita1() { if (usharita1ZoomState.zoom < usharita1MaxZoom) { usharita1ZoomState.zoom += usharita1ZoomStep; applyUsharita1Zoom(); } }
+        function zoomOutUsharita1() { if (usharita1ZoomState.zoom > usharita1MinZoom) { usharita1ZoomState.zoom -= usharita1ZoomStep; applyUsharita1Zoom(); } }
+        function resetZoomUsharita1() { usharita1ZoomState.zoom = 1; usharita1ZoomState.translateX = 0; usharita1ZoomState.translateY = 0; applyUsharita1Zoom(); }
+        function applyUsharita1Zoom() {
+            const img = document.getElementById('usharita1-image');
+            if (img) img.style.transform = `scale(${usharita1ZoomState.zoom}) translate(${usharita1ZoomState.translateX}px, ${usharita1ZoomState.translateY}px)`;
+        }
+        
+        // Kullanıcı Haritası 2 Zoom
+        const usharita2ZoomState = { zoom: 1, translateX: 0, translateY: 0, lastTranslateX: 0, lastTranslateY: 0 };
+        const usharita2DragState = { isDragging: false, startX: 0, startY: 0 };
+        const usharita2MinZoom = 0.5, usharita2MaxZoom = 4, usharita2ZoomStep = 0.2;
+        
+        function zoomInUsharita2() { if (usharita2ZoomState.zoom < usharita2MaxZoom) { usharita2ZoomState.zoom += usharita2ZoomStep; applyUsharita2Zoom(); } }
+        function zoomOutUsharita2() { if (usharita2ZoomState.zoom > usharita2MinZoom) { usharita2ZoomState.zoom -= usharita2ZoomStep; applyUsharita2Zoom(); } }
+        function resetZoomUsharita2() { usharita2ZoomState.zoom = 1; usharita2ZoomState.translateX = 0; usharita2ZoomState.translateY = 0; applyUsharita2Zoom(); }
+        function applyUsharita2Zoom() {
+            const img = document.getElementById('usharita2-image');
+            if (img) img.style.transform = `scale(${usharita2ZoomState.zoom}) translate(${usharita2ZoomState.translateX}px, ${usharita2ZoomState.translateY}px)`;
+        }
+        
+        // Kullanıcı Haritası 3 Zoom
+        const usharita3ZoomState = { zoom: 1, translateX: 0, translateY: 0, lastTranslateX: 0, lastTranslateY: 0 };
+        const usharita3DragState = { isDragging: false, startX: 0, startY: 0 };
+        const usharita3MinZoom = 0.5, usharita3MaxZoom = 4, usharita3ZoomStep = 0.2;
+        
+        function zoomInUsharita3() { if (usharita3ZoomState.zoom < usharita3MaxZoom) { usharita3ZoomState.zoom += usharita3ZoomStep; applyUsharita3Zoom(); } }
+        function zoomOutUsharita3() { if (usharita3ZoomState.zoom > usharita3MinZoom) { usharita3ZoomState.zoom -= usharita3ZoomStep; applyUsharita3Zoom(); } }
+        function resetZoomUsharita3() { usharita3ZoomState.zoom = 1; usharita3ZoomState.translateX = 0; usharita3ZoomState.translateY = 0; applyUsharita3Zoom(); }
+        function applyUsharita3Zoom() {
+            const img = document.getElementById('usharita3-image');
+            if (img) img.style.transform = `scale(${usharita3ZoomState.zoom}) translate(${usharita3ZoomState.translateX}px, ${usharita3ZoomState.translateY}px)`;
+        }
+        
+        // Wheel zoom ve drag için event listener
+        document.addEventListener('DOMContentLoaded', function() {
+            // Harita 1
+            const img1 = document.getElementById('usharita1-image');
+            if (img1) {
+                const container1 = img1.closest('.persona-image-container');
+                if (container1) {
+                    container1.addEventListener('wheel', function(e) { e.preventDefault(); if (e.deltaY < 0) zoomInUsharita1(); else zoomOutUsharita1(); }, { passive: false });
+                    img1.addEventListener('mousedown', function(e) { if (e.button === 0) { usharita1DragState.isDragging = true; usharita1DragState.startX = e.clientX - usharita1ZoomState.translateX; usharita1DragState.startY = e.clientY - usharita1ZoomState.translateY; img1.classList.add('dragging'); e.preventDefault(); } });
+                }
+            }
+            // Harita 2
+            const img2 = document.getElementById('usharita2-image');
+            if (img2) {
+                const container2 = img2.closest('.persona-image-container');
+                if (container2) {
+                    container2.addEventListener('wheel', function(e) { e.preventDefault(); if (e.deltaY < 0) zoomInUsharita2(); else zoomOutUsharita2(); }, { passive: false });
+                    img2.addEventListener('mousedown', function(e) { if (e.button === 0) { usharita2DragState.isDragging = true; usharita2DragState.startX = e.clientX - usharita2ZoomState.translateX; usharita2DragState.startY = e.clientY - usharita2ZoomState.translateY; img2.classList.add('dragging'); e.preventDefault(); } });
+                }
+            }
+            // Harita 3
+            const img3 = document.getElementById('usharita3-image');
+            if (img3) {
+                const container3 = img3.closest('.persona-image-container');
+                if (container3) {
+                    container3.addEventListener('wheel', function(e) { e.preventDefault(); if (e.deltaY < 0) zoomInUsharita3(); else zoomOutUsharita3(); }, { passive: false });
+                    img3.addEventListener('mousedown', function(e) { if (e.button === 0) { usharita3DragState.isDragging = true; usharita3DragState.startX = e.clientX - usharita3ZoomState.translateX; usharita3DragState.startY = e.clientY - usharita3ZoomState.translateY; img3.classList.add('dragging'); e.preventDefault(); } });
+                }
+            }
+            
+            // Global mouse events for drag
+            document.addEventListener('mousemove', function(e) {
+                if (usharita1DragState.isDragging) { usharita1ZoomState.translateX = e.clientX - usharita1DragState.startX; usharita1ZoomState.translateY = e.clientY - usharita1DragState.startY; applyUsharita1Zoom(); }
+                if (usharita2DragState.isDragging) { usharita2ZoomState.translateX = e.clientX - usharita2DragState.startX; usharita2ZoomState.translateY = e.clientY - usharita2DragState.startY; applyUsharita2Zoom(); }
+                if (usharita3DragState.isDragging) { usharita3ZoomState.translateX = e.clientX - usharita3DragState.startX; usharita3ZoomState.translateY = e.clientY - usharita3DragState.startY; applyUsharita3Zoom(); }
+            });
+            document.addEventListener('mouseup', function() {
+                usharita1DragState.isDragging = false; usharita2DragState.isDragging = false; usharita3DragState.isDragging = false;
+                const img1 = document.getElementById('usharita1-image'); if (img1) img1.classList.remove('dragging');
+                const img2 = document.getElementById('usharita2-image'); if (img2) img2.classList.remove('dragging');
+                const img3 = document.getElementById('usharita3-image'); if (img3) img3.classList.remove('dragging');
+            });
+        });
+    </script>
 </body>
 </html>
