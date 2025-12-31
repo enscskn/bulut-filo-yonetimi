@@ -4368,6 +4368,194 @@
             }
         });
 
+        // ============================================
+        // AS-IS IMAGE ZOOM & DRAG FUNCTIONALITY
+        // ============================================
+        
+        // AS-IS image zoom state
+        const asisZoomState = {
+            zoom: 1,
+            translateX: 0,
+            translateY: 0,
+            lastTranslateX: 0,
+            lastTranslateY: 0
+        };
+        
+        const asisDragState = {
+            isDragging: false,
+            startX: 0,
+            startY: 0
+        };
+        
+        const asisMinZoom = 0.5;
+        const asisMaxZoom = 3;
+        const asisZoomStep = 0.2;
+        
+        // AS-IS zoom functions
+        function zoomInAsis() {
+            if (asisZoomState.zoom < asisMaxZoom) {
+                asisZoomState.zoom += asisZoomStep;
+                applyAsisZoom();
+            }
+        }
+        
+        function zoomOutAsis() {
+            if (asisZoomState.zoom > asisMinZoom) {
+                asisZoomState.zoom -= asisZoomStep;
+                applyAsisZoom();
+            }
+        }
+        
+        function resetZoomAsis() {
+            asisZoomState.zoom = 1;
+            asisZoomState.translateX = 0;
+            asisZoomState.translateY = 0;
+            asisZoomState.lastTranslateX = 0;
+            asisZoomState.lastTranslateY = 0;
+            applyAsisZoom();
+        }
+        
+        function applyAsisZoom() {
+            const image = document.getElementById('asis-image');
+            if (image) {
+                const state = asisZoomState;
+                image.style.transform = `scale(${state.zoom}) translate(${state.translateX}px, ${state.translateY}px)`;
+            }
+        }
+        
+        // Initialize asis image functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const asisImage = document.getElementById('asis-image');
+            if (!asisImage) return;
+            
+            const asisContainer = asisImage.closest('.persona-image-container');
+            if (asisImage && asisContainer) {
+                // Mouse wheel zoom - always work when over container
+                asisContainer.addEventListener('wheel', function(e) {
+                    // Always allow zoom when over the container
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomInAsis();
+                    } else {
+                        zoomOutAsis();
+                    }
+                }, { passive: false });
+                
+                // Also add wheel listener directly to image for better control
+                asisImage.addEventListener('wheel', function(e) {
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomInAsis();
+                    } else {
+                        zoomOutAsis();
+                    }
+                }, { passive: false });
+                
+                // Mouse drag events
+                asisImage.addEventListener('mousedown', function(e) {
+                    if (e.button === 0) { // Left mouse button
+                        asisDragState.isDragging = true;
+                        asisDragState.startX = e.clientX - asisZoomState.translateX;
+                        asisDragState.startY = e.clientY - asisZoomState.translateY;
+                        asisImage.classList.add('dragging');
+                        e.preventDefault();
+                    }
+                });
+                
+                document.addEventListener('mousemove', function(e) {
+                    if (asisDragState.isDragging) {
+                        asisZoomState.translateX = e.clientX - asisDragState.startX;
+                        asisZoomState.translateY = e.clientY - asisDragState.startY;
+                        
+                        // Apply boundaries
+                        const containerRect = asisContainer.getBoundingClientRect();
+                        const imageRect = asisImage.getBoundingClientRect();
+                        const scaledWidth = imageRect.width * asisZoomState.zoom;
+                        const scaledHeight = imageRect.height * asisZoomState.zoom;
+                        
+                        const maxTranslateX = Math.max(0, (scaledWidth - containerRect.width) / 2);
+                        const maxTranslateY = Math.max(0, (scaledHeight - containerRect.height) / 2);
+                        
+                        asisZoomState.translateX = Math.max(-maxTranslateX, Math.min(maxTranslateX, asisZoomState.translateX));
+                        asisZoomState.translateY = Math.max(-maxTranslateY, Math.min(maxTranslateY, asisZoomState.translateY));
+                        
+                        applyAsisZoom();
+                    }
+                });
+                
+                document.addEventListener('mouseup', function() {
+                    if (asisDragState.isDragging) {
+                        asisDragState.isDragging = false;
+                        asisZoomState.lastTranslateX = asisZoomState.translateX;
+                        asisZoomState.lastTranslateY = asisZoomState.translateY;
+                        asisImage.classList.remove('dragging');
+                    }
+                });
+                
+                // Context menu prevention
+                asisImage.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                });
+                
+                // Touch zoom and drag support
+                let initialDistance = 0;
+                let initialZoom = 1;
+                let initialTranslateX = 0;
+                let initialTranslateY = 0;
+                let touchStartX = 0;
+                let touchStartY = 0;
+                
+                asisImage.addEventListener('touchstart', function(e) {
+                    if (e.touches.length === 1) {
+                        // Single touch - drag
+                        touchStartX = e.touches[0].clientX - asisZoomState.translateX;
+                        touchStartY = e.touches[0].clientY - asisZoomState.translateY;
+                    } else if (e.touches.length === 2) {
+                        // Two touches - zoom
+                        e.preventDefault();
+                        initialDistance = getDistance(e.touches[0], e.touches[1]);
+                        initialZoom = asisZoomState.zoom;
+                        initialTranslateX = asisZoomState.translateX;
+                        initialTranslateY = asisZoomState.translateY;
+                    }
+                });
+                
+                asisImage.addEventListener('touchmove', function(e) {
+                    if (e.touches.length === 1) {
+                        // Single touch - drag
+                        e.preventDefault();
+                        asisZoomState.translateX = e.touches[0].clientX - touchStartX;
+                        asisZoomState.translateY = e.touches[0].clientY - touchStartY;
+                        
+                        // Apply boundaries
+                        const containerRect = asisContainer.getBoundingClientRect();
+                        const imageRect = asisImage.getBoundingClientRect();
+                        const scaledWidth = imageRect.width * asisZoomState.zoom;
+                        const scaledHeight = imageRect.height * asisZoomState.zoom;
+                        
+                        const maxTranslateX = Math.max(0, (scaledWidth - containerRect.width) / 2);
+                        const maxTranslateY = Math.max(0, (scaledHeight - containerRect.height) / 2);
+                        
+                        asisZoomState.translateX = Math.max(-maxTranslateX, Math.min(maxTranslateX, asisZoomState.translateX));
+                        asisZoomState.translateY = Math.max(-maxTranslateY, Math.min(maxTranslateY, asisZoomState.translateY));
+                        
+                        applyAsisZoom();
+                    } else if (e.touches.length === 2) {
+                        // Two touches - zoom
+                        e.preventDefault();
+                        const currentDistance = getDistance(e.touches[0], e.touches[1]);
+                        const scale = currentDistance / initialDistance;
+                        const newZoom = initialZoom * scale;
+                        
+                        if (newZoom >= asisMinZoom && newZoom <= asisMaxZoom) {
+                            asisZoomState.zoom = newZoom;
+                            applyAsisZoom();
+                        }
+                    }
+                });
+            }
+        });
+
         // Add title animation keyframes
         const titleAnimationStyle = document.createElement('style');
         titleAnimationStyle.textContent = `
